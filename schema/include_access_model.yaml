@@ -853,8 +853,6 @@ slots:
     - Study
     range: Publication
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   expected_number_of_participants:
     name: expected_number_of_participants
     definition_uri: https://includedcc.org/include-access-model/expected_number_of_participants
@@ -1030,13 +1028,17 @@ classes:
     description: Information about a specific publication.
     title: Publication
     from_schema: https://includedcc.org/include-access-model
+    is_a: Record
     slots:
+    - uuid
+    - id
+    - external_id
     - bibliographic_reference
     - website
     class_uri: includedcc:Publication
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-11T01:07:20'
-source_file_size: 13184
-generation_date: '2025-11-11T01:07:30'
+source_file_date: '2025-11-11T02:22:08'
+source_file_size: 13201
+generation_date: '2025-11-11T02:22:16'
 
