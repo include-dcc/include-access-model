@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://include-dcc.github.io/include-access-model/elements/DOI/" rel="canonical"/>
+<link href="https://include-dcc.github.io/include-access-model/elements/Subject/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Class: Digital Object Identifier (DOI) (DOI) - include-access-model</title>
+<title>Class: Subject (Subject) - include-access-model</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-digital-object-identifier-doi-doi">
+<a class="md-skip" href="#class-subject-subject">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Digital Object Identifier (DOI) (DOI)
+              Class: Subject (Subject)
             
           </span>
 </div>
@@ -229,27 +229,38 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-digital-object-identifier-doi-doi">Class: Digital Object Identifier (DOI) (DOI)</h1>
-<p><em>A DOI is a permanent reference with metadata about a digital object.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/DOI">includedcc:DOI</a></p>
+<h1 id="class-subject-subject">Class: Subject (Subject)</h1>
+<p><em>This entity is the subject about which data or references are recorded. | This includes the idea of a human participant in a study, a cell line, an animal model, | or any other similar entity.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/Subject">includedcc:Subject</a></p>
 <div class="mermaid"> classDiagram
-    class DOI
-    click DOI href "../DOI/"
-      Record &lt;|-- DOI
+    class Subject
+    click Subject href "../Subject/"
+      Record &lt;|-- Subject
         click Record href "../Record/"
 
-      DOI : bibliographic_reference
+      Subject : external_id
 
-      DOI : doi
+      Subject : organism_type
 
-      DOI : external_id
+      Subject : subject_id
+
+      Subject : subject_type
+
+
+
+
+
+        Subject --&gt; "1" EnumSubjectType : subject_type
+        click EnumSubjectType href "../EnumSubjectType/"
+
+
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../Record/">Record</a><ul>
-<li><strong>DOI</strong></li>
+<li><strong>Subject</strong></li>
 </ul>
 </li>
 </ul>
@@ -265,15 +276,21 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../doi/">doi</a></td>
-<td>1 <br/> <a href="../Uri/">Uri</a></td>
-<td>Digital Object Identifier (DOI) for this Record</td>
+<td><a href="../subject_id/">subject_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>INLCUDE Global ID for the Subject</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../bibliographic_reference/">bibliographic_reference</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Text use to reference this Record</td>
+<td><a href="../subject_type/">subject_type</a></td>
+<td>1 <br/> <a href="../EnumSubjectType/">EnumSubjectType</a></td>
+<td>Type of entity this record represents</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../organism_type/">organism_type</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Organism Type</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -300,11 +317,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:DOI</td>
+<td>includedcc:Subject</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:DOI</td>
+<td>includedcc:Subject</td>
 </tr>
 </tbody>
 </table>
@@ -312,17 +329,20 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: DOI
-description: A DOI is a permanent reference with metadata about a digital object.
-title: Digital Object Identifier (DOI)
+<pre><code class="language-yaml">name: Subject
+description: This entity is the subject about which data or references are recorded.
+  | This includes the idea of a human participant in a study, a cell line, an animal
+  model, | or any other similar entity.
+title: Subject
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slots:
-- doi
-- bibliographic_reference
+- subject_id
+- subject_type
+- organism_type
 slot_usage:
-  doi:
-    name: doi
+  subject_id:
+    name: subject_id
     identifier: true
     required: true
 
@@ -330,44 +350,58 @@ slot_usage:
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: DOI
-description: A DOI is a permanent reference with metadata about a digital object.
-title: Digital Object Identifier (DOI)
+<pre><code class="language-yaml">name: Subject
+description: This entity is the subject about which data or references are recorded.
+  | This includes the idea of a human participant in a study, a cell line, an animal
+  model, | or any other similar entity.
+title: Subject
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slot_usage:
-  doi:
-    name: doi
+  subject_id:
+    name: subject_id
     identifier: true
     required: true
 attributes:
-  doi:
-    name: doi
-    description: Digital Object Identifier (DOI) for this Record.
-    title: DOI
+  subject_id:
+    name: subject_id
+    description: INLCUDE Global ID for the Subject
+    title: Study ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
     identifier: true
-    alias: doi
-    owner: DOI
+    alias: subject_id
+    owner: Subject
     domain_of:
-    - Study
-    - DOI
-    range: uri
+    - Subject
+    - Demographics
+    range: string
     required: true
     multivalued: false
-  bibliographic_reference:
-    name: bibliographic_reference
-    description: Text use to reference this Record.
-    title: Bibiliographic Reference
+  subject_type:
+    name: subject_type
+    description: Type of entity this record represents
+    title: Subject Type
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: bibliographic_reference
-    owner: DOI
+    alias: subject_type
+    owner: Subject
     domain_of:
-    - DOI
-    - Publication
-    range: string
+    - Subject
+    range: EnumSubjectType
+    required: true
+  organism_type:
+    name: organism_type
+    description: Organism Type
+    title: Organism Type
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: organism_type
+    owner: Subject
+    domain_of:
+    - Subject
+    range: uriorcurie
+    required: false
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study
@@ -376,7 +410,7 @@ attributes:
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
     alias: external_id
-    owner: DOI
+    owner: Subject
     domain_of:
     - Record
     range: uriorcurie

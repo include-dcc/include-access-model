@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/doi/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/EnumRace/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Slot: DOI (doi) - include-access-model</title>
+        <title>Enum: EnumRace - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-doi-doi" class="md-skip">
+        <a href="#enum-enumrace" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: DOI (doi)
+              Enum: EnumRace
             
           </span>
         </div>
@@ -308,18 +308,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
-      Applicable Classes
+      Permissible Values
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
-      Properties
+      Slots
     </span>
   </a>
   
@@ -346,15 +346,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mappings
-    </span>
-  </a>
   
 </li>
       
@@ -386,76 +377,168 @@
   
 
 
-<h1 id="slot-doi-doi">Slot: DOI (doi)</h1>
-<p><em>Digital Object Identifier (DOI) for this Record.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/doi">includedcc:doi</a>
-Alias: doi</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumrace">Enum: EnumRace</h1>
+<p>URI: <a href="https://includedcc.org/include-access-model/EnumRace">includedcc:EnumRace</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>american_indian_or_alaska_native</td>
+<td>NCIT:C41259</td>
+<td></td>
+</tr>
+<tr>
+<td>asian</td>
+<td>NCIT:C41260</td>
+<td></td>
+</tr>
+<tr>
+<td>black_or_african_american</td>
+<td>NCIT:C16352</td>
+<td></td>
+</tr>
+<tr>
+<td>more_than_one_race</td>
+<td>NCIT:C67109</td>
+<td></td>
+</tr>
+<tr>
+<td>native_hawaiian_or_other_pacific_islander</td>
+<td>NCIT:C41219</td>
+<td></td>
+</tr>
+<tr>
+<td>other</td>
+<td>NCIT:C17649</td>
+<td></td>
+</tr>
+<tr>
+<td>white</td>
+<td>NCIT:C41261</td>
+<td></td>
+</tr>
+<tr>
+<td>prefer_not_to_answer</td>
+<td>NCIT:C132222</td>
+<td></td>
+</tr>
+<tr>
+<td>unknown</td>
+<td>NCIT:C17998</td>
+<td></td>
+</tr>
+<tr>
+<td>east_asian</td>
+<td>NCIT:C161419</td>
+<td>UK only; do not use for US data</td>
+</tr>
+<tr>
+<td>latin_american</td>
+<td>NCIT:C126531</td>
+<td>UK only; do not use for US data</td>
+</tr>
+<tr>
+<td>middle_eastern_or_north_african</td>
+<td>NCIT:C43866</td>
+<td>UK only; do not use for US data</td>
+</tr>
+<tr>
+<td>south_asian</td>
+<td>NCIT:C41263</td>
+<td>UK only; do not use for US data</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../DOI/">DOI</a></td>
-<td>A DOI is a permanent reference with metadata about a digital object</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../Study/">Study</a></td>
-<td>Study Metadata</td>
-<td>no</td>
+<td><a href="../race/">race</a></td>
+<td>Race of Participant</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../Uri/">Uri</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://includedcc.org/include-access-model</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>includedcc:doi</td>
-</tr>
-<tr>
-<td>native</td>
-<td>includedcc:doi</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: doi
-description: Digital Object Identifier (DOI) for this Record.
-title: DOI
+<pre><code class="language-yaml">name: EnumRace
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-alias: doi
-domain_of:
-- Study
-- DOI
-range: uri
-multivalued: false
+permissible_values:
+  american_indian_or_alaska_native:
+    text: american_indian_or_alaska_native
+    meaning: NCIT:C41259
+    title: American Indian or Alaska Native
+  asian:
+    text: asian
+    meaning: NCIT:C41260
+    title: Asian
+  black_or_african_american:
+    text: black_or_african_american
+    meaning: NCIT:C16352
+    title: Black or African American
+  more_than_one_race:
+    text: more_than_one_race
+    meaning: NCIT:C67109
+    title: More than one race
+  native_hawaiian_or_other_pacific_islander:
+    text: native_hawaiian_or_other_pacific_islander
+    meaning: NCIT:C41219
+    title: Native Hawaiian or Other Pacific Islander
+  other:
+    text: other
+    meaning: NCIT:C17649
+    title: Other
+  white:
+    text: white
+    meaning: NCIT:C41261
+    title: White
+  prefer_not_to_answer:
+    text: prefer_not_to_answer
+    meaning: NCIT:C132222
+    title: Prefer not to answer
+  unknown:
+    text: unknown
+    meaning: NCIT:C17998
+    title: Unknown
+  east_asian:
+    text: east_asian
+    description: UK only; do not use for US data
+    meaning: NCIT:C161419
+    title: East Asian
+  latin_american:
+    text: latin_american
+    description: UK only; do not use for US data
+    meaning: NCIT:C126531
+    title: Latin American
+  middle_eastern_or_north_african:
+    text: middle_eastern_or_north_african
+    description: UK only; do not use for US data
+    meaning: NCIT:C43866
+    title: Middle Eastern or North African
+  south_asian:
+    text: south_asian
+    description: UK only; do not use for US data
+    meaning: NCIT:C41263
+    title: South Asian
 
 </code></pre>
 

@@ -258,13 +258,9 @@
 
       VirtualBiorepository : external_id
 
-      VirtualBiorepository : id
-
       VirtualBiorepository : institution
 
       VirtualBiorepository : name
-
-      VirtualBiorepository : uuid
 
       VirtualBiorepository : vbr_readme
 
@@ -319,18 +315,6 @@
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Instructions for contacting or requesting samples from Virtual Biorepository,...</td>
 <td>direct</td>
-</tr>
-<tr>
-<td><a href="../uuid/">uuid</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Internally assigned UUID for data management and QC purposes</td>
-<td><a href="../Record/">Record</a></td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for this record</td>
-<td><a href="../Record/">Record</a></td>
 </tr>
 <tr>
 <td><a href="../external_id/">external_id</a></td>
@@ -474,33 +458,6 @@ attributes:
     domain_of:
     - VirtualBiorepository
     range: string
-  uuid:
-    name: uuid
-    description: Internally assigned UUID for data management and QC purposes
-    title: UUID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: uuid
-    owner: VirtualBiorepository
-    domain_of:
-    - Record
-    range: string
-    required: true
-    multivalued: false
-  id:
-    name: id
-    description: INLCUDE Global ID for this record
-    title: ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    identifier: true
-    alias: id
-    owner: VirtualBiorepository
-    domain_of:
-    - Record
-    range: string
-    required: true
-    multivalued: false
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study

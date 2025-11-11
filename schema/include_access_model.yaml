@@ -50,6 +50,9 @@ prefixes:
   mesh:
     prefix_prefix: mesh
     prefix_reference: http://id.nlm.nih.gov/mesh/
+  NCIT:
+    prefix_prefix: NCIT
+    prefix_reference: http://purl.obolibrary.org/obo/ncit_
 default_prefix: includedcc
 default_range: string
 types:
@@ -520,6 +523,171 @@ enums:
       sleep_study:
         text: sleep_study
         title: Sleep Study
+  EnumSubjectType:
+    name: EnumSubjectType
+    definition_uri: https://includedcc.org/include-access-model/EnumSubjectType
+    description: Types of entities
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      participant:
+        text: participant
+        description: Study participant with consent, assent, or waiver of consent.
+      non_participant:
+        text: non_participant
+        description: An individual associated with a study who was not explictly consented,
+          eg, the subject | of a reported family history.
+      cell_line:
+        text: cell_line
+        description: Cell Line
+      animal_model:
+        text: animal_model
+        description: Animal model
+      group:
+        text: group
+        description: A group of individuals or entities.
+      other:
+        text: other
+        description: A different entity type- ideally this will be resolved!
+  EnumDownSyndromeStatus:
+    name: EnumDownSyndromeStatus
+    definition_uri: https://includedcc.org/include-access-model/EnumDownSyndromeStatus
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      d21:
+        text: d21
+        description: Disomy 21 (euploid)
+        title: D21
+      t21:
+        text: t21
+        description: Trisomy 21 (Down syndrome)
+        meaning: MONDO:0008608
+        title: T21
+  EnumSex:
+    name: EnumSex
+    definition_uri: https://includedcc.org/include-access-model/EnumSex
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      female:
+        text: female
+        meaning: NCIT:C16576
+        title: Female
+      male:
+        text: male
+        meaning: NCIT:C20197
+        title: Male
+      other:
+        text: other
+        meaning: NCIT:C17649
+        title: Other
+      unknown:
+        text: unknown
+        meaning: NCIT:C17998
+        title: Unknown
+  EnumRace:
+    name: EnumRace
+    definition_uri: https://includedcc.org/include-access-model/EnumRace
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      american_indian_or_alaska_native:
+        text: american_indian_or_alaska_native
+        meaning: NCIT:C41259
+        title: American Indian or Alaska Native
+      asian:
+        text: asian
+        meaning: NCIT:C41260
+        title: Asian
+      black_or_african_american:
+        text: black_or_african_american
+        meaning: NCIT:C16352
+        title: Black or African American
+      more_than_one_race:
+        text: more_than_one_race
+        meaning: NCIT:C67109
+        title: More than one race
+      native_hawaiian_or_other_pacific_islander:
+        text: native_hawaiian_or_other_pacific_islander
+        meaning: NCIT:C41219
+        title: Native Hawaiian or Other Pacific Islander
+      other:
+        text: other
+        meaning: NCIT:C17649
+        title: Other
+      white:
+        text: white
+        meaning: NCIT:C41261
+        title: White
+      prefer_not_to_answer:
+        text: prefer_not_to_answer
+        meaning: NCIT:C132222
+        title: Prefer not to answer
+      unknown:
+        text: unknown
+        meaning: NCIT:C17998
+        title: Unknown
+      east_asian:
+        text: east_asian
+        description: UK only; do not use for US data
+        meaning: NCIT:C161419
+        title: East Asian
+      latin_american:
+        text: latin_american
+        description: UK only; do not use for US data
+        meaning: NCIT:C126531
+        title: Latin American
+      middle_eastern_or_north_african:
+        text: middle_eastern_or_north_african
+        description: UK only; do not use for US data
+        meaning: NCIT:C43866
+        title: Middle Eastern or North African
+      south_asian:
+        text: south_asian
+        description: UK only; do not use for US data
+        meaning: NCIT:C41263
+        title: South Asian
+  EnumEthnicity:
+    name: EnumEthnicity
+    definition_uri: https://includedcc.org/include-access-model/EnumEthnicity
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      hispanic_or_latino:
+        text: hispanic_or_latino
+        meaning: NCIT:C17459
+        title: Hispanic or Latino
+      not_hispanic_or_latino:
+        text: not_hispanic_or_latino
+        meaning: NCIT:C41222
+        title: Not Hispanic or Latino
+      prefer_not_to_answer:
+        text: prefer_not_to_answer
+        meaning: NCIT:C132222
+        title: Prefer not to answer
+      unknown:
+        text: unknown
+        meaning: NCIT:C17998
+        title: Unknown
+  EnumVitalStatus:
+    name: EnumVitalStatus
+    definition_uri: https://includedcc.org/include-access-model/EnumVitalStatus
+    from_schema: https://includedcc.org/include-access-model
+    is_a: EnumNull
+    permissible_values:
+      dead:
+        text: dead
+        meaning: NCIT:C28554
+        title: Dead
+      alive:
+        text: alive
+        meaning: NCIT:C37987
+        title: Alive
+  EnumNull:
+    name: EnumNull
+    definition_uri: https://includedcc.org/include-access-model/EnumNull
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      unknown:
+        text: unknown
+        meaning: NCIT:C17998
+        title: Unknown
 slots:
   uuid:
     name: uuid
@@ -528,9 +696,6 @@ slots:
     title: UUID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:uuid
-    owner: Record
-    domain_of:
-    - Record
     range: string
     required: true
     multivalued: false
@@ -542,11 +707,46 @@ slots:
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:id
     identifier: true
-    owner: Record
-    domain_of:
-    - Record
     range: string
     required: true
+    multivalued: false
+  study_id:
+    name: study_id
+    definition_uri: https://includedcc.org/include-access-model/study_id
+    description: INLCUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:study_id
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    multivalued: false
+  doi:
+    name: doi
+    definition_uri: https://includedcc.org/include-access-model/doi
+    description: Digital Object Identifier (DOI) for this Record.
+    title: DOI
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:doi
+    owner: DOI
+    domain_of:
+    - Study
+    - DOI
+    range: uri
+    multivalued: false
+  subject_id:
+    name: subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: INLCUDE Global ID for the Subject
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:subject_id
+    owner: Demographics
+    domain_of:
+    - Subject
+    - Demographics
+    range: string
     multivalued: false
   external_id:
     name: external_id
@@ -601,6 +801,8 @@ slots:
     range: Investigator
     required: true
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   study_title:
     name: study_title
     definition_uri: https://includedcc.org/include-access-model/study_title
@@ -739,6 +941,8 @@ slots:
     range: Investigator
     required: true
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   vbr:
     name: vbr
     definition_uri: https://includedcc.org/include-access-model/vbr
@@ -751,6 +955,8 @@ slots:
     - Study
     range: VirtualBiorepository
     required: false
+    inlined: true
+    inlined_as_list: true
   vbr_readme:
     name: vbr_readme
     definition_uri: https://includedcc.org/include-access-model/vbr_readme
@@ -853,6 +1059,8 @@ slots:
     - Study
     range: Publication
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   expected_number_of_participants:
     name: expected_number_of_participants
     definition_uri: https://includedcc.org/include-access-model/expected_number_of_participants
@@ -916,18 +1124,194 @@ slots:
     - DOI
     - Publication
     range: string
-  doi:
-    name: doi
+  organism_type:
+    name: organism_type
+    definition_uri: https://includedcc.org/include-access-model/organism_type
+    description: Organism Type
+    title: Organism Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:organism_type
+    owner: Subject
+    domain_of:
+    - Subject
+    range: uriorcurie
+    required: false
+  subject_type:
+    name: subject_type
+    definition_uri: https://includedcc.org/include-access-model/subject_type
+    description: Type of entity this record represents
+    title: Subject Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:subject_type
+    owner: Subject
+    domain_of:
+    - Subject
+    range: EnumSubjectType
+    required: true
+  sex:
+    name: sex
+    definition_uri: https://includedcc.org/include-access-model/sex
+    description: Sex of Participant
+    title: Sex
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:sex
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: EnumSex
+    required: true
+  race:
+    name: race
+    definition_uri: https://includedcc.org/include-access-model/race
+    description: Race of Participant
+    title: Race
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:race
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: EnumRace
+    required: true
+    multivalued: true
+  ethnicity:
+    name: ethnicity
+    definition_uri: https://includedcc.org/include-access-model/ethnicity
+    description: Ethnicity of Participant
+    title: Ethnicity
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:ethnicity
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: EnumEthnicity
+    required: true
+  down_syndrome_status:
+    name: down_syndrome_status
+    definition_uri: https://includedcc.org/include-access-model/down_syndrome_status
+    description: Down Syndrome status of participant
+    title: Down Syndrome Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:down_syndrome_status
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: EnumDownSyndromeStatus
+    required: true
+  age_at_first_engagement:
+    name: age_at_first_engagement
+    definition_uri: https://includedcc.org/include-access-model/age_at_first_engagement
+    description: Age in days of Participant at first recorded study event (enrollment,
+      visit, observation, sample collection, survey completion, etc.). Age at enrollment
+      is preferred, if available.
+    title: Age at First Participant Engagement
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:age_at_first_engagement
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: integer
+    minimum_value: -365
+    maximum_value: 32507
+  vital_status:
+    name: vital_status
+    definition_uri: https://includedcc.org/include-access-model/vital_status
+    description: Whether participant is alive or dead
+    title: Vital Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:vital_status
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: EnumVitalStatus
+  age_at_last_vital_status:
+    name: age_at_last_vital_status
+    definition_uri: https://includedcc.org/include-access-model/age_at_last_vital_status
+    description: Age in days when participant's vital status was last recorded
+    title: Age at Last Vital Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:age_at_last_vital_status
+    owner: Demographics
+    domain_of:
+    - Demographics
+    range: integer
+    minimum_value: -365
+    maximum_value: 32507
+  Study_study_id:
+    name: Study_study_id
+    definition_uri: https://includedcc.org/include-access-model/study_id
+    description: INLCUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: study_id
+    domain: Study
+    slot_uri: includedcc:study_id
+    identifier: true
+    alias: study_id
+    owner: Study
+    domain_of:
+    - Study
+    is_usage_slot: true
+    usage_slot_name: study_id
+    range: string
+    required: true
+    multivalued: false
+  DOI_doi:
+    name: DOI_doi
     definition_uri: https://includedcc.org/include-access-model/doi
     description: Digital Object Identifier (DOI) for this Record.
     title: DOI
     from_schema: https://includedcc.org/include-access-model
+    is_a: doi
+    domain: DOI
     slot_uri: includedcc:doi
+    identifier: true
+    alias: doi
     owner: DOI
     domain_of:
-    - Study
     - DOI
-    range: DOI
+    is_usage_slot: true
+    usage_slot_name: doi
+    range: uri
+    required: true
+    multivalued: false
+  Subject_subject_id:
+    name: Subject_subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: INLCUDE Global ID for the Subject
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: subject_id
+    domain: Subject
+    slot_uri: includedcc:subject_id
+    identifier: true
+    alias: subject_id
+    owner: Subject
+    domain_of:
+    - Subject
+    is_usage_slot: true
+    usage_slot_name: subject_id
+    range: string
+    required: true
+    multivalued: false
+  Demographics_subject_id:
+    name: Demographics_subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: INLCUDE Global ID for the Subject
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: subject_id
+    domain: Demographics
+    slot_uri: includedcc:subject_id
+    identifier: true
+    alias: subject_id
+    owner: Demographics
+    domain_of:
+    - Demographics
+    is_usage_slot: true
+    usage_slot_name: subject_id
+    range: string
+    required: true
+    multivalued: false
 classes:
   Record:
     name: Record
@@ -937,8 +1321,6 @@ classes:
     from_schema: https://includedcc.org/include-access-model
     abstract: true
     slots:
-    - uuid
-    - id
     - external_id
     class_uri: includedcc:Record
   Study:
@@ -949,9 +1331,8 @@ classes:
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
     slots:
-    - uuid
-    - id
     - external_id
+    - Study_study_id
     - parent_study
     - funding_source
     - principal_investigator
@@ -975,6 +1356,11 @@ classes:
     - acknowledgments
     - citation_statement
     - doi
+    slot_usage:
+      study_id:
+        name: study_id
+        identifier: true
+        required: true
     class_uri: includedcc:Study
   VirtualBiorepository:
     name: VirtualBiorepository
@@ -984,8 +1370,6 @@ classes:
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
     slots:
-    - uuid
-    - id
     - external_id
     - name
     - institution
@@ -1001,11 +1385,14 @@ classes:
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
     slots:
-    - uuid
-    - id
     - external_id
-    - doi
+    - DOI_doi
     - bibliographic_reference
+    slot_usage:
+      doi:
+        name: doi
+        identifier: true
+        required: true
     class_uri: includedcc:DOI
   Investigator:
     name: Investigator
@@ -1016,8 +1403,6 @@ classes:
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
     slots:
-    - uuid
-    - id
     - external_id
     - name
     - institution
@@ -1032,15 +1417,56 @@ classes:
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
     slots:
-    - uuid
-    - id
     - external_id
     - bibliographic_reference
     - website
     class_uri: includedcc:Publication
+  Subject:
+    name: Subject
+    definition_uri: https://includedcc.org/include-access-model/Subject
+    description: This entity is the subject about which data or references are recorded.
+      | This includes the idea of a human participant in a study, a cell line, an
+      animal model, | or any other similar entity.
+    title: Subject
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Subject_subject_id
+    - subject_type
+    - organism_type
+    slot_usage:
+      subject_id:
+        name: subject_id
+        identifier: true
+        required: true
+    class_uri: includedcc:Subject
+  Demographics:
+    name: Demographics
+    definition_uri: https://includedcc.org/include-access-model/Demographics
+    description: Basic participant demographics summary
+    title: Demographics
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Demographics_subject_id
+    - sex
+    - race
+    - ethnicity
+    - down_syndrome_status
+    - age_at_last_vital_status
+    - vital_status
+    - age_at_first_engagement
+    slot_usage:
+      subject_id:
+        name: subject_id
+        identifier: true
+        required: true
+    class_uri: includedcc:Demographics
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-11T13:52:07'
-source_file_size: 13178
-generation_date: '2025-11-11T13:52:16'
+source_file_date: '2025-11-11T20:58:12'
+source_file_size: 19564
+generation_date: '2025-11-11T20:58:21'
 

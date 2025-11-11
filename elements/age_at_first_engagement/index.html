@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/doi/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/age_at_first_engagement/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Slot: DOI (doi) - include-access-model</title>
+        <title>Slot: Age at First Participant Engagement (age_at_first_engagement) - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-doi-doi" class="md-skip">
+        <a href="#slot-age-at-first-participant-engagement-age_at_first_engagement" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: DOI (doi)
+              Slot: Age at First Participant Engagement (age_at_first_engagement)
             
           </span>
         </div>
@@ -386,10 +386,10 @@
   
 
 
-<h1 id="slot-doi-doi">Slot: DOI (doi)</h1>
-<p><em>Digital Object Identifier (DOI) for this Record.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/doi">includedcc:doi</a>
-Alias: doi</p>
+<h1 id="slot-age-at-first-participant-engagement-age_at_first_engagement">Slot: Age at First Participant Engagement (age_at_first_engagement)</h1>
+<p><em>Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/age_at_first_engagement">includedcc:age_at_first_engagement</a>
+Alias: age_at_first_engagement</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -403,20 +403,23 @@ Alias: doi</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../DOI/">DOI</a></td>
-<td>A DOI is a permanent reference with metadata about a digital object</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../Study/">Study</a></td>
-<td>Study Metadata</td>
+<td><a href="../Demographics/">Demographics</a></td>
+<td>Basic participant demographics summary</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../Uri/">Uri</a></li>
+<li>
+<p>Range: <a href="../Integer/">Integer</a></p>
+</li>
+<li>
+<p>Minimum Value: -365</p>
+</li>
+<li>
+<p>Maximum Value: 32507</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -434,28 +437,30 @@ Alias: doi</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:doi</td>
+<td>includedcc:age_at_first_engagement</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:doi</td>
+<td>includedcc:age_at_first_engagement</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: doi
-description: Digital Object Identifier (DOI) for this Record.
-title: DOI
+<pre><code class="language-yaml">name: age_at_first_engagement
+description: Age in days of Participant at first recorded study event (enrollment,
+  visit, observation, sample collection, survey completion, etc.). Age at enrollment
+  is preferred, if available.
+title: Age at First Participant Engagement
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-alias: doi
+alias: age_at_first_engagement
 domain_of:
-- Study
-- DOI
-range: uri
-multivalued: false
+- Demographics
+range: integer
+minimum_value: -365
+maximum_value: 32507
 
 </code></pre>
 

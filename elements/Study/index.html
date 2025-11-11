@@ -286,22 +286,11 @@
 
       Study : doi
 
-
-
-
-
-        Study --&gt; "0..1" DOI : doi
-        click DOI href "../DOI/"
-
-
-
       Study : expected_number_of_participants
 
       Study : external_id
 
       Study : funding_source
-
-      Study : id
 
       Study : parent_study
 
@@ -386,11 +375,11 @@
 
 
 
+      Study : study_id
+
       Study : study_short_name
 
       Study : study_title
-
-      Study : uuid
 
       Study : vbr
 
@@ -425,6 +414,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../study_id/">study_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>INLCUDE Global ID for the study</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../parent_study/">parent_study</a></td>
 <td>0..1 <br/> <a href="./">Study</a></td>
@@ -559,21 +554,9 @@
 </tr>
 <tr>
 <td><a href="../doi/">doi</a></td>
-<td>0..1 <br/> <a href="../DOI/">DOI</a></td>
+<td>0..1 <br/> <a href="../Uri/">Uri</a></td>
 <td>Digital Object Identifier (DOI) for this Record</td>
 <td>direct</td>
-</tr>
-<tr>
-<td><a href="../uuid/">uuid</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Internally assigned UUID for data management and QC purposes</td>
-<td><a href="../Record/">Record</a></td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for this record</td>
-<td><a href="../Record/">Record</a></td>
 </tr>
 <tr>
 <td><a href="../external_id/">external_id</a></td>
@@ -636,6 +619,7 @@ title: Study
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slots:
+- study_id
 - parent_study
 - funding_source
 - principal_investigator
@@ -659,6 +643,11 @@ slots:
 - acknowledgments
 - citation_statement
 - doi
+slot_usage:
+  study_id:
+    name: study_id
+    identifier: true
+    required: true
 
 </code></pre>
 </details>
@@ -669,7 +658,26 @@ description: Study Metadata
 title: Study
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
+slot_usage:
+  study_id:
+    name: study_id
+    identifier: true
+    required: true
 attributes:
+  study_id:
+    name: study_id
+    description: INLCUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    identifier: true
+    alias: study_id
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: true
+    multivalued: false
   parent_study:
     name: parent_study
     description: The parent study for this study, if it is a nested study.
@@ -961,33 +969,7 @@ attributes:
     domain_of:
     - Study
     - DOI
-    range: DOI
-  uuid:
-    name: uuid
-    description: Internally assigned UUID for data management and QC purposes
-    title: UUID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: uuid
-    owner: Study
-    domain_of:
-    - Record
-    range: string
-    required: true
-    multivalued: false
-  id:
-    name: id
-    description: INLCUDE Global ID for this record
-    title: ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    identifier: true
-    alias: id
-    owner: Study
-    domain_of:
-    - Record
-    range: string
-    required: true
+    range: uri
     multivalued: false
   external_id:
     name: external_id

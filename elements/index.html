@@ -480,6 +480,10 @@
 <td>One row / entity within the database</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Demographics/">Demographics</a></td>
+<td>Basic participant demographics summary</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="DOI/">DOI</a></td>
 <td>A DOI is a permanent reference with metadata about a digital object</td>
 </tr>
@@ -494,6 +498,10 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Study/">Study</a></td>
 <td>Study Metadata</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Subject/">Subject</a></td>
+<td>This entity is the subject about which data or references are recorded</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="VirtualBiorepository/">VirtualBiorepository</a></td>
@@ -517,6 +525,14 @@
 <tr>
 <td><a href="actual_number_of_participants/">actual_number_of_participants</a></td>
 <td>Total participants included at this time</td>
+</tr>
+<tr>
+<td><a href="age_at_first_engagement/">age_at_first_engagement</a></td>
+<td>Age in days of Participant at first recorded study event (enrollment, visit, ...</td>
+</tr>
+<tr>
+<td><a href="age_at_last_vital_status/">age_at_last_vital_status</a></td>
+<td>Age in days when participant's vital status was last recorded</td>
 </tr>
 <tr>
 <td><a href="bibliographic_reference/">bibliographic_reference</a></td>
@@ -543,8 +559,16 @@
 <td>Digital Object Identifier (DOI) for this Record</td>
 </tr>
 <tr>
+<td><a href="down_syndrome_status/">down_syndrome_status</a></td>
+<td>Down Syndrome status of participant</td>
+</tr>
+<tr>
 <td><a href="email/">email</a></td>
 <td>An email address to reach the entity</td>
+</tr>
+<tr>
+<td><a href="ethnicity/">ethnicity</a></td>
+<td>Ethnicity of Participant</td>
 </tr>
 <tr>
 <td><a href="expected_number_of_participants/">expected_number_of_participants</a></td>
@@ -575,6 +599,10 @@
 <td>Name of the entity</td>
 </tr>
 <tr>
+<td><a href="organism_type/">organism_type</a></td>
+<td>Organism Type</td>
+</tr>
+<tr>
 <td><a href="parent_study/">parent_study</a></td>
 <td>The parent study for this study, if it is a nested study</td>
 </tr>
@@ -595,12 +623,20 @@
 <td>Publications associated with this Record</td>
 </tr>
 <tr>
+<td><a href="race/">race</a></td>
+<td>Race of Participant</td>
+</tr>
+<tr>
 <td><a href="research_domain/">research_domain</a></td>
 <td>Main research domain(s) of the study, other than Down syndrome</td>
 </tr>
 <tr>
 <td><a href="selection_criteria/">selection_criteria</a></td>
 <td>Brief description of inclusion and/or exclusion criteria for the study</td>
+</tr>
+<tr>
+<td><a href="sex/">sex</a></td>
+<td>Sex of Participant</td>
 </tr>
 <tr>
 <td><a href="study_code/">study_code</a></td>
@@ -615,12 +651,24 @@
 <td>Overall design of study, including whether it is longitudinal and whether fam...</td>
 </tr>
 <tr>
+<td><a href="study_id/">study_id</a></td>
+<td>INLCUDE Global ID for the study</td>
+</tr>
+<tr>
 <td><a href="study_short_name/">study_short_name</a></td>
 <td>Short name for the study</td>
 </tr>
 <tr>
 <td><a href="study_title/">study_title</a></td>
 <td>Full Study Title</td>
+</tr>
+<tr>
+<td><a href="subject_id/">subject_id</a></td>
+<td>INLCUDE Global ID for the Subject</td>
+</tr>
+<tr>
+<td><a href="subject_type/">subject_type</a></td>
+<td>Type of entity this record represents</td>
 </tr>
 <tr>
 <td><a href="uuid/">uuid</a></td>
@@ -633,6 +681,10 @@
 <tr>
 <td><a href="vbr_readme/">vbr_readme</a></td>
 <td>Instructions for contacting or requesting samples from Virtual Biorepository,...</td>
+</tr>
+<tr>
+<td><a href="vital_status/">vital_status</a></td>
+<td>Whether participant is alive or dead</td>
 </tr>
 <tr>
 <td><a href="website/">website</a></td>
@@ -658,6 +710,18 @@
 <td>Categories of data which may be collected about participants</td>
 </tr>
 <tr>
+<td><a href="EnumDownSyndromeStatus/">EnumDownSyndromeStatus</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EnumEthnicity/">EnumEthnicity</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EnumNull/">EnumNull</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="EnumParticipantLifespanStage/">EnumParticipantLifespanStage</a></td>
 <td>Stages of life during which participants may be recruited</td>
 </tr>
@@ -666,12 +730,28 @@
 <td>Funding programs relevant to inform operations</td>
 </tr>
 <tr>
+<td><a href="EnumRace/">EnumRace</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="EnumResearchDomain/">EnumResearchDomain</a></td>
 <td>Domains of Research used to find studies</td>
 </tr>
 <tr>
+<td><a href="EnumSex/">EnumSex</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="EnumStudyDesign/">EnumStudyDesign</a></td>
 <td>Approaches for collecting data, investigating interventions, and/or analyzing...</td>
+</tr>
+<tr>
+<td><a href="EnumSubjectType/">EnumSubjectType</a></td>
+<td>Types of entities</td>
+</tr>
+<tr>
+<td><a href="EnumVitalStatus/">EnumVitalStatus</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
