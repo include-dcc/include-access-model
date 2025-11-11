@@ -72,8 +72,7 @@ classes:
 #    - guidMapped
       - acknowledgments
       - citation_statement
-#      - doi
-#      - doi_citation
+      - doi
   VirtualBiorepository:
     title: Virtual BioRepository (VBR)
     description: An organization that can provide access to specimen for further analysis.

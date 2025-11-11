@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-10T20:17:42
+# Generation date: 2025-11-11T07:37:46
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -177,6 +177,7 @@ class Study(Record):
     publication: Optional[Union[Union[str, PublicationId], list[Union[str, PublicationId]]]] = empty_list()
     acknowledgments: Optional[str] = None
     citation_statement: Optional[str] = None
+    doi: Optional[Union[str, DOIId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -285,6 +286,9 @@ class Study(Record):
 
         if self.citation_statement is not None and not isinstance(self.citation_statement, str):
             self.citation_statement = str(self.citation_statement)
+
+        if self.doi is not None and not isinstance(self.doi, DOIId):
+            self.doi = DOIId(self.doi)
 
         super().__post_init__(**kwargs)
 
