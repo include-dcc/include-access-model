@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/EnumVitalStatus/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/value_units_display/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Enum: EnumVitalStatus - include-access-model</title>
+        <title>Slot: Value Units (value_units_display) - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enum-enumvitalstatus" class="md-skip">
+        <a href="#slot-value-units-value_units_display" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Enum: EnumVitalStatus
+              Slot: Value Units (value_units_display)
             
           </span>
         </div>
@@ -308,18 +308,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#permissible-values" class="md-nav__link">
+  <a href="#applicable-classes" class="md-nav__link">
     <span class="md-ellipsis">
-      Permissible Values
+      Applicable Classes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
+  <a href="#properties" class="md-nav__link">
     <span class="md-ellipsis">
-      Slots
+      Properties
     </span>
   </a>
   
@@ -346,6 +346,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mappings
+    </span>
+  </a>
   
 </li>
       
@@ -377,68 +386,69 @@
   
 
 
-<h1 id="enum-enumvitalstatus">Enum: EnumVitalStatus</h1>
-<p><em>Descriptions of a Subject's vital status</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/EnumVitalStatus">includedcc:EnumVitalStatus</a></p>
-<h2 id="permissible-values">Permissible Values</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dead</td>
-<td>NCIT:C28554</td>
-<td></td>
-</tr>
-<tr>
-<td>alive</td>
-<td>NCIT:C37987</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
+<h1 id="slot-value-units-value_units_display">Slot: Value Units (value_units_display)</h1>
+<p><em>The friendly display string of units of the value.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/value_units_display">includedcc:value_units_display</a>
+Alias: value_units_display</p>
+<!-- no inheritance hierarchy -->
+
+<h2 id="applicable-classes">Applicable Classes</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
+<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../vital_status/">vital_status</a></td>
-<td>Whether participant is alive or dead</td>
+<td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
+<td>Assertion about a particular Subject</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>Range: <a href="../String/">String</a></li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://includedcc.org/include-access-model</li>
 </ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>includedcc:value_units_display</td>
+</tr>
+<tr>
+<td>native</td>
+<td>includedcc:value_units_display</td>
+</tr>
+</tbody>
+</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: EnumVitalStatus
-description: Descriptions of a Subject's vital status
+<pre><code class="language-yaml">name: value_units_display
+description: The friendly display string of units of the value.
+title: Value Units
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-is_a: EnumNull
-permissible_values:
-  dead:
-    text: dead
-    meaning: NCIT:C28554
-    title: Dead
-  alive:
-    text: alive
-    meaning: NCIT:C37987
-    title: Alive
+alias: value_units_display
+domain_of:
+- SubjectAssertion
+range: string
 
 </code></pre>
 

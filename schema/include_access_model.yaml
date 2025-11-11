@@ -52,7 +52,10 @@ prefixes:
     prefix_reference: http://id.nlm.nih.gov/mesh/
   NCIT:
     prefix_prefix: NCIT
-    prefix_reference: http://purl.obolibrary.org/obo/ncit_
+    prefix_reference: http://purl.obolibrary.org/obo/NCIT_
+  PATO:
+    prefix_prefix: PATO
+    prefix_reference: http://purl.obolibrary.org/obo/PATO_
 default_prefix: includedcc
 default_range: string
 types:
@@ -526,7 +529,7 @@ enums:
   EnumSubjectType:
     name: EnumSubjectType
     definition_uri: https://includedcc.org/include-access-model/EnumSubjectType
-    description: Types of entities
+    description: Types of Subject entities
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       participant:
@@ -551,11 +554,13 @@ enums:
   EnumDownSyndromeStatus:
     name: EnumDownSyndromeStatus
     definition_uri: https://includedcc.org/include-access-model/EnumDownSyndromeStatus
+    description: Down syndrome / chromosome 21 status
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       d21:
         text: d21
         description: Disomy 21 (euploid)
+        meaning: PATO:0001393
         title: D21
       t21:
         text: t21
@@ -565,6 +570,7 @@ enums:
   EnumSex:
     name: EnumSex
     definition_uri: https://includedcc.org/include-access-model/EnumSex
+    description: Subject Sex
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       female:
@@ -586,6 +592,7 @@ enums:
   EnumRace:
     name: EnumRace
     definition_uri: https://includedcc.org/include-access-model/EnumRace
+    description: Participant Race
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       american_indian_or_alaska_native:
@@ -647,6 +654,7 @@ enums:
   EnumEthnicity:
     name: EnumEthnicity
     definition_uri: https://includedcc.org/include-access-model/EnumEthnicity
+    description: Participant ethnicity, specific to Hispanic or Latino.
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       hispanic_or_latino:
@@ -668,6 +676,7 @@ enums:
   EnumVitalStatus:
     name: EnumVitalStatus
     definition_uri: https://includedcc.org/include-access-model/EnumVitalStatus
+    description: Descriptions of a Subject's vital status
     from_schema: https://includedcc.org/include-access-model
     is_a: EnumNull
     permissible_values:
@@ -682,12 +691,37 @@ enums:
   EnumNull:
     name: EnumNull
     definition_uri: https://includedcc.org/include-access-model/EnumNull
+    description: Base enumeration providing null options.
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       unknown:
         text: unknown
         meaning: NCIT:C17998
         title: Unknown
+  EnumAssertionProvenance:
+    name: EnumAssertionProvenance
+    definition_uri: https://includedcc.org/include-access-model/EnumAssertionProvenance
+    description: Possible data sources for assertions.
+    from_schema: https://includedcc.org/include-access-model
+    is_a: EnumNull
+    permissible_values:
+      medical_record:
+        text: medical_record
+        description: Data obtained from a medical record
+        title: Medical Record
+      investigator_assessment:
+        text: investigator_assessment
+        description: Data obtained by examination, interview, etc. with investigator
+        title: Investigator Assessment
+      participant_or_caregiver_report:
+        text: participant_or_caregiver_report
+        description: Data obtained from survey, questionnaire, etc. filled out by
+          participant or caregiver
+        title: Participant or Caregiver Report
+      other:
+        text: other
+        description: Data obtained from other source, such as tissue bank
+        title: Other
 slots:
   uuid:
     name: uuid
@@ -742,10 +776,23 @@ slots:
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:subject_id
-    owner: Demographics
+    owner: SubjectAssertion
     domain_of:
     - Subject
     - Demographics
+    - SubjectAssertion
+    range: string
+    multivalued: false
+  assertion_id:
+    name: assertion_id
+    definition_uri: https://includedcc.org/include-access-model/assertion_id
+    description: INLCUDE Global ID for the Assertion
+    title: Assertion ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:assertion_id
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
     range: string
     multivalued: false
   external_id:
@@ -1212,6 +1259,8 @@ slots:
     range: integer
     minimum_value: -365
     maximum_value: 32507
+    unit:
+      ucum_code: d
   vital_status:
     name: vital_status
     definition_uri: https://includedcc.org/include-access-model/vital_status
@@ -1236,6 +1285,170 @@ slots:
     range: integer
     minimum_value: -365
     maximum_value: 32507
+    unit:
+      ucum_code: d
+  assertion_provenance:
+    name: assertion_provenance
+    definition_uri: https://includedcc.org/include-access-model/assertion_provenance
+    description: The original source of this assertion
+    title: Assertion Provenance
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:assertion_provenance
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: EnumAssertionProvenance
+  age_at_assertion:
+    name: age_at_assertion
+    definition_uri: https://includedcc.org/include-access-model/age_at_assertion
+    description: The age in days of the Subject when the assertion was made.
+    title: Age at assertion
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:age_at_assertion
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: integer
+    unit:
+      ucum_code: d
+  age_at_event:
+    name: age_at_event
+    definition_uri: https://includedcc.org/include-access-model/age_at_event
+    description: The age in days of the Subject at the time point which the assertion
+      describes, | eg, age of onset or when a measurement was performed.
+    title: Age at event
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:age_at_event
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: integer
+    unit:
+      ucum_code: d
+  age_at_resolution:
+    name: age_at_resolution
+    definition_uri: https://includedcc.org/include-access-model/age_at_resolution
+    description: The age in days of the Subject when the asserted state was resolved.
+    title: Age at resolution
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:age_at_resolution
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: integer
+    unit:
+      ucum_code: d
+  code:
+    name: code
+    definition_uri: https://includedcc.org/include-access-model/code
+    description: The structured term defining the meaning of the assertion.
+    title: Assertion Code
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:code
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: uriorcurie
+  display:
+    name: display
+    definition_uri: https://includedcc.org/include-access-model/display
+    description: The friendly display string of the coded term.
+    title: Display String
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:display
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  code_source:
+    name: code_source
+    definition_uri: https://includedcc.org/include-access-model/code_source
+    description: The source text yielding the code.
+    title: Code Source Text
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:code_source
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_code:
+    name: value_code
+    definition_uri: https://includedcc.org/include-access-model/value_code
+    description: The structured term defining the value of the assertion.
+    title: Value Code
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_code
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: uriorcurie
+  value_display:
+    name: value_display
+    definition_uri: https://includedcc.org/include-access-model/value_display
+    description: The friendly display string of the coded term for the value of the
+      assertion.
+    title: Value Display String
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_display
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_number:
+    name: value_number
+    definition_uri: https://includedcc.org/include-access-model/value_number
+    description: The numeric value of the assertion.
+    title: Value Number
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_number
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: float
+  value_source:
+    name: value_source
+    definition_uri: https://includedcc.org/include-access-model/value_source
+    description: The source text yielding the value.
+    title: Value Source Text
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_source
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_units:
+    name: value_units
+    definition_uri: https://includedcc.org/include-access-model/value_units
+    description: The structured term defining the units of the value.
+    title: Value Units
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_units
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: uriorcurie
+  value_units_display:
+    name: value_units_display
+    definition_uri: https://includedcc.org/include-access-model/value_units_display
+    description: The friendly display string of units of the value.
+    title: Value Units
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_units_display
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_units_source:
+    name: value_units_source
+    definition_uri: https://includedcc.org/include-access-model/value_units_source
+    description: The source text yielding the value's units.
+    title: Value Units Source Text
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:value_units_source
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
@@ -1309,6 +1522,25 @@ slots:
     - Demographics
     is_usage_slot: true
     usage_slot_name: subject_id
+    range: string
+    required: true
+    multivalued: false
+  SubjectAssertion_assertion_id:
+    name: SubjectAssertion_assertion_id
+    definition_uri: https://includedcc.org/include-access-model/assertion_id
+    description: INLCUDE Global ID for the Assertion
+    title: Assertion ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: assertion_id
+    domain: SubjectAssertion
+    slot_uri: includedcc:assertion_id
+    identifier: true
+    alias: assertion_id
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    is_usage_slot: true
+    usage_slot_name: assertion_id
     range: string
     required: true
     multivalued: false
@@ -1464,9 +1696,41 @@ classes:
         identifier: true
         required: true
     class_uri: includedcc:Demographics
+  SubjectAssertion:
+    name: SubjectAssertion
+    definition_uri: https://includedcc.org/include-access-model/SubjectAssertion
+    description: Assertion about a particular Subject. May include Conditions, Measurements,
+      etc.
+    title: Subject Assertion
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - SubjectAssertion_assertion_id
+    - subject_id
+    - assertion_provenance
+    - age_at_assertion
+    - age_at_event
+    - age_at_resolution
+    - code
+    - display
+    - code_source
+    - value_code
+    - value_display
+    - value_number
+    - value_source
+    - value_units
+    - value_units_display
+    - value_units_source
+    slot_usage:
+      assertion_id:
+        name: assertion_id
+        identifier: true
+        required: true
+    class_uri: includedcc:SubjectAssertion
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-11T20:58:12'
-source_file_size: 19564
-generation_date: '2025-11-11T20:58:21'
+source_file_date: '2025-11-11T22:09:39'
+source_file_size: 23528
+generation_date: '2025-11-11T22:09:48'
 

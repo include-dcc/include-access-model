@@ -49,6 +49,10 @@
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumAssertionProvenance/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/EnumClinicalDataSourceType/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
@@ -157,6 +161,10 @@
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/SubjectAssertion/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/Time/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
@@ -181,11 +189,31 @@
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/age_at_assertion/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/age_at_event/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/age_at_first_engagement/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/age_at_last_vital_status/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/age_at_resolution/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/assertion_id/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/assertion_provenance/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
@@ -201,11 +229,23 @@
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/code/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/code_source/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/contact/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/data_category/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/display/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>
@@ -330,6 +370,34 @@
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/uuid/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_code/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_display/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_number/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_source/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_units/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_units_display/</loc>
+         <lastmod>2025-11-11</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_units_source/</loc>
          <lastmod>2025-11-11</lastmod>
     </url>
     <url>

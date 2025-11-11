@@ -378,6 +378,7 @@
 
 
 <h1 id="enum-enumdownsyndromestatus">Enum: EnumDownSyndromeStatus</h1>
+<p><em>Down syndrome / chromosome 21 status</em></p>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumDownSyndromeStatus">includedcc:EnumDownSyndromeStatus</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -391,7 +392,7 @@
 <tbody>
 <tr>
 <td>d21</td>
-<td>None</td>
+<td>PATO:0001393</td>
 <td>Disomy 21 (euploid)</td>
 </tr>
 <tr>
@@ -425,12 +426,14 @@
 <details>
 
 <pre><code class="language-yaml">name: EnumDownSyndromeStatus
+description: Down syndrome / chromosome 21 status
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
 permissible_values:
   d21:
     text: d21
     description: Disomy 21 (euploid)
+    meaning: PATO:0001393
     title: D21
   t21:
     text: t21

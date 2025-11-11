@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://include-dcc.github.io/include-access-model/elements/Demographics/" rel="canonical"/>
+<link href="https://include-dcc.github.io/include-access-model/elements/SubjectAssertion/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Class: Demographics (Demographics) - include-access-model</title>
+<title>Class: Subject Assertion (SubjectAssertion) - include-access-model</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-demographics-demographics">
+<a class="md-skip" href="#class-subject-assertion-subjectassertion">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Demographics (Demographics)
+              Class: Subject Assertion (SubjectAssertion)
             
           </span>
 </div>
@@ -229,84 +229,64 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-demographics-demographics">Class: Demographics (Demographics)</h1>
-<p><em>Basic participant demographics summary</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/Demographics">includedcc:Demographics</a></p>
+<h1 id="class-subject-assertion-subjectassertion">Class: Subject Assertion (SubjectAssertion)</h1>
+<p><em>Assertion about a particular Subject. May include Conditions, Measurements, etc.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/SubjectAssertion">includedcc:SubjectAssertion</a></p>
 <div class="mermaid"> classDiagram
-    class Demographics
-    click Demographics href "../Demographics/"
-      Record &lt;|-- Demographics
+    class SubjectAssertion
+    click SubjectAssertion href "../SubjectAssertion/"
+      Record &lt;|-- SubjectAssertion
         click Record href "../Record/"
 
-      Demographics : age_at_first_engagement
+      SubjectAssertion : age_at_assertion
 
-      Demographics : age_at_last_vital_status
+      SubjectAssertion : age_at_event
 
-      Demographics : down_syndrome_status
+      SubjectAssertion : age_at_resolution
 
+      SubjectAssertion : assertion_id
 
-
-
-
-        Demographics --&gt; "1" EnumDownSyndromeStatus : down_syndrome_status
-        click EnumDownSyndromeStatus href "../EnumDownSyndromeStatus/"
-
-
-
-      Demographics : ethnicity
+      SubjectAssertion : assertion_provenance
 
 
 
 
 
-        Demographics --&gt; "1" EnumEthnicity : ethnicity
-        click EnumEthnicity href "../EnumEthnicity/"
+        SubjectAssertion --&gt; "0..1" EnumAssertionProvenance : assertion_provenance
+        click EnumAssertionProvenance href "../EnumAssertionProvenance/"
 
 
 
-      Demographics : external_id
+      SubjectAssertion : code
 
-      Demographics : race
+      SubjectAssertion : code_source
 
+      SubjectAssertion : display
 
+      SubjectAssertion : external_id
 
+      SubjectAssertion : subject_id
 
+      SubjectAssertion : value_code
 
-        Demographics --&gt; "1..*" EnumRace : race
-        click EnumRace href "../EnumRace/"
+      SubjectAssertion : value_display
 
+      SubjectAssertion : value_number
 
+      SubjectAssertion : value_source
 
-      Demographics : sex
+      SubjectAssertion : value_units
 
+      SubjectAssertion : value_units_display
 
-
-
-
-        Demographics --&gt; "1" EnumSex : sex
-        click EnumSex href "../EnumSex/"
-
-
-
-      Demographics : subject_id
-
-      Demographics : vital_status
-
-
-
-
-
-        Demographics --&gt; "0..1" EnumVitalStatus : vital_status
-        click EnumVitalStatus href "../EnumVitalStatus/"
-
-
+      SubjectAssertion : value_units_source
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../Record/">Record</a><ul>
-<li><strong>Demographics</strong></li>
+<li><strong>SubjectAssertion</strong></li>
 </ul>
 </li>
 </ul>
@@ -322,51 +302,99 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../subject_id/">subject_id</a></td>
+<td><a href="../assertion_id/">assertion_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
+<td>INLCUDE Global ID for the Assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../subject_id/">subject_id</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
 <td>INLCUDE Global ID for the Subject</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../sex/">sex</a></td>
-<td>1 <br/> <a href="../EnumSex/">EnumSex</a></td>
-<td>Sex of Participant</td>
+<td><a href="../assertion_provenance/">assertion_provenance</a></td>
+<td>0..1 <br/> <a href="../EnumAssertionProvenance/">EnumAssertionProvenance</a></td>
+<td>The original source of this assertion</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../race/">race</a></td>
-<td>1..* <br/> <a href="../EnumRace/">EnumRace</a></td>
-<td>Race of Participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../ethnicity/">ethnicity</a></td>
-<td>1 <br/> <a href="../EnumEthnicity/">EnumEthnicity</a></td>
-<td>Ethnicity of Participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../down_syndrome_status/">down_syndrome_status</a></td>
-<td>1 <br/> <a href="../EnumDownSyndromeStatus/">EnumDownSyndromeStatus</a></td>
-<td>Down Syndrome status of participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../age_at_last_vital_status/">age_at_last_vital_status</a></td>
+<td><a href="../age_at_assertion/">age_at_assertion</a></td>
 <td>0..1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Age in days when participant's vital status was last recorded</td>
+<td>The age in days of the Subject when the assertion was made</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../vital_status/">vital_status</a></td>
-<td>0..1 <br/> <a href="../EnumVitalStatus/">EnumVitalStatus</a></td>
-<td>Whether participant is alive or dead</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../age_at_first_engagement/">age_at_first_engagement</a></td>
+<td><a href="../age_at_event/">age_at_event</a></td>
 <td>0..1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Age in days of Participant at first recorded study event (enrollment, visit, ...</td>
+<td>The age in days of the Subject at the time point which the assertion describe...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../age_at_resolution/">age_at_resolution</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td>The age in days of the Subject when the asserted state was resolved</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../code/">code</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The structured term defining the meaning of the assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../display/">display</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The friendly display string of the coded term</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../code_source/">code_source</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The source text yielding the code</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_code/">value_code</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The structured term defining the value of the assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_display/">value_display</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The friendly display string of the coded term for the value of the assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_number/">value_number</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
+<td>The numeric value of the assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_source/">value_source</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The source text yielding the value</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_units/">value_units</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The structured term defining the units of the value</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_units_display/">value_units_display</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The friendly display string of units of the value</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_units_source/">value_units_source</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The source text yielding the value's units</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -393,11 +421,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:Demographics</td>
+<td>includedcc:SubjectAssertion</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:Demographics</td>
+<td>includedcc:SubjectAssertion</td>
 </tr>
 </tbody>
 </table>
@@ -405,23 +433,32 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Demographics
-description: Basic participant demographics summary
-title: Demographics
+<pre><code class="language-yaml">name: SubjectAssertion
+description: Assertion about a particular Subject. May include Conditions, Measurements,
+  etc.
+title: Subject Assertion
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slots:
+- assertion_id
 - subject_id
-- sex
-- race
-- ethnicity
-- down_syndrome_status
-- age_at_last_vital_status
-- vital_status
-- age_at_first_engagement
+- assertion_provenance
+- age_at_assertion
+- age_at_event
+- age_at_resolution
+- code
+- display
+- code_source
+- value_code
+- value_display
+- value_number
+- value_source
+- value_units
+- value_units_display
+- value_units_source
 slot_usage:
-  subject_id:
-    name: subject_id
+  assertion_id:
+    name: assertion_id
     identifier: true
     required: true
 
@@ -429,125 +466,208 @@ slot_usage:
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Demographics
-description: Basic participant demographics summary
-title: Demographics
+<pre><code class="language-yaml">name: SubjectAssertion
+description: Assertion about a particular Subject. May include Conditions, Measurements,
+  etc.
+title: Subject Assertion
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slot_usage:
-  subject_id:
-    name: subject_id
+  assertion_id:
+    name: assertion_id
     identifier: true
     required: true
 attributes:
+  assertion_id:
+    name: assertion_id
+    description: INLCUDE Global ID for the Assertion
+    title: Assertion ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    identifier: true
+    alias: assertion_id
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+    required: true
+    multivalued: false
   subject_id:
     name: subject_id
     description: INLCUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    identifier: true
     alias: subject_id
-    owner: Demographics
+    owner: SubjectAssertion
     domain_of:
     - Subject
     - Demographics
     - SubjectAssertion
     range: string
-    required: true
     multivalued: false
-  sex:
-    name: sex
-    description: Sex of Participant
-    title: Sex
+  assertion_provenance:
+    name: assertion_provenance
+    description: The original source of this assertion
+    title: Assertion Provenance
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: sex
-    owner: Demographics
+    alias: assertion_provenance
+    owner: SubjectAssertion
     domain_of:
-    - Demographics
-    range: EnumSex
-    required: true
-  race:
-    name: race
-    description: Race of Participant
-    title: Race
+    - SubjectAssertion
+    range: EnumAssertionProvenance
+  age_at_assertion:
+    name: age_at_assertion
+    description: The age in days of the Subject when the assertion was made.
+    title: Age at assertion
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: race
-    owner: Demographics
+    alias: age_at_assertion
+    owner: SubjectAssertion
     domain_of:
-    - Demographics
-    range: EnumRace
-    required: true
-    multivalued: true
-  ethnicity:
-    name: ethnicity
-    description: Ethnicity of Participant
-    title: Ethnicity
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: ethnicity
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumEthnicity
-    required: true
-  down_syndrome_status:
-    name: down_syndrome_status
-    description: Down Syndrome status of participant
-    title: Down Syndrome Status
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: down_syndrome_status
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumDownSyndromeStatus
-    required: true
-  age_at_last_vital_status:
-    name: age_at_last_vital_status
-    description: Age in days when participant's vital status was last recorded
-    title: Age at Last Vital Status
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: age_at_last_vital_status
-    owner: Demographics
-    domain_of:
-    - Demographics
+    - SubjectAssertion
     range: integer
-    minimum_value: -365
-    maximum_value: 32507
     unit:
       ucum_code: d
-  vital_status:
-    name: vital_status
-    description: Whether participant is alive or dead
-    title: Vital Status
+  age_at_event:
+    name: age_at_event
+    description: The age in days of the Subject at the time point which the assertion
+      describes, | eg, age of onset or when a measurement was performed.
+    title: Age at event
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: vital_status
-    owner: Demographics
+    alias: age_at_event
+    owner: SubjectAssertion
     domain_of:
-    - Demographics
-    range: EnumVitalStatus
-  age_at_first_engagement:
-    name: age_at_first_engagement
-    description: Age in days of Participant at first recorded study event (enrollment,
-      visit, observation, sample collection, survey completion, etc.). Age at enrollment
-      is preferred, if available.
-    title: Age at First Participant Engagement
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: age_at_first_engagement
-    owner: Demographics
-    domain_of:
-    - Demographics
+    - SubjectAssertion
     range: integer
-    minimum_value: -365
-    maximum_value: 32507
     unit:
       ucum_code: d
+  age_at_resolution:
+    name: age_at_resolution
+    description: The age in days of the Subject when the asserted state was resolved.
+    title: Age at resolution
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: age_at_resolution
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: integer
+    unit:
+      ucum_code: d
+  code:
+    name: code
+    description: The structured term defining the meaning of the assertion.
+    title: Assertion Code
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: code
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: uriorcurie
+  display:
+    name: display
+    description: The friendly display string of the coded term.
+    title: Display String
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: display
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  code_source:
+    name: code_source
+    description: The source text yielding the code.
+    title: Code Source Text
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: code_source
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_code:
+    name: value_code
+    description: The structured term defining the value of the assertion.
+    title: Value Code
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_code
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: uriorcurie
+  value_display:
+    name: value_display
+    description: The friendly display string of the coded term for the value of the
+      assertion.
+    title: Value Display String
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_display
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_number:
+    name: value_number
+    description: The numeric value of the assertion.
+    title: Value Number
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_number
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: float
+  value_source:
+    name: value_source
+    description: The source text yielding the value.
+    title: Value Source Text
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_source
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_units:
+    name: value_units
+    description: The structured term defining the units of the value.
+    title: Value Units
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_units
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: uriorcurie
+  value_units_display:
+    name: value_units_display
+    description: The friendly display string of units of the value.
+    title: Value Units
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_units_display
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
+  value_units_source:
+    name: value_units_source
+    description: The source text yielding the value's units.
+    title: Value Units Source Text
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: value_units_source
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    range: string
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study
@@ -556,7 +676,7 @@ attributes:
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
     alias: external_id
-    owner: Demographics
+    owner: SubjectAssertion
     domain_of:
     - Record
     range: uriorcurie

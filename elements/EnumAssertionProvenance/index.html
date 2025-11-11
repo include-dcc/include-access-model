@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/EnumVitalStatus/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/EnumAssertionProvenance/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Enum: EnumVitalStatus - include-access-model</title>
+        <title>Enum: EnumAssertionProvenance - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enum-enumvitalstatus" class="md-skip">
+        <a href="#enum-enumassertionprovenance" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Enum: EnumVitalStatus
+              Enum: EnumAssertionProvenance
             
           </span>
         </div>
@@ -377,9 +377,9 @@
   
 
 
-<h1 id="enum-enumvitalstatus">Enum: EnumVitalStatus</h1>
-<p><em>Descriptions of a Subject's vital status</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/EnumVitalStatus">includedcc:EnumVitalStatus</a></p>
+<h1 id="enum-enumassertionprovenance">Enum: EnumAssertionProvenance</h1>
+<p><em>Possible data sources for assertions.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/EnumAssertionProvenance">includedcc:EnumAssertionProvenance</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
 <thead>
@@ -391,14 +391,24 @@
 </thead>
 <tbody>
 <tr>
-<td>dead</td>
-<td>NCIT:C28554</td>
-<td></td>
+<td>medical_record</td>
+<td>None</td>
+<td>Data obtained from a medical record</td>
 </tr>
 <tr>
-<td>alive</td>
-<td>NCIT:C37987</td>
-<td></td>
+<td>investigator_assessment</td>
+<td>None</td>
+<td>Data obtained by examination, interview, etc</td>
+</tr>
+<tr>
+<td>participant_or_caregiver_report</td>
+<td>None</td>
+<td>Data obtained from survey, questionnaire, etc</td>
+</tr>
+<tr>
+<td>other</td>
+<td>None</td>
+<td>Data obtained from other source, such as tissue bank</td>
 </tr>
 </tbody>
 </table>
@@ -412,8 +422,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../vital_status/">vital_status</a></td>
-<td>Whether participant is alive or dead</td>
+<td><a href="../assertion_provenance/">assertion_provenance</a></td>
+<td>The original source of this assertion</td>
 </tr>
 </tbody>
 </table>
@@ -425,20 +435,29 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: EnumVitalStatus
-description: Descriptions of a Subject's vital status
+<pre><code class="language-yaml">name: EnumAssertionProvenance
+description: Possible data sources for assertions.
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
 is_a: EnumNull
 permissible_values:
-  dead:
-    text: dead
-    meaning: NCIT:C28554
-    title: Dead
-  alive:
-    text: alive
-    meaning: NCIT:C37987
-    title: Alive
+  medical_record:
+    text: medical_record
+    description: Data obtained from a medical record
+    title: Medical Record
+  investigator_assessment:
+    text: investigator_assessment
+    description: Data obtained by examination, interview, etc. with investigator
+    title: Investigator Assessment
+  participant_or_caregiver_report:
+    text: participant_or_caregiver_report
+    description: Data obtained from survey, questionnaire, etc. filled out by participant
+      or caregiver
+    title: Participant or Caregiver Report
+  other:
+    text: other
+    description: Data obtained from other source, such as tissue bank
+    title: Other
 
 </code></pre>
 

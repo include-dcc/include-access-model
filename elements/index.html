@@ -504,6 +504,10 @@
 <td>This entity is the subject about which data or references are recorded</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SubjectAssertion/">SubjectAssertion</a></td>
+<td>Assertion about a particular Subject</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="VirtualBiorepository/">VirtualBiorepository</a></td>
 <td>An organization that can provide access to specimen for further analysis</td>
 </tr>
@@ -527,12 +531,32 @@
 <td>Total participants included at this time</td>
 </tr>
 <tr>
+<td><a href="age_at_assertion/">age_at_assertion</a></td>
+<td>The age in days of the Subject when the assertion was made</td>
+</tr>
+<tr>
+<td><a href="age_at_event/">age_at_event</a></td>
+<td>The age in days of the Subject at the time point which the assertion describe...</td>
+</tr>
+<tr>
 <td><a href="age_at_first_engagement/">age_at_first_engagement</a></td>
 <td>Age in days of Participant at first recorded study event (enrollment, visit, ...</td>
 </tr>
 <tr>
 <td><a href="age_at_last_vital_status/">age_at_last_vital_status</a></td>
 <td>Age in days when participant's vital status was last recorded</td>
+</tr>
+<tr>
+<td><a href="age_at_resolution/">age_at_resolution</a></td>
+<td>The age in days of the Subject when the asserted state was resolved</td>
+</tr>
+<tr>
+<td><a href="assertion_id/">assertion_id</a></td>
+<td>INLCUDE Global ID for the Assertion</td>
+</tr>
+<tr>
+<td><a href="assertion_provenance/">assertion_provenance</a></td>
+<td>The original source of this assertion</td>
 </tr>
 <tr>
 <td><a href="bibliographic_reference/">bibliographic_reference</a></td>
@@ -547,12 +571,24 @@
 <td>Source(s) of data collected from study participants</td>
 </tr>
 <tr>
+<td><a href="code/">code</a></td>
+<td>The structured term defining the meaning of the assertion</td>
+</tr>
+<tr>
+<td><a href="code_source/">code_source</a></td>
+<td>The source text yielding the code</td>
+</tr>
+<tr>
 <td><a href="contact/">contact</a></td>
 <td>The individual to contact with questions about this record</td>
 </tr>
 <tr>
 <td><a href="data_category/">data_category</a></td>
 <td>General category of data in this Record (e</td>
+</tr>
+<tr>
+<td><a href="display/">display</a></td>
+<td>The friendly display string of the coded term</td>
 </tr>
 <tr>
 <td><a href="doi/">doi</a></td>
@@ -675,6 +711,34 @@
 <td>Internally assigned UUID for data management and QC purposes</td>
 </tr>
 <tr>
+<td><a href="value_code/">value_code</a></td>
+<td>The structured term defining the value of the assertion</td>
+</tr>
+<tr>
+<td><a href="value_display/">value_display</a></td>
+<td>The friendly display string of the coded term for the value of the assertion</td>
+</tr>
+<tr>
+<td><a href="value_number/">value_number</a></td>
+<td>The numeric value of the assertion</td>
+</tr>
+<tr>
+<td><a href="value_source/">value_source</a></td>
+<td>The source text yielding the value</td>
+</tr>
+<tr>
+<td><a href="value_units/">value_units</a></td>
+<td>The structured term defining the units of the value</td>
+</tr>
+<tr>
+<td><a href="value_units_display/">value_units_display</a></td>
+<td>The friendly display string of units of the value</td>
+</tr>
+<tr>
+<td><a href="value_units_source/">value_units_source</a></td>
+<td>The source text yielding the value's units</td>
+</tr>
+<tr>
 <td><a href="vbr/">vbr</a></td>
 <td>Information about the study's Virtual Biorepository, if participating</td>
 </tr>
@@ -702,6 +766,10 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="EnumAssertionProvenance/">EnumAssertionProvenance</a></td>
+<td>Possible data sources for assertions</td>
+</tr>
+<tr>
 <td><a href="EnumClinicalDataSourceType/">EnumClinicalDataSourceType</a></td>
 <td>Approaches to ascertain clinical information about a participant</td>
 </tr>
@@ -711,15 +779,15 @@
 </tr>
 <tr>
 <td><a href="EnumDownSyndromeStatus/">EnumDownSyndromeStatus</a></td>
-<td></td>
+<td>Down syndrome / chromosome 21 status</td>
 </tr>
 <tr>
 <td><a href="EnumEthnicity/">EnumEthnicity</a></td>
-<td></td>
+<td>Participant ethnicity, specific to Hispanic or Latino</td>
 </tr>
 <tr>
 <td><a href="EnumNull/">EnumNull</a></td>
-<td></td>
+<td>Base enumeration providing null options</td>
 </tr>
 <tr>
 <td><a href="EnumParticipantLifespanStage/">EnumParticipantLifespanStage</a></td>
@@ -731,7 +799,7 @@
 </tr>
 <tr>
 <td><a href="EnumRace/">EnumRace</a></td>
-<td></td>
+<td>Participant Race</td>
 </tr>
 <tr>
 <td><a href="EnumResearchDomain/">EnumResearchDomain</a></td>
@@ -739,7 +807,7 @@
 </tr>
 <tr>
 <td><a href="EnumSex/">EnumSex</a></td>
-<td></td>
+<td>Subject Sex</td>
 </tr>
 <tr>
 <td><a href="EnumStudyDesign/">EnumStudyDesign</a></td>
@@ -747,11 +815,11 @@
 </tr>
 <tr>
 <td><a href="EnumSubjectType/">EnumSubjectType</a></td>
-<td>Types of entities</td>
+<td>Types of Subject entities</td>
 </tr>
 <tr>
 <td><a href="EnumVitalStatus/">EnumVitalStatus</a></td>
-<td></td>
+<td>Descriptions of a Subject's vital status</td>
 </tr>
 </tbody>
 </table>
