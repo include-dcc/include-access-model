@@ -24,7 +24,8 @@ prefixes:
   MONDO: http://purl.obolibrary.org/obo/MONDO_
   HP: http://purl.obolibrary.org/obo/HP_
   mesh: http://id.nlm.nih.gov/mesh/
-  NCIT: http://purl.obolibrary.org/obo/ncit_
+  NCIT: http://purl.obolibrary.org/obo/NCIT_
+  PATO: http://purl.obolibrary.org/obo/PATO_
 
 default_prefix: includedcc
 default_range: string
@@ -148,6 +149,32 @@ classes:
       subject_id:
         required: true
         identifier: true
+  SubjectAssertion:
+    title: Subject Assertion 
+    description: Assertion about a particular Subject. May include Conditions, Measurements, etc.
+    is_a: Record 
+    slots:
+      - assertion_id
+      - subject_id
+      #- encounter_id
+      - assertion_provenance
+      - age_at_assertion
+      - age_at_event
+      - age_at_resolution
+      - code
+      - display
+      - code_source
+      - value_code
+      - value_display
+      - value_number
+      - value_source
+      - value_units
+      - value_units_display 
+      - value_units_source
+    slot_usage:
+      assertion_id:
+        required: true
+        identifier: true
 
 slots: 
   uuid:
@@ -180,6 +207,11 @@ slots:
   subject_id:
     title: Study ID
     description: INLCUDE Global ID for the Subject
+    range: string
+    multivalued: false 
+  assertion_id:
+    title: Assertion ID
+    description: INLCUDE Global ID for the Assertion
     range: string
     multivalued: false 
   external_id: 
@@ -367,9 +399,11 @@ slots:
     title: Age at First Participant Engagement
     description: Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.
     range: integer
+    unit:
+      ucum_code: d
     #Range -1 year to 89*365.25 (Privacy upper bound for ages over 89 years)
     minimum_value: -365
-    maximum_value: 32507
+    maximum_value: 32507    
   vital_status:
     title: Vital Status
     description: Whether participant is alive or dead
@@ -378,9 +412,74 @@ slots:
     title: Age at Last Vital Status
     description: Age in days when participant's vital status was last recorded
     range: integer
+    unit:
+      ucum_code: d
     minimum_value: -365
     maximum_value: 32507
-
+  assertion_provenance:
+    title: Assertion Provenance
+    description: The original source of this assertion
+    range: EnumAssertionProvenance
+  age_at_assertion:
+    title: Age at assertion
+    description: The age in days of the Subject when the assertion was made.
+    range: integer
+    unit:
+      ucum_code: d
+  age_at_event:
+    title: Age at event
+    description: The age in days of the Subject at the time point which the assertion describes, |
+      eg, age of onset or when a measurement was performed.
+    range: integer
+    unit:
+      ucum_code: d
+  age_at_resolution:
+    title: Age at resolution
+    description: The age in days of the Subject when the asserted state was resolved.
+    range: integer
+    unit:
+      ucum_code: d
+  code:
+#TODO: Is this required?
+    title: Assertion Code
+    description: The structured term defining the meaning of the assertion.
+    range: uriorcurie
+  display:
+    title: Display String
+    description: The friendly display string of the coded term.
+    range: string
+  code_source:
+    title: Code Source Text
+    description: The source text yielding the code.
+    range: string
+  value_code:
+    title: Value Code
+    description: The structured term defining the value of the assertion.
+    range: uriorcurie
+  value_display:
+    title: Value Display String
+    description: The friendly display string of the coded term for the value of the assertion.
+    range: string
+  value_number:
+    title: Value Number
+    description: The numeric value of the assertion.
+    range: float
+  value_source:
+    title: Value Source Text
+    description: The source text yielding the value.
+    range: string
+  value_units:
+    title: Value Units
+    description: The structured term defining the units of the value.
+    range: uriorcurie
+  value_units_display:
+    title: Value Units
+    description: The friendly display string of units of the value.
+    range: string
+  value_units_source:
+    title: Value Units Source Text
+    description: The source text yielding the value's units.
+    range: string
 
 
 enums:
@@ -523,7 +622,7 @@ enums:
       sleep_study:
         title: Sleep Study
   EnumSubjectType:
-    description: Types of entities
+    description: Types of Subject entities
     permissible_values: 
       participant: 
         description: Study participant with consent, assent, or waiver of consent.
@@ -539,15 +638,18 @@ enums:
       other:
         description: A different entity type- ideally this will be resolved!
   EnumDownSyndromeStatus:
+    description: Down syndrome / chromosome 21 status
     permissible_values:
       d21:
         title: D21
         description: Disomy 21 (euploid)
+        meaning: PATO:0001393
       t21:
         title: T21
         description: Trisomy 21 (Down syndrome)
         meaning: MONDO:0008608
   EnumSex:
+    description: Subject Sex
     permissible_values:
       female:
         title: Female
@@ -562,6 +664,7 @@ enums:
         title: Unknown
         meaning: NCIT:C17998
   EnumRace:
+    description: Participant Race
     permissible_values:
       american_indian_or_alaska_native:
         title: American Indian or Alaska Native
@@ -607,6 +710,7 @@ enums:
         description: UK only; do not use for US data
         meaning: NCIT:C41263
   EnumEthnicity:
+    description: Participant ethnicity, specific to Hispanic or Latino.
     permissible_values:
       # asked_but_unknown:
       #   text: asked_but_unknown
@@ -625,6 +729,7 @@ enums:
         title: Unknown
         meaning: NCIT:C17998
   EnumVitalStatus:
+    description: Descriptions of a Subject's vital status
     is_a: EnumNull
     permissible_values:
       dead:
@@ -634,7 +739,24 @@ enums:
         title: Alive
         meaning: NCIT:C37987
   EnumNull:
+    description: Base enumeration providing null options.
     permissible_values:
       unknown:
         title: Unknown
         meaning: NCIT:C17998
+  EnumAssertionProvenance:
+    description: Possible data sources for assertions.
+    is_a: EnumNull
+    permissible_values:
+      medical_record:
+        title: Medical Record
+        description: Data obtained from a medical record
+      investigator_assessment:
+        title: Investigator Assessment
+        description: Data obtained by examination, interview, etc. with investigator
+      participant_or_caregiver_report:
+        title: Participant or Caregiver Report
+        description: Data obtained from survey, questionnaire, etc. filled out by participant or caregiver
+      other:
+        title: Other
+        description: Data obtained from other source, such as tissue bank

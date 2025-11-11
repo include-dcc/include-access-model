@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-11T14:56:59
+# Generation date: 2025-11-11T16:08:56
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -56,7 +56,7 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Integer, String, Uri, Uriorcurie
+from linkml_runtime.linkml_model.types import Float, Integer, String, Uri, Uriorcurie
 from linkml_runtime.utils.metamodelcore import URI, URIorCURIE
 
 metamodel_version = "1.7.0"
@@ -65,7 +65,8 @@ version = None
 # Namespaces
 HP = CurieNamespace('HP', 'http://purl.obolibrary.org/obo/HP_')
 MONDO = CurieNamespace('MONDO', 'http://purl.obolibrary.org/obo/MONDO_')
-NCIT = CurieNamespace('NCIT', 'http://purl.obolibrary.org/obo/ncit_')
+NCIT = CurieNamespace('NCIT', 'http://purl.obolibrary.org/obo/NCIT_')
+PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
 CDC_RACE_ETH = CurieNamespace('cdc_race_eth', 'urn:oid:2.16.840.1.113883.6.238/')
 HL7_NULL = CurieNamespace('hl7_null', 'http://terminology.hl7.org/CodeSystem/v3-NullFlavor/')
 IG2_BIOSPECIMEN_AVAILABILITY = CurieNamespace('ig2_biospecimen_availability', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability/')
@@ -97,6 +98,10 @@ class SubjectSubjectId(extended_str):
 
 
 class DemographicsSubjectId(extended_str):
+    pass
+
+
+class SubjectAssertionAssertionId(extended_str):
     pass
 
 
@@ -492,6 +497,89 @@ class Demographics(Record):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
+class SubjectAssertion(Record):
+    """
+    Assertion about a particular Subject. May include Conditions, Measurements, etc.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["SubjectAssertion"]
+    class_class_curie: ClassVar[str] = "includedcc:SubjectAssertion"
+    class_name: ClassVar[str] = "SubjectAssertion"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.SubjectAssertion
+
+    assertion_id: Union[str, SubjectAssertionAssertionId] = None
+    subject_id: Optional[str] = None
+    assertion_provenance: Optional[Union[str, "EnumAssertionProvenance"]] = None
+    age_at_assertion: Optional[int] = None
+    age_at_event: Optional[int] = None
+    age_at_resolution: Optional[int] = None
+    code: Optional[Union[str, URIorCURIE]] = None
+    display: Optional[str] = None
+    code_source: Optional[str] = None
+    value_code: Optional[Union[str, URIorCURIE]] = None
+    value_display: Optional[str] = None
+    value_number: Optional[float] = None
+    value_source: Optional[str] = None
+    value_units: Optional[Union[str, URIorCURIE]] = None
+    value_units_display: Optional[str] = None
+    value_units_source: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.assertion_id):
+            self.MissingRequiredField("assertion_id")
+        if not isinstance(self.assertion_id, SubjectAssertionAssertionId):
+            self.assertion_id = SubjectAssertionAssertionId(self.assertion_id)
+
+        if self.subject_id is not None and not isinstance(self.subject_id, str):
+            self.subject_id = str(self.subject_id)
+
+        if self.assertion_provenance is not None and not isinstance(self.assertion_provenance, EnumAssertionProvenance):
+            self.assertion_provenance = EnumAssertionProvenance(self.assertion_provenance)
+
+        if self.age_at_assertion is not None and not isinstance(self.age_at_assertion, int):
+            self.age_at_assertion = int(self.age_at_assertion)
+
+        if self.age_at_event is not None and not isinstance(self.age_at_event, int):
+            self.age_at_event = int(self.age_at_event)
+
+        if self.age_at_resolution is not None and not isinstance(self.age_at_resolution, int):
+            self.age_at_resolution = int(self.age_at_resolution)
+
+        if self.code is not None and not isinstance(self.code, URIorCURIE):
+            self.code = URIorCURIE(self.code)
+
+        if self.display is not None and not isinstance(self.display, str):
+            self.display = str(self.display)
+
+        if self.code_source is not None and not isinstance(self.code_source, str):
+            self.code_source = str(self.code_source)
+
+        if self.value_code is not None and not isinstance(self.value_code, URIorCURIE):
+            self.value_code = URIorCURIE(self.value_code)
+
+        if self.value_display is not None and not isinstance(self.value_display, str):
+            self.value_display = str(self.value_display)
+
+        if self.value_number is not None and not isinstance(self.value_number, float):
+            self.value_number = float(self.value_number)
+
+        if self.value_source is not None and not isinstance(self.value_source, str):
+            self.value_source = str(self.value_source)
+
+        if self.value_units is not None and not isinstance(self.value_units, URIorCURIE):
+            self.value_units = URIorCURIE(self.value_units)
+
+        if self.value_units_display is not None and not isinstance(self.value_units_display, str):
+            self.value_units_display = str(self.value_units_display)
+
+        if self.value_units_source is not None and not isinstance(self.value_units_source, str):
+            self.value_units_source = str(self.value_units_source)
+
+        super().__post_init__(**kwargs)
+
+
 # Enumerations
 class EnumProgram(EnumDefinitionImpl):
     """
@@ -709,7 +797,7 @@ class EnumDataCategory(EnumDefinitionImpl):
 
 class EnumSubjectType(EnumDefinitionImpl):
     """
-    Types of entities
+    Types of Subject entities
     """
     participant = PermissibleValue(
         text="participant",
@@ -732,15 +820,18 @@ class EnumSubjectType(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumSubjectType",
-        description="Types of entities",
+        description="Types of Subject entities",
     )
 
 class EnumDownSyndromeStatus(EnumDefinitionImpl):
-
+    """
+    Down syndrome / chromosome 21 status
+    """
     d21 = PermissibleValue(
         text="d21",
         title="D21",
-        description="Disomy 21 (euploid)")
+        description="Disomy 21 (euploid)",
+        meaning=PATO["0001393"])
     t21 = PermissibleValue(
         text="t21",
         title="T21",
@@ -749,10 +840,13 @@ class EnumDownSyndromeStatus(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumDownSyndromeStatus",
+        description="Down syndrome / chromosome 21 status",
     )
 
 class EnumSex(EnumDefinitionImpl):
-
+    """
+    Subject Sex
+    """
     female = PermissibleValue(
         text="female",
         title="Female",
@@ -772,10 +866,13 @@ class EnumSex(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumSex",
+        description="Subject Sex",
     )
 
 class EnumRace(EnumDefinitionImpl):
-
+    """
+    Participant Race
+    """
     american_indian_or_alaska_native = PermissibleValue(
         text="american_indian_or_alaska_native",
         title="American Indian or Alaska Native",
@@ -835,10 +932,13 @@ class EnumRace(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumRace",
+        description="Participant Race",
     )
 
 class EnumEthnicity(EnumDefinitionImpl):
-
+    """
+    Participant ethnicity, specific to Hispanic or Latino.
+    """
     hispanic_or_latino = PermissibleValue(
         text="hispanic_or_latino",
         title="Hispanic or Latino",
@@ -858,10 +958,13 @@ class EnumEthnicity(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumEthnicity",
+        description="Participant ethnicity, specific to Hispanic or Latino.",
     )
 
 class EnumVitalStatus(EnumDefinitionImpl):
-
+    """
+    Descriptions of a Subject's vital status
+    """
     dead = PermissibleValue(
         text="dead",
         title="Dead",
@@ -873,10 +976,13 @@ class EnumVitalStatus(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumVitalStatus",
+        description="Descriptions of a Subject's vital status",
     )
 
 class EnumNull(EnumDefinitionImpl):
-
+    """
+    Base enumeration providing null options.
+    """
     unknown = PermissibleValue(
         text="unknown",
         title="Unknown",
@@ -884,6 +990,33 @@ class EnumNull(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumNull",
+        description="Base enumeration providing null options.",
+    )
+
+class EnumAssertionProvenance(EnumDefinitionImpl):
+    """
+    Possible data sources for assertions.
+    """
+    medical_record = PermissibleValue(
+        text="medical_record",
+        title="Medical Record",
+        description="Data obtained from a medical record")
+    investigator_assessment = PermissibleValue(
+        text="investigator_assessment",
+        title="Investigator Assessment",
+        description="Data obtained by examination, interview, etc. with investigator")
+    participant_or_caregiver_report = PermissibleValue(
+        text="participant_or_caregiver_report",
+        title="Participant or Caregiver Report",
+        description="Data obtained from survey, questionnaire, etc. filled out by participant or caregiver")
+    other = PermissibleValue(
+        text="other",
+        title="Other",
+        description="Data obtained from other source, such as tissue bank")
+
+    _defn = EnumDefinition(
+        name="EnumAssertionProvenance",
+        description="Possible data sources for assertions.",
     )
 
 # Slots
@@ -904,6 +1037,9 @@ slots.doi = Slot(uri=INCLUDEDCC.doi, name="doi", curie=INCLUDEDCC.curie('doi'),
 
 slots.subject_id = Slot(uri=INCLUDEDCC.subject_id, name="subject_id", curie=INCLUDEDCC.curie('subject_id'),
                    model_uri=INCLUDEDCC.subject_id, domain=None, range=Optional[str])
+
+slots.assertion_id = Slot(uri=INCLUDEDCC.assertion_id, name="assertion_id", curie=INCLUDEDCC.curie('assertion_id'),
+                   model_uri=INCLUDEDCC.assertion_id, domain=None, range=Optional[str])
 
 slots.external_id = Slot(uri=INCLUDEDCC.external_id, name="external_id", curie=INCLUDEDCC.curie('external_id'),
                    model_uri=INCLUDEDCC.external_id, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
@@ -1019,6 +1155,48 @@ slots.vital_status = Slot(uri=INCLUDEDCC.vital_status, name="vital_status", curi
 slots.age_at_last_vital_status = Slot(uri=INCLUDEDCC.age_at_last_vital_status, name="age_at_last_vital_status", curie=INCLUDEDCC.curie('age_at_last_vital_status'),
                    model_uri=INCLUDEDCC.age_at_last_vital_status, domain=None, range=Optional[int])
 
+slots.assertion_provenance = Slot(uri=INCLUDEDCC.assertion_provenance, name="assertion_provenance", curie=INCLUDEDCC.curie('assertion_provenance'),
+                   model_uri=INCLUDEDCC.assertion_provenance, domain=None, range=Optional[Union[str, "EnumAssertionProvenance"]])
+
+slots.age_at_assertion = Slot(uri=INCLUDEDCC.age_at_assertion, name="age_at_assertion", curie=INCLUDEDCC.curie('age_at_assertion'),
+                   model_uri=INCLUDEDCC.age_at_assertion, domain=None, range=Optional[int])
+
+slots.age_at_event = Slot(uri=INCLUDEDCC.age_at_event, name="age_at_event", curie=INCLUDEDCC.curie('age_at_event'),
+                   model_uri=INCLUDEDCC.age_at_event, domain=None, range=Optional[int])
+
+slots.age_at_resolution = Slot(uri=INCLUDEDCC.age_at_resolution, name="age_at_resolution", curie=INCLUDEDCC.curie('age_at_resolution'),
+                   model_uri=INCLUDEDCC.age_at_resolution, domain=None, range=Optional[int])
+
+slots.code = Slot(uri=INCLUDEDCC.code, name="code", curie=INCLUDEDCC.curie('code'),
+                   model_uri=INCLUDEDCC.code, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.display = Slot(uri=INCLUDEDCC.display, name="display", curie=INCLUDEDCC.curie('display'),
+                   model_uri=INCLUDEDCC.display, domain=None, range=Optional[str])
+
+slots.code_source = Slot(uri=INCLUDEDCC.code_source, name="code_source", curie=INCLUDEDCC.curie('code_source'),
+                   model_uri=INCLUDEDCC.code_source, domain=None, range=Optional[str])
+
+slots.value_code = Slot(uri=INCLUDEDCC.value_code, name="value_code", curie=INCLUDEDCC.curie('value_code'),
+                   model_uri=INCLUDEDCC.value_code, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.value_display = Slot(uri=INCLUDEDCC.value_display, name="value_display", curie=INCLUDEDCC.curie('value_display'),
+                   model_uri=INCLUDEDCC.value_display, domain=None, range=Optional[str])
+
+slots.value_number = Slot(uri=INCLUDEDCC.value_number, name="value_number", curie=INCLUDEDCC.curie('value_number'),
+                   model_uri=INCLUDEDCC.value_number, domain=None, range=Optional[float])
+
+slots.value_source = Slot(uri=INCLUDEDCC.value_source, name="value_source", curie=INCLUDEDCC.curie('value_source'),
+                   model_uri=INCLUDEDCC.value_source, domain=None, range=Optional[str])
+
+slots.value_units = Slot(uri=INCLUDEDCC.value_units, name="value_units", curie=INCLUDEDCC.curie('value_units'),
+                   model_uri=INCLUDEDCC.value_units, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.value_units_display = Slot(uri=INCLUDEDCC.value_units_display, name="value_units_display", curie=INCLUDEDCC.curie('value_units_display'),
+                   model_uri=INCLUDEDCC.value_units_display, domain=None, range=Optional[str])
+
+slots.value_units_source = Slot(uri=INCLUDEDCC.value_units_source, name="value_units_source", curie=INCLUDEDCC.curie('value_units_source'),
+                   model_uri=INCLUDEDCC.value_units_source, domain=None, range=Optional[str])
+
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
 
@@ -1030,3 +1208,6 @@ slots.Subject_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Subject_subject
 
 slots.Demographics_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Demographics_subject_id", curie=INCLUDEDCC.curie('subject_id'),
                    model_uri=INCLUDEDCC.Demographics_subject_id, domain=Demographics, range=Union[str, DemographicsSubjectId])
+
+slots.SubjectAssertion_assertion_id = Slot(uri=INCLUDEDCC.assertion_id, name="SubjectAssertion_assertion_id", curie=INCLUDEDCC.curie('assertion_id'),
+                   model_uri=INCLUDEDCC.SubjectAssertion_assertion_id, domain=SubjectAssertion, range=Union[str, SubjectAssertionAssertionId])

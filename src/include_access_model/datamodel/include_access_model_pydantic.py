@@ -90,7 +90,9 @@ linkml_meta = LinkMLMeta({'default_prefix': 'includedcc',
                   'MONDO': {'prefix_prefix': 'MONDO',
                             'prefix_reference': 'http://purl.obolibrary.org/obo/MONDO_'},
                   'NCIT': {'prefix_prefix': 'NCIT',
-                           'prefix_reference': 'http://purl.obolibrary.org/obo/ncit_'},
+                           'prefix_reference': 'http://purl.obolibrary.org/obo/NCIT_'},
+                  'PATO': {'prefix_prefix': 'PATO',
+                           'prefix_reference': 'http://purl.obolibrary.org/obo/PATO_'},
                   'cdc_race_eth': {'prefix_prefix': 'cdc_race_eth',
                                    'prefix_reference': 'urn:oid:2.16.840.1.113883.6.238/'},
                   'hl7_null': {'prefix_prefix': 'hl7_null',
@@ -227,7 +229,7 @@ class EnumDataCategory(str, Enum):
 
 class EnumSubjectType(str, Enum):
     """
-    Types of entities
+    Types of Subject entities
     """
     participant = "participant"
     """
@@ -256,6 +258,9 @@ class EnumSubjectType(str, Enum):
 
 
 class EnumDownSyndromeStatus(str, Enum):
+    """
+    Down syndrome / chromosome 21 status
+    """
     D21 = "d21"
     """
     Disomy 21 (euploid)
@@ -267,6 +272,9 @@ class EnumDownSyndromeStatus(str, Enum):
 
 
 class EnumSex(str, Enum):
+    """
+    Subject Sex
+    """
     Female = "female"
     Male = "male"
     Other = "other"
@@ -274,6 +282,9 @@ class EnumSex(str, Enum):
 
 
 class EnumRace(str, Enum):
+    """
+    Participant Race
+    """
     American_Indian_or_Alaska_Native = "american_indian_or_alaska_native"
     Asian = "asian"
     Black_or_African_American = "black_or_african_american"
@@ -302,6 +313,9 @@ class EnumRace(str, Enum):
 
 
 class EnumEthnicity(str, Enum):
+    """
+    Participant ethnicity, specific to Hispanic or Latino.
+    """
     Hispanic_or_Latino = "hispanic_or_latino"
     Not_Hispanic_or_Latino = "not_hispanic_or_latino"
     Prefer_not_to_answer = "prefer_not_to_answer"
@@ -309,12 +323,40 @@ class EnumEthnicity(str, Enum):
 
 
 class EnumVitalStatus(str, Enum):
+    """
+    Descriptions of a Subject's vital status
+    """
     Dead = "dead"
     Alive = "alive"
 
 
 class EnumNull(str, Enum):
+    """
+    Base enumeration providing null options.
+    """
     Unknown = "unknown"
+
+
+class EnumAssertionProvenance(str, Enum):
+    """
+    Possible data sources for assertions.
+    """
+    Medical_Record = "medical_record"
+    """
+    Data obtained from a medical record
+    """
+    Investigator_Assessment = "investigator_assessment"
+    """
+    Data obtained by examination, interview, etc. with investigator
+    """
+    Participant_or_Caregiver_Report = "participant_or_caregiver_report"
+    """
+    Data obtained from survey, questionnaire, etc. filled out by participant or caregiver
+    """
+    Other = "other"
+    """
+    Data obtained from other source, such as tissue bank
+    """
 
 
 
@@ -430,7 +472,7 @@ class Subject(Record):
                                        'required': True}},
          'title': 'Subject'})
 
-    subject_id: str = Field(default=..., title="Study ID", description="""INLCUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics']} })
+    subject_id: str = Field(default=..., title="Study ID", description="""INLCUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion']} })
     subject_type: EnumSubjectType = Field(default=..., title="Subject Type", description="""Type of entity this record represents""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     organism_type: Optional[str] = Field(default=None, title="Organism Type", description="""Organism Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
@@ -446,14 +488,43 @@ class Demographics(Record):
                                        'required': True}},
          'title': 'Demographics'})
 
-    subject_id: str = Field(default=..., title="Study ID", description="""INLCUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics']} })
+    subject_id: str = Field(default=..., title="Study ID", description="""INLCUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion']} })
     sex: EnumSex = Field(default=..., title="Sex", description="""Sex of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     race: list[EnumRace] = Field(default=..., title="Race", description="""Race of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Ethnicity of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     down_syndrome_status: EnumDownSyndromeStatus = Field(default=..., title="Down Syndrome Status", description="""Down Syndrome status of participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
-    age_at_last_vital_status: Optional[int] = Field(default=None, title="Age at Last Vital Status", description="""Age in days when participant's vital status was last recorded""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
+    age_at_last_vital_status: Optional[int] = Field(default=None, title="Age at Last Vital Status", description="""Age in days when participant's vital status was last recorded""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics'], 'unit': {'ucum_code': 'd'}} })
     vital_status: Optional[EnumVitalStatus] = Field(default=None, title="Vital Status", description="""Whether participant is alive or dead""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
-    age_at_first_engagement: Optional[int] = Field(default=None, title="Age at First Participant Engagement", description="""Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
+    age_at_first_engagement: Optional[int] = Field(default=None, title="Age at First Participant Engagement", description="""Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics'], 'unit': {'ucum_code': 'd'}} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class SubjectAssertion(Record):
+    """
+    Assertion about a particular Subject. May include Conditions, Measurements, etc.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'assertion_id': {'identifier': True,
+                                         'name': 'assertion_id',
+                                         'required': True}},
+         'title': 'Subject Assertion'})
+
+    assertion_id: str = Field(default=..., title="Assertion ID", description="""INLCUDE Global ID for the Assertion""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INLCUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion']} })
+    assertion_provenance: Optional[EnumAssertionProvenance] = Field(default=None, title="Assertion Provenance", description="""The original source of this assertion""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    age_at_assertion: Optional[int] = Field(default=None, title="Age at assertion", description="""The age in days of the Subject when the assertion was made.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
+    age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, | eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
+    age_at_resolution: Optional[int] = Field(default=None, title="Age at resolution", description="""The age in days of the Subject when the asserted state was resolved.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
+    code: Optional[str] = Field(default=None, title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    display: Optional[str] = Field(default=None, title="Display String", description="""The friendly display string of the coded term.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    code_source: Optional[str] = Field(default=None, title="Code Source Text", description="""The source text yielding the code.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_code: Optional[str] = Field(default=None, title="Value Code", description="""The structured term defining the value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_display: Optional[str] = Field(default=None, title="Value Display String", description="""The friendly display string of the coded term for the value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_number: Optional[float] = Field(default=None, title="Value Number", description="""The numeric value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_source: Optional[str] = Field(default=None, title="Value Source Text", description="""The source text yielding the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_units: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_units_display: Optional[str] = Field(default=None, title="Value Units", description="""The friendly display string of units of the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_units_source: Optional[str] = Field(default=None, title="Value Units Source Text", description="""The source text yielding the value's units.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
@@ -467,3 +538,4 @@ Investigator.model_rebuild()
 Publication.model_rebuild()
 Subject.model_rebuild()
 Demographics.model_rebuild()
+SubjectAssertion.model_rebuild()
