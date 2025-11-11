@@ -24,6 +24,7 @@ prefixes:
   MONDO: http://purl.obolibrary.org/obo/MONDO_
   HP: http://purl.obolibrary.org/obo/HP_
   mesh: http://id.nlm.nih.gov/mesh/
+  NCIT: http://purl.obolibrary.org/obo/ncit_
 
 default_prefix: includedcc
 default_range: string
@@ -37,8 +38,6 @@ classes:
     title: Record
     abstract: true
     slots:
-    - uuid
-    - id
     - external_id
   Study:
     title: Study 
@@ -46,6 +45,7 @@ classes:
     is_a: Record
     slots: 
 #TODO: Split out core Study items and additional study metadata?
+      - study_id
       - parent_study 
       - funding_source
       - principal_investigator 
@@ -73,6 +73,10 @@ classes:
       - acknowledgments
       - citation_statement
       - doi
+    slot_usage:
+      study_id:
+        required: true
+        identifier: true
   VirtualBiorepository:
     title: Virtual BioRepository (VBR)
     description: An organization that can provide access to specimen for further analysis.
@@ -88,8 +92,13 @@ classes:
     description: A DOI is a permanent reference with metadata about a digital object.
     is_a: Record
     slots:
+#TODO: Need to split up the doi slot here versus in the study resource- it's self-referential now.
       - doi
       - bibliographic_reference
+    slot_usage:
+      doi:
+        required: true
+        identifier: true
   Investigator:
     title: Investigator
     description: An individual who made contributions to the collection, analysis, or sharing of data.
@@ -108,6 +117,37 @@ classes:
     slots:
       - bibliographic_reference
       - website
+  Subject:
+    title: Subject
+    description: This entity is the subject about which data or references are recorded. |
+      This includes the idea of a human participant in a study, a cell line, an animal model, |
+      or any other similar entity.
+    is_a: Record
+    slots:
+      - subject_id
+      - subject_type
+      - organism_type
+    slot_usage:
+      subject_id:
+        required: true
+        identifier: true
+  Demographics:
+    title: Demographics
+    description: Basic participant demographics summary
+    is_a: Record
+    slots:
+      - subject_id
+      - sex
+      - race
+      - ethnicity
+      - down_syndrome_status
+      - age_at_last_vital_status 
+      - vital_status
+      - age_at_first_engagement
+    slot_usage:
+      subject_id:
+        required: true
+        identifier: true
 
 slots: 
   uuid:
@@ -121,6 +161,25 @@ slots:
     description: INLCUDE Global ID for this record
     identifier: true
     required: true
+    range: string
+    multivalued: false 
+  study_id:
+    title: Study ID
+    description: INLCUDE Global ID for the study
+    #identifier: true
+    #required: true
+    range: string
+    multivalued: false 
+  doi:
+    title: DOI
+    description: Digital Object Identifier (DOI) for this Record.
+    #identifier: true
+    #required: true
+    range: uri
+    multivalued: false 
+  subject_id:
+    title: Study ID
+    description: INLCUDE Global ID for the Subject
     range: string
     multivalued: false 
   external_id: 
@@ -272,10 +331,57 @@ slots:
     title: Bibiliographic Reference
     description: Text use to reference this Record.
     range: string
-  doi:
-    title: DOI
-    description: Digital Object Identifier (DOI) for this Record.
-    range: DOI
+  organism_type:
+    title: Organism Type 
+    description: Organism Type
+    required: false 
+    range: uriorcurie 
+  subject_type: 
+    title: Subject Type 
+    description: Type of entity this record represents
+    required: true 
+    range: EnumSubjectType 
+  sex:
+    title: Sex
+    description: Sex of Participant
+    range: EnumSex
+    required: true
+  race:
+    title: Race
+    description: Race of Participant
+    range: EnumRace
+    required: true
+    multivalued: true
+  ethnicity:
+    title: Ethnicity
+    description: Ethnicity of Participant
+    range: EnumEthnicity
+    required: true
+  down_syndrome_status:
+    title: Down Syndrome Status
+    description: Down Syndrome status of participant
+    range: EnumDownSyndromeStatus
+    required: true
+  age_at_first_engagement:
+#Should this just be a reference out to an encounter?
+    title: Age at First Participant Engagement
+    description: Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.
+    range: integer
+    #Range -1 year to 89*365.25 (Privacy upper bound for ages over 89 years)
+    minimum_value: -365
+    maximum_value: 32507
+  vital_status:
+    title: Vital Status
+    description: Whether participant is alive or dead
+    range: EnumVitalStatus
+  age_at_last_vital_status:
+    title: Age at Last Vital Status
+    description: Age in days when participant's vital status was last recorded
+    range: integer
+    minimum_value: -365
+    maximum_value: 32507
+
+
 
 enums:
   EnumProgram:
@@ -416,3 +522,119 @@ enums:
         title: Other
       sleep_study:
         title: Sleep Study
+  EnumSubjectType:
+    description: Types of entities
+    permissible_values: 
+      participant: 
+        description: Study participant with consent, assent, or waiver of consent.
+      non_participant:
+        description: An individual associated with a study who was not explictly consented, eg, the subject |
+          of a reported family history.
+      cell_line: 
+        description: Cell Line
+      animal_model: 
+        description: Animal model
+      group:
+        description: A group of individuals or entities.
+      other:
+        description: A different entity type- ideally this will be resolved!
+  EnumDownSyndromeStatus:
+    permissible_values:
+      d21:
+        title: D21
+        description: Disomy 21 (euploid)
+      t21:
+        title: T21
+        description: Trisomy 21 (Down syndrome)
+        meaning: MONDO:0008608
+  EnumSex:
+    permissible_values:
+      female:
+        title: Female
+        meaning: NCIT:C16576
+      male:
+        title: Male
+        meaning: NCIT:C20197
+      other:
+        title: Other
+        meaning: NCIT:C17649
+      unknown:
+        title: Unknown
+        meaning: NCIT:C17998
+  EnumRace:
+    permissible_values:
+      american_indian_or_alaska_native:
+        title: American Indian or Alaska Native
+        meaning: NCIT:C41259
+      asian:
+        title: Asian
+        meaning: NCIT:C41260
+      black_or_african_american:
+        title: Black or African American
+        meaning: NCIT:C16352
+      more_than_one_race:
+        title: More than one race
+        meaning: NCIT:C67109
+      native_hawaiian_or_other_pacific_islander:
+        title: Native Hawaiian or Other Pacific Islander
+        meaning: NCIT:C41219
+      other:
+        title: Other
+        meaning: NCIT:C17649
+      white:
+        title: White
+        meaning: NCIT:C41261
+      prefer_not_to_answer:
+        title: Prefer not to answer
+        meaning: NCIT:C132222
+      unknown:
+        title: Unknown
+        meaning: NCIT:C17998
+      east_asian:
+        title: East Asian
+        description: UK only; do not use for US data
+        meaning: NCIT:C161419
+      latin_american:
+        title: Latin American
+        description: UK only; do not use for US data
+        meaning: NCIT:C126531
+      middle_eastern_or_north_african:
+        title: Middle Eastern or North African
+        description: UK only; do not use for US data
+        meaning: NCIT:C43866
+      south_asian:
+        title: South Asian
+        description: UK only; do not use for US data
+        meaning: NCIT:C41263
+  EnumEthnicity:
+    permissible_values:
+      # asked_but_unknown:
+      #   text: asked_but_unknown
+      #   title: Asked but unknown
+      hispanic_or_latino:
+        title: Hispanic or Latino
+        meaning: NCIT:C17459
+      not_hispanic_or_latino:
+        title: Not Hispanic or Latino
+        meaning: NCIT:C41222
+      #This should likely be rolled into a null flavor
+      prefer_not_to_answer:
+        title: Prefer not to answer
+        meaning: NCIT:C132222
+      unknown:
+        title: Unknown
+        meaning: NCIT:C17998
+  EnumVitalStatus:
+    is_a: EnumNull
+    permissible_values:
+      dead:
+        title: Dead
+        meaning: NCIT:C28554
+      alive:
+        title: Alive
+        meaning: NCIT:C37987
+  EnumNull:
+    permissible_values:
+      unknown:
+        title: Unknown
+        meaning: NCIT:C17998

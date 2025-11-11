@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-11T07:37:46
+# Generation date: 2025-11-11T14:56:59
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -65,6 +65,7 @@ version = None
 # Namespaces
 HP = CurieNamespace('HP', 'http://purl.obolibrary.org/obo/HP_')
 MONDO = CurieNamespace('MONDO', 'http://purl.obolibrary.org/obo/MONDO_')
+NCIT = CurieNamespace('NCIT', 'http://purl.obolibrary.org/obo/ncit_')
 CDC_RACE_ETH = CurieNamespace('cdc_race_eth', 'urn:oid:2.16.840.1.113883.6.238/')
 HL7_NULL = CurieNamespace('hl7_null', 'http://terminology.hl7.org/CodeSystem/v3-NullFlavor/')
 IG2_BIOSPECIMEN_AVAILABILITY = CurieNamespace('ig2_biospecimen_availability', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability/')
@@ -83,27 +84,19 @@ DEFAULT_ = INCLUDEDCC
 # Types
 
 # Class references
-class RecordId(extended_str):
+class StudyStudyId(extended_str):
     pass
 
 
-class StudyId(RecordId):
+class DOIDoi(URI):
     pass
 
 
-class VirtualBiorepositoryId(RecordId):
+class SubjectSubjectId(extended_str):
     pass
 
 
-class DOIId(RecordId):
-    pass
-
-
-class InvestigatorId(RecordId):
-    pass
-
-
-class PublicationId(RecordId):
+class DemographicsSubjectId(extended_str):
     pass
 
 
@@ -119,21 +112,9 @@ class Record(YAMLRoot):
     class_name: ClassVar[str] = "Record"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Record
 
-    id: Union[str, RecordId] = None
-    uuid: str = None
     external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.uuid):
-            self.MissingRequiredField("uuid")
-        if not isinstance(self.uuid, str):
-            self.uuid = str(self.uuid)
-
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, RecordId):
-            self.id = RecordId(self.id)
-
         if not isinstance(self.external_id, list):
             self.external_id = [self.external_id] if self.external_id is not None else []
         self.external_id = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.external_id]
@@ -153,10 +134,9 @@ class Study(Record):
     class_name: ClassVar[str] = "Study"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Study
 
-    id: Union[str, StudyId] = None
-    uuid: str = None
-    principal_investigator: Union[Union[str, InvestigatorId], list[Union[str, InvestigatorId]]] = None
-    contact: Union[Union[str, InvestigatorId], list[Union[str, InvestigatorId]]] = None
+    study_id: Union[str, StudyStudyId] = None
+    principal_investigator: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
+    contact: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
     study_title: str = None
     study_code: str = None
     program: Union[Union[str, "EnumProgram"], list[Union[str, "EnumProgram"]]] = None
@@ -168,34 +148,34 @@ class Study(Record):
     data_category: Union[Union[str, "EnumDataCategory"], list[Union[str, "EnumDataCategory"]]] = None
     expected_number_of_participants: int = None
     actual_number_of_participants: int = None
-    parent_study: Optional[Union[str, StudyId]] = None
+    parent_study: Optional[Union[str, StudyStudyId]] = None
     funding_source: Optional[Union[str, list[str]]] = empty_list()
     study_short_name: Optional[str] = None
-    vbr: Optional[Union[str, VirtualBiorepositoryId]] = None
+    vbr: Optional[Union[dict, "VirtualBiorepository"]] = None
     selection_criteria: Optional[str] = None
     website: Optional[Union[str, URI]] = None
-    publication: Optional[Union[Union[str, PublicationId], list[Union[str, PublicationId]]]] = empty_list()
+    publication: Optional[Union[Union[dict, "Publication"], list[Union[dict, "Publication"]]]] = empty_list()
     acknowledgments: Optional[str] = None
     citation_statement: Optional[str] = None
-    doi: Optional[Union[str, DOIId]] = None
+    doi: Optional[Union[str, URI]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, StudyId):
-            self.id = StudyId(self.id)
+        if self._is_empty(self.study_id):
+            self.MissingRequiredField("study_id")
+        if not isinstance(self.study_id, StudyStudyId):
+            self.study_id = StudyStudyId(self.study_id)
 
         if self._is_empty(self.principal_investigator):
             self.MissingRequiredField("principal_investigator")
         if not isinstance(self.principal_investigator, list):
             self.principal_investigator = [self.principal_investigator] if self.principal_investigator is not None else []
-        self.principal_investigator = [v if isinstance(v, InvestigatorId) else InvestigatorId(v) for v in self.principal_investigator]
+        self.principal_investigator = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.principal_investigator]
 
         if self._is_empty(self.contact):
             self.MissingRequiredField("contact")
         if not isinstance(self.contact, list):
             self.contact = [self.contact] if self.contact is not None else []
-        self.contact = [v if isinstance(v, InvestigatorId) else InvestigatorId(v) for v in self.contact]
+        self.contact = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.contact]
 
         if self._is_empty(self.study_title):
             self.MissingRequiredField("study_title")
@@ -258,8 +238,8 @@ class Study(Record):
         if not isinstance(self.actual_number_of_participants, int):
             self.actual_number_of_participants = int(self.actual_number_of_participants)
 
-        if self.parent_study is not None and not isinstance(self.parent_study, StudyId):
-            self.parent_study = StudyId(self.parent_study)
+        if self.parent_study is not None and not isinstance(self.parent_study, StudyStudyId):
+            self.parent_study = StudyStudyId(self.parent_study)
 
         if not isinstance(self.funding_source, list):
             self.funding_source = [self.funding_source] if self.funding_source is not None else []
@@ -268,8 +248,8 @@ class Study(Record):
         if self.study_short_name is not None and not isinstance(self.study_short_name, str):
             self.study_short_name = str(self.study_short_name)
 
-        if self.vbr is not None and not isinstance(self.vbr, VirtualBiorepositoryId):
-            self.vbr = VirtualBiorepositoryId(self.vbr)
+        if self.vbr is not None and not isinstance(self.vbr, VirtualBiorepository):
+            self.vbr = VirtualBiorepository(**as_dict(self.vbr))
 
         if self.selection_criteria is not None and not isinstance(self.selection_criteria, str):
             self.selection_criteria = str(self.selection_criteria)
@@ -279,7 +259,7 @@ class Study(Record):
 
         if not isinstance(self.publication, list):
             self.publication = [self.publication] if self.publication is not None else []
-        self.publication = [v if isinstance(v, PublicationId) else PublicationId(v) for v in self.publication]
+        self.publication = [v if isinstance(v, Publication) else Publication(**as_dict(v)) for v in self.publication]
 
         if self.acknowledgments is not None and not isinstance(self.acknowledgments, str):
             self.acknowledgments = str(self.acknowledgments)
@@ -287,8 +267,8 @@ class Study(Record):
         if self.citation_statement is not None and not isinstance(self.citation_statement, str):
             self.citation_statement = str(self.citation_statement)
 
-        if self.doi is not None and not isinstance(self.doi, DOIId):
-            self.doi = DOIId(self.doi)
+        if self.doi is not None and not isinstance(self.doi, URI):
+            self.doi = URI(self.doi)
 
         super().__post_init__(**kwargs)
 
@@ -305,25 +285,18 @@ class VirtualBiorepository(Record):
     class_name: ClassVar[str] = "VirtualBiorepository"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.VirtualBiorepository
 
-    id: Union[str, VirtualBiorepositoryId] = None
-    uuid: str = None
-    contact: Union[Union[str, InvestigatorId], list[Union[str, InvestigatorId]]] = None
+    contact: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
     name: Optional[str] = None
     institution: Optional[str] = None
     website: Optional[Union[str, URI]] = None
     vbr_readme: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, VirtualBiorepositoryId):
-            self.id = VirtualBiorepositoryId(self.id)
-
         if self._is_empty(self.contact):
             self.MissingRequiredField("contact")
         if not isinstance(self.contact, list):
             self.contact = [self.contact] if self.contact is not None else []
-        self.contact = [v if isinstance(v, InvestigatorId) else InvestigatorId(v) for v in self.contact]
+        self.contact = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.contact]
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
@@ -352,19 +325,14 @@ class DOI(Record):
     class_name: ClassVar[str] = "DOI"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.DOI
 
-    id: Union[str, DOIId] = None
-    uuid: str = None
-    doi: Optional[Union[str, DOIId]] = None
+    doi: Union[str, DOIDoi] = None
     bibliographic_reference: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, DOIId):
-            self.id = DOIId(self.id)
-
-        if self.doi is not None and not isinstance(self.doi, DOIId):
-            self.doi = DOIId(self.doi)
+        if self._is_empty(self.doi):
+            self.MissingRequiredField("doi")
+        if not isinstance(self.doi, DOIDoi):
+            self.doi = DOIDoi(self.doi)
 
         if self.bibliographic_reference is not None and not isinstance(self.bibliographic_reference, str):
             self.bibliographic_reference = str(self.bibliographic_reference)
@@ -384,19 +352,12 @@ class Investigator(Record):
     class_name: ClassVar[str] = "Investigator"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Investigator
 
-    id: Union[str, InvestigatorId] = None
-    uuid: str = None
     name: Optional[str] = None
     institution: Optional[str] = None
     invesitgator_title: Optional[str] = None
     email: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, InvestigatorId):
-            self.id = InvestigatorId(self.id)
-
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
 
@@ -424,22 +385,109 @@ class Publication(Record):
     class_name: ClassVar[str] = "Publication"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Publication
 
-    id: Union[str, PublicationId] = None
-    uuid: str = None
     bibliographic_reference: Optional[str] = None
     website: Optional[Union[str, URI]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PublicationId):
-            self.id = PublicationId(self.id)
-
         if self.bibliographic_reference is not None and not isinstance(self.bibliographic_reference, str):
             self.bibliographic_reference = str(self.bibliographic_reference)
 
         if self.website is not None and not isinstance(self.website, URI):
             self.website = URI(self.website)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Subject(Record):
+    """
+    This entity is the subject about which data or references are recorded. | This includes the idea of a human
+    participant in a study, a cell line, an animal model, | or any other similar entity.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Subject"]
+    class_class_curie: ClassVar[str] = "includedcc:Subject"
+    class_name: ClassVar[str] = "Subject"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Subject
+
+    subject_id: Union[str, SubjectSubjectId] = None
+    subject_type: Union[str, "EnumSubjectType"] = None
+    organism_type: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.subject_id):
+            self.MissingRequiredField("subject_id")
+        if not isinstance(self.subject_id, SubjectSubjectId):
+            self.subject_id = SubjectSubjectId(self.subject_id)
+
+        if self._is_empty(self.subject_type):
+            self.MissingRequiredField("subject_type")
+        if not isinstance(self.subject_type, EnumSubjectType):
+            self.subject_type = EnumSubjectType(self.subject_type)
+
+        if self.organism_type is not None and not isinstance(self.organism_type, URIorCURIE):
+            self.organism_type = URIorCURIE(self.organism_type)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Demographics(Record):
+    """
+    Basic participant demographics summary
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Demographics"]
+    class_class_curie: ClassVar[str] = "includedcc:Demographics"
+    class_name: ClassVar[str] = "Demographics"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Demographics
+
+    subject_id: Union[str, DemographicsSubjectId] = None
+    sex: Union[str, "EnumSex"] = None
+    race: Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]] = None
+    ethnicity: Union[str, "EnumEthnicity"] = None
+    down_syndrome_status: Union[str, "EnumDownSyndromeStatus"] = None
+    age_at_last_vital_status: Optional[int] = None
+    vital_status: Optional[Union[str, "EnumVitalStatus"]] = None
+    age_at_first_engagement: Optional[int] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.subject_id):
+            self.MissingRequiredField("subject_id")
+        if not isinstance(self.subject_id, DemographicsSubjectId):
+            self.subject_id = DemographicsSubjectId(self.subject_id)
+
+        if self._is_empty(self.sex):
+            self.MissingRequiredField("sex")
+        if not isinstance(self.sex, EnumSex):
+            self.sex = EnumSex(self.sex)
+
+        if self._is_empty(self.race):
+            self.MissingRequiredField("race")
+        if not isinstance(self.race, list):
+            self.race = [self.race] if self.race is not None else []
+        self.race = [v if isinstance(v, EnumRace) else EnumRace(v) for v in self.race]
+
+        if self._is_empty(self.ethnicity):
+            self.MissingRequiredField("ethnicity")
+        if not isinstance(self.ethnicity, EnumEthnicity):
+            self.ethnicity = EnumEthnicity(self.ethnicity)
+
+        if self._is_empty(self.down_syndrome_status):
+            self.MissingRequiredField("down_syndrome_status")
+        if not isinstance(self.down_syndrome_status, EnumDownSyndromeStatus):
+            self.down_syndrome_status = EnumDownSyndromeStatus(self.down_syndrome_status)
+
+        if self.age_at_last_vital_status is not None and not isinstance(self.age_at_last_vital_status, int):
+            self.age_at_last_vital_status = int(self.age_at_last_vital_status)
+
+        if self.vital_status is not None and not isinstance(self.vital_status, EnumVitalStatus):
+            self.vital_status = EnumVitalStatus(self.vital_status)
+
+        if self.age_at_first_engagement is not None and not isinstance(self.age_at_first_engagement, int):
+            self.age_at_first_engagement = int(self.age_at_first_engagement)
 
         super().__post_init__(**kwargs)
 
@@ -659,6 +707,185 @@ class EnumDataCategory(EnumDefinitionImpl):
         description="Categories of data which may be collected about participants.",
     )
 
+class EnumSubjectType(EnumDefinitionImpl):
+    """
+    Types of entities
+    """
+    participant = PermissibleValue(
+        text="participant",
+        description="Study participant with consent, assent, or waiver of consent.")
+    non_participant = PermissibleValue(
+        text="non_participant",
+        description="""An individual associated with a study who was not explictly consented, eg, the subject | of a reported family history.""")
+    cell_line = PermissibleValue(
+        text="cell_line",
+        description="Cell Line")
+    animal_model = PermissibleValue(
+        text="animal_model",
+        description="Animal model")
+    group = PermissibleValue(
+        text="group",
+        description="A group of individuals or entities.")
+    other = PermissibleValue(
+        text="other",
+        description="A different entity type- ideally this will be resolved!")
+
+    _defn = EnumDefinition(
+        name="EnumSubjectType",
+        description="Types of entities",
+    )
+
+class EnumDownSyndromeStatus(EnumDefinitionImpl):
+
+    d21 = PermissibleValue(
+        text="d21",
+        title="D21",
+        description="Disomy 21 (euploid)")
+    t21 = PermissibleValue(
+        text="t21",
+        title="T21",
+        description="Trisomy 21 (Down syndrome)",
+        meaning=MONDO["0008608"])
+
+    _defn = EnumDefinition(
+        name="EnumDownSyndromeStatus",
+    )
+
+class EnumSex(EnumDefinitionImpl):
+
+    female = PermissibleValue(
+        text="female",
+        title="Female",
+        meaning=NCIT["C16576"])
+    male = PermissibleValue(
+        text="male",
+        title="Male",
+        meaning=NCIT["C20197"])
+    other = PermissibleValue(
+        text="other",
+        title="Other",
+        meaning=NCIT["C17649"])
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown",
+        meaning=NCIT["C17998"])
+
+    _defn = EnumDefinition(
+        name="EnumSex",
+    )
+
+class EnumRace(EnumDefinitionImpl):
+
+    american_indian_or_alaska_native = PermissibleValue(
+        text="american_indian_or_alaska_native",
+        title="American Indian or Alaska Native",
+        meaning=NCIT["C41259"])
+    asian = PermissibleValue(
+        text="asian",
+        title="Asian",
+        meaning=NCIT["C41260"])
+    black_or_african_american = PermissibleValue(
+        text="black_or_african_american",
+        title="Black or African American",
+        meaning=NCIT["C16352"])
+    more_than_one_race = PermissibleValue(
+        text="more_than_one_race",
+        title="More than one race",
+        meaning=NCIT["C67109"])
+    native_hawaiian_or_other_pacific_islander = PermissibleValue(
+        text="native_hawaiian_or_other_pacific_islander",
+        title="Native Hawaiian or Other Pacific Islander",
+        meaning=NCIT["C41219"])
+    other = PermissibleValue(
+        text="other",
+        title="Other",
+        meaning=NCIT["C17649"])
+    white = PermissibleValue(
+        text="white",
+        title="White",
+        meaning=NCIT["C41261"])
+    prefer_not_to_answer = PermissibleValue(
+        text="prefer_not_to_answer",
+        title="Prefer not to answer",
+        meaning=NCIT["C132222"])
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown",
+        meaning=NCIT["C17998"])
+    east_asian = PermissibleValue(
+        text="east_asian",
+        title="East Asian",
+        description="UK only; do not use for US data",
+        meaning=NCIT["C161419"])
+    latin_american = PermissibleValue(
+        text="latin_american",
+        title="Latin American",
+        description="UK only; do not use for US data",
+        meaning=NCIT["C126531"])
+    middle_eastern_or_north_african = PermissibleValue(
+        text="middle_eastern_or_north_african",
+        title="Middle Eastern or North African",
+        description="UK only; do not use for US data",
+        meaning=NCIT["C43866"])
+    south_asian = PermissibleValue(
+        text="south_asian",
+        title="South Asian",
+        description="UK only; do not use for US data",
+        meaning=NCIT["C41263"])
+
+    _defn = EnumDefinition(
+        name="EnumRace",
+    )
+
+class EnumEthnicity(EnumDefinitionImpl):
+
+    hispanic_or_latino = PermissibleValue(
+        text="hispanic_or_latino",
+        title="Hispanic or Latino",
+        meaning=NCIT["C17459"])
+    not_hispanic_or_latino = PermissibleValue(
+        text="not_hispanic_or_latino",
+        title="Not Hispanic or Latino",
+        meaning=NCIT["C41222"])
+    prefer_not_to_answer = PermissibleValue(
+        text="prefer_not_to_answer",
+        title="Prefer not to answer",
+        meaning=NCIT["C132222"])
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown",
+        meaning=NCIT["C17998"])
+
+    _defn = EnumDefinition(
+        name="EnumEthnicity",
+    )
+
+class EnumVitalStatus(EnumDefinitionImpl):
+
+    dead = PermissibleValue(
+        text="dead",
+        title="Dead",
+        meaning=NCIT["C28554"])
+    alive = PermissibleValue(
+        text="alive",
+        title="Alive",
+        meaning=NCIT["C37987"])
+
+    _defn = EnumDefinition(
+        name="EnumVitalStatus",
+    )
+
+class EnumNull(EnumDefinitionImpl):
+
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown",
+        meaning=NCIT["C17998"])
+
+    _defn = EnumDefinition(
+        name="EnumNull",
+    )
+
 # Slots
 class slots:
     pass
@@ -669,17 +896,26 @@ slots.uuid = Slot(uri=INCLUDEDCC.uuid, name="uuid", curie=INCLUDEDCC.curie('uuid
 slots.id = Slot(uri=INCLUDEDCC.id, name="id", curie=INCLUDEDCC.curie('id'),
                    model_uri=INCLUDEDCC.id, domain=None, range=URIRef)
 
+slots.study_id = Slot(uri=INCLUDEDCC.study_id, name="study_id", curie=INCLUDEDCC.curie('study_id'),
+                   model_uri=INCLUDEDCC.study_id, domain=None, range=Optional[str])
+
+slots.doi = Slot(uri=INCLUDEDCC.doi, name="doi", curie=INCLUDEDCC.curie('doi'),
+                   model_uri=INCLUDEDCC.doi, domain=None, range=Optional[Union[str, URI]])
+
+slots.subject_id = Slot(uri=INCLUDEDCC.subject_id, name="subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.subject_id, domain=None, range=Optional[str])
+
 slots.external_id = Slot(uri=INCLUDEDCC.external_id, name="external_id", curie=INCLUDEDCC.curie('external_id'),
                    model_uri=INCLUDEDCC.external_id, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
 
 slots.parent_study = Slot(uri=INCLUDEDCC.parent_study, name="parent_study", curie=INCLUDEDCC.curie('parent_study'),
-                   model_uri=INCLUDEDCC.parent_study, domain=None, range=Optional[Union[str, StudyId]])
+                   model_uri=INCLUDEDCC.parent_study, domain=None, range=Optional[Union[str, StudyStudyId]])
 
 slots.funding_source = Slot(uri=INCLUDEDCC.funding_source, name="funding_source", curie=INCLUDEDCC.curie('funding_source'),
                    model_uri=INCLUDEDCC.funding_source, domain=None, range=Optional[Union[str, list[str]]])
 
 slots.principal_investigator = Slot(uri=INCLUDEDCC.principal_investigator, name="principal_investigator", curie=INCLUDEDCC.curie('principal_investigator'),
-                   model_uri=INCLUDEDCC.principal_investigator, domain=None, range=Union[Union[str, InvestigatorId], list[Union[str, InvestigatorId]]])
+                   model_uri=INCLUDEDCC.principal_investigator, domain=None, range=Union[Union[dict, Investigator], list[Union[dict, Investigator]]])
 
 slots.study_title = Slot(uri=INCLUDEDCC.study_title, name="study_title", curie=INCLUDEDCC.curie('study_title'),
                    model_uri=INCLUDEDCC.study_title, domain=None, range=str)
@@ -712,10 +948,10 @@ slots.website = Slot(uri=INCLUDEDCC.website, name="website", curie=INCLUDEDCC.cu
                    model_uri=INCLUDEDCC.website, domain=None, range=Optional[Union[str, URI]])
 
 slots.contact = Slot(uri=INCLUDEDCC.contact, name="contact", curie=INCLUDEDCC.curie('contact'),
-                   model_uri=INCLUDEDCC.contact, domain=None, range=Union[Union[str, InvestigatorId], list[Union[str, InvestigatorId]]])
+                   model_uri=INCLUDEDCC.contact, domain=None, range=Union[Union[dict, Investigator], list[Union[dict, Investigator]]])
 
 slots.vbr = Slot(uri=INCLUDEDCC.vbr, name="vbr", curie=INCLUDEDCC.curie('vbr'),
-                   model_uri=INCLUDEDCC.vbr, domain=None, range=Optional[Union[str, VirtualBiorepositoryId]])
+                   model_uri=INCLUDEDCC.vbr, domain=None, range=Optional[Union[dict, VirtualBiorepository]])
 
 slots.vbr_readme = Slot(uri=INCLUDEDCC.vbr_readme, name="vbr_readme", curie=INCLUDEDCC.curie('vbr_readme'),
                    model_uri=INCLUDEDCC.vbr_readme, domain=None, range=Optional[str])
@@ -739,7 +975,7 @@ slots.clinical_data_source_type = Slot(uri=INCLUDEDCC.clinical_data_source_type,
                    model_uri=INCLUDEDCC.clinical_data_source_type, domain=None, range=Union[Union[str, "EnumClinicalDataSourceType"], list[Union[str, "EnumClinicalDataSourceType"]]])
 
 slots.publication = Slot(uri=INCLUDEDCC.publication, name="publication", curie=INCLUDEDCC.curie('publication'),
-                   model_uri=INCLUDEDCC.publication, domain=None, range=Optional[Union[Union[str, PublicationId], list[Union[str, PublicationId]]]])
+                   model_uri=INCLUDEDCC.publication, domain=None, range=Optional[Union[Union[dict, Publication], list[Union[dict, Publication]]]])
 
 slots.expected_number_of_participants = Slot(uri=INCLUDEDCC.expected_number_of_participants, name="expected_number_of_participants", curie=INCLUDEDCC.curie('expected_number_of_participants'),
                    model_uri=INCLUDEDCC.expected_number_of_participants, domain=None, range=int)
@@ -756,5 +992,41 @@ slots.citation_statement = Slot(uri=INCLUDEDCC.citation_statement, name="citatio
 slots.bibliographic_reference = Slot(uri=INCLUDEDCC.bibliographic_reference, name="bibliographic_reference", curie=INCLUDEDCC.curie('bibliographic_reference'),
                    model_uri=INCLUDEDCC.bibliographic_reference, domain=None, range=Optional[str])
 
-slots.doi = Slot(uri=INCLUDEDCC.doi, name="doi", curie=INCLUDEDCC.curie('doi'),
-                   model_uri=INCLUDEDCC.doi, domain=None, range=Optional[Union[str, DOIId]])
+slots.organism_type = Slot(uri=INCLUDEDCC.organism_type, name="organism_type", curie=INCLUDEDCC.curie('organism_type'),
+                   model_uri=INCLUDEDCC.organism_type, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.subject_type = Slot(uri=INCLUDEDCC.subject_type, name="subject_type", curie=INCLUDEDCC.curie('subject_type'),
+                   model_uri=INCLUDEDCC.subject_type, domain=None, range=Union[str, "EnumSubjectType"])
+
+slots.sex = Slot(uri=INCLUDEDCC.sex, name="sex", curie=INCLUDEDCC.curie('sex'),
+                   model_uri=INCLUDEDCC.sex, domain=None, range=Union[str, "EnumSex"])
+
+slots.race = Slot(uri=INCLUDEDCC.race, name="race", curie=INCLUDEDCC.curie('race'),
+                   model_uri=INCLUDEDCC.race, domain=None, range=Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]])
+
+slots.ethnicity = Slot(uri=INCLUDEDCC.ethnicity, name="ethnicity", curie=INCLUDEDCC.curie('ethnicity'),
+                   model_uri=INCLUDEDCC.ethnicity, domain=None, range=Union[str, "EnumEthnicity"])
+
+slots.down_syndrome_status = Slot(uri=INCLUDEDCC.down_syndrome_status, name="down_syndrome_status", curie=INCLUDEDCC.curie('down_syndrome_status'),
+                   model_uri=INCLUDEDCC.down_syndrome_status, domain=None, range=Union[str, "EnumDownSyndromeStatus"])
+
+slots.age_at_first_engagement = Slot(uri=INCLUDEDCC.age_at_first_engagement, name="age_at_first_engagement", curie=INCLUDEDCC.curie('age_at_first_engagement'),
+                   model_uri=INCLUDEDCC.age_at_first_engagement, domain=None, range=Optional[int])
+
+slots.vital_status = Slot(uri=INCLUDEDCC.vital_status, name="vital_status", curie=INCLUDEDCC.curie('vital_status'),
+                   model_uri=INCLUDEDCC.vital_status, domain=None, range=Optional[Union[str, "EnumVitalStatus"]])
+
+slots.age_at_last_vital_status = Slot(uri=INCLUDEDCC.age_at_last_vital_status, name="age_at_last_vital_status", curie=INCLUDEDCC.curie('age_at_last_vital_status'),
+                   model_uri=INCLUDEDCC.age_at_last_vital_status, domain=None, range=Optional[int])
+
+slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
+                   model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
+
+slots.DOI_doi = Slot(uri=INCLUDEDCC.doi, name="DOI_doi", curie=INCLUDEDCC.curie('doi'),
+                   model_uri=INCLUDEDCC.DOI_doi, domain=DOI, range=Union[str, DOIDoi])
+
+slots.Subject_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Subject_subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.Subject_subject_id, domain=Subject, range=Union[str, SubjectSubjectId])
+
+slots.Demographics_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Demographics_subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.Demographics_subject_id, domain=Demographics, range=Union[str, DemographicsSubjectId])
