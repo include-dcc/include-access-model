@@ -1,0 +1,1042 @@
+name: include-access-model
+description: LinkML Schema for the internal INCLUDE DCC Access Model
+title: INCLUDE DCC Access Model
+see_also:
+- https://includedcc.github.io/include-access-model
+id: https://includedcc.org/include-access-model
+imports:
+- linkml:types
+license: MIT
+prefixes:
+  includedcc:
+    prefix_prefix: includedcc
+    prefix_reference: https://includedcc.org/include-access-model/
+  linkml:
+    prefix_prefix: linkml
+    prefix_reference: https://w3id.org/linkml/
+  schema:
+    prefix_prefix: schema
+    prefix_reference: http://schema.org/
+  cdc_race_eth:
+    prefix_prefix: cdc_race_eth
+    prefix_reference: urn:oid:2.16.840.1.113883.6.238/
+  hl7_null:
+    prefix_prefix: hl7_null
+    prefix_reference: http://terminology.hl7.org/CodeSystem/v3-NullFlavor/
+  ig_dob_method:
+    prefix_prefix: ig_dob_method
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method/
+  igcondtype:
+    prefix_prefix: igcondtype
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
+  ig2dac:
+    prefix_prefix: ig2dac
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
+  ig2dat:
+    prefix_prefix: ig2dat
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type/
+  ig2_biospecimen_availability:
+    prefix_prefix: ig2_biospecimen_availability
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability/
+  snomed_ct:
+    prefix_prefix: snomed_ct
+    prefix_reference: http://snomed.info/id/
+  MONDO:
+    prefix_prefix: MONDO
+    prefix_reference: http://purl.obolibrary.org/obo/MONDO_
+  HP:
+    prefix_prefix: HP
+    prefix_reference: http://purl.obolibrary.org/obo/HP_
+  mesh:
+    prefix_prefix: mesh
+    prefix_reference: http://id.nlm.nih.gov/mesh/
+default_prefix: includedcc
+default_range: string
+types:
+  string:
+    name: string
+    definition_uri: https://w3id.org/linkml/String
+    description: A character string
+    notes:
+    - In RDF serializations, a slot with range of string is treated as a literal or
+      type xsd:string.   If you are authoring schemas in LinkML YAML, the type is
+      referenced with the lower case "string".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Text
+    base: str
+    uri: xsd:string
+  integer:
+    name: integer
+    definition_uri: https://w3id.org/linkml/Integer
+    description: An integer
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "integer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Integer
+    base: int
+    uri: xsd:integer
+  boolean:
+    name: boolean
+    definition_uri: https://w3id.org/linkml/Boolean
+    description: A binary (true or false) value
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "boolean".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Boolean
+    base: Bool
+    uri: xsd:boolean
+    repr: bool
+  float:
+    name: float
+    definition_uri: https://w3id.org/linkml/Float
+    description: A real number that conforms to the xsd:float specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "float".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:float
+  double:
+    name: double
+    definition_uri: https://w3id.org/linkml/Double
+    description: A real number that conforms to the xsd:double specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "double".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:double
+  decimal:
+    name: decimal
+    definition_uri: https://w3id.org/linkml/Decimal
+    description: A real number with arbitrary precision that conforms to the xsd:decimal
+      specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "decimal".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    broad_mappings:
+    - schema:Number
+    base: Decimal
+    uri: xsd:decimal
+  time:
+    name: time
+    definition_uri: https://w3id.org/linkml/Time
+    description: A time object represents a (local) time of day, independent of any
+      particular day
+    notes:
+    - URI is dateTime because OWL reasoners do not work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "time".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Time
+    base: XSDTime
+    uri: xsd:time
+    repr: str
+  date:
+    name: date
+    definition_uri: https://w3id.org/linkml/Date
+    description: a date (year, month and day) in an idealized calendar
+    notes:
+    - URI is dateTime because OWL reasoners don't work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Date
+    base: XSDDate
+    uri: xsd:date
+    repr: str
+  datetime:
+    name: datetime
+    definition_uri: https://w3id.org/linkml/Datetime
+    description: The combination of a date and time
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:DateTime
+    base: XSDDateTime
+    uri: xsd:dateTime
+    repr: str
+  date_or_datetime:
+    name: date_or_datetime
+    definition_uri: https://w3id.org/linkml/DateOrDatetime
+    description: Either a date or a datetime
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date_or_datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: linkml:DateOrDatetime
+    repr: str
+  uriorcurie:
+    name: uriorcurie
+    definition_uri: https://w3id.org/linkml/Uriorcurie
+    description: a URI or a CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uriorcurie".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: URIorCURIE
+    uri: xsd:anyURI
+    repr: str
+  curie:
+    name: curie
+    definition_uri: https://w3id.org/linkml/Curie
+    conforms_to: https://www.w3.org/TR/curie/
+    description: a compact URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "curie".
+    comments:
+    - in RDF serializations this MUST be expanded to a URI
+    - in non-RDF serializations MAY be serialized as the compact representation
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: Curie
+    uri: xsd:string
+    repr: str
+  uri:
+    name: uri
+    definition_uri: https://w3id.org/linkml/Uri
+    conforms_to: https://www.ietf.org/rfc/rfc3987.txt
+    description: a complete URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uri".
+    comments:
+    - in RDF serializations a slot with range of uri is treated as a literal or type
+      xsd:anyURI unless it is an identifier or a reference to an identifier, in which
+      case it is translated directly to a node
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:URL
+    base: URI
+    uri: xsd:anyURI
+    repr: str
+  ncname:
+    name: ncname
+    definition_uri: https://w3id.org/linkml/Ncname
+    description: Prefix part of CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "ncname".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NCName
+    uri: xsd:string
+    repr: str
+  objectidentifier:
+    name: objectidentifier
+    definition_uri: https://w3id.org/linkml/Objectidentifier
+    description: A URI or CURIE that represents an object in the model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "objectidentifier".
+    comments:
+    - Used for inheritance and type checking
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: ElementIdentifier
+    uri: shex:iri
+    repr: str
+  nodeidentifier:
+    name: nodeidentifier
+    definition_uri: https://w3id.org/linkml/Nodeidentifier
+    description: A URI, CURIE or BNODE that represents a node in a model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "nodeidentifier".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NodeIdentifier
+    uri: shex:nonLiteral
+    repr: str
+  jsonpointer:
+    name: jsonpointer
+    definition_uri: https://w3id.org/linkml/Jsonpointer
+    conforms_to: https://datatracker.ietf.org/doc/html/rfc6901
+    description: A string encoding a JSON Pointer. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to a valid object within the current
+      instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpointer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  jsonpath:
+    name: jsonpath
+    definition_uri: https://w3id.org/linkml/Jsonpath
+    conforms_to: https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html
+    description: A string encoding a JSON Path. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to zero or more valid objects within
+      the current instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  sparqlpath:
+    name: sparqlpath
+    definition_uri: https://w3id.org/linkml/Sparqlpath
+    conforms_to: https://www.w3.org/TR/sparql11-query/#propertypaths
+    description: A string encoding a SPARQL Property Path. The value of the string
+      MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects
+      within the current instance document when encoded as RDF.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "sparqlpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+enums:
+  EnumProgram:
+    name: EnumProgram
+    definition_uri: https://includedcc.org/include-access-model/EnumProgram
+    description: Funding programs relevant to inform operations.
+    title: Funding Programs
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      include:
+        text: include
+        title: INCLUDE
+      kf:
+        text: kf
+        title: KF
+      other:
+        text: other
+        title: Other
+  EnumResearchDomain:
+    name: EnumResearchDomain
+    definition_uri: https://includedcc.org/include-access-model/EnumResearchDomain
+    description: Domains of Research used to find studies.
+    title: Research Domain
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      behavior_and_behavior_mechanisms:
+        text: behavior_and_behavior_mechanisms
+        meaning: mesh:D001520
+        title: Behavior and Behavior Mechanisms
+      congenital_heart_defects:
+        text: congenital_heart_defects
+        meaning: mesh:D006330
+        title: Congenital Heart Defects
+      immune_system_diseases:
+        text: immune_system_diseases
+        meaning: mesh:D007154
+        title: Immune System Diseases
+      hematologic_diseases:
+        text: hematologic_diseases
+        meaning: mesh:D006402
+        title: Hematologic Diseases
+      neurodevelopment:
+        text: neurodevelopment
+        meaning: mesh:D065886
+        title: Neurodevelopment
+      sleep_wake_disorders:
+        text: sleep_wake_disorders
+        meaning: mesh:D012893
+        title: Sleep Wake Disorders
+      all_co_occurring_conditions:
+        text: all_co_occurring_conditions
+        meaning: mesh:D013568
+        title: All Co-occurring Conditions
+      physical_fitness:
+        text: physical_fitness
+        meaning: mesh:D010809
+        title: Physical Fitness
+      other:
+        text: other
+        title: Other
+  EnumParticipantLifespanStage:
+    name: EnumParticipantLifespanStage
+    definition_uri: https://includedcc.org/include-access-model/EnumParticipantLifespanStage
+    description: Stages of life during which participants may be recruited.
+    title: Participant Lifespan Stage
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      fetal:
+        text: fetal
+        description: Before birth
+        title: Fetal
+      neonatal:
+        text: neonatal
+        description: 0-28 days old
+        title: Neonatal
+      pediatric:
+        text: pediatric
+        description: Birth-17 years old
+        title: Pediatric
+      adult:
+        text: adult
+        description: 18+ years old
+        title: Adult
+  EnumStudyDesign:
+    name: EnumStudyDesign
+    definition_uri: https://includedcc.org/include-access-model/EnumStudyDesign
+    description: Approaches for collecting data, investigating interventions, and/or
+      analyzing data.
+    title: Study Design
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      case_control:
+        text: case_control
+        title: Case-Control
+      case_set:
+        text: case_set
+        title: Case Set
+      control_set:
+        text: control_set
+        title: Control Set
+      clinical_trial:
+        text: clinical_trial
+        title: Clinical Trial
+      cross_sectional:
+        text: cross_sectional
+        title: Cross-Sectional
+      family_twins_trios:
+        text: family_twins_trios
+        title: Family/Twins/Trios
+      interventional:
+        text: interventional
+        title: Interventional
+      longitudinal:
+        text: longitudinal
+        title: Longitudinal
+      trial_readiness_study:
+        text: trial_readiness_study
+        title: Trial Readiness Study
+      tumor_vs_matched_normal:
+        text: tumor_vs_matched_normal
+        title: Tumor vs Matched Normal
+  EnumClinicalDataSourceType:
+    name: EnumClinicalDataSourceType
+    definition_uri: https://includedcc.org/include-access-model/EnumClinicalDataSourceType
+    description: Approaches to ascertain clinical information about a participant.
+    title: Clinical Data Source Type
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      medical_record:
+        text: medical_record
+        description: Data obtained directly from medical record
+        title: Medical Record
+      investigator_assessment:
+        text: investigator_assessment
+        description: Data obtained by examination, interview, etc. with investigator
+        title: Investigator Assessment
+      participant_or_caregiver_report:
+        text: participant_or_caregiver_report
+        description: Data obtained from survey, questionnaire, etc. filled out by
+          participant or caregiver
+        title: Participant or Caregiver Report
+      other:
+        text: other
+        description: Data obtained from other source, such as tissue bank
+        title: Other
+      unknown:
+        text: unknown
+        title: Unknown
+  EnumDataCategory:
+    name: EnumDataCategory
+    definition_uri: https://includedcc.org/include-access-model/EnumDataCategory
+    description: Categories of data which may be collected about participants.
+    title: Data Category
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      unharmonized_demographic_clinical_data:
+        text: unharmonized_demographic_clinical_data
+        title: Unharmonized Demographic/Clinical Data
+      harmonized_demographic_clinical_data:
+        text: harmonized_demographic_clinical_data
+        title: Harmonized Demographic/Clinical Data
+      genomics:
+        text: genomics
+        title: Genomics
+      transcriptomics:
+        text: transcriptomics
+        title: Transcriptomics
+      epigenomics:
+        text: epigenomics
+        title: Epigenomics
+      proteomics:
+        text: proteomics
+        title: Proteomics
+      metabolomics:
+        text: metabolomics
+        title: Metabolomics
+      cognitive_behavioral:
+        text: cognitive_behavioral
+        title: Cognitive/Behavioral
+      immune_profiling:
+        text: immune_profiling
+        title: Immune Profiling
+      imaging:
+        text: imaging
+        title: Imaging
+      microbiome:
+        text: microbiome
+        title: Microbiome
+      fitness:
+        text: fitness
+        title: Fitness
+      physical_activity:
+        text: physical_activity
+        title: Physical Activity
+      other:
+        text: other
+        title: Other
+      sleep_study:
+        text: sleep_study
+        title: Sleep Study
+slots:
+  uuid:
+    name: uuid
+    definition_uri: https://includedcc.org/include-access-model/uuid
+    description: Internally assigned UUID for data management and QC purposes
+    title: UUID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:uuid
+    owner: Record
+    domain_of:
+    - Record
+    range: string
+    required: true
+    multivalued: false
+  id:
+    name: id
+    definition_uri: https://includedcc.org/include-access-model/id
+    description: INLCUDE Global ID for this record
+    title: ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:id
+    identifier: true
+    owner: Record
+    domain_of:
+    - Record
+    range: string
+    required: true
+    multivalued: false
+  external_id:
+    name: external_id
+    definition_uri: https://includedcc.org/include-access-model/external_id
+    description: Other identifiers for this entity, eg, from the submitting study
+      or in systems like dbGaP
+    title: External Identifiers
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:external_id
+    owner: Record
+    domain_of:
+    - Record
+    range: uriorcurie
+    required: false
+    multivalued: true
+  parent_study:
+    name: parent_study
+    definition_uri: https://includedcc.org/include-access-model/parent_study
+    description: The parent study for this study, if it is a nested study.
+    title: Parent Study
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:parent_study
+    owner: Study
+    domain_of:
+    - Study
+    range: Study
+    required: false
+    multivalued: false
+  funding_source:
+    name: funding_source
+    definition_uri: https://includedcc.org/include-access-model/funding_source
+    description: The funding source(s) of the study.
+    title: Funding Source
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:funding_source
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: false
+    multivalued: true
+  principal_investigator:
+    name: principal_investigator
+    definition_uri: https://includedcc.org/include-access-model/principal_investigator
+    description: The Principal Investigator(s) responsible for the study.
+    title: Principal Investigator
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:principal_investigator
+    owner: Study
+    domain_of:
+    - Study
+    range: Investigator
+    required: true
+    multivalued: true
+  study_title:
+    name: study_title
+    definition_uri: https://includedcc.org/include-access-model/study_title
+    description: Full Study Title
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:study_title
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: true
+    multivalued: false
+  study_code:
+    name: study_code
+    definition_uri: https://includedcc.org/include-access-model/study_code
+    description: Unique identifier for the study (generally a short acronym)
+    title: Study Code
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:study_code
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: true
+  study_short_name:
+    name: study_short_name
+    definition_uri: https://includedcc.org/include-access-model/study_short_name
+    description: Short name for the study
+    title: Study Code
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:study_short_name
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: false
+  invesitgator_title:
+    name: invesitgator_title
+    definition_uri: https://includedcc.org/include-access-model/invesitgator_title
+    description: The title of the Investigator, eg, "Assistant Professor"
+    title: Investigator Title
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:invesitgator_title
+    owner: Investigator
+    domain_of:
+    - Investigator
+    range: string
+    required: false
+  name:
+    name: name
+    definition_uri: https://includedcc.org/include-access-model/name
+    description: Name of the entity.
+    title: Name
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:name
+    owner: Investigator
+    domain_of:
+    - VirtualBiorepository
+    - Investigator
+    range: string
+    required: false
+  email:
+    name: email
+    definition_uri: https://includedcc.org/include-access-model/email
+    description: An email address to reach the entity.
+    title: Email Address
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:email
+    owner: Investigator
+    domain_of:
+    - Investigator
+    range: string
+    required: false
+  institution:
+    name: institution
+    definition_uri: https://includedcc.org/include-access-model/institution
+    description: Name of the institution this record is associated with.
+    title: Institution
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:institution
+    owner: Investigator
+    domain_of:
+    - VirtualBiorepository
+    - Investigator
+    range: string
+    required: false
+  program:
+    name: program
+    definition_uri: https://includedcc.org/include-access-model/program
+    description: Funding source(s) for the study
+    title: Program
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:program
+    owner: Study
+    domain_of:
+    - Study
+    range: EnumProgram
+    required: true
+    multivalued: true
+  study_description:
+    name: study_description
+    definition_uri: https://includedcc.org/include-access-model/study_description
+    description: Brief description of the study (2-4 sentences)
+    title: Study Description
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:study_description
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: true
+  website:
+    name: website
+    definition_uri: https://includedcc.org/include-access-model/website
+    description: Website for the Record.
+    title: Website
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:website
+    owner: Publication
+    domain_of:
+    - Study
+    - VirtualBiorepository
+    - Publication
+    range: uri
+  contact:
+    name: contact
+    definition_uri: https://includedcc.org/include-access-model/contact
+    description: The individual to contact with questions about this record.
+    title: Contact Person
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:contact
+    owner: VirtualBiorepository
+    domain_of:
+    - Study
+    - VirtualBiorepository
+    range: Investigator
+    required: true
+    multivalued: true
+  vbr:
+    name: vbr
+    definition_uri: https://includedcc.org/include-access-model/vbr
+    description: Information about the study's Virtual Biorepository, if participating
+    title: Virtual Biorepository
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:vbr
+    owner: Study
+    domain_of:
+    - Study
+    range: VirtualBiorepository
+    required: false
+  vbr_readme:
+    name: vbr_readme
+    definition_uri: https://includedcc.org/include-access-model/vbr_readme
+    description: Instructions for contacting or requesting samples from Virtual Biorepository,
+      if participating
+    title: VBR Readme
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:vbr_readme
+    owner: VirtualBiorepository
+    domain_of:
+    - VirtualBiorepository
+    range: string
+  research_domain:
+    name: research_domain
+    definition_uri: https://includedcc.org/include-access-model/research_domain
+    description: Main research domain(s) of the study, other than Down syndrome
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:research_domain
+    owner: Study
+    domain_of:
+    - Study
+    range: EnumResearchDomain
+    required: true
+    multivalued: true
+  participant_lifespan_stage:
+    name: participant_lifespan_stage
+    definition_uri: https://includedcc.org/include-access-model/participant_lifespan_stage
+    description: Focus age group(s) of the study population
+    title: Participant Lifespan Stage
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:participant_lifespan_stage
+    owner: Study
+    domain_of:
+    - Study
+    range: EnumParticipantLifespanStage
+    required: true
+    multivalued: true
+  selection_criteria:
+    name: selection_criteria
+    definition_uri: https://includedcc.org/include-access-model/selection_criteria
+    description: Brief description of inclusion and/or exclusion criteria for the
+      study
+    title: Selection Criteria
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:selection_criteria
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+  study_design:
+    name: study_design
+    definition_uri: https://includedcc.org/include-access-model/study_design
+    description: Overall design of study, including whether it is longitudinal and
+      whether family members/unrelated controls are also enrolled
+    title: Study Design
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:study_design
+    owner: Study
+    domain_of:
+    - Study
+    range: EnumStudyDesign
+    required: true
+    multivalued: true
+  data_category:
+    name: data_category
+    definition_uri: https://includedcc.org/include-access-model/data_category
+    description: General category of data in this Record (e.g. Clinical, Genomics,
+      etc)
+    title: Data Category
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_category
+    owner: Study
+    domain_of:
+    - Study
+    range: EnumDataCategory
+    required: true
+    multivalued: true
+  clinical_data_source_type:
+    name: clinical_data_source_type
+    definition_uri: https://includedcc.org/include-access-model/clinical_data_source_type
+    description: Source(s) of data collected from study participants
+    title: Clinical Data Source Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:clinical_data_source_type
+    owner: Study
+    domain_of:
+    - Study
+    range: EnumClinicalDataSourceType
+    required: true
+    multivalued: true
+  publication:
+    name: publication
+    definition_uri: https://includedcc.org/include-access-model/publication
+    description: Publications associated with this Record.
+    title: Publication
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:publication
+    owner: Study
+    domain_of:
+    - Study
+    range: Publication
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  expected_number_of_participants:
+    name: expected_number_of_participants
+    definition_uri: https://includedcc.org/include-access-model/expected_number_of_participants
+    description: Total expected number of participants to be recruited.
+    title: Expected Number of Participants
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:expected_number_of_participants
+    owner: Study
+    domain_of:
+    - Study
+    range: integer
+    required: true
+  actual_number_of_participants:
+    name: actual_number_of_participants
+    definition_uri: https://includedcc.org/include-access-model/actual_number_of_participants
+    description: Total participants included at this time.
+    title: Actual Number of Participants
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:actual_number_of_participants
+    owner: Study
+    domain_of:
+    - Study
+    range: integer
+    required: true
+  acknowledgments:
+    name: acknowledgments
+    definition_uri: https://includedcc.org/include-access-model/acknowledgments
+    description: Funding statement and acknowledgments for this study
+    title: Acknowledgments
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:acknowledgments
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+  citation_statement:
+    name: citation_statement
+    definition_uri: https://includedcc.org/include-access-model/citation_statement
+    description: Statement that secondary data users should use to acknowledge use
+      of this study or dataset. E.g., "The results analyzed and <published or shown>
+      here are based in whole or in part upon data generated by the INCLUDE (INvestigation
+      of Co-occurring conditions across the Lifespan to Understand Down syndromE)
+      Project <insert accession number(s) and/or study DOI(s)>, and were accessed
+      from the INCLUDE Data Hub and <insert other database(s)>."
+    title: Citation Statement
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:citation_statement
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+  bibliographic_reference:
+    name: bibliographic_reference
+    definition_uri: https://includedcc.org/include-access-model/bibliographic_reference
+    description: Text use to reference this Record.
+    title: Bibiliographic Reference
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:bibliographic_reference
+    owner: Publication
+    domain_of:
+    - DOI
+    - Publication
+    range: string
+  doi:
+    name: doi
+    definition_uri: https://includedcc.org/include-access-model/doi
+    description: Digital Object Identifier (DOI) for this Record.
+    title: DOI
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:doi
+    owner: DOI
+    domain_of:
+    - DOI
+    range: DOI
+classes:
+  Record:
+    name: Record
+    definition_uri: https://includedcc.org/include-access-model/Record
+    description: One row / entity within the database
+    title: Record
+    from_schema: https://includedcc.org/include-access-model
+    abstract: true
+    slots:
+    - uuid
+    - id
+    - external_id
+    class_uri: includedcc:Record
+  Study:
+    name: Study
+    definition_uri: https://includedcc.org/include-access-model/Study
+    description: Study Metadata
+    title: Study
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - uuid
+    - id
+    - external_id
+    - parent_study
+    - funding_source
+    - principal_investigator
+    - contact
+    - study_title
+    - study_code
+    - study_short_name
+    - program
+    - study_description
+    - vbr
+    - research_domain
+    - participant_lifespan_stage
+    - selection_criteria
+    - study_design
+    - clinical_data_source_type
+    - data_category
+    - website
+    - publication
+    - expected_number_of_participants
+    - actual_number_of_participants
+    - acknowledgments
+    - citation_statement
+    class_uri: includedcc:Study
+  VirtualBiorepository:
+    name: VirtualBiorepository
+    definition_uri: https://includedcc.org/include-access-model/VirtualBiorepository
+    description: An organization that can provide access to specimen for further analysis.
+    title: Virtual BioRepository (VBR)
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - uuid
+    - id
+    - external_id
+    - name
+    - institution
+    - contact
+    - website
+    - vbr_readme
+    class_uri: includedcc:VirtualBiorepository
+  DOI:
+    name: DOI
+    definition_uri: https://includedcc.org/include-access-model/DOI
+    description: A DOI is a permanent reference with metadata about a digital object.
+    title: Digital Object Identifier (DOI)
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - uuid
+    - id
+    - external_id
+    - doi
+    - bibliographic_reference
+    class_uri: includedcc:DOI
+  Investigator:
+    name: Investigator
+    definition_uri: https://includedcc.org/include-access-model/Investigator
+    description: An individual who made contributions to the collection, analysis,
+      or sharing of data.
+    title: Investigator
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - uuid
+    - id
+    - external_id
+    - name
+    - institution
+    - invesitgator_title
+    - email
+    class_uri: includedcc:Investigator
+  Publication:
+    name: Publication
+    definition_uri: https://includedcc.org/include-access-model/Publication
+    description: Information about a specific publication.
+    title: Publication
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - bibliographic_reference
+    - website
+    class_uri: includedcc:Publication
+metamodel_version: 1.7.0
+source_file: include_access_model.yaml
+source_file_date: '2025-11-10T19:02:19'
+source_file_size: 13601
+generation_date: '2025-11-10T19:04:56'
+
