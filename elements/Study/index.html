@@ -284,6 +284,17 @@
 
 
 
+      Study : doi
+
+
+
+
+
+        Study --&gt; "0..1" DOI : doi
+        click DOI href "../DOI/"
+
+
+
       Study : expected_number_of_participants
 
       Study : external_id
@@ -547,6 +558,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../doi/">doi</a></td>
+<td>0..1 <br/> <a href="../DOI/">DOI</a></td>
+<td>Digital Object Identifier (DOI) for this Record</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../uuid/">uuid</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Internally assigned UUID for data management and QC purposes</td>
@@ -641,6 +658,7 @@ slots:
 - actual_number_of_participants
 - acknowledgments
 - citation_statement
+- doi
 
 </code></pre>
 </details>
@@ -932,6 +950,18 @@ attributes:
     domain_of:
     - Study
     range: string
+  doi:
+    name: doi
+    description: Digital Object Identifier (DOI) for this Record.
+    title: DOI
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: doi
+    owner: Study
+    domain_of:
+    - Study
+    - DOI
+    range: DOI
   uuid:
     name: uuid
     description: Internally assigned UUID for data management and QC purposes

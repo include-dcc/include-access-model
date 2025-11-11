@@ -925,6 +925,7 @@ slots:
     slot_uri: includedcc:doi
     owner: DOI
     domain_of:
+    - Study
     - DOI
     range: DOI
 classes:
@@ -973,6 +974,7 @@ classes:
     - actual_number_of_participants
     - acknowledgments
     - citation_statement
+    - doi
     class_uri: includedcc:Study
   VirtualBiorepository:
     name: VirtualBiorepository
@@ -1038,7 +1040,7 @@ classes:
     class_uri: includedcc:Publication
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-11T02:25:02'
-source_file_size: 13201
-generation_date: '2025-11-11T02:25:11'
+source_file_date: '2025-11-11T13:52:07'
+source_file_size: 13178
+generation_date: '2025-11-11T13:52:16'
 
