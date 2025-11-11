@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-10T19:04:46
+# Generation date: 2025-11-10T19:22:06
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -103,6 +103,10 @@ class InvestigatorId(RecordId):
     pass
 
 
+class PublicationId(RecordId):
+    pass
+
+
 @dataclass(repr=False)
 class Record(YAMLRoot):
     """
@@ -170,7 +174,7 @@ class Study(Record):
     vbr: Optional[Union[str, VirtualBiorepositoryId]] = None
     selection_criteria: Optional[str] = None
     website: Optional[Union[str, URI]] = None
-    publication: Optional[Union[Union[dict, "Publication"], list[Union[dict, "Publication"]]]] = empty_list()
+    publication: Optional[Union[Union[str, PublicationId], list[Union[str, PublicationId]]]] = empty_list()
     acknowledgments: Optional[str] = None
     citation_statement: Optional[str] = None
 
@@ -274,7 +278,7 @@ class Study(Record):
 
         if not isinstance(self.publication, list):
             self.publication = [self.publication] if self.publication is not None else []
-        self.publication = [v if isinstance(v, Publication) else Publication(**as_dict(v)) for v in self.publication]
+        self.publication = [v if isinstance(v, PublicationId) else PublicationId(v) for v in self.publication]
 
         if self.acknowledgments is not None and not isinstance(self.acknowledgments, str):
             self.acknowledgments = str(self.acknowledgments)
@@ -405,7 +409,7 @@ class Investigator(Record):
 
 
 @dataclass(repr=False)
-class Publication(YAMLRoot):
+class Publication(Record):
     """
     Information about a specific publication.
     """
@@ -416,10 +420,17 @@ class Publication(YAMLRoot):
     class_name: ClassVar[str] = "Publication"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Publication
 
+    id: Union[str, PublicationId] = None
+    uuid: str = None
     bibliographic_reference: Optional[str] = None
     website: Optional[Union[str, URI]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PublicationId):
+            self.id = PublicationId(self.id)
+
         if self.bibliographic_reference is not None and not isinstance(self.bibliographic_reference, str):
             self.bibliographic_reference = str(self.bibliographic_reference)
 
@@ -724,7 +735,7 @@ slots.clinical_data_source_type = Slot(uri=INCLUDEDCC.clinical_data_source_type,
                    model_uri=INCLUDEDCC.clinical_data_source_type, domain=None, range=Union[Union[str, "EnumClinicalDataSourceType"], list[Union[str, "EnumClinicalDataSourceType"]]])
 
 slots.publication = Slot(uri=INCLUDEDCC.publication, name="publication", curie=INCLUDEDCC.curie('publication'),
-                   model_uri=INCLUDEDCC.publication, domain=None, range=Optional[Union[Union[dict, Publication], list[Union[dict, Publication]]]])
+                   model_uri=INCLUDEDCC.publication, domain=None, range=Optional[Union[Union[str, PublicationId], list[Union[str, PublicationId]]]])
 
 slots.expected_number_of_participants = Slot(uri=INCLUDEDCC.expected_number_of_participants, name="expected_number_of_participants", curie=INCLUDEDCC.curie('expected_number_of_participants'),
                    model_uri=INCLUDEDCC.expected_number_of_participants, domain=None, range=int)
