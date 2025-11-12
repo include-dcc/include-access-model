@@ -1338,19 +1338,30 @@ slots:
     range: integer
     unit:
       ucum_code: d
-  code:
-    name: code
-    definition_uri: https://includedcc.org/include-access-model/code
+  concept:
+    name: concept
+    definition_uri: https://includedcc.org/include-access-model/concept
     description: The structured term defining the meaning of the assertion.
-    title: Assertion Code
+    title: Assertion concept
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:code
-    owner: Concept
+    slot_uri: includedcc:concept
+    owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
+    range: Concept
+    multivalued: true
+    inlined: false
+  concept_curie:
+    name: concept_curie
+    definition_uri: https://includedcc.org/include-access-model/concept_curie
+    description: The standardized curie for the term.
+    title: Concept Curie
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:concept_curie
+    owner: Concept
+    domain_of:
     - Concept
     range: uriorcurie
-    multivalued: true
   display:
     name: display
     definition_uri: https://includedcc.org/include-access-model/display
@@ -1362,28 +1373,30 @@ slots:
     domain_of:
     - Concept
     range: string
-  code_source:
-    name: code_source
-    definition_uri: https://includedcc.org/include-access-model/code_source
-    description: The source text yielding the code.
-    title: Code Source Text
+  concept_source:
+    name: concept_source
+    definition_uri: https://includedcc.org/include-access-model/concept_source
+    description: The source text yielding the standardized concept.
+    title: Concept Source Text
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:code_source
+    slot_uri: includedcc:concept_source
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
     range: string
-  value_code:
-    name: value_code
-    definition_uri: https://includedcc.org/include-access-model/value_code
+  value_concept:
+    name: value_concept
+    definition_uri: https://includedcc.org/include-access-model/value_concept
     description: The structured term defining the value of the assertion.
-    title: Value Code
+    title: Value concept
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:value_code
+    slot_uri: includedcc:value_concept
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
-    range: uriorcurie
+    range: Concept
+    multivalued: true
+    inlined: false
   value_number:
     name: value_number
     definition_uri: https://includedcc.org/include-access-model/value_number
@@ -1534,25 +1547,24 @@ slots:
     range: string
     required: true
     multivalued: false
-  Concept_code:
-    name: Concept_code
-    definition_uri: https://includedcc.org/include-access-model/code
-    description: The structured term defining the meaning of the assertion.
-    title: Assertion Code
+  Concept_concept_curie:
+    name: Concept_concept_curie
+    definition_uri: https://includedcc.org/include-access-model/concept_curie
+    description: The standardized curie for the term.
+    title: Concept Curie
     from_schema: https://includedcc.org/include-access-model
-    is_a: code
+    is_a: concept_curie
     domain: Concept
-    slot_uri: includedcc:code
+    slot_uri: includedcc:concept_curie
     identifier: true
-    alias: code
+    alias: concept_curie
     owner: Concept
     domain_of:
     - Concept
     is_usage_slot: true
-    usage_slot_name: code
+    usage_slot_name: concept_curie
     range: uriorcurie
     required: true
-    multivalued: true
 classes:
   Record:
     name: Record
@@ -1721,9 +1733,9 @@ classes:
     - age_at_assertion
     - age_at_event
     - age_at_resolution
-    - code
-    - code_source
-    - value_code
+    - concept
+    - concept_source
+    - value_concept
     - value_number
     - value_source
     - value_units
@@ -1742,18 +1754,17 @@ classes:
     title: Concept
     from_schema: https://includedcc.org/include-access-model
     slots:
-    - Concept_code
+    - Concept_concept_curie
     - display
     slot_usage:
-      code:
-        name: code
+      concept_curie:
+        name: concept_curie
         identifier: true
         required: true
-        multivalued: false
     class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-12T13:49:02'
-source_file_size: 23667
-generation_date: '2025-11-12T13:49:10'
+source_file_date: '2025-11-12T14:19:14'
+source_file_size: 23873
+generation_date: '2025-11-12T14:19:24'
 

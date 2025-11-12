@@ -257,15 +257,33 @@
 
 
 
-      SubjectAssertion : code
+      SubjectAssertion : concept
 
-      SubjectAssertion : code_source
+
+
+
+
+        SubjectAssertion --&gt; "*" Concept : concept
+        click Concept href "../Concept/"
+
+
+
+      SubjectAssertion : concept_source
 
       SubjectAssertion : external_id
 
       SubjectAssertion : subject_id
 
-      SubjectAssertion : value_code
+      SubjectAssertion : value_concept
+
+
+
+
+
+        SubjectAssertion --&gt; "*" Concept : value_concept
+        click Concept href "../Concept/"
+
+
 
       SubjectAssertion : value_number
 
@@ -334,20 +352,20 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../code/">code</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td><a href="../concept/">concept</a></td>
+<td>* <br/> <a href="../Concept/">Concept</a></td>
 <td>The structured term defining the meaning of the assertion</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../code_source/">code_source</a></td>
+<td><a href="../concept_source/">concept_source</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The source text yielding the code</td>
+<td>The source text yielding the standardized concept</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../value_code/">value_code</a></td>
-<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td><a href="../value_concept/">value_concept</a></td>
+<td>* <br/> <a href="../Concept/">Concept</a></td>
 <td>The structured term defining the value of the assertion</td>
 <td>direct</td>
 </tr>
@@ -430,9 +448,9 @@ slots:
 - age_at_assertion
 - age_at_event
 - age_at_resolution
-- code
-- code_source
-- value_code
+- concept
+- concept_source
+- value_concept
 - value_number
 - value_source
 - value_units
@@ -539,41 +557,43 @@ attributes:
     range: integer
     unit:
       ucum_code: d
-  code:
-    name: code
+  concept:
+    name: concept
     description: The structured term defining the meaning of the assertion.
-    title: Assertion Code
+    title: Assertion concept
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: code
+    alias: concept
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
-    - Concept
-    range: uriorcurie
+    range: Concept
     multivalued: true
-  code_source:
-    name: code_source
-    description: The source text yielding the code.
-    title: Code Source Text
+    inlined: false
+  concept_source:
+    name: concept_source
+    description: The source text yielding the standardized concept.
+    title: Concept Source Text
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: code_source
+    alias: concept_source
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
     range: string
-  value_code:
-    name: value_code
+  value_concept:
+    name: value_concept
     description: The structured term defining the value of the assertion.
-    title: Value Code
+    title: Value concept
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: value_code
+    alias: value_concept
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
-    range: uriorcurie
+    range: Concept
+    multivalued: true
+    inlined: false
   value_number:
     name: value_number
     description: The numeric value of the assertion.

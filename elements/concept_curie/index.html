@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/code_source/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/concept_curie/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Slot: Code Source Text (code_source) - include-access-model</title>
+        <title>Slot: Concept Curie (concept_curie) - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-code-source-text-code_source" class="md-skip">
+        <a href="#slot-concept-curie-concept_curie" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Code Source Text (code_source)
+              Slot: Concept Curie (concept_curie)
             
           </span>
         </div>
@@ -386,10 +386,10 @@
   
 
 
-<h1 id="slot-code-source-text-code_source">Slot: Code Source Text (code_source)</h1>
-<p><em>The source text yielding the code.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/code_source">includedcc:code_source</a>
-Alias: code_source</p>
+<h1 id="slot-concept-curie-concept_curie">Slot: Concept Curie (concept_curie)</h1>
+<p><em>The standardized curie for the term.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/concept_curie">includedcc:concept_curie</a>
+Alias: concept_curie</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -403,15 +403,15 @@ Alias: code_source</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
-<td>Assertion about a particular Subject</td>
-<td>no</td>
+<td><a href="../Concept/">Concept</a></td>
+<td>A standardized concept with display information</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../Uriorcurie/">Uriorcurie</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -429,26 +429,26 @@ Alias: code_source</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:code_source</td>
+<td>includedcc:concept_curie</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:code_source</td>
+<td>includedcc:concept_curie</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: code_source
-description: The source text yielding the code.
-title: Code Source Text
+<pre><code class="language-yaml">name: concept_curie
+description: The standardized curie for the term.
+title: Concept Curie
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-alias: code_source
+alias: concept_curie
 domain_of:
-- SubjectAssertion
-range: string
+- Concept
+range: uriorcurie
 
 </code></pre>
 
