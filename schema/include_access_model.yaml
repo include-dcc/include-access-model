@@ -1345,10 +1345,12 @@ slots:
     title: Assertion Code
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:code
-    owner: SubjectAssertion
+    owner: Concept
     domain_of:
     - SubjectAssertion
+    - Concept
     range: uriorcurie
+    multivalued: true
   display:
     name: display
     definition_uri: https://includedcc.org/include-access-model/display
@@ -1356,9 +1358,9 @@ slots:
     title: Display String
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:display
-    owner: SubjectAssertion
+    owner: Concept
     domain_of:
-    - SubjectAssertion
+    - Concept
     range: string
   code_source:
     name: code_source
@@ -1382,18 +1384,6 @@ slots:
     domain_of:
     - SubjectAssertion
     range: uriorcurie
-  value_display:
-    name: value_display
-    definition_uri: https://includedcc.org/include-access-model/value_display
-    description: The friendly display string of the coded term for the value of the
-      assertion.
-    title: Value Display String
-    from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:value_display
-    owner: SubjectAssertion
-    domain_of:
-    - SubjectAssertion
-    range: string
   value_number:
     name: value_number
     definition_uri: https://includedcc.org/include-access-model/value_number
@@ -1544,6 +1534,25 @@ slots:
     range: string
     required: true
     multivalued: false
+  Concept_code:
+    name: Concept_code
+    definition_uri: https://includedcc.org/include-access-model/code
+    description: The structured term defining the meaning of the assertion.
+    title: Assertion Code
+    from_schema: https://includedcc.org/include-access-model
+    is_a: code
+    domain: Concept
+    slot_uri: includedcc:code
+    identifier: true
+    alias: code
+    owner: Concept
+    domain_of:
+    - Concept
+    is_usage_slot: true
+    usage_slot_name: code
+    range: uriorcurie
+    required: true
+    multivalued: true
 classes:
   Record:
     name: Record
@@ -1713,10 +1722,8 @@ classes:
     - age_at_event
     - age_at_resolution
     - code
-    - display
     - code_source
     - value_code
-    - value_display
     - value_number
     - value_source
     - value_units
@@ -1728,9 +1735,25 @@ classes:
         identifier: true
         required: true
     class_uri: includedcc:SubjectAssertion
+  Concept:
+    name: Concept
+    definition_uri: https://includedcc.org/include-access-model/Concept
+    description: A standardized concept with display information.
+    title: Concept
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - Concept_code
+    - display
+    slot_usage:
+      code:
+        name: code
+        identifier: true
+        required: true
+        multivalued: false
+    class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-11T22:09:39'
-source_file_size: 23528
-generation_date: '2025-11-11T22:09:48'
+source_file_date: '2025-11-12T13:49:02'
+source_file_size: 23667
+generation_date: '2025-11-12T13:49:10'
 
