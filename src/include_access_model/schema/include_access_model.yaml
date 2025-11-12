@@ -162,10 +162,11 @@ classes:
       - age_at_event
       - age_at_resolution
       - code
-      - display
+# Moved the displays into the concept
+#      - display
       - code_source
       - value_code
-      - value_display
+#      - value_display
       - value_number
       - value_source
       - value_units
@@ -173,6 +174,17 @@ classes:
       - value_units_source
     slot_usage:
       assertion_id:
+        required: true
+        identifier: true
+  Concept:
+    title: Concept
+    description: A standardized concept with display information.
+    slots:
+      - code
+      - display
+    slot_usage:
+      code:
+        multivalued: false
         required: true
         identifier: true
 
@@ -444,6 +456,7 @@ slots:
     title: Assertion Code
     description: The structured term defining the meaning of the assertion.
     range: uriorcurie
+    multivalued: true
   display:
     title: Display String
     description: The friendly display string of the coded term.
@@ -456,10 +469,6 @@ slots:
     title: Value Code
     description: The structured term defining the value of the assertion.
     range: uriorcurie
-  value_display:
-    title: Value Display String
-    description: The friendly display string of the coded term for the value of the assertion.
-    range: string
   value_number:
     title: Value Number
     description: The numeric value of the assertion.

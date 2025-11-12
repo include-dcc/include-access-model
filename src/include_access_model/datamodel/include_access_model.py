@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-11T16:08:56
+# Generation date: 2025-11-12T07:19:24
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -102,6 +102,10 @@ class DemographicsSubjectId(extended_str):
 
 
 class SubjectAssertionAssertionId(extended_str):
+    pass
+
+
+class ConceptCode(URIorCURIE):
     pass
 
 
@@ -515,11 +519,9 @@ class SubjectAssertion(Record):
     age_at_assertion: Optional[int] = None
     age_at_event: Optional[int] = None
     age_at_resolution: Optional[int] = None
-    code: Optional[Union[str, URIorCURIE]] = None
-    display: Optional[str] = None
+    code: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
     code_source: Optional[str] = None
     value_code: Optional[Union[str, URIorCURIE]] = None
-    value_display: Optional[str] = None
     value_number: Optional[float] = None
     value_source: Optional[str] = None
     value_units: Optional[Union[str, URIorCURIE]] = None
@@ -547,20 +549,15 @@ class SubjectAssertion(Record):
         if self.age_at_resolution is not None and not isinstance(self.age_at_resolution, int):
             self.age_at_resolution = int(self.age_at_resolution)
 
-        if self.code is not None and not isinstance(self.code, URIorCURIE):
-            self.code = URIorCURIE(self.code)
-
-        if self.display is not None and not isinstance(self.display, str):
-            self.display = str(self.display)
+        if not isinstance(self.code, list):
+            self.code = [self.code] if self.code is not None else []
+        self.code = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.code]
 
         if self.code_source is not None and not isinstance(self.code_source, str):
             self.code_source = str(self.code_source)
 
         if self.value_code is not None and not isinstance(self.value_code, URIorCURIE):
             self.value_code = URIorCURIE(self.value_code)
-
-        if self.value_display is not None and not isinstance(self.value_display, str):
-            self.value_display = str(self.value_display)
 
         if self.value_number is not None and not isinstance(self.value_number, float):
             self.value_number = float(self.value_number)
@@ -576,6 +573,34 @@ class SubjectAssertion(Record):
 
         if self.value_units_source is not None and not isinstance(self.value_units_source, str):
             self.value_units_source = str(self.value_units_source)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Concept(YAMLRoot):
+    """
+    A standardized concept with display information.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Concept"]
+    class_class_curie: ClassVar[str] = "includedcc:Concept"
+    class_name: ClassVar[str] = "Concept"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Concept
+
+    code: Union[Union[str, ConceptCode], list[Union[str, ConceptCode]]] = None
+    display: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.code):
+            self.MissingRequiredField("code")
+        if not isinstance(self.code, list):
+            self.code = [self.code] if self.code is not None else []
+        self.code = [v if isinstance(v, ConceptCode) else ConceptCode(v) for v in self.code]
+
+        if self.display is not None and not isinstance(self.display, str):
+            self.display = str(self.display)
 
         super().__post_init__(**kwargs)
 
@@ -1168,7 +1193,7 @@ slots.age_at_resolution = Slot(uri=INCLUDEDCC.age_at_resolution, name="age_at_re
                    model_uri=INCLUDEDCC.age_at_resolution, domain=None, range=Optional[int])
 
 slots.code = Slot(uri=INCLUDEDCC.code, name="code", curie=INCLUDEDCC.curie('code'),
-                   model_uri=INCLUDEDCC.code, domain=None, range=Optional[Union[str, URIorCURIE]])
+                   model_uri=INCLUDEDCC.code, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
 
 slots.display = Slot(uri=INCLUDEDCC.display, name="display", curie=INCLUDEDCC.curie('display'),
                    model_uri=INCLUDEDCC.display, domain=None, range=Optional[str])
@@ -1178,9 +1203,6 @@ slots.code_source = Slot(uri=INCLUDEDCC.code_source, name="code_source", curie=I
 
 slots.value_code = Slot(uri=INCLUDEDCC.value_code, name="value_code", curie=INCLUDEDCC.curie('value_code'),
                    model_uri=INCLUDEDCC.value_code, domain=None, range=Optional[Union[str, URIorCURIE]])
-
-slots.value_display = Slot(uri=INCLUDEDCC.value_display, name="value_display", curie=INCLUDEDCC.curie('value_display'),
-                   model_uri=INCLUDEDCC.value_display, domain=None, range=Optional[str])
 
 slots.value_number = Slot(uri=INCLUDEDCC.value_number, name="value_number", curie=INCLUDEDCC.curie('value_number'),
                    model_uri=INCLUDEDCC.value_number, domain=None, range=Optional[float])
@@ -1211,3 +1233,6 @@ slots.Demographics_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Demographi
 
 slots.SubjectAssertion_assertion_id = Slot(uri=INCLUDEDCC.assertion_id, name="SubjectAssertion_assertion_id", curie=INCLUDEDCC.curie('assertion_id'),
                    model_uri=INCLUDEDCC.SubjectAssertion_assertion_id, domain=SubjectAssertion, range=Union[str, SubjectAssertionAssertionId])
+
+slots.Concept_code = Slot(uri=INCLUDEDCC.code, name="Concept_code", curie=INCLUDEDCC.curie('code'),
+                   model_uri=INCLUDEDCC.Concept_code, domain=Concept, range=Union[Union[str, ConceptCode], list[Union[str, ConceptCode]]])
