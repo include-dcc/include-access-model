@@ -161,11 +161,11 @@ classes:
       - age_at_assertion
       - age_at_event
       - age_at_resolution
-      - code
+      - concept
 # Moved the displays into the concept
 #      - display
-      - code_source
-      - value_code
+      - concept_source
+      - value_concept
 #      - value_display
       - value_number
       - value_source
@@ -180,11 +180,10 @@ classes:
     title: Concept
     description: A standardized concept with display information.
     slots:
-      - code
+      - concept_curie
       - display
     slot_usage:
-      code:
-        multivalued: false
+      concept_curie:
         required: true
         identifier: true
 
@@ -451,24 +450,31 @@ slots:
     range: integer
     unit:
       ucum_code: d
-  code:
+  concept:
 #TODO: Is this required?
-    title: Assertion Code
+    title: Assertion concept
     description: The structured term defining the meaning of the assertion.
-    range: uriorcurie
+    range: Concept
     multivalued: true
+    inlined: false
+  concept_curie:
+    title: Concept Curie
+    description: The standardized curie for the term.
+    range: uriorcurie
   display:
     title: Display String
     description: The friendly display string of the coded term.
     range: string
-  code_source:
-    title: Code Source Text
-    description: The source text yielding the code.
+  concept_source:
+    title: Concept Source Text
+    description: The source text yielding the standardized concept.
     range: string
-  value_code:
-    title: Value Code
+  value_concept:
+    title: Value concept
     description: The structured term defining the value of the assertion.
-    range: uriorcurie
+    range: Concept
+    multivalued: true
+    inlined: false
   value_number:
     title: Value Number
     description: The numeric value of the assertion.

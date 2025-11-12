@@ -515,9 +515,9 @@ class SubjectAssertion(Record):
     age_at_assertion: Optional[int] = Field(default=None, title="Age at assertion", description="""The age in days of the Subject when the assertion was made.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
     age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, | eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
     age_at_resolution: Optional[int] = Field(default=None, title="Age at resolution", description="""The age in days of the Subject when the asserted state was resolved.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
-    code: Optional[list[str]] = Field(default=[], title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Concept']} })
-    code_source: Optional[str] = Field(default=None, title="Code Source Text", description="""The source text yielding the code.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
-    value_code: Optional[str] = Field(default=None, title="Value Code", description="""The structured term defining the value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    concept: Optional[list[str]] = Field(default=[], title="Assertion concept", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    concept_source: Optional[str] = Field(default=None, title="Concept Source Text", description="""The source text yielding the standardized concept.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_concept: Optional[list[str]] = Field(default=[], title="Value concept", description="""The structured term defining the value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_number: Optional[float] = Field(default=None, title="Value Number", description="""The numeric value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_source: Optional[str] = Field(default=None, title="Value Source Text", description="""The source text yielding the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_units: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
@@ -531,13 +531,12 @@ class Concept(ConfiguredBaseModel):
     A standardized concept with display information.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
-         'slot_usage': {'code': {'identifier': True,
-                                 'multivalued': False,
-                                 'name': 'code',
-                                 'required': True}},
+         'slot_usage': {'concept_curie': {'identifier': True,
+                                          'name': 'concept_curie',
+                                          'required': True}},
          'title': 'Concept'})
 
-    code: str = Field(default=..., title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Concept']} })
+    concept_curie: str = Field(default=..., title="Concept Curie", description="""The standardized curie for the term.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Concept']} })
     display: Optional[str] = Field(default=None, title="Display String", description="""The friendly display string of the coded term.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Concept']} })
 
 
