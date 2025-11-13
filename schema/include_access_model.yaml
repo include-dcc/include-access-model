@@ -1350,7 +1350,6 @@ slots:
     - SubjectAssertion
     range: Concept
     multivalued: true
-    inlined: false
   concept_curie:
     name: concept_curie
     definition_uri: https://includedcc.org/include-access-model/concept_curie
@@ -1396,7 +1395,6 @@ slots:
     - SubjectAssertion
     range: Concept
     multivalued: true
-    inlined: false
   value_number:
     name: value_number
     definition_uri: https://includedcc.org/include-access-model/value_number
@@ -1752,7 +1750,7 @@ classes:
     class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-13T00:39:05'
-source_file_size: 23709
-generation_date: '2025-11-13T00:39:14'
+source_file_date: '2025-11-13T17:46:31'
+source_file_size: 23711
+generation_date: '2025-11-13T17:46:41'
 
