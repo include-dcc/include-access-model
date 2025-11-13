@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-12T08:15:07
+# Generation date: 2025-11-12T18:15:09
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -524,8 +524,7 @@ class SubjectAssertion(Record):
     value_concept: Optional[Union[Union[str, ConceptConceptCurie], list[Union[str, ConceptConceptCurie]]]] = empty_list()
     value_number: Optional[float] = None
     value_source: Optional[str] = None
-    value_units: Optional[Union[str, URIorCURIE]] = None
-    value_units_display: Optional[str] = None
+    value_units: Optional[Union[str, ConceptConceptCurie]] = None
     value_units_source: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -566,11 +565,8 @@ class SubjectAssertion(Record):
         if self.value_source is not None and not isinstance(self.value_source, str):
             self.value_source = str(self.value_source)
 
-        if self.value_units is not None and not isinstance(self.value_units, URIorCURIE):
-            self.value_units = URIorCURIE(self.value_units)
-
-        if self.value_units_display is not None and not isinstance(self.value_units_display, str):
-            self.value_units_display = str(self.value_units_display)
+        if self.value_units is not None and not isinstance(self.value_units, ConceptConceptCurie):
+            self.value_units = ConceptConceptCurie(self.value_units)
 
         if self.value_units_source is not None and not isinstance(self.value_units_source, str):
             self.value_units_source = str(self.value_units_source)
@@ -1214,10 +1210,7 @@ slots.value_source = Slot(uri=INCLUDEDCC.value_source, name="value_source", curi
                    model_uri=INCLUDEDCC.value_source, domain=None, range=Optional[str])
 
 slots.value_units = Slot(uri=INCLUDEDCC.value_units, name="value_units", curie=INCLUDEDCC.curie('value_units'),
-                   model_uri=INCLUDEDCC.value_units, domain=None, range=Optional[Union[str, URIorCURIE]])
-
-slots.value_units_display = Slot(uri=INCLUDEDCC.value_units_display, name="value_units_display", curie=INCLUDEDCC.curie('value_units_display'),
-                   model_uri=INCLUDEDCC.value_units_display, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.value_units, domain=None, range=Optional[Union[str, ConceptConceptCurie]])
 
 slots.value_units_source = Slot(uri=INCLUDEDCC.value_units_source, name="value_units_source", curie=INCLUDEDCC.curie('value_units_source'),
                    model_uri=INCLUDEDCC.value_units_source, domain=None, range=Optional[str])

@@ -170,7 +170,6 @@ classes:
       - value_number
       - value_source
       - value_units
-      - value_units_display 
       - value_units_source
     slot_usage:
       assertion_id:
@@ -486,11 +485,7 @@ slots:
   value_units:
     title: Value Units
     description: The structured term defining the units of the value.
-    range: uriorcurie
-  value_units_display:
-    title: Value Units
-    description: The friendly display string of units of the value.
-    range: string
+    range: Concept
   value_units_source:
     title: Value Units Source Text
     description: The source text yielding the value's units.
