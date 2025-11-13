@@ -1429,18 +1429,7 @@ slots:
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
-    range: uriorcurie
-  value_units_display:
-    name: value_units_display
-    definition_uri: https://includedcc.org/include-access-model/value_units_display
-    description: The friendly display string of units of the value.
-    title: Value Units
-    from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:value_units_display
-    owner: SubjectAssertion
-    domain_of:
-    - SubjectAssertion
-    range: string
+    range: Concept
   value_units_source:
     name: value_units_source
     definition_uri: https://includedcc.org/include-access-model/value_units_source
@@ -1739,7 +1728,6 @@ classes:
     - value_number
     - value_source
     - value_units
-    - value_units_display
     - value_units_source
     slot_usage:
       assertion_id:
@@ -1764,7 +1752,7 @@ classes:
     class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-12T14:19:14'
-source_file_size: 23873
-generation_date: '2025-11-12T14:19:24'
+source_file_date: '2025-11-13T00:26:08'
+source_file_size: 23709
+generation_date: '2025-11-13T00:26:18'
 
