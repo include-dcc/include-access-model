@@ -455,7 +455,7 @@ slots:
     description: The structured term defining the meaning of the assertion.
     range: Concept
     multivalued: true
-    inlined: false
+#    inlined: false
   concept_curie:
     title: Concept Curie
     description: The standardized curie for the term.
@@ -473,7 +473,7 @@ slots:
     description: The structured term defining the value of the assertion.
     range: Concept
     multivalued: true
-    inlined: false
+ #   inlined: false
   value_number:
     title: Value Number
     description: The numeric value of the assertion.
