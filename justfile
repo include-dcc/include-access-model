@@ -94,8 +94,13 @@ lint:
 
 # Generate md documentation for the schema
 [group('model development')]
-gen-doc: _gen-yaml
+gen-doc: _gen-yaml _gen-erd
   uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}}
+
+# Generate erd for the overall schema and add it to the docs
+[group('model development')]
+_gen-erd:
+  uv run gen-erdiagram {{source_schema_path}} > {{docdir}}/erdiagram.md
 
 # Build docs and run test server
 [group('model development')]
