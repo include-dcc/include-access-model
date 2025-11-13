@@ -5,10 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://include-dcc.github.io/include-access-model/elements/Demographics/" rel="canonical"/>
+<link href="https://include-dcc.github.io/include-access-model/elements/erdiagram/" rel="canonical"/>
+<link href="../" rel="prev"/>
+<link href="../../about/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Class: Demographics (Demographics) - include-access-model</title>
+<title>ER Diagram - include-access-model</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,9 +25,6 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-demographics-demographics">
-          Skip to content
-        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -47,7 +46,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Demographics (Demographics)
+              ER Diagram
             
           </span>
 </div>
@@ -128,8 +127,9 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../erdiagram/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     ER Diagram
     
@@ -153,418 +153,109 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      Inheritance
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      Slots
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#identifier-and-mapping-information">
-<span class="md-ellipsis">
-      Identifier and Mapping Information
-    </span>
-</a>
-<nav aria-label="Identifier and Mapping Information" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#schema-source">
-<span class="md-ellipsis">
-      Schema Source
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#mappings">
-<span class="md-ellipsis">
-      Mappings
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      LinkML Source
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      Direct
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      Induced
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-demographics-demographics">Class: Demographics (Demographics)</h1>
-<p><em>Basic participant demographics summary</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/Demographics">includedcc:Demographics</a></p>
-<div class="mermaid"> classDiagram
-    class Demographics
-    click Demographics href "../Demographics/"
-      Record &lt;|-- Demographics
-        click Record href "../Record/"
+<h1>ER Diagram</h1>
+<div class="mermaid">erDiagram
+Concept {
+    uriorcurie concept_curie  
+    string display  
+}
+DOI {
+    uri doi  
+    string bibliographic_reference  
+    uriorcurieList external_id  
+}
+Demographics {
+    string subject_id  
+    EnumSex sex  
+    EnumRaceList race  
+    EnumEthnicity ethnicity  
+    EnumDownSyndromeStatus down_syndrome_status  
+    integer age_at_last_vital_status  
+    EnumVitalStatus vital_status  
+    integer age_at_first_engagement  
+    uriorcurieList external_id  
+}
+Investigator {
+    string name  
+    string institution  
+    string invesitgator_title  
+    string email  
+    uriorcurieList external_id  
+}
+Publication {
+    string bibliographic_reference  
+    uri website  
+    uriorcurieList external_id  
+}
+Record {
+    uriorcurieList external_id  
+}
+Study {
+    string study_id  
+    stringList funding_source  
+    string study_title  
+    string study_code  
+    string study_short_name  
+    EnumProgramList program  
+    string study_description  
+    EnumResearchDomainList research_domain  
+    EnumParticipantLifespanStageList participant_lifespan_stage  
+    string selection_criteria  
+    EnumStudyDesignList study_design  
+    EnumClinicalDataSourceTypeList clinical_data_source_type  
+    EnumDataCategoryList data_category  
+    uri website  
+    integer expected_number_of_participants  
+    integer actual_number_of_participants  
+    string acknowledgments  
+    string citation_statement  
+    uri doi  
+    uriorcurieList external_id  
+}
+Subject {
+    string subject_id  
+    EnumSubjectType subject_type  
+    uriorcurie organism_type  
+    uriorcurieList external_id  
+}
+SubjectAssertion {
+    string assertion_id  
+    string subject_id  
+    EnumAssertionProvenance assertion_provenance  
+    integer age_at_assertion  
+    integer age_at_event  
+    integer age_at_resolution  
+    string concept_source  
+    float value_number  
+    string value_source  
+    string value_units_source  
+    uriorcurieList external_id  
+}
+VirtualBiorepository {
+    string name  
+    string institution  
+    uri website  
+    string vbr_readme  
+    uriorcurieList external_id  
+}
 
-      Demographics : age_at_first_engagement
-
-      Demographics : age_at_last_vital_status
-
-      Demographics : down_syndrome_status
-
-
-
-
-
-        Demographics --&gt; "1" EnumDownSyndromeStatus : down_syndrome_status
-        click EnumDownSyndromeStatus href "../EnumDownSyndromeStatus/"
-
-
-
-      Demographics : ethnicity
-
-
-
-
-
-        Demographics --&gt; "1" EnumEthnicity : ethnicity
-        click EnumEthnicity href "../EnumEthnicity/"
-
-
-
-      Demographics : external_id
-
-      Demographics : race
-
-
-
-
-
-        Demographics --&gt; "1..*" EnumRace : race
-        click EnumRace href "../EnumRace/"
-
-
-
-      Demographics : sex
-
-
-
-
-
-        Demographics --&gt; "1" EnumSex : sex
-        click EnumSex href "../EnumSex/"
-
-
-
-      Demographics : subject_id
-
-      Demographics : vital_status
-
-
-
-
-
-        Demographics --&gt; "0..1" EnumVitalStatus : vital_status
-        click EnumVitalStatus href "../EnumVitalStatus/"
-
-
-
+Study ||--|o Study : "parent_study"
+Study ||--|o VirtualBiorepository : "vbr"
+Study ||--}o Publication : "publication"
+Study ||--}| Investigator : "contact"
+Study ||--}| Investigator : "principal_investigator"
+SubjectAssertion ||--|o Concept : "value_units"
+SubjectAssertion ||--}o Concept : "concept"
+SubjectAssertion ||--}o Concept : "value_concept"
+VirtualBiorepository ||--}| Investigator : "contact"
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../Record/">Record</a><ul>
-<li><strong>Demographics</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../subject_id/">subject_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for the Subject</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../sex/">sex</a></td>
-<td>1 <br/> <a href="../EnumSex/">EnumSex</a></td>
-<td>Sex of Participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../race/">race</a></td>
-<td>1..* <br/> <a href="../EnumRace/">EnumRace</a></td>
-<td>Race of Participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../ethnicity/">ethnicity</a></td>
-<td>1 <br/> <a href="../EnumEthnicity/">EnumEthnicity</a></td>
-<td>Ethnicity of Participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../down_syndrome_status/">down_syndrome_status</a></td>
-<td>1 <br/> <a href="../EnumDownSyndromeStatus/">EnumDownSyndromeStatus</a></td>
-<td>Down Syndrome status of participant</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../age_at_last_vital_status/">age_at_last_vital_status</a></td>
-<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Age in days when participant's vital status was last recorded</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../vital_status/">vital_status</a></td>
-<td>0..1 <br/> <a href="../EnumVitalStatus/">EnumVitalStatus</a></td>
-<td>Whether participant is alive or dead</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../age_at_first_engagement/">age_at_first_engagement</a></td>
-<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Age in days of Participant at first recorded study event (enrollment, visit, ...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../Record/">Record</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>includedcc:Demographics</td>
-</tr>
-<tr>
-<td>native</td>
-<td>includedcc:Demographics</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
-<pre><code class="language-yaml">name: Demographics
-description: Basic participant demographics summary
-title: Demographics
-from_schema: https://includedcc.org/include-access-model
-is_a: Record
-slots:
-- subject_id
-- sex
-- race
-- ethnicity
-- down_syndrome_status
-- age_at_last_vital_status
-- vital_status
-- age_at_first_engagement
-slot_usage:
-  subject_id:
-    name: subject_id
-    identifier: true
-    required: true
-
-</code></pre>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<pre><code class="language-yaml">name: Demographics
-description: Basic participant demographics summary
-title: Demographics
-from_schema: https://includedcc.org/include-access-model
-is_a: Record
-slot_usage:
-  subject_id:
-    name: subject_id
-    identifier: true
-    required: true
-attributes:
-  subject_id:
-    name: subject_id
-    description: INLCUDE Global ID for the Subject
-    title: Study ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    identifier: true
-    alias: subject_id
-    owner: Demographics
-    domain_of:
-    - Subject
-    - Demographics
-    - SubjectAssertion
-    range: string
-    required: true
-    multivalued: false
-  sex:
-    name: sex
-    description: Sex of Participant
-    title: Sex
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: sex
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumSex
-    required: true
-  race:
-    name: race
-    description: Race of Participant
-    title: Race
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: race
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumRace
-    required: true
-    multivalued: true
-  ethnicity:
-    name: ethnicity
-    description: Ethnicity of Participant
-    title: Ethnicity
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: ethnicity
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumEthnicity
-    required: true
-  down_syndrome_status:
-    name: down_syndrome_status
-    description: Down Syndrome status of participant
-    title: Down Syndrome Status
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: down_syndrome_status
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumDownSyndromeStatus
-    required: true
-  age_at_last_vital_status:
-    name: age_at_last_vital_status
-    description: Age in days when participant's vital status was last recorded
-    title: Age at Last Vital Status
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: age_at_last_vital_status
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: integer
-    minimum_value: -365
-    maximum_value: 32507
-    unit:
-      ucum_code: d
-  vital_status:
-    name: vital_status
-    description: Whether participant is alive or dead
-    title: Vital Status
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: vital_status
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: EnumVitalStatus
-  age_at_first_engagement:
-    name: age_at_first_engagement
-    description: Age in days of Participant at first recorded study event (enrollment,
-      visit, observation, sample collection, survey completion, etc.). Age at enrollment
-      is preferred, if available.
-    title: Age at First Participant Engagement
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: age_at_first_engagement
-    owner: Demographics
-    domain_of:
-    - Demographics
-    range: integer
-    minimum_value: -365
-    maximum_value: 32507
-    unit:
-      ucum_code: d
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems like dbGaP
-    title: External Identifiers
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: external_id
-    owner: Demographics
-    domain_of:
-    - Record
-    range: uriorcurie
-    required: false
-    multivalued: true
-
-</code></pre>
-</details>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
