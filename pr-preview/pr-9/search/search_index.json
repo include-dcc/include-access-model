@@ -1,0 +1,1 @@
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"include-access-model","text":"<p>Internal Access model for the INCLUDE DCC.</p> <ul> <li>Auto-generated schema documentation</li> </ul>"},{"location":"about/","title":"About include-access-model","text":"<p>Internal Access model for the INCLUDE DCC.</p>"}]}
