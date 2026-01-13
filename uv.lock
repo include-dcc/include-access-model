@@ -871,6 +871,7 @@ wheels = [
 name = "include-access-model"
 source = { editable = "." }
 dependencies = [
+    { name = "linkml" },
     { name = "linkml-runtime" },
 ]
 
@@ -884,7 +885,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "linkml-runtime", specifier = ">=1.9.4" }]
+requires-dist = [
+    { name = "linkml", specifier = ">=1.9.6" },
+    { name = "linkml-runtime", specifier = ">=1.9.4" },
+]
 
 [package.metadata.requires-dev]
 dev = [
@@ -1496,7 +1500,7 @@ wheels = [
 
 [[package]]
 name = "linkml"
-version = "1.9.5"
+version = "1.9.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "antlr4-python3-runtime" },
@@ -1526,9 +1530,9 @@ dependencies = [
     { name = "typing-extensions", marker = "python_full_version < '3.12'" },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ef/c8/bb05918189d1674d39a631a13c519d12e7620399dd77da926daf1f7ce93c/linkml-1.9.5.tar.gz", hash = "sha256:736765dfdf35054497452771f8fd5653f7a2b6aec735b4e9e8171730ddf93582", size = 42955755, upload-time = "2025-10-27T16:09:56.423Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0d/52/1e4e6e0af2296074822bbb26d60761a5dbd0b977b843fe263da8cc0a4be1/linkml-1.9.6.tar.gz", hash = "sha256:d2ef74bbb52bf5e48b67b5d9319ca2e4acb8184dd40bf43d00635222b2dc1d4c", size = 42963392, upload-time = "2025-12-01T22:14:54.962Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/48/b9/658c5814858e6aa6f6d8ea33c952593b5cd74f672177a6958f9fd4f36508/linkml-1.9.5-py3-none-any.whl", hash = "sha256:7544c8221a083029ee37ec12eeaa3978237c8181f08d6f2abf9789561375a58f", size = 397781, upload-time = "2025-10-27T16:09:54.331Z" },
+    { url = "https://files.pythonhosted.org/packages/94/ff/b965a845fc0a9ca2331d8d6043e262cc834f5328ac0f1970db1622bac2cf/linkml-1.9.6-py3-none-any.whl", hash = "sha256:4ac3d2b7b6ea38c9da70e264a434977281a655f5e6040b33e65be76c63ab95cd", size = 402879, upload-time = "2025-12-01T22:14:52.579Z" },
 ]
 
 [[package]]
