@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-13T09:29:09
+# Generation date: 2026-02-02T11:07:35
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -89,7 +89,7 @@ class StudyStudyId(extended_str):
     pass
 
 
-class DOIDoi(URI):
+class DOIDoId(extended_str):
     pass
 
 
@@ -97,7 +97,7 @@ class SubjectSubjectId(extended_str):
     pass
 
 
-class DemographicsSubjectId(extended_str):
+class DemographicsSubjectId(SubjectSubjectId):
     pass
 
 
@@ -166,7 +166,7 @@ class Study(Record):
     publication: Optional[Union[Union[dict, "Publication"], list[Union[dict, "Publication"]]]] = empty_list()
     acknowledgments: Optional[str] = None
     citation_statement: Optional[str] = None
-    doi: Optional[Union[str, URI]] = None
+    do_id: Optional[Union[str, DOIDoId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.study_id):
@@ -276,8 +276,8 @@ class Study(Record):
         if self.citation_statement is not None and not isinstance(self.citation_statement, str):
             self.citation_statement = str(self.citation_statement)
 
-        if self.doi is not None and not isinstance(self.doi, URI):
-            self.doi = URI(self.doi)
+        if self.do_id is not None and not isinstance(self.do_id, DOIDoId):
+            self.do_id = DOIDoId(self.do_id)
 
         super().__post_init__(**kwargs)
 
@@ -334,14 +334,14 @@ class DOI(Record):
     class_name: ClassVar[str] = "DOI"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.DOI
 
-    doi: Union[str, DOIDoi] = None
+    do_id: Union[str, DOIDoId] = None
     bibliographic_reference: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.doi):
-            self.MissingRequiredField("doi")
-        if not isinstance(self.doi, DOIDoi):
-            self.doi = DOIDoi(self.doi)
+        if self._is_empty(self.do_id):
+            self.MissingRequiredField("do_id")
+        if not isinstance(self.do_id, DOIDoId):
+            self.do_id = DOIDoId(self.do_id)
 
         if self.bibliographic_reference is not None and not isinstance(self.bibliographic_reference, str):
             self.bibliographic_reference = str(self.bibliographic_reference)
@@ -514,7 +514,7 @@ class SubjectAssertion(Record):
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.SubjectAssertion
 
     assertion_id: Union[str, SubjectAssertionAssertionId] = None
-    subject_id: Optional[str] = None
+    subject_id: Optional[Union[str, SubjectSubjectId]] = None
     assertion_provenance: Optional[Union[str, "EnumAssertionProvenance"]] = None
     age_at_assertion: Optional[int] = None
     age_at_event: Optional[int] = None
@@ -533,8 +533,8 @@ class SubjectAssertion(Record):
         if not isinstance(self.assertion_id, SubjectAssertionAssertionId):
             self.assertion_id = SubjectAssertionAssertionId(self.assertion_id)
 
-        if self.subject_id is not None and not isinstance(self.subject_id, str):
-            self.subject_id = str(self.subject_id)
+        if self.subject_id is not None and not isinstance(self.subject_id, SubjectSubjectId):
+            self.subject_id = SubjectSubjectId(self.subject_id)
 
         if self.assertion_provenance is not None and not isinstance(self.assertion_provenance, EnumAssertionProvenance):
             self.assertion_provenance = EnumAssertionProvenance(self.assertion_provenance)
@@ -1044,23 +1044,17 @@ class EnumAssertionProvenance(EnumDefinitionImpl):
 class slots:
     pass
 
-slots.uuid = Slot(uri=INCLUDEDCC.uuid, name="uuid", curie=INCLUDEDCC.curie('uuid'),
-                   model_uri=INCLUDEDCC.uuid, domain=None, range=str)
-
-slots.id = Slot(uri=INCLUDEDCC.id, name="id", curie=INCLUDEDCC.curie('id'),
-                   model_uri=INCLUDEDCC.id, domain=None, range=URIRef)
-
 slots.study_id = Slot(uri=INCLUDEDCC.study_id, name="study_id", curie=INCLUDEDCC.curie('study_id'),
-                   model_uri=INCLUDEDCC.study_id, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.study_id, domain=None, range=Optional[Union[str, StudyStudyId]])
 
-slots.doi = Slot(uri=INCLUDEDCC.doi, name="doi", curie=INCLUDEDCC.curie('doi'),
-                   model_uri=INCLUDEDCC.doi, domain=None, range=Optional[Union[str, URI]])
+slots.do_id = Slot(uri=INCLUDEDCC.do_id, name="do_id", curie=INCLUDEDCC.curie('do_id'),
+                   model_uri=INCLUDEDCC.do_id, domain=None, range=Optional[Union[str, DOIDoId]])
 
 slots.subject_id = Slot(uri=INCLUDEDCC.subject_id, name="subject_id", curie=INCLUDEDCC.curie('subject_id'),
-                   model_uri=INCLUDEDCC.subject_id, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.subject_id, domain=None, range=Optional[Union[str, SubjectSubjectId]])
 
 slots.assertion_id = Slot(uri=INCLUDEDCC.assertion_id, name="assertion_id", curie=INCLUDEDCC.curie('assertion_id'),
-                   model_uri=INCLUDEDCC.assertion_id, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.assertion_id, domain=None, range=Optional[Union[str, SubjectAssertionAssertionId]])
 
 slots.external_id = Slot(uri=INCLUDEDCC.external_id, name="external_id", curie=INCLUDEDCC.curie('external_id'),
                    model_uri=INCLUDEDCC.external_id, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
@@ -1218,8 +1212,8 @@ slots.value_units_source = Slot(uri=INCLUDEDCC.value_units_source, name="value_u
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
 
-slots.DOI_doi = Slot(uri=INCLUDEDCC.doi, name="DOI_doi", curie=INCLUDEDCC.curie('doi'),
-                   model_uri=INCLUDEDCC.DOI_doi, domain=DOI, range=Union[str, DOIDoi])
+slots.DOI_do_id = Slot(uri=INCLUDEDCC.do_id, name="DOI_do_id", curie=INCLUDEDCC.curie('do_id'),
+                   model_uri=INCLUDEDCC.DOI_do_id, domain=DOI, range=Union[str, DOIDoId])
 
 slots.Subject_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Subject_subject_id", curie=INCLUDEDCC.curie('subject_id'),
                    model_uri=INCLUDEDCC.Subject_subject_id, domain=Subject, range=Union[str, SubjectSubjectId])

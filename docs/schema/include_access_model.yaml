@@ -723,27 +723,6 @@ enums:
         description: Data obtained from other source, such as tissue bank
         title: Other
 slots:
-  uuid:
-    name: uuid
-    definition_uri: https://includedcc.org/include-access-model/uuid
-    description: Internally assigned UUID for data management and QC purposes
-    title: UUID
-    from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:uuid
-    range: string
-    required: true
-    multivalued: false
-  id:
-    name: id
-    definition_uri: https://includedcc.org/include-access-model/id
-    description: INLCUDE Global ID for this record
-    title: ID
-    from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:id
-    identifier: true
-    range: string
-    required: true
-    multivalued: false
   study_id:
     name: study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
@@ -754,7 +733,7 @@ slots:
     owner: Study
     domain_of:
     - Study
-    range: string
+    range: Study
     multivalued: false
   doi:
     name: doi
@@ -767,7 +746,7 @@ slots:
     domain_of:
     - Study
     - DOI
-    range: uri
+    range: DOI
     multivalued: false
   subject_id:
     name: subject_id
@@ -781,7 +760,7 @@ slots:
     - Subject
     - Demographics
     - SubjectAssertion
-    range: string
+    range: Subject
     multivalued: false
   assertion_id:
     name: assertion_id
@@ -793,7 +772,7 @@ slots:
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
-    range: string
+    range: SubjectAssertion
     multivalued: false
   external_id:
     name: external_id
@@ -1350,7 +1329,6 @@ slots:
     - SubjectAssertion
     range: Concept
     multivalued: true
-    inlined: false
   concept_curie:
     name: concept_curie
     definition_uri: https://includedcc.org/include-access-model/concept_curie
@@ -1396,7 +1374,6 @@ slots:
     - SubjectAssertion
     range: Concept
     multivalued: true
-    inlined: false
   value_number:
     name: value_number
     definition_uri: https://includedcc.org/include-access-model/value_number
@@ -1476,7 +1453,7 @@ slots:
     - DOI
     is_usage_slot: true
     usage_slot_name: doi
-    range: uri
+    range: string
     required: true
     multivalued: false
   Subject_subject_id:
@@ -1514,7 +1491,7 @@ slots:
     - Demographics
     is_usage_slot: true
     usage_slot_name: subject_id
-    range: string
+    range: Subject
     required: true
     multivalued: false
   SubjectAssertion_assertion_id:
@@ -1602,6 +1579,7 @@ classes:
       study_id:
         name: study_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:Study
   VirtualBiorepository:
@@ -1634,6 +1612,7 @@ classes:
       doi:
         name: doi
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:DOI
   Investigator:
@@ -1681,6 +1660,7 @@ classes:
       subject_id:
         name: subject_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:Subject
   Demographics:
@@ -1733,6 +1713,7 @@ classes:
       assertion_id:
         name: assertion_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:SubjectAssertion
   Concept:
@@ -1752,7 +1733,7 @@ classes:
     class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2025-11-12T10:52:41'
-source_file_size: 24481
-generation_date: '2025-11-12T18:29:57'
+source_file_date: '2026-01-14T09:08:39'
+source_file_size: 24256
+generation_date: '2026-01-14T12:27:53'
 

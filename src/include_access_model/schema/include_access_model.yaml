@@ -73,9 +73,10 @@ classes:
 #    - guidMapped
       - acknowledgments
       - citation_statement
-      - doi
+      - do_id
     slot_usage:
       study_id:
+        range: string
         required: true
         identifier: true
   VirtualBiorepository:
@@ -94,10 +95,11 @@ classes:
     is_a: Record
     slots:
 #TODO: Need to split up the doi slot here versus in the study resource- it's self-referential now.
-      - doi
+      - do_id
       - bibliographic_reference
     slot_usage:
-      doi:
+      do_id:
+        range: string
         required: true
         identifier: true
   Investigator:
@@ -130,6 +132,7 @@ classes:
       - organism_type
     slot_usage:
       subject_id:
+        range: string
         required: true
         identifier: true
   Demographics:
@@ -173,6 +176,7 @@ classes:
       - value_units_source
     slot_usage:
       assertion_id:
+        range: string
         required: true
         identifier: true
   Concept:
@@ -187,42 +191,25 @@ classes:
         identifier: true
 
 slots: 
-  uuid:
-    title: UUID
-    description: Internally assigned UUID for data management and QC purposes
-    required: true
-    range: string
-    multivalued: false 
-  id:
-    title: ID
-    description: INLCUDE Global ID for this record
-    identifier: true
-    required: true
-    range: string
-    multivalued: false 
   study_id:
     title: Study ID
-    description: INLCUDE Global ID for the study
-    #identifier: true
-    #required: true
-    range: string
+    description: INCLUDE Global ID for the study
+    range: Study
     multivalued: false 
-  doi:
+  do_id:
     title: DOI
     description: Digital Object Identifier (DOI) for this Record.
-    #identifier: true
-    #required: true
-    range: uri
+    range: DOI
     multivalued: false 
   subject_id:
     title: Study ID
-    description: INLCUDE Global ID for the Subject
-    range: string
+    description: INCLUDE Global ID for the Subject
+    range: Subject
     multivalued: false 
   assertion_id:
     title: Assertion ID
-    description: INLCUDE Global ID for the Assertion
-    range: string
+    description: INCLUDE Global ID for the Assertion
+    range: SubjectAssertion
     multivalued: false 
   external_id: 
     title: External Identifiers
