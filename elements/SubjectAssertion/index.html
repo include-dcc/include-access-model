@@ -274,6 +274,15 @@
 
       SubjectAssertion : subject_id
 
+
+
+
+
+        SubjectAssertion --&gt; "0..1" Subject : subject_id
+        click Subject href "../Subject/"
+
+
+
       SubjectAssertion : value_concept
 
 
@@ -325,13 +334,13 @@
 <tr>
 <td><a href="../assertion_id/">assertion_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for the Assertion</td>
+<td>INCLUDE Global ID for the Assertion</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../subject_id/">subject_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for the Subject</td>
+<td>0..1 <br/> <a href="../Subject/">Subject</a></td>
+<td>INCLUDE Global ID for the Subject</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -460,6 +469,7 @@ slot_usage:
   assertion_id:
     name: assertion_id
     identifier: true
+    range: string
     required: true
 
 </code></pre>
@@ -476,11 +486,12 @@ slot_usage:
   assertion_id:
     name: assertion_id
     identifier: true
+    range: string
     required: true
 attributes:
   assertion_id:
     name: assertion_id
-    description: INLCUDE Global ID for the Assertion
+    description: INCLUDE Global ID for the Assertion
     title: Assertion ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -494,7 +505,7 @@ attributes:
     multivalued: false
   subject_id:
     name: subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -504,7 +515,7 @@ attributes:
     - Subject
     - Demographics
     - SubjectAssertion
-    range: string
+    range: Subject
     multivalued: false
   assertion_provenance:
     name: assertion_provenance

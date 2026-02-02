@@ -290,6 +290,15 @@
 
       Demographics : subject_id
 
+
+
+
+
+        Demographics --&gt; "1" Subject : subject_id
+        click Subject href "../Subject/"
+
+
+
       Demographics : vital_status
 
 
@@ -323,8 +332,8 @@
 <tbody>
 <tr>
 <td><a href="../subject_id/">subject_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for the Subject</td>
+<td>1 <br/> <a href="../Subject/">Subject</a></td>
+<td>INCLUDE Global ID for the Subject</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -442,7 +451,7 @@ slot_usage:
 attributes:
   subject_id:
     name: subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -453,7 +462,7 @@ attributes:
     - Subject
     - Demographics
     - SubjectAssertion
-    range: string
+    range: Subject
     required: true
     multivalued: false
   sex:

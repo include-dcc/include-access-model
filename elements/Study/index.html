@@ -284,7 +284,16 @@
 
 
 
-      Study : doi
+      Study : do_id
+
+
+
+
+
+        Study --&gt; "0..1" DOI : do_id
+        click DOI href "../DOI/"
+
+
 
       Study : expected_number_of_participants
 
@@ -417,7 +426,7 @@
 <tr>
 <td><a href="../study_id/">study_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
-<td>INLCUDE Global ID for the study</td>
+<td>INCLUDE Global ID for the study</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -553,8 +562,8 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../doi/">doi</a></td>
-<td>0..1 <br/> <a href="../Uri/">Uri</a></td>
+<td><a href="../do_id/">do_id</a></td>
+<td>0..1 <br/> <a href="../DOI/">DOI</a></td>
 <td>Digital Object Identifier (DOI) for this Record</td>
 <td>direct</td>
 </tr>
@@ -642,11 +651,12 @@ slots:
 - actual_number_of_participants
 - acknowledgments
 - citation_statement
-- doi
+- do_id
 slot_usage:
   study_id:
     name: study_id
     identifier: true
+    range: string
     required: true
 
 </code></pre>
@@ -662,11 +672,12 @@ slot_usage:
   study_id:
     name: study_id
     identifier: true
+    range: string
     required: true
 attributes:
   study_id:
     name: study_id
-    description: INLCUDE Global ID for the study
+    description: INCLUDE Global ID for the study
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -958,18 +969,18 @@ attributes:
     domain_of:
     - Study
     range: string
-  doi:
-    name: doi
+  do_id:
+    name: do_id
     description: Digital Object Identifier (DOI) for this Record.
     title: DOI
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: doi
+    alias: do_id
     owner: Study
     domain_of:
     - Study
     - DOI
-    range: uri
+    range: DOI
     multivalued: false
   external_id:
     name: external_id

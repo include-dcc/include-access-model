@@ -723,56 +723,35 @@ enums:
         description: Data obtained from other source, such as tissue bank
         title: Other
 slots:
-  uuid:
-    name: uuid
-    definition_uri: https://includedcc.org/include-access-model/uuid
-    description: Internally assigned UUID for data management and QC purposes
-    title: UUID
-    from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:uuid
-    range: string
-    required: true
-    multivalued: false
-  id:
-    name: id
-    definition_uri: https://includedcc.org/include-access-model/id
-    description: INLCUDE Global ID for this record
-    title: ID
-    from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:id
-    identifier: true
-    range: string
-    required: true
-    multivalued: false
   study_id:
     name: study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
-    description: INLCUDE Global ID for the study
+    description: INCLUDE Global ID for the study
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:study_id
     owner: Study
     domain_of:
     - Study
-    range: string
+    range: Study
     multivalued: false
-  doi:
-    name: doi
-    definition_uri: https://includedcc.org/include-access-model/doi
+  do_id:
+    name: do_id
+    definition_uri: https://includedcc.org/include-access-model/do_id
     description: Digital Object Identifier (DOI) for this Record.
     title: DOI
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:doi
+    slot_uri: includedcc:do_id
     owner: DOI
     domain_of:
     - Study
     - DOI
-    range: uri
+    range: DOI
     multivalued: false
   subject_id:
     name: subject_id
     definition_uri: https://includedcc.org/include-access-model/subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:subject_id
@@ -781,19 +760,19 @@ slots:
     - Subject
     - Demographics
     - SubjectAssertion
-    range: string
+    range: Subject
     multivalued: false
   assertion_id:
     name: assertion_id
     definition_uri: https://includedcc.org/include-access-model/assertion_id
-    description: INLCUDE Global ID for the Assertion
+    description: INCLUDE Global ID for the Assertion
     title: Assertion ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:assertion_id
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
-    range: string
+    range: SubjectAssertion
     multivalued: false
   external_id:
     name: external_id
@@ -1442,7 +1421,7 @@ slots:
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
-    description: INLCUDE Global ID for the study
+    description: INCLUDE Global ID for the study
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     is_a: study_id
@@ -1458,29 +1437,29 @@ slots:
     range: string
     required: true
     multivalued: false
-  DOI_doi:
-    name: DOI_doi
-    definition_uri: https://includedcc.org/include-access-model/doi
+  DOI_do_id:
+    name: DOI_do_id
+    definition_uri: https://includedcc.org/include-access-model/do_id
     description: Digital Object Identifier (DOI) for this Record.
     title: DOI
     from_schema: https://includedcc.org/include-access-model
-    is_a: doi
+    is_a: do_id
     domain: DOI
-    slot_uri: includedcc:doi
+    slot_uri: includedcc:do_id
     identifier: true
-    alias: doi
+    alias: do_id
     owner: DOI
     domain_of:
     - DOI
     is_usage_slot: true
-    usage_slot_name: doi
-    range: uri
+    usage_slot_name: do_id
+    range: string
     required: true
     multivalued: false
   Subject_subject_id:
     name: Subject_subject_id
     definition_uri: https://includedcc.org/include-access-model/subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     is_a: subject_id
@@ -1499,7 +1478,7 @@ slots:
   Demographics_subject_id:
     name: Demographics_subject_id
     definition_uri: https://includedcc.org/include-access-model/subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     is_a: subject_id
@@ -1512,13 +1491,13 @@ slots:
     - Demographics
     is_usage_slot: true
     usage_slot_name: subject_id
-    range: string
+    range: Subject
     required: true
     multivalued: false
   SubjectAssertion_assertion_id:
     name: SubjectAssertion_assertion_id
     definition_uri: https://includedcc.org/include-access-model/assertion_id
-    description: INLCUDE Global ID for the Assertion
+    description: INCLUDE Global ID for the Assertion
     title: Assertion ID
     from_schema: https://includedcc.org/include-access-model
     is_a: assertion_id
@@ -1595,11 +1574,12 @@ classes:
     - actual_number_of_participants
     - acknowledgments
     - citation_statement
-    - doi
+    - do_id
     slot_usage:
       study_id:
         name: study_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:Study
   VirtualBiorepository:
@@ -1626,12 +1606,13 @@ classes:
     is_a: Record
     slots:
     - external_id
-    - DOI_doi
+    - DOI_do_id
     - bibliographic_reference
     slot_usage:
-      doi:
-        name: doi
+      do_id:
+        name: do_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:DOI
   Investigator:
@@ -1679,6 +1660,7 @@ classes:
       subject_id:
         name: subject_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:Subject
   Demographics:
@@ -1731,6 +1713,7 @@ classes:
       assertion_id:
         name: assertion_id
         identifier: true
+        range: string
         required: true
     class_uri: includedcc:SubjectAssertion
   Concept:
@@ -1750,7 +1733,7 @@ classes:
     class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-01-13T22:40:15'
-source_file_size: 23711
-generation_date: '2026-01-13T22:40:25'
+source_file_date: '2026-02-02T17:12:17'
+source_file_size: 23417
+generation_date: '2026-02-02T17:12:27'
 

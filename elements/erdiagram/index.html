@@ -166,12 +166,11 @@ Concept {
     string display  
 }
 DOI {
-    uri doi  
+    string do_id  
     string bibliographic_reference  
     uriorcurieList external_id  
 }
 Demographics {
-    string subject_id  
     EnumSex sex  
     EnumRaceList race  
     EnumEthnicity ethnicity  
@@ -215,7 +214,6 @@ Study {
     integer actual_number_of_participants  
     string acknowledgments  
     string citation_statement  
-    uri doi  
     uriorcurieList external_id  
 }
 Subject {
@@ -226,7 +224,6 @@ Subject {
 }
 SubjectAssertion {
     string assertion_id  
-    string subject_id  
     EnumAssertionProvenance assertion_provenance  
     integer age_at_assertion  
     integer age_at_event  
@@ -245,12 +242,15 @@ VirtualBiorepository {
     uriorcurieList external_id  
 }
 
+Demographics ||--|| Subject : "subject_id"
+Study ||--|o DOI : "do_id"
 Study ||--|o Study : "parent_study"
 Study ||--|o VirtualBiorepository : "vbr"
 Study ||--}o Publication : "publication"
 Study ||--}| Investigator : "contact"
 Study ||--}| Investigator : "principal_investigator"
 SubjectAssertion ||--|o Concept : "value_units"
+SubjectAssertion ||--|o Subject : "subject_id"
 SubjectAssertion ||--}o Concept : "concept"
 SubjectAssertion ||--}o Concept : "value_concept"
 VirtualBiorepository ||--}| Investigator : "contact"
