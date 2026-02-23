@@ -359,6 +359,51 @@ class EnumAssertionProvenance(str, Enum):
     """
 
 
+class EnumAvailabilityStatus(str, Enum):
+    """
+    Is the Thing available for use?
+    """
+    Available = "available"
+    """
+    Biospecimen is Available
+    """
+    Unavailable = "unavailable"
+    """
+    Biospecimen is Unavailable
+    """
+
+
+class EnumSampleCollectionMethod(str):
+    """
+    The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).
+
+    """
+    pass
+
+
+class EnumSite(str):
+    """
+    The location of the specimen collection. Recommended ontology: [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
+
+    """
+    pass
+
+
+class EnumSpatialQualifiers(str):
+    """
+    Any spatial/location qualifiers.
+
+    """
+    pass
+
+
+class EnumLaterality(str):
+    """
+    Laterality information for the site
+    """
+    pass
+
+
 
 class Record(ConfiguredBaseModel):
     """
@@ -540,8 +585,8 @@ class SubjectAssertion(Record):
     value_concept: Optional[list[str]] = Field(default=[], title="Value concept", description="""The structured term defining the value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_number: Optional[float] = Field(default=None, title="Value Number", description="""The numeric value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_source: Optional[str] = Field(default=None, title="Value Source Text", description="""The source text yielding the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
-    value_units: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
-    value_units_source: Optional[str] = Field(default=None, title="Value Units Source Text", description="""The source text yielding the value's units.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_unit: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    value_unit_source: Optional[str] = Field(default=None, title="Value Units Source Text", description="""The source text yielding the value's units.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
@@ -559,6 +604,76 @@ class Concept(ConfiguredBaseModel):
     display: Optional[str] = Field(default=None, title="Display String", description="""The friendly display string of the coded term.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Concept']} })
 
 
+class Sample(Record):
+    """
+    A functionally equivalent specimen taken from a participant or processed from such a sample.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'biospecimen_collection_id': {'description': 'Biospecimen '
+                                                                     'Collection '
+                                                                     'during which '
+                                                                     'this sample was '
+                                                                     'generated.',
+                                                      'name': 'biospecimen_collection_id'},
+                        'sample_id': {'identifier': True,
+                                      'name': 'sample_id',
+                                      'range': 'string',
+                                      'required': True}},
+         'title': 'Sample'})
+
+    sample_id: str = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    biospecimen_collection_id: Optional[str] = Field(default=None, title="Biospecimen Collection ID", description="""Biospecimen Collection during which this sample was generated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'BiospecimenCollection']} })
+    parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample from which this sample is derived""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    sample_type: str = Field(default=..., title="Sample Type", description="""Type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    processing: Optional[list[str]] = Field(default=[], title="Sample Processing", description="""Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    availablity_status: Optional[EnumAvailabilityStatus] = Field(default=None, title="Sample Availability", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    storage_method: Optional[list[str]] = Field(default=[], title="Sample Storage Method", description="""Sample storage method, eg, Frozen or with additives""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    quantity_number: Optional[float] = Field(default=None, title="Quantity", description="""The total quantity of the specimen""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    quantity_unit: Optional[str] = Field(default=None, title="Quantity Units", description="""The structured term defining the units of the quantity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class BiospecimenCollection(Record):
+    """
+    A biospecimen collection event which yields one or more Samples.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'biospecimen_collection_id': {'identifier': True,
+                                                      'name': 'biospecimen_collection_id',
+                                                      'range': 'string',
+                                                      'required': True}},
+         'title': 'BiospecimenCollection'})
+
+    biospecimen_collection_id: str = Field(default=..., title="Biospecimen Collection ID", description="""Unique identifier for this Biospecimen Collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'BiospecimenCollection']} })
+    age_at_collection: Optional[float] = Field(default=None, title="Age at Biospecimen Collection", description="""The age at which this biospecimen was collected in decimal years.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection'], 'unit': {'ucum_code': 'a'}} })
+    method: Optional[EnumSampleCollectionMethod] = Field(default=None, title="Biospecimen Collection Method", description="""The approach used to collect the biospecimen.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
+    site: Optional[EnumSite] = Field(default=None, title="Biospecimen Collection Site", description="""The location of the specimen collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
+    spatial_qualifier: Optional[EnumSpatialQualifiers] = Field(default=None, title="Spatial Qualifier", description="""Qualifier that further refine the specific location of biospecimen collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
+    laterality: Optional[EnumLaterality] = Field(default=None, title="Location Laterality", description="""Laterality that further refine the specific location of biospecimen collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class Aliquot(Record):
+    """
+    A specific tube or amount of a biospecimen associated with a Sample.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'aliquot_id': {'identifier': True,
+                                       'name': 'aliquot_id',
+                                       'range': 'string',
+                                       'required': True}},
+         'title': 'Aliquot'})
+
+    aliquot_id: str = Field(default=..., title="Aliquot ID", description="""Unique identifier for an Aliquot.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
+    sample_id: Optional[str] = Field(default=None, title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    availablity_status: Optional[EnumAvailabilityStatus] = Field(default=None, title="Sample Availability", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    quantity_number: Optional[float] = Field(default=None, title="Quantity", description="""The total quantity of the specimen""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    quantity_unit: Optional[str] = Field(default=None, title="Quantity Units", description="""The structured term defining the units of the quantity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
+    concentration_number: Optional[float] = Field(default=None, title="Concentration", description="""What is the concentration of the analyte in the Aliquot?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
+    concentration_unit: Optional[str] = Field(default=None, title="Concentration Units", description="""Units associated with the concentration of the analyte in the Aliquot.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 Record.model_rebuild()
@@ -572,3 +687,6 @@ Subject.model_rebuild()
 Demographics.model_rebuild()
 SubjectAssertion.model_rebuild()
 Concept.model_rebuild()
+Sample.model_rebuild()
+BiospecimenCollection.model_rebuild()
+Aliquot.model_rebuild()

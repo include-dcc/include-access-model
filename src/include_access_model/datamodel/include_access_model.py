@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-02-23T12:29:43
+# Generation date: 2026-02-23T16:48:29
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -110,6 +110,18 @@ class SubjectAssertionAssertionId(extended_str):
 
 
 class ConceptConceptCurie(URIorCURIE):
+    pass
+
+
+class SampleSampleId(extended_str):
+    pass
+
+
+class BiospecimenCollectionBiospecimenCollectionId(extended_str):
+    pass
+
+
+class AliquotAliquotId(extended_str):
     pass
 
 
@@ -551,8 +563,8 @@ class SubjectAssertion(Record):
     value_concept: Optional[Union[Union[str, ConceptConceptCurie], list[Union[str, ConceptConceptCurie]]]] = empty_list()
     value_number: Optional[float] = None
     value_source: Optional[str] = None
-    value_units: Optional[Union[str, ConceptConceptCurie]] = None
-    value_units_source: Optional[str] = None
+    value_unit: Optional[Union[str, ConceptConceptCurie]] = None
+    value_unit_source: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.assertion_id):
@@ -592,11 +604,11 @@ class SubjectAssertion(Record):
         if self.value_source is not None and not isinstance(self.value_source, str):
             self.value_source = str(self.value_source)
 
-        if self.value_units is not None and not isinstance(self.value_units, ConceptConceptCurie):
-            self.value_units = ConceptConceptCurie(self.value_units)
+        if self.value_unit is not None and not isinstance(self.value_unit, ConceptConceptCurie):
+            self.value_unit = ConceptConceptCurie(self.value_unit)
 
-        if self.value_units_source is not None and not isinstance(self.value_units_source, str):
-            self.value_units_source = str(self.value_units_source)
+        if self.value_unit_source is not None and not isinstance(self.value_unit_source, str):
+            self.value_unit_source = str(self.value_unit_source)
 
         super().__post_init__(**kwargs)
 
@@ -624,6 +636,143 @@ class Concept(YAMLRoot):
 
         if self.display is not None and not isinstance(self.display, str):
             self.display = str(self.display)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Sample(Record):
+    """
+    A functionally equivalent specimen taken from a participant or processed from such a sample.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Sample"]
+    class_class_curie: ClassVar[str] = "includedcc:Sample"
+    class_name: ClassVar[str] = "Sample"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Sample
+
+    sample_id: Union[str, SampleSampleId] = None
+    sample_type: Union[str, URIorCURIE] = None
+    biospecimen_collection_id: Optional[Union[str, BiospecimenCollectionBiospecimenCollectionId]] = None
+    parent_sample_id: Optional[Union[str, SampleSampleId]] = None
+    processing: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    availablity_status: Optional[Union[str, "EnumAvailabilityStatus"]] = None
+    storage_method: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    quantity_number: Optional[float] = None
+    quantity_unit: Optional[Union[str, ConceptConceptCurie]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.sample_id):
+            self.MissingRequiredField("sample_id")
+        if not isinstance(self.sample_id, SampleSampleId):
+            self.sample_id = SampleSampleId(self.sample_id)
+
+        if self._is_empty(self.sample_type):
+            self.MissingRequiredField("sample_type")
+        if not isinstance(self.sample_type, URIorCURIE):
+            self.sample_type = URIorCURIE(self.sample_type)
+
+        if self.biospecimen_collection_id is not None and not isinstance(self.biospecimen_collection_id, BiospecimenCollectionBiospecimenCollectionId):
+            self.biospecimen_collection_id = BiospecimenCollectionBiospecimenCollectionId(self.biospecimen_collection_id)
+
+        if self.parent_sample_id is not None and not isinstance(self.parent_sample_id, SampleSampleId):
+            self.parent_sample_id = SampleSampleId(self.parent_sample_id)
+
+        if not isinstance(self.processing, list):
+            self.processing = [self.processing] if self.processing is not None else []
+        self.processing = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.processing]
+
+        if self.availablity_status is not None and not isinstance(self.availablity_status, EnumAvailabilityStatus):
+            self.availablity_status = EnumAvailabilityStatus(self.availablity_status)
+
+        if not isinstance(self.storage_method, list):
+            self.storage_method = [self.storage_method] if self.storage_method is not None else []
+        self.storage_method = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.storage_method]
+
+        if self.quantity_number is not None and not isinstance(self.quantity_number, float):
+            self.quantity_number = float(self.quantity_number)
+
+        if self.quantity_unit is not None and not isinstance(self.quantity_unit, ConceptConceptCurie):
+            self.quantity_unit = ConceptConceptCurie(self.quantity_unit)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class BiospecimenCollection(Record):
+    """
+    A biospecimen collection event which yields one or more Samples.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["BiospecimenCollection"]
+    class_class_curie: ClassVar[str] = "includedcc:BiospecimenCollection"
+    class_name: ClassVar[str] = "BiospecimenCollection"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.BiospecimenCollection
+
+    biospecimen_collection_id: Union[str, BiospecimenCollectionBiospecimenCollectionId] = None
+    age_at_collection: Optional[float] = None
+    method: Optional[Union[str, "EnumSampleCollectionMethod"]] = None
+    site: Optional[Union[str, "EnumSite"]] = None
+    spatial_qualifier: Optional[Union[str, "EnumSpatialQualifiers"]] = None
+    laterality: Optional[Union[str, "EnumLaterality"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.biospecimen_collection_id):
+            self.MissingRequiredField("biospecimen_collection_id")
+        if not isinstance(self.biospecimen_collection_id, BiospecimenCollectionBiospecimenCollectionId):
+            self.biospecimen_collection_id = BiospecimenCollectionBiospecimenCollectionId(self.biospecimen_collection_id)
+
+        if self.age_at_collection is not None and not isinstance(self.age_at_collection, float):
+            self.age_at_collection = float(self.age_at_collection)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Aliquot(Record):
+    """
+    A specific tube or amount of a biospecimen associated with a Sample.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Aliquot"]
+    class_class_curie: ClassVar[str] = "includedcc:Aliquot"
+    class_name: ClassVar[str] = "Aliquot"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Aliquot
+
+    aliquot_id: Union[str, AliquotAliquotId] = None
+    sample_id: Optional[Union[str, SampleSampleId]] = None
+    availablity_status: Optional[Union[str, "EnumAvailabilityStatus"]] = None
+    quantity_number: Optional[float] = None
+    quantity_unit: Optional[Union[str, ConceptConceptCurie]] = None
+    concentration_number: Optional[float] = None
+    concentration_unit: Optional[Union[str, ConceptConceptCurie]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.aliquot_id):
+            self.MissingRequiredField("aliquot_id")
+        if not isinstance(self.aliquot_id, AliquotAliquotId):
+            self.aliquot_id = AliquotAliquotId(self.aliquot_id)
+
+        if self.sample_id is not None and not isinstance(self.sample_id, SampleSampleId):
+            self.sample_id = SampleSampleId(self.sample_id)
+
+        if self.availablity_status is not None and not isinstance(self.availablity_status, EnumAvailabilityStatus):
+            self.availablity_status = EnumAvailabilityStatus(self.availablity_status)
+
+        if self.quantity_number is not None and not isinstance(self.quantity_number, float):
+            self.quantity_number = float(self.quantity_number)
+
+        if self.quantity_unit is not None and not isinstance(self.quantity_unit, ConceptConceptCurie):
+            self.quantity_unit = ConceptConceptCurie(self.quantity_unit)
+
+        if self.concentration_number is not None and not isinstance(self.concentration_number, float):
+            self.concentration_number = float(self.concentration_number)
+
+        if self.concentration_unit is not None and not isinstance(self.concentration_unit, ConceptConceptCurie):
+            self.concentration_unit = ConceptConceptCurie(self.concentration_unit)
 
         super().__post_init__(**kwargs)
 
@@ -1067,6 +1216,63 @@ class EnumAssertionProvenance(EnumDefinitionImpl):
         description="Possible data sources for assertions.",
     )
 
+class EnumAvailabilityStatus(EnumDefinitionImpl):
+    """
+    Is the Thing available for use?
+    """
+    available = PermissibleValue(
+        text="available",
+        title="Available",
+        description="Biospecimen is Available",
+        meaning=IG2_BIOSPECIMEN_AVAILABILITY["available"])
+    unavailable = PermissibleValue(
+        text="unavailable",
+        title="Unavailable",
+        description="Biospecimen is Unavailable",
+        meaning=IG2_BIOSPECIMEN_AVAILABILITY["unavailable"])
+
+    _defn = EnumDefinition(
+        name="EnumAvailabilityStatus",
+        description="Is the Thing available for use?",
+    )
+
+class EnumSampleCollectionMethod(EnumDefinitionImpl):
+    """
+    The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).
+    """
+    _defn = EnumDefinition(
+        name="EnumSampleCollectionMethod",
+        description="""The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).""",
+    )
+
+class EnumSite(EnumDefinitionImpl):
+    """
+    The location of the specimen collection. Recommended ontology: [SNOMED Body
+    Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
+    """
+    _defn = EnumDefinition(
+        name="EnumSite",
+        description="""The location of the specimen collection. Recommended ontology: [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)""",
+    )
+
+class EnumSpatialQualifiers(EnumDefinitionImpl):
+    """
+    Any spatial/location qualifiers.
+    """
+    _defn = EnumDefinition(
+        name="EnumSpatialQualifiers",
+        description="""Any spatial/location qualifiers.""",
+    )
+
+class EnumLaterality(EnumDefinitionImpl):
+    """
+    Laterality information for the site
+    """
+    _defn = EnumDefinition(
+        name="EnumLaterality",
+        description="Laterality information for the site",
+    )
+
 # Slots
 class slots:
     pass
@@ -1230,11 +1436,62 @@ slots.value_number = Slot(uri=INCLUDEDCC.value_number, name="value_number", curi
 slots.value_source = Slot(uri=INCLUDEDCC.value_source, name="value_source", curie=INCLUDEDCC.curie('value_source'),
                    model_uri=INCLUDEDCC.value_source, domain=None, range=Optional[str])
 
-slots.value_units = Slot(uri=INCLUDEDCC.value_units, name="value_units", curie=INCLUDEDCC.curie('value_units'),
-                   model_uri=INCLUDEDCC.value_units, domain=None, range=Optional[Union[str, ConceptConceptCurie]])
+slots.value_unit = Slot(uri=INCLUDEDCC.value_unit, name="value_unit", curie=INCLUDEDCC.curie('value_unit'),
+                   model_uri=INCLUDEDCC.value_unit, domain=None, range=Optional[Union[str, ConceptConceptCurie]])
 
-slots.value_units_source = Slot(uri=INCLUDEDCC.value_units_source, name="value_units_source", curie=INCLUDEDCC.curie('value_units_source'),
-                   model_uri=INCLUDEDCC.value_units_source, domain=None, range=Optional[str])
+slots.value_unit_source = Slot(uri=INCLUDEDCC.value_unit_source, name="value_unit_source", curie=INCLUDEDCC.curie('value_unit_source'),
+                   model_uri=INCLUDEDCC.value_unit_source, domain=None, range=Optional[str])
+
+slots.sample_id = Slot(uri=INCLUDEDCC.sample_id, name="sample_id", curie=INCLUDEDCC.curie('sample_id'),
+                   model_uri=INCLUDEDCC.sample_id, domain=None, range=Optional[Union[str, SampleSampleId]])
+
+slots.parent_sample_id = Slot(uri=INCLUDEDCC.parent_sample_id, name="parent_sample_id", curie=INCLUDEDCC.curie('parent_sample_id'),
+                   model_uri=INCLUDEDCC.parent_sample_id, domain=None, range=Optional[Union[str, SampleSampleId]])
+
+slots.biospecimen_collection_id = Slot(uri=INCLUDEDCC.biospecimen_collection_id, name="biospecimen_collection_id", curie=INCLUDEDCC.curie('biospecimen_collection_id'),
+                   model_uri=INCLUDEDCC.biospecimen_collection_id, domain=None, range=Optional[Union[str, BiospecimenCollectionBiospecimenCollectionId]])
+
+slots.aliquot_id = Slot(uri=INCLUDEDCC.aliquot_id, name="aliquot_id", curie=INCLUDEDCC.curie('aliquot_id'),
+                   model_uri=INCLUDEDCC.aliquot_id, domain=None, range=Optional[Union[str, AliquotAliquotId]])
+
+slots.sample_type = Slot(uri=INCLUDEDCC.sample_type, name="sample_type", curie=INCLUDEDCC.curie('sample_type'),
+                   model_uri=INCLUDEDCC.sample_type, domain=None, range=Union[str, URIorCURIE])
+
+slots.processing = Slot(uri=INCLUDEDCC.processing, name="processing", curie=INCLUDEDCC.curie('processing'),
+                   model_uri=INCLUDEDCC.processing, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
+slots.availablity_status = Slot(uri=INCLUDEDCC.availablity_status, name="availablity_status", curie=INCLUDEDCC.curie('availablity_status'),
+                   model_uri=INCLUDEDCC.availablity_status, domain=None, range=Optional[Union[str, "EnumAvailabilityStatus"]])
+
+slots.storage_method = Slot(uri=INCLUDEDCC.storage_method, name="storage_method", curie=INCLUDEDCC.curie('storage_method'),
+                   model_uri=INCLUDEDCC.storage_method, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
+slots.quantity_number = Slot(uri=INCLUDEDCC.quantity_number, name="quantity_number", curie=INCLUDEDCC.curie('quantity_number'),
+                   model_uri=INCLUDEDCC.quantity_number, domain=None, range=Optional[float])
+
+slots.quantity_unit = Slot(uri=INCLUDEDCC.quantity_unit, name="quantity_unit", curie=INCLUDEDCC.curie('quantity_unit'),
+                   model_uri=INCLUDEDCC.quantity_unit, domain=None, range=Optional[Union[str, ConceptConceptCurie]])
+
+slots.concentration_number = Slot(uri=INCLUDEDCC.concentration_number, name="concentration_number", curie=INCLUDEDCC.curie('concentration_number'),
+                   model_uri=INCLUDEDCC.concentration_number, domain=None, range=Optional[float])
+
+slots.concentration_unit = Slot(uri=INCLUDEDCC.concentration_unit, name="concentration_unit", curie=INCLUDEDCC.curie('concentration_unit'),
+                   model_uri=INCLUDEDCC.concentration_unit, domain=None, range=Optional[Union[str, ConceptConceptCurie]])
+
+slots.age_at_collection = Slot(uri=INCLUDEDCC.age_at_collection, name="age_at_collection", curie=INCLUDEDCC.curie('age_at_collection'),
+                   model_uri=INCLUDEDCC.age_at_collection, domain=None, range=Optional[float])
+
+slots.method = Slot(uri=INCLUDEDCC.method, name="method", curie=INCLUDEDCC.curie('method'),
+                   model_uri=INCLUDEDCC.method, domain=None, range=Optional[Union[str, "EnumSampleCollectionMethod"]])
+
+slots.site = Slot(uri=INCLUDEDCC.site, name="site", curie=INCLUDEDCC.curie('site'),
+                   model_uri=INCLUDEDCC.site, domain=None, range=Optional[Union[str, "EnumSite"]])
+
+slots.spatial_qualifier = Slot(uri=INCLUDEDCC.spatial_qualifier, name="spatial_qualifier", curie=INCLUDEDCC.curie('spatial_qualifier'),
+                   model_uri=INCLUDEDCC.spatial_qualifier, domain=None, range=Optional[Union[str, "EnumSpatialQualifiers"]])
+
+slots.laterality = Slot(uri=INCLUDEDCC.laterality, name="laterality", curie=INCLUDEDCC.curie('laterality'),
+                   model_uri=INCLUDEDCC.laterality, domain=None, range=Optional[Union[str, "EnumLaterality"]])
 
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
@@ -1256,3 +1513,15 @@ slots.SubjectAssertion_assertion_id = Slot(uri=INCLUDEDCC.assertion_id, name="Su
 
 slots.Concept_concept_curie = Slot(uri=INCLUDEDCC.concept_curie, name="Concept_concept_curie", curie=INCLUDEDCC.curie('concept_curie'),
                    model_uri=INCLUDEDCC.Concept_concept_curie, domain=Concept, range=Union[str, ConceptConceptCurie])
+
+slots.Sample_sample_id = Slot(uri=INCLUDEDCC.sample_id, name="Sample_sample_id", curie=INCLUDEDCC.curie('sample_id'),
+                   model_uri=INCLUDEDCC.Sample_sample_id, domain=Sample, range=Union[str, SampleSampleId])
+
+slots.Sample_biospecimen_collection_id = Slot(uri=INCLUDEDCC.biospecimen_collection_id, name="Sample_biospecimen_collection_id", curie=INCLUDEDCC.curie('biospecimen_collection_id'),
+                   model_uri=INCLUDEDCC.Sample_biospecimen_collection_id, domain=Sample, range=Optional[Union[str, BiospecimenCollectionBiospecimenCollectionId]])
+
+slots.BiospecimenCollection_biospecimen_collection_id = Slot(uri=INCLUDEDCC.biospecimen_collection_id, name="BiospecimenCollection_biospecimen_collection_id", curie=INCLUDEDCC.curie('biospecimen_collection_id'),
+                   model_uri=INCLUDEDCC.BiospecimenCollection_biospecimen_collection_id, domain=BiospecimenCollection, range=Union[str, BiospecimenCollectionBiospecimenCollectionId])
+
+slots.Aliquot_aliquot_id = Slot(uri=INCLUDEDCC.aliquot_id, name="Aliquot_aliquot_id", curie=INCLUDEDCC.curie('aliquot_id'),
+                   model_uri=INCLUDEDCC.Aliquot_aliquot_id, domain=Aliquot, range=Union[str, AliquotAliquotId])

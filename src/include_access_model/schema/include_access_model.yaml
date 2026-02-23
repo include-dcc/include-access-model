@@ -179,8 +179,8 @@ classes:
       - value_concept
       - value_number
       - value_source
-      - value_units
-      - value_units_source
+      - value_unit
+      - value_unit_source
     slot_usage:
       assertion_id:
         range: string
@@ -194,6 +194,60 @@ classes:
       - display
     slot_usage:
       concept_curie:
+        required: true
+        identifier: true
+  Sample:
+    title: Sample 
+    description: A functionally equivalent specimen taken from a participant or processed from such a sample.
+    is_a: Record
+    slots: 
+      - sample_id
+      - biospecimen_collection_id 
+      - parent_sample_id 
+      - sample_type
+      - processing 
+      - availablity_status 
+      - storage_method 
+      - quantity_number
+      - quantity_unit 
+    slot_usage:
+      sample_id:
+        range: string
+        required: true
+        identifier: true
+      biospecimen_collection_id:
+        description: Biospecimen Collection during which this sample was generated.
+  BiospecimenCollection:
+    title: BiospecimenCollection
+    description: A biospecimen collection event which yields one or more Samples.
+    is_a: Record 
+    slots: 
+      - biospecimen_collection_id
+      - age_at_collection
+      - method 
+      - site 
+      - spatial_qualifier 
+      - laterality 
+    slot_usage:
+      biospecimen_collection_id:
+        range: string
+        required: true
+        identifier: true
+  Aliquot:
+    title: Aliquot
+    description: A specific tube or amount of a biospecimen associated with a Sample.
+    is_a: Record 
+    slots: 
+      - aliquot_id
+      - sample_id
+      - availablity_status
+      - quantity_number
+      - quantity_unit 
+      - concentration_number
+      - concentration_unit
+    slot_usage:
+      aliquot_id:
+        range: string
         required: true
         identifier: true
 
@@ -476,15 +530,88 @@ slots:
     title: Value Source Text
     description: The source text yielding the value.
     range: string
-  value_units:
+  value_unit:
     title: Value Units
     description: The structured term defining the units of the value.
     range: Concept
-  value_units_source:
+  value_unit_source:
     title: Value Units Source Text
     description: The source text yielding the value's units.
     range: string
-
+  sample_id:
+    title: Sample ID
+    description: The unique identifier for this Sample.
+    range: Sample
+  parent_sample_id: 
+    title: Parent Sample ID
+    description: Sample from which this sample is derived
+    range: Sample 
+    inlined: false
+  biospecimen_collection_id: 
+    title: Biospecimen Collection ID
+    description: Unique identifier for this Biospecimen Collection.
+    range: BiospecimenCollection 
+  aliquot_id: 
+    title: Aliquot ID
+    description: Unique identifier for an Aliquot.
+    range: Aliquot 
+  sample_type:
+    title: Sample Type
+    description: Type of material of which this Sample is comprised 
+    required: true 
+    range: uriorcurie  
+  processing:
+    title: Sample Processing
+    description: Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample
+    range: uriorcurie 
+    multivalued: true 
+  availablity_status: 
+    title: Sample Availability
+    description: Can this Sample be requested for further analysis?
+    range: EnumAvailabilityStatus 
+  storage_method: 
+    title: Sample Storage Method
+    description: Sample storage method, eg, Frozen or with additives
+    range: uriorcurie
+    multivalued: true
+  quantity_number:
+    title: Quantity
+    description: The total quantity of the specimen
+    range: float
+  quantity_unit:
+    title: Quantity Units
+    description: The structured term defining the units of the quantity.
+    range: Concept
+  concentration_number: 
+    title: Concentration
+    description: What is the concentration of the analyte in the Aliquot?
+    range: float 
+  concentration_unit: 
+    title: Concentration Units
+    description: Units associated with the concentration of the analyte in the Aliquot.
+    range: Concept 
+  age_at_collection:
+    title: Age at Biospecimen Collection
+    description: The age at which this biospecimen was collected in decimal years.
+    range: float 
+    unit:
+      ucum_code: a   
+  method: 
+    title: Biospecimen Collection Method 
+    description: The approach used to collect the biospecimen.
+    range: EnumSampleCollectionMethod
+  site: 
+    title: Biospecimen Collection Site  
+    description: The location of the specimen collection.
+    range: EnumSite
+  spatial_qualifier: 
+    title: Spatial Qualifier
+    description: Qualifier that further refine the specific location of biospecimen collection
+    range: EnumSpatialQualifiers
+  laterality: 
+    title: Location Laterality
+    description: Laterality that further refine the specific location of biospecimen collection
+    range: EnumLaterality
 
 enums:
   EnumProgram:
@@ -764,3 +891,40 @@ enums:
       other:
         title: Other
         description: Data obtained from other source, such as tissue bank
+#TODO: Revisit these bindings / enumerations
+  EnumAvailabilityStatus:
+    description: Is the Thing available for use?
+    permissible_values:
+      available:
+        title: Available 
+        meaning: ig2_biospecimen_availability:available 
+        description: Biospecimen is Available
+      unavailable: 
+        title: Unavailable 
+        meaning: ig2_biospecimen_availability:unavailable 
+        description: Biospecimen is Unavailable
+  EnumSampleCollectionMethod:
+    description: |
+      The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).
+  EnumSite:
+    description: |
+      The location of the specimen collection. Recommended ontology: [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
+  EnumSpatialQualifiers:
+    description: |
+      Any spatial/location qualifiers.
+    enum_uri: http://hl7.org/fhir/us/mcode/ValueSet/mcode-body-location-qualifier-vs 
+    reachable_from:
+      source_ontology: bioregistry:snomedct
+      source_nodes:
+        - snomedct:106233006
+        - snomedct:272424004 
+        - snomedct:51440002
+        - snomedct:399488007
+        - snomedct:24028007
+        - snomedct:7771000
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
+  EnumLaterality:
+    description: |
+      Laterality information for the site
