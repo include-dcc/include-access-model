@@ -251,7 +251,7 @@
 
       Investigator : institution
 
-      Investigator : invesitgator_title
+      Investigator : investigator_title
 
       Investigator : name
 
@@ -288,7 +288,7 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../invesitgator_title/">invesitgator_title</a></td>
+<td><a href="../investigator_title/">investigator_title</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>The title of the Investigator, eg, "Assistant Professor"</td>
 <td>direct</td>
@@ -375,7 +375,7 @@ is_a: Record
 slots:
 - name
 - institution
-- invesitgator_title
+- investigator_title
 - email
 
 </code></pre>
@@ -415,13 +415,13 @@ attributes:
     - Investigator
     range: string
     required: false
-  invesitgator_title:
-    name: invesitgator_title
+  investigator_title:
+    name: investigator_title
     description: The title of the Investigator, eg, "Assistant Professor"
     title: Investigator Title
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: invesitgator_title
+    alias: investigator_title
     owner: Investigator
     domain_of:
     - Investigator

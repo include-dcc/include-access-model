@@ -865,13 +865,13 @@ slots:
     - Study
     range: string
     required: false
-  invesitgator_title:
-    name: invesitgator_title
-    definition_uri: https://includedcc.org/include-access-model/invesitgator_title
+  investigator_title:
+    name: investigator_title
+    definition_uri: https://includedcc.org/include-access-model/investigator_title
     description: The title of the Investigator, eg, "Assistant Professor"
     title: Investigator Title
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:invesitgator_title
+    slot_uri: includedcc:investigator_title
     owner: Investigator
     domain_of:
     - Investigator
@@ -1627,7 +1627,7 @@ classes:
     - external_id
     - name
     - institution
-    - invesitgator_title
+    - investigator_title
     - email
     class_uri: includedcc:Investigator
   Publication:
@@ -1733,7 +1733,7 @@ classes:
     class_uri: includedcc:Concept
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-02-02T17:12:17'
+source_file_date: '2026-02-23T17:52:18'
 source_file_size: 23417
-generation_date: '2026-02-02T17:12:27'
+generation_date: '2026-02-23T17:52:27'
 
