@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-02-23T11:50:56
+# Generation date: 2026-02-23T12:29:43
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -89,6 +89,10 @@ class StudyStudyId(extended_str):
     pass
 
 
+class StudyMetadataStudyId(StudyStudyId):
+    pass
+
+
 class DOIDoId(extended_str):
     pass
 
@@ -144,24 +148,15 @@ class Study(Record):
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Study
 
     study_id: Union[str, StudyStudyId] = None
-    principal_investigator: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
-    contact: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
     study_title: str = None
     study_code: str = None
     program: Union[Union[str, "EnumProgram"], list[Union[str, "EnumProgram"]]] = None
+    principal_investigator: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
+    contact: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
     study_description: str = None
-    research_domain: Union[Union[str, "EnumResearchDomain"], list[Union[str, "EnumResearchDomain"]]] = None
-    participant_lifespan_stage: Union[Union[str, "EnumParticipantLifespanStage"], list[Union[str, "EnumParticipantLifespanStage"]]] = None
-    study_design: Union[Union[str, "EnumStudyDesign"], list[Union[str, "EnumStudyDesign"]]] = None
-    clinical_data_source_type: Union[Union[str, "EnumClinicalDataSourceType"], list[Union[str, "EnumClinicalDataSourceType"]]] = None
-    data_category: Union[Union[str, "EnumDataCategory"], list[Union[str, "EnumDataCategory"]]] = None
-    expected_number_of_participants: int = None
-    actual_number_of_participants: int = None
     parent_study: Optional[Union[str, StudyStudyId]] = None
-    funding_source: Optional[Union[str, list[str]]] = empty_list()
     study_short_name: Optional[str] = None
-    vbr: Optional[Union[dict, "VirtualBiorepository"]] = None
-    selection_criteria: Optional[str] = None
+    funding_source: Optional[Union[str, list[str]]] = empty_list()
     website: Optional[Union[str, URI]] = None
     publication: Optional[Union[Union[dict, "Publication"], list[Union[dict, "Publication"]]]] = empty_list()
     acknowledgments: Optional[str] = None
@@ -173,18 +168,6 @@ class Study(Record):
             self.MissingRequiredField("study_id")
         if not isinstance(self.study_id, StudyStudyId):
             self.study_id = StudyStudyId(self.study_id)
-
-        if self._is_empty(self.principal_investigator):
-            self.MissingRequiredField("principal_investigator")
-        if not isinstance(self.principal_investigator, list):
-            self.principal_investigator = [self.principal_investigator] if self.principal_investigator is not None else []
-        self.principal_investigator = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.principal_investigator]
-
-        if self._is_empty(self.contact):
-            self.MissingRequiredField("contact")
-        if not isinstance(self.contact, list):
-            self.contact = [self.contact] if self.contact is not None else []
-        self.contact = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.contact]
 
         if self._is_empty(self.study_title):
             self.MissingRequiredField("study_title")
@@ -202,16 +185,80 @@ class Study(Record):
             self.program = [self.program] if self.program is not None else []
         self.program = [v if isinstance(v, EnumProgram) else EnumProgram(v) for v in self.program]
 
+        if self._is_empty(self.principal_investigator):
+            self.MissingRequiredField("principal_investigator")
+        if not isinstance(self.principal_investigator, list):
+            self.principal_investigator = [self.principal_investigator] if self.principal_investigator is not None else []
+        self.principal_investigator = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.principal_investigator]
+
+        if self._is_empty(self.contact):
+            self.MissingRequiredField("contact")
+        if not isinstance(self.contact, list):
+            self.contact = [self.contact] if self.contact is not None else []
+        self.contact = [v if isinstance(v, Investigator) else Investigator(**as_dict(v)) for v in self.contact]
+
         if self._is_empty(self.study_description):
             self.MissingRequiredField("study_description")
         if not isinstance(self.study_description, str):
             self.study_description = str(self.study_description)
 
-        if self._is_empty(self.research_domain):
-            self.MissingRequiredField("research_domain")
-        if not isinstance(self.research_domain, list):
-            self.research_domain = [self.research_domain] if self.research_domain is not None else []
-        self.research_domain = [v if isinstance(v, EnumResearchDomain) else EnumResearchDomain(v) for v in self.research_domain]
+        if self.parent_study is not None and not isinstance(self.parent_study, StudyStudyId):
+            self.parent_study = StudyStudyId(self.parent_study)
+
+        if self.study_short_name is not None and not isinstance(self.study_short_name, str):
+            self.study_short_name = str(self.study_short_name)
+
+        if not isinstance(self.funding_source, list):
+            self.funding_source = [self.funding_source] if self.funding_source is not None else []
+        self.funding_source = [v if isinstance(v, str) else str(v) for v in self.funding_source]
+
+        if self.website is not None and not isinstance(self.website, URI):
+            self.website = URI(self.website)
+
+        if not isinstance(self.publication, list):
+            self.publication = [self.publication] if self.publication is not None else []
+        self.publication = [v if isinstance(v, Publication) else Publication(**as_dict(v)) for v in self.publication]
+
+        if self.acknowledgments is not None and not isinstance(self.acknowledgments, str):
+            self.acknowledgments = str(self.acknowledgments)
+
+        if self.citation_statement is not None and not isinstance(self.citation_statement, str):
+            self.citation_statement = str(self.citation_statement)
+
+        if self.do_id is not None and not isinstance(self.do_id, DOIDoId):
+            self.do_id = DOIDoId(self.do_id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class StudyMetadata(Record):
+    """
+    Additional features about studies that may not apply to all studies
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["StudyMetadata"]
+    class_class_curie: ClassVar[str] = "includedcc:StudyMetadata"
+    class_name: ClassVar[str] = "StudyMetadata"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.StudyMetadata
+
+    study_id: Union[str, StudyMetadataStudyId] = None
+    participant_lifespan_stage: Union[Union[str, "EnumParticipantLifespanStage"], list[Union[str, "EnumParticipantLifespanStage"]]] = None
+    study_design: Union[Union[str, "EnumStudyDesign"], list[Union[str, "EnumStudyDesign"]]] = None
+    clinical_data_source_type: Union[Union[str, "EnumClinicalDataSourceType"], list[Union[str, "EnumClinicalDataSourceType"]]] = None
+    data_category: Union[Union[str, "EnumDataCategory"], list[Union[str, "EnumDataCategory"]]] = None
+    research_domain: Union[Union[str, "EnumResearchDomain"], list[Union[str, "EnumResearchDomain"]]] = None
+    expected_number_of_participants: int = None
+    actual_number_of_participants: int = None
+    selection_criteria: Optional[str] = None
+    vbr: Optional[Union[dict, "VirtualBiorepository"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.study_id):
+            self.MissingRequiredField("study_id")
+        if not isinstance(self.study_id, StudyMetadataStudyId):
+            self.study_id = StudyMetadataStudyId(self.study_id)
 
         if self._is_empty(self.participant_lifespan_stage):
             self.MissingRequiredField("participant_lifespan_stage")
@@ -237,6 +284,12 @@ class Study(Record):
             self.data_category = [self.data_category] if self.data_category is not None else []
         self.data_category = [v if isinstance(v, EnumDataCategory) else EnumDataCategory(v) for v in self.data_category]
 
+        if self._is_empty(self.research_domain):
+            self.MissingRequiredField("research_domain")
+        if not isinstance(self.research_domain, list):
+            self.research_domain = [self.research_domain] if self.research_domain is not None else []
+        self.research_domain = [v if isinstance(v, EnumResearchDomain) else EnumResearchDomain(v) for v in self.research_domain]
+
         if self._is_empty(self.expected_number_of_participants):
             self.MissingRequiredField("expected_number_of_participants")
         if not isinstance(self.expected_number_of_participants, int):
@@ -247,37 +300,11 @@ class Study(Record):
         if not isinstance(self.actual_number_of_participants, int):
             self.actual_number_of_participants = int(self.actual_number_of_participants)
 
-        if self.parent_study is not None and not isinstance(self.parent_study, StudyStudyId):
-            self.parent_study = StudyStudyId(self.parent_study)
-
-        if not isinstance(self.funding_source, list):
-            self.funding_source = [self.funding_source] if self.funding_source is not None else []
-        self.funding_source = [v if isinstance(v, str) else str(v) for v in self.funding_source]
-
-        if self.study_short_name is not None and not isinstance(self.study_short_name, str):
-            self.study_short_name = str(self.study_short_name)
-
-        if self.vbr is not None and not isinstance(self.vbr, VirtualBiorepository):
-            self.vbr = VirtualBiorepository(**as_dict(self.vbr))
-
         if self.selection_criteria is not None and not isinstance(self.selection_criteria, str):
             self.selection_criteria = str(self.selection_criteria)
 
-        if self.website is not None and not isinstance(self.website, URI):
-            self.website = URI(self.website)
-
-        if not isinstance(self.publication, list):
-            self.publication = [self.publication] if self.publication is not None else []
-        self.publication = [v if isinstance(v, Publication) else Publication(**as_dict(v)) for v in self.publication]
-
-        if self.acknowledgments is not None and not isinstance(self.acknowledgments, str):
-            self.acknowledgments = str(self.acknowledgments)
-
-        if self.citation_statement is not None and not isinstance(self.citation_statement, str):
-            self.citation_statement = str(self.citation_statement)
-
-        if self.do_id is not None and not isinstance(self.do_id, DOIDoId):
-            self.do_id = DOIDoId(self.do_id)
+        if self.vbr is not None and not isinstance(self.vbr, VirtualBiorepository):
+            self.vbr = VirtualBiorepository(**as_dict(self.vbr))
 
         super().__post_init__(**kwargs)
 
@@ -1211,6 +1238,9 @@ slots.value_units_source = Slot(uri=INCLUDEDCC.value_units_source, name="value_u
 
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
+
+slots.StudyMetadata_study_id = Slot(uri=INCLUDEDCC.study_id, name="StudyMetadata_study_id", curie=INCLUDEDCC.curie('study_id'),
+                   model_uri=INCLUDEDCC.StudyMetadata_study_id, domain=StudyMetadata, range=Union[str, StudyMetadataStudyId])
 
 slots.DOI_do_id = Slot(uri=INCLUDEDCC.do_id, name="DOI_do_id", curie=INCLUDEDCC.curie('do_id'),
                    model_uri=INCLUDEDCC.DOI_do_id, domain=DOI, range=Union[str, DOIDoId])

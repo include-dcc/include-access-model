@@ -48,35 +48,45 @@ classes:
 #TODO: Split out core Study items and additional study metadata?
       - study_id
       - parent_study 
-      - funding_source
-      - principal_investigator 
-      - contact
       - study_title
       - study_code
       - study_short_name
       - program
+      - funding_source
+      - principal_investigator 
+      - contact
       - study_description
-      - vbr
-      - research_domain
-      - participant_lifespan_stage
-      - selection_criteria
-      - study_design
-      - clinical_data_source_type
-      - data_category
       - website
 # - dbgap : Should we call this out specifically or just use an external id?
       - publication
-      - expected_number_of_participants
-      - actual_number_of_participants
-# Do we need this info, or should it be documented elsewhere?
-#    - guidType
-#    - guidMapped
       - acknowledgments
       - citation_statement
       - do_id
     slot_usage:
       study_id:
         range: string
+        required: true
+        identifier: true
+  StudyMetadata:
+    title: Study Metadata
+    description: Additional features about studies that may not apply to all studies
+    is_a: Record
+    slots:
+      - study_id
+      - participant_lifespan_stage
+      - selection_criteria
+      - study_design
+      - clinical_data_source_type
+      - data_category
+      - vbr
+      - research_domain
+      - expected_number_of_participants
+      - actual_number_of_participants
+# Do we need this info, or should it be documented elsewhere?
+#    - guidType
+#    - guidMapped
+    slot_usage:
+      study_id:
         required: true
         identifier: true
   VirtualBiorepository:
@@ -165,11 +175,8 @@ classes:
       - age_at_event
       - age_at_resolution
       - concept
-# Moved the displays into the concept
-#      - display
       - concept_source
       - value_concept
-#      - value_display
       - value_number
       - value_source
       - value_units
