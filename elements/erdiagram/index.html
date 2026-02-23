@@ -161,6 +161,22 @@
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
 <div class="mermaid">erDiagram
+Aliquot {
+    string aliquot_id  
+    EnumAvailabilityStatus availablity_status  
+    float quantity_number  
+    float concentration_number  
+    uriorcurieList external_id  
+}
+BiospecimenCollection {
+    string biospecimen_collection_id  
+    float age_at_collection  
+    EnumSampleCollectionMethod method  
+    EnumSite site  
+    EnumSpatialQualifiers spatial_qualifier  
+    EnumLaterality laterality  
+    uriorcurieList external_id  
+}
 Concept {
     uriorcurie concept_curie  
     string display  
@@ -195,25 +211,37 @@ Publication {
 Record {
     uriorcurieList external_id  
 }
+Sample {
+    string sample_id  
+    uriorcurie sample_type  
+    uriorcurieList processing  
+    EnumAvailabilityStatus availablity_status  
+    uriorcurieList storage_method  
+    float quantity_number  
+    uriorcurieList external_id  
+}
 Study {
     string study_id  
-    stringList funding_source  
     string study_title  
     string study_code  
     string study_short_name  
     EnumProgramList program  
+    stringList funding_source  
     string study_description  
-    EnumResearchDomainList research_domain  
+    uri website  
+    string acknowledgments  
+    string citation_statement  
+    uriorcurieList external_id  
+}
+StudyMetadata {
     EnumParticipantLifespanStageList participant_lifespan_stage  
     string selection_criteria  
     EnumStudyDesignList study_design  
     EnumClinicalDataSourceTypeList clinical_data_source_type  
     EnumDataCategoryList data_category  
-    uri website  
+    EnumResearchDomainList research_domain  
     integer expected_number_of_participants  
     integer actual_number_of_participants  
-    string acknowledgments  
-    string citation_statement  
     uriorcurieList external_id  
 }
 Subject {
@@ -231,7 +259,7 @@ SubjectAssertion {
     string concept_source  
     float value_number  
     string value_source  
-    string value_units_source  
+    string value_unit_source  
     uriorcurieList external_id  
 }
 VirtualBiorepository {
@@ -242,14 +270,21 @@ VirtualBiorepository {
     uriorcurieList external_id  
 }
 
+Aliquot ||--|o Concept : "concentration_unit"
+Aliquot ||--|o Concept : "quantity_unit"
+Aliquot ||--|o Sample : "sample_id"
 Demographics ||--|| Subject : "subject_id"
+Sample ||--|o BiospecimenCollection : "biospecimen_collection_id"
+Sample ||--|o Concept : "quantity_unit"
+Sample ||--|o Sample : "parent_sample_id"
 Study ||--|o DOI : "do_id"
 Study ||--|o Study : "parent_study"
-Study ||--|o VirtualBiorepository : "vbr"
 Study ||--}o Publication : "publication"
 Study ||--}| Investigator : "contact"
 Study ||--}| Investigator : "principal_investigator"
-SubjectAssertion ||--|o Concept : "value_units"
+StudyMetadata ||--|o VirtualBiorepository : "vbr"
+StudyMetadata ||--|| Study : "study_id"
+SubjectAssertion ||--|o Concept : "value_unit"
 SubjectAssertion ||--|o Subject : "subject_id"
 SubjectAssertion ||--}o Concept : "concept"
 SubjectAssertion ||--}o Concept : "value_concept"

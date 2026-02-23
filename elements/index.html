@@ -482,6 +482,14 @@
 <td>One row / entity within the database</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Aliquot/">Aliquot</a></td>
+<td>A specific tube or amount of a biospecimen associated with a Sample</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="BiospecimenCollection/">BiospecimenCollection</a></td>
+<td>A biospecimen collection event which yields one or more Samples</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Demographics/">Demographics</a></td>
 <td>Basic participant demographics summary</td>
 </tr>
@@ -498,8 +506,16 @@
 <td>Information about a specific publication</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Sample/">Sample</a></td>
+<td>A functionally equivalent specimen taken from a participant or processed from...</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Study/">Study</a></td>
 <td>Study Metadata</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="StudyMetadata/">StudyMetadata</a></td>
+<td>Additional features about studies that may not apply to all studies</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Subject/">Subject</a></td>
@@ -537,6 +553,10 @@
 <td>The age in days of the Subject when the assertion was made</td>
 </tr>
 <tr>
+<td><a href="age_at_collection/">age_at_collection</a></td>
+<td>The age at which this biospecimen was collected in decimal years</td>
+</tr>
+<tr>
 <td><a href="age_at_event/">age_at_event</a></td>
 <td>The age in days of the Subject at the time point which the assertion describe...</td>
 </tr>
@@ -553,6 +573,10 @@
 <td>The age in days of the Subject when the asserted state was resolved</td>
 </tr>
 <tr>
+<td><a href="aliquot_id/">aliquot_id</a></td>
+<td>Unique identifier for an Aliquot</td>
+</tr>
+<tr>
 <td><a href="assertion_id/">assertion_id</a></td>
 <td>INCLUDE Global ID for the Assertion</td>
 </tr>
@@ -561,8 +585,16 @@
 <td>The original source of this assertion</td>
 </tr>
 <tr>
+<td><a href="availablity_status/">availablity_status</a></td>
+<td>Can this Sample be requested for further analysis?</td>
+</tr>
+<tr>
 <td><a href="bibliographic_reference/">bibliographic_reference</a></td>
 <td>Text use to reference this Record</td>
+</tr>
+<tr>
+<td><a href="biospecimen_collection_id/">biospecimen_collection_id</a></td>
+<td>Unique identifier for this Biospecimen Collection</td>
 </tr>
 <tr>
 <td><a href="citation_statement/">citation_statement</a></td>
@@ -571,6 +603,14 @@
 <tr>
 <td><a href="clinical_data_source_type/">clinical_data_source_type</a></td>
 <td>Source(s) of data collected from study participants</td>
+</tr>
+<tr>
+<td><a href="concentration_number/">concentration_number</a></td>
+<td>What is the concentration of the analyte in the Aliquot?</td>
+</tr>
+<tr>
+<td><a href="concentration_unit/">concentration_unit</a></td>
+<td>Units associated with the concentration of the analyte in the Aliquot</td>
 </tr>
 <tr>
 <td><a href="concept/">concept</a></td>
@@ -633,12 +673,24 @@
 <td>The title of the Investigator, eg, "Assistant Professor"</td>
 </tr>
 <tr>
+<td><a href="laterality/">laterality</a></td>
+<td>Laterality that further refine the specific location of biospecimen collectio...</td>
+</tr>
+<tr>
+<td><a href="method/">method</a></td>
+<td>The approach used to collect the biospecimen</td>
+</tr>
+<tr>
 <td><a href="name/">name</a></td>
 <td>Name of the entity</td>
 </tr>
 <tr>
 <td><a href="organism_type/">organism_type</a></td>
 <td>Organism Type</td>
+</tr>
+<tr>
+<td><a href="parent_sample_id/">parent_sample_id</a></td>
+<td>Sample from which this sample is derived</td>
 </tr>
 <tr>
 <td><a href="parent_study/">parent_study</a></td>
@@ -653,12 +705,24 @@
 <td>The Principal Investigator(s) responsible for the study</td>
 </tr>
 <tr>
+<td><a href="processing/">processing</a></td>
+<td>Processing that was applied to the Parent Sample or from the Biospecimen Coll...</td>
+</tr>
+<tr>
 <td><a href="program/">program</a></td>
 <td>Funding source(s) for the study</td>
 </tr>
 <tr>
 <td><a href="publication/">publication</a></td>
 <td>Publications associated with this Record</td>
+</tr>
+<tr>
+<td><a href="quantity_number/">quantity_number</a></td>
+<td>The total quantity of the specimen</td>
+</tr>
+<tr>
+<td><a href="quantity_unit/">quantity_unit</a></td>
+<td>The structured term defining the units of the quantity</td>
 </tr>
 <tr>
 <td><a href="race/">race</a></td>
@@ -669,12 +733,32 @@
 <td>Main research domain(s) of the study, other than Down syndrome</td>
 </tr>
 <tr>
+<td><a href="sample_id/">sample_id</a></td>
+<td>The unique identifier for this Sample</td>
+</tr>
+<tr>
+<td><a href="sample_type/">sample_type</a></td>
+<td>Type of material of which this Sample is comprised</td>
+</tr>
+<tr>
 <td><a href="selection_criteria/">selection_criteria</a></td>
 <td>Brief description of inclusion and/or exclusion criteria for the study</td>
 </tr>
 <tr>
 <td><a href="sex/">sex</a></td>
 <td>Sex of Participant</td>
+</tr>
+<tr>
+<td><a href="site/">site</a></td>
+<td>The location of the specimen collection</td>
+</tr>
+<tr>
+<td><a href="spatial_qualifier/">spatial_qualifier</a></td>
+<td>Qualifier that further refine the specific location of biospecimen collection</td>
+</tr>
+<tr>
+<td><a href="storage_method/">storage_method</a></td>
+<td>Sample storage method, eg, Frozen or with additives</td>
 </tr>
 <tr>
 <td><a href="study_code/">study_code</a></td>
@@ -721,11 +805,11 @@
 <td>The source text yielding the value</td>
 </tr>
 <tr>
-<td><a href="value_units/">value_units</a></td>
+<td><a href="value_unit/">value_unit</a></td>
 <td>The structured term defining the units of the value</td>
 </tr>
 <tr>
-<td><a href="value_units_source/">value_units_source</a></td>
+<td><a href="value_unit_source/">value_unit_source</a></td>
 <td>The source text yielding the value's units</td>
 </tr>
 <tr>
@@ -760,6 +844,10 @@
 <td>Possible data sources for assertions</td>
 </tr>
 <tr>
+<td><a href="EnumAvailabilityStatus/">EnumAvailabilityStatus</a></td>
+<td>Is the Thing available for use?</td>
+</tr>
+<tr>
 <td><a href="EnumClinicalDataSourceType/">EnumClinicalDataSourceType</a></td>
 <td>Approaches to ascertain clinical information about a participant</td>
 </tr>
@@ -774,6 +862,10 @@
 <tr>
 <td><a href="EnumEthnicity/">EnumEthnicity</a></td>
 <td>Participant ethnicity, specific to Hispanic or Latino</td>
+</tr>
+<tr>
+<td><a href="EnumLaterality/">EnumLaterality</a></td>
+<td>Laterality information for the site</td>
 </tr>
 <tr>
 <td><a href="EnumNull/">EnumNull</a></td>
@@ -796,8 +888,20 @@
 <td>Domains of Research used to find studies</td>
 </tr>
 <tr>
+<td><a href="EnumSampleCollectionMethod/">EnumSampleCollectionMethod</a></td>
+<td>The approach used to collect the biospecimen</td>
+</tr>
+<tr>
 <td><a href="EnumSex/">EnumSex</a></td>
 <td>Subject Sex</td>
+</tr>
+<tr>
+<td><a href="EnumSite/">EnumSite</a></td>
+<td>The location of the specimen collection</td>
+</tr>
+<tr>
+<td><a href="EnumSpatialQualifiers/">EnumSpatialQualifiers</a></td>
+<td>Any spatial/location qualifiers</td>
 </tr>
 <tr>
 <td><a href="EnumStudyDesign/">EnumStudyDesign</a></td>

@@ -247,20 +247,7 @@
 
       Study : acknowledgments
 
-      Study : actual_number_of_participants
-
       Study : citation_statement
-
-      Study : clinical_data_source_type
-
-
-
-
-
-        Study --&gt; "1..*" EnumClinicalDataSourceType : clinical_data_source_type
-        click EnumClinicalDataSourceType href "../EnumClinicalDataSourceType/"
-
-
 
       Study : contact
 
@@ -270,17 +257,6 @@
 
         Study --&gt; "1..*" Investigator : contact
         click Investigator href "../Investigator/"
-
-
-
-      Study : data_category
-
-
-
-
-
-        Study --&gt; "1..*" EnumDataCategory : data_category
-        click EnumDataCategory href "../EnumDataCategory/"
 
 
 
@@ -295,8 +271,6 @@
 
 
 
-      Study : expected_number_of_participants
-
       Study : external_id
 
       Study : funding_source
@@ -309,17 +283,6 @@
 
         Study --&gt; "0..1" Study : parent_study
         click Study href "../Study/"
-
-
-
-      Study : participant_lifespan_stage
-
-
-
-
-
-        Study --&gt; "1..*" EnumParticipantLifespanStage : participant_lifespan_stage
-        click EnumParticipantLifespanStage href "../EnumParticipantLifespanStage/"
 
 
 
@@ -356,50 +319,15 @@
 
 
 
-      Study : research_domain
-
-
-
-
-
-        Study --&gt; "1..*" EnumResearchDomain : research_domain
-        click EnumResearchDomain href "../EnumResearchDomain/"
-
-
-
-      Study : selection_criteria
-
       Study : study_code
 
       Study : study_description
-
-      Study : study_design
-
-
-
-
-
-        Study --&gt; "1..*" EnumStudyDesign : study_design
-        click EnumStudyDesign href "../EnumStudyDesign/"
-
-
 
       Study : study_id
 
       Study : study_short_name
 
       Study : study_title
-
-      Study : vbr
-
-
-
-
-
-        Study --&gt; "0..1" VirtualBiorepository : vbr
-        click VirtualBiorepository href "../VirtualBiorepository/"
-
-
 
       Study : website
 
@@ -436,24 +364,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../funding_source/">funding_source</a></td>
-<td>* <br/> <a href="../String/">String</a></td>
-<td>The funding source(s) of the study</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../principal_investigator/">principal_investigator</a></td>
-<td>1..* <br/> <a href="../Investigator/">Investigator</a></td>
-<td>The Principal Investigator(s) responsible for the study</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../contact/">contact</a></td>
-<td>1..* <br/> <a href="../Investigator/">Investigator</a></td>
-<td>The individual to contact with questions about this record</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../study_title/">study_title</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Full Study Title</td>
@@ -478,51 +388,27 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../funding_source/">funding_source</a></td>
+<td>* <br/> <a href="../String/">String</a></td>
+<td>The funding source(s) of the study</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../principal_investigator/">principal_investigator</a></td>
+<td>1..* <br/> <a href="../Investigator/">Investigator</a></td>
+<td>The Principal Investigator(s) responsible for the study</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../contact/">contact</a></td>
+<td>1..* <br/> <a href="../Investigator/">Investigator</a></td>
+<td>The individual to contact with questions about this record</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../study_description/">study_description</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Brief description of the study (2-4 sentences)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../vbr/">vbr</a></td>
-<td>0..1 <br/> <a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
-<td>Information about the study's Virtual Biorepository, if participating</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../research_domain/">research_domain</a></td>
-<td>1..* <br/> <a href="../EnumResearchDomain/">EnumResearchDomain</a></td>
-<td>Main research domain(s) of the study, other than Down syndrome</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../participant_lifespan_stage/">participant_lifespan_stage</a></td>
-<td>1..* <br/> <a href="../EnumParticipantLifespanStage/">EnumParticipantLifespanStage</a></td>
-<td>Focus age group(s) of the study population</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../selection_criteria/">selection_criteria</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Brief description of inclusion and/or exclusion criteria for the study</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../study_design/">study_design</a></td>
-<td>1..* <br/> <a href="../EnumStudyDesign/">EnumStudyDesign</a></td>
-<td>Overall design of study, including whether it is longitudinal and whether fam...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../clinical_data_source_type/">clinical_data_source_type</a></td>
-<td>1..* <br/> <a href="../EnumClinicalDataSourceType/">EnumClinicalDataSourceType</a></td>
-<td>Source(s) of data collected from study participants</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../data_category/">data_category</a></td>
-<td>1..* <br/> <a href="../EnumDataCategory/">EnumDataCategory</a></td>
-<td>General category of data in this Record (e</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -535,18 +421,6 @@
 <td><a href="../publication/">publication</a></td>
 <td>* <br/> <a href="../Publication/">Publication</a></td>
 <td>Publications associated with this Record</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../expected_number_of_participants/">expected_number_of_participants</a></td>
-<td>1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Total expected number of participants to be recruited</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../actual_number_of_participants/">actual_number_of_participants</a></td>
-<td>1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Total participants included at this time</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -592,6 +466,12 @@
 <td>range</td>
 <td><a href="./">Study</a></td>
 </tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -630,25 +510,16 @@ is_a: Record
 slots:
 - study_id
 - parent_study
-- funding_source
-- principal_investigator
-- contact
 - study_title
 - study_code
 - study_short_name
 - program
+- funding_source
+- principal_investigator
+- contact
 - study_description
-- vbr
-- research_domain
-- participant_lifespan_stage
-- selection_criteria
-- study_design
-- clinical_data_source_type
-- data_category
 - website
 - publication
-- expected_number_of_participants
-- actual_number_of_participants
 - acknowledgments
 - citation_statement
 - do_id
@@ -686,6 +557,7 @@ attributes:
     owner: Study
     domain_of:
     - Study
+    - StudyMetadata
     range: string
     required: true
     multivalued: false
@@ -702,46 +574,6 @@ attributes:
     range: Study
     required: false
     multivalued: false
-  funding_source:
-    name: funding_source
-    description: The funding source(s) of the study.
-    title: Funding Source
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: funding_source
-    owner: Study
-    domain_of:
-    - Study
-    range: string
-    required: false
-    multivalued: true
-  principal_investigator:
-    name: principal_investigator
-    description: The Principal Investigator(s) responsible for the study.
-    title: Principal Investigator
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: principal_investigator
-    owner: Study
-    domain_of:
-    - Study
-    range: Investigator
-    required: true
-    multivalued: true
-  contact:
-    name: contact
-    description: The individual to contact with questions about this record.
-    title: Contact Person
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: contact
-    owner: Study
-    domain_of:
-    - Study
-    - VirtualBiorepository
-    range: Investigator
-    required: true
-    multivalued: true
   study_title:
     name: study_title
     description: Full Study Title
@@ -791,6 +623,46 @@ attributes:
     range: EnumProgram
     required: true
     multivalued: true
+  funding_source:
+    name: funding_source
+    description: The funding source(s) of the study.
+    title: Funding Source
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: funding_source
+    owner: Study
+    domain_of:
+    - Study
+    range: string
+    required: false
+    multivalued: true
+  principal_investigator:
+    name: principal_investigator
+    description: The Principal Investigator(s) responsible for the study.
+    title: Principal Investigator
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: principal_investigator
+    owner: Study
+    domain_of:
+    - Study
+    range: Investigator
+    required: true
+    multivalued: true
+  contact:
+    name: contact
+    description: The individual to contact with questions about this record.
+    title: Contact Person
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: contact
+    owner: Study
+    domain_of:
+    - Study
+    - VirtualBiorepository
+    range: Investigator
+    required: true
+    multivalued: true
   study_description:
     name: study_description
     description: Brief description of the study (2-4 sentences)
@@ -803,96 +675,6 @@ attributes:
     - Study
     range: string
     required: true
-  vbr:
-    name: vbr
-    description: Information about the study's Virtual Biorepository, if participating
-    title: Virtual Biorepository
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: vbr
-    owner: Study
-    domain_of:
-    - Study
-    range: VirtualBiorepository
-    required: false
-  research_domain:
-    name: research_domain
-    description: Main research domain(s) of the study, other than Down syndrome
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: research_domain
-    owner: Study
-    domain_of:
-    - Study
-    range: EnumResearchDomain
-    required: true
-    multivalued: true
-  participant_lifespan_stage:
-    name: participant_lifespan_stage
-    description: Focus age group(s) of the study population
-    title: Participant Lifespan Stage
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: participant_lifespan_stage
-    owner: Study
-    domain_of:
-    - Study
-    range: EnumParticipantLifespanStage
-    required: true
-    multivalued: true
-  selection_criteria:
-    name: selection_criteria
-    description: Brief description of inclusion and/or exclusion criteria for the
-      study
-    title: Selection Criteria
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: selection_criteria
-    owner: Study
-    domain_of:
-    - Study
-    range: string
-  study_design:
-    name: study_design
-    description: Overall design of study, including whether it is longitudinal and
-      whether family members/unrelated controls are also enrolled
-    title: Study Design
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: study_design
-    owner: Study
-    domain_of:
-    - Study
-    range: EnumStudyDesign
-    required: true
-    multivalued: true
-  clinical_data_source_type:
-    name: clinical_data_source_type
-    description: Source(s) of data collected from study participants
-    title: Clinical Data Source Type
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: clinical_data_source_type
-    owner: Study
-    domain_of:
-    - Study
-    range: EnumClinicalDataSourceType
-    required: true
-    multivalued: true
-  data_category:
-    name: data_category
-    description: General category of data in this Record (e.g. Clinical, Genomics,
-      etc)
-    title: Data Category
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: data_category
-    owner: Study
-    domain_of:
-    - Study
-    range: EnumDataCategory
-    required: true
-    multivalued: true
   website:
     name: website
     description: Website for the Record.
@@ -918,30 +700,6 @@ attributes:
     - Study
     range: Publication
     multivalued: true
-  expected_number_of_participants:
-    name: expected_number_of_participants
-    description: Total expected number of participants to be recruited.
-    title: Expected Number of Participants
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: expected_number_of_participants
-    owner: Study
-    domain_of:
-    - Study
-    range: integer
-    required: true
-  actual_number_of_participants:
-    name: actual_number_of_participants
-    description: Total participants included at this time.
-    title: Actual Number of Participants
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: actual_number_of_participants
-    owner: Study
-    domain_of:
-    - Study
-    range: integer
-    required: true
   acknowledgments:
     name: acknowledgments
     description: Funding statement and acknowledgments for this study

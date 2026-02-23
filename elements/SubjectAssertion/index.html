@@ -298,18 +298,18 @@
 
       SubjectAssertion : value_source
 
-      SubjectAssertion : value_units
+      SubjectAssertion : value_unit
 
 
 
 
 
-        SubjectAssertion --&gt; "0..1" Concept : value_units
+        SubjectAssertion --&gt; "0..1" Concept : value_unit
         click Concept href "../Concept/"
 
 
 
-      SubjectAssertion : value_units_source
+      SubjectAssertion : value_unit_source
 
 
 </div>
@@ -398,13 +398,13 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../value_units/">value_units</a></td>
+<td><a href="../value_unit/">value_unit</a></td>
 <td>0..1 <br/> <a href="../Concept/">Concept</a></td>
 <td>The structured term defining the units of the value</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../value_units_source/">value_units_source</a></td>
+<td><a href="../value_unit_source/">value_unit_source</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>The source text yielding the value's units</td>
 <td>direct</td>
@@ -463,8 +463,8 @@ slots:
 - value_concept
 - value_number
 - value_source
-- value_units
-- value_units_source
+- value_unit
+- value_unit_source
 slot_usage:
   assertion_id:
     name: assertion_id
@@ -625,24 +625,24 @@ attributes:
     domain_of:
     - SubjectAssertion
     range: string
-  value_units:
-    name: value_units
+  value_unit:
+    name: value_unit
     description: The structured term defining the units of the value.
     title: Value Units
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: value_units
+    alias: value_unit
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
     range: Concept
-  value_units_source:
-    name: value_units_source
+  value_unit_source:
+    name: value_unit_source
     description: The source text yielding the value's units.
     title: Value Units Source Text
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: value_units_source
+    alias: value_unit_source
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion

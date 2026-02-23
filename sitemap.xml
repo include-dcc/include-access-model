@@ -13,6 +13,14 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/Aliquot/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/BiospecimenCollection/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/Boolean/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
@@ -57,6 +65,10 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumAvailabilityStatus/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/EnumClinicalDataSourceType/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
@@ -70,6 +82,10 @@
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/EnumEthnicity/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumLaterality/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -93,7 +109,19 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumSampleCollectionMethod/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/EnumSex/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumSite/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumSpatialQualifiers/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -149,6 +177,10 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/Sample/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/Sparqlpath/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
@@ -158,6 +190,10 @@
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/Study/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/StudyMetadata/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -197,6 +233,10 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/age_at_collection/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/age_at_event/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
@@ -213,6 +253,10 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/aliquot_id/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/assertion_id/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
@@ -221,7 +265,15 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/availablity_status/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/bibliographic_reference/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/biospecimen_collection_id/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -230,6 +282,14 @@
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/clinical_data_source_type/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/concentration_number/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/concentration_unit/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -301,11 +361,23 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/laterality/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/method/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/name/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/organism_type/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/parent_sample_id/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -321,11 +393,23 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/processing/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/program/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/publication/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/quantity_number/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/quantity_unit/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -337,11 +421,31 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/sample_id/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/sample_type/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/selection_criteria/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/sex/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/site/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/spatial_qualifier/</loc>
+         <lastmod>2026-02-23</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/storage_method/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
@@ -389,11 +493,11 @@
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://include-dcc.github.io/include-access-model/elements/value_units/</loc>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_unit/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://include-dcc.github.io/include-access-model/elements/value_units_source/</loc>
+         <loc>https://include-dcc.github.io/include-access-model/elements/value_unit_source/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
