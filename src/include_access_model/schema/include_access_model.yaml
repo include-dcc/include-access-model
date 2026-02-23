@@ -110,7 +110,7 @@ classes:
       - name
       - institution
       # - orcid : Should we call this out specifically or just use an external id?
-      - invesitgator_title
+      - investigator_title
       - email
   Publication:
     title: Publication
@@ -250,7 +250,7 @@ slots:
     description: Short name for the study
     range: string
     required: false
-  invesitgator_title:
+  investigator_title:
     title: Investigator Title
     description: The title of the Investigator, eg, "Assistant Professor"
     range: string

@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-02-02T11:07:35
+# Generation date: 2026-02-23T11:50:56
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -363,7 +363,7 @@ class Investigator(Record):
 
     name: Optional[str] = None
     institution: Optional[str] = None
-    invesitgator_title: Optional[str] = None
+    investigator_title: Optional[str] = None
     email: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -373,8 +373,8 @@ class Investigator(Record):
         if self.institution is not None and not isinstance(self.institution, str):
             self.institution = str(self.institution)
 
-        if self.invesitgator_title is not None and not isinstance(self.invesitgator_title, str):
-            self.invesitgator_title = str(self.invesitgator_title)
+        if self.investigator_title is not None and not isinstance(self.investigator_title, str):
+            self.investigator_title = str(self.investigator_title)
 
         if self.email is not None and not isinstance(self.email, str):
             self.email = str(self.email)
@@ -1077,8 +1077,8 @@ slots.study_code = Slot(uri=INCLUDEDCC.study_code, name="study_code", curie=INCL
 slots.study_short_name = Slot(uri=INCLUDEDCC.study_short_name, name="study_short_name", curie=INCLUDEDCC.curie('study_short_name'),
                    model_uri=INCLUDEDCC.study_short_name, domain=None, range=Optional[str])
 
-slots.invesitgator_title = Slot(uri=INCLUDEDCC.invesitgator_title, name="invesitgator_title", curie=INCLUDEDCC.curie('invesitgator_title'),
-                   model_uri=INCLUDEDCC.invesitgator_title, domain=None, range=Optional[str])
+slots.investigator_title = Slot(uri=INCLUDEDCC.investigator_title, name="investigator_title", curie=INCLUDEDCC.curie('investigator_title'),
+                   model_uri=INCLUDEDCC.investigator_title, domain=None, range=Optional[str])
 
 slots.name = Slot(uri=INCLUDEDCC.name, name="name", curie=INCLUDEDCC.curie('name'),
                    model_uri=INCLUDEDCC.name, domain=None, range=Optional[str])
