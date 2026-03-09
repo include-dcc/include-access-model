@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-09T10:45:00
+# Generation date: 2026-03-09T12:08:53
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -122,6 +122,18 @@ class BiospecimenCollectionBiospecimenCollectionId(extended_str):
 
 
 class AliquotAliquotId(extended_str):
+    pass
+
+
+class EncounterEncounterId(extended_str):
+    pass
+
+
+class EncounterDefinitionEncounterDefinitionId(extended_str):
+    pass
+
+
+class ActivityDefinitionActivityDefinitionId(extended_str):
     pass
 
 
@@ -554,6 +566,7 @@ class SubjectAssertion(Record):
 
     assertion_id: Union[str, SubjectAssertionAssertionId] = None
     subject_id: Optional[Union[str, SubjectSubjectId]] = None
+    encounter_id: Optional[Union[str, EncounterEncounterId]] = None
     assertion_provenance: Optional[Union[str, "EnumAssertionProvenance"]] = None
     age_at_assertion: Optional[int] = None
     age_at_event: Optional[int] = None
@@ -574,6 +587,9 @@ class SubjectAssertion(Record):
 
         if self.subject_id is not None and not isinstance(self.subject_id, SubjectSubjectId):
             self.subject_id = SubjectSubjectId(self.subject_id)
+
+        if self.encounter_id is not None and not isinstance(self.encounter_id, EncounterEncounterId):
+            self.encounter_id = EncounterEncounterId(self.encounter_id)
 
         if self.assertion_provenance is not None and not isinstance(self.assertion_provenance, EnumAssertionProvenance):
             self.assertion_provenance = EnumAssertionProvenance(self.assertion_provenance)
@@ -717,6 +733,7 @@ class BiospecimenCollection(Record):
     site: Optional[Union[str, "EnumSite"]] = None
     spatial_qualifier: Optional[Union[str, "EnumSpatialQualifiers"]] = None
     laterality: Optional[Union[str, "EnumLaterality"]] = None
+    encounter_id: Optional[Union[str, EncounterEncounterId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.biospecimen_collection_id):
@@ -726,6 +743,9 @@ class BiospecimenCollection(Record):
 
         if self.age_at_collection is not None and not isinstance(self.age_at_collection, float):
             self.age_at_collection = float(self.age_at_collection)
+
+        if self.encounter_id is not None and not isinstance(self.encounter_id, EncounterEncounterId):
+            self.encounter_id = EncounterEncounterId(self.encounter_id)
 
         super().__post_init__(**kwargs)
 
@@ -773,6 +793,111 @@ class Aliquot(Record):
 
         if self.concentration_unit is not None and not isinstance(self.concentration_unit, ConceptConceptCurie):
             self.concentration_unit = ConceptConceptCurie(self.concentration_unit)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Encounter(Record):
+    """
+    An event at which data was collected about a participant, an intervention was made, or information about a
+    participant was recorded.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Encounter"]
+    class_class_curie: ClassVar[str] = "includedcc:Encounter"
+    class_name: ClassVar[str] = "Encounter"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Encounter
+
+    encounter_id: Union[str, EncounterEncounterId] = None
+    subject_id: Optional[Union[str, SubjectSubjectId]] = None
+    encounter_definition_id: Optional[Union[str, EncounterDefinitionEncounterDefinitionId]] = None
+    age_at_event: Optional[int] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.encounter_id):
+            self.MissingRequiredField("encounter_id")
+        if not isinstance(self.encounter_id, EncounterEncounterId):
+            self.encounter_id = EncounterEncounterId(self.encounter_id)
+
+        if self.subject_id is not None and not isinstance(self.subject_id, SubjectSubjectId):
+            self.subject_id = SubjectSubjectId(self.subject_id)
+
+        if self.encounter_definition_id is not None and not isinstance(self.encounter_definition_id, EncounterDefinitionEncounterDefinitionId):
+            self.encounter_definition_id = EncounterDefinitionEncounterDefinitionId(self.encounter_definition_id)
+
+        if self.age_at_event is not None and not isinstance(self.age_at_event, int):
+            self.age_at_event = int(self.age_at_event)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class EncounterDefinition(Record):
+    """
+    A definition of an encounter type in this study, ie, an event at which data was collected about a participant, an
+    intervention was made, or information about a participant was recorded. This may be something planned by a study
+    or a type of data collection.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["EncounterDefinition"]
+    class_class_curie: ClassVar[str] = "includedcc:EncounterDefinition"
+    class_name: ClassVar[str] = "EncounterDefinition"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.EncounterDefinition
+
+    encounter_definition_id: Union[str, EncounterDefinitionEncounterDefinitionId] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    activity_definition_id: Optional[Union[Union[str, ActivityDefinitionActivityDefinitionId], list[Union[str, ActivityDefinitionActivityDefinitionId]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.encounter_definition_id):
+            self.MissingRequiredField("encounter_definition_id")
+        if not isinstance(self.encounter_definition_id, EncounterDefinitionEncounterDefinitionId):
+            self.encounter_definition_id = EncounterDefinitionEncounterDefinitionId(self.encounter_definition_id)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        if not isinstance(self.activity_definition_id, list):
+            self.activity_definition_id = [self.activity_definition_id] if self.activity_definition_id is not None else []
+        self.activity_definition_id = [v if isinstance(v, ActivityDefinitionActivityDefinitionId) else ActivityDefinitionActivityDefinitionId(v) for v in self.activity_definition_id]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class ActivityDefinition(Record):
+    """
+    A definition of an activity in this study, eg, a biospecimen collection, intervention, survey, or assessment.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["ActivityDefinition"]
+    class_class_curie: ClassVar[str] = "includedcc:ActivityDefinition"
+    class_name: ClassVar[str] = "ActivityDefinition"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.ActivityDefinition
+
+    activity_definition_id: Union[str, ActivityDefinitionActivityDefinitionId] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.activity_definition_id):
+            self.MissingRequiredField("activity_definition_id")
+        if not isinstance(self.activity_definition_id, ActivityDefinitionActivityDefinitionId):
+            self.activity_definition_id = ActivityDefinitionActivityDefinitionId(self.activity_definition_id)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
 
         super().__post_init__(**kwargs)
 
@@ -1493,6 +1618,18 @@ slots.spatial_qualifier = Slot(uri=INCLUDEDCC.spatial_qualifier, name="spatial_q
 slots.laterality = Slot(uri=INCLUDEDCC.laterality, name="laterality", curie=INCLUDEDCC.curie('laterality'),
                    model_uri=INCLUDEDCC.laterality, domain=None, range=Optional[Union[str, "EnumLaterality"]])
 
+slots.encounter_id = Slot(uri=INCLUDEDCC.encounter_id, name="encounter_id", curie=INCLUDEDCC.curie('encounter_id'),
+                   model_uri=INCLUDEDCC.encounter_id, domain=None, range=Optional[Union[str, EncounterEncounterId]])
+
+slots.description = Slot(uri=INCLUDEDCC.description, name="description", curie=INCLUDEDCC.curie('description'),
+                   model_uri=INCLUDEDCC.description, domain=None, range=Optional[str])
+
+slots.encounter_definition_id = Slot(uri=INCLUDEDCC.encounter_definition_id, name="encounter_definition_id", curie=INCLUDEDCC.curie('encounter_definition_id'),
+                   model_uri=INCLUDEDCC.encounter_definition_id, domain=None, range=Optional[Union[str, EncounterDefinitionEncounterDefinitionId]])
+
+slots.activity_definition_id = Slot(uri=INCLUDEDCC.activity_definition_id, name="activity_definition_id", curie=INCLUDEDCC.curie('activity_definition_id'),
+                   model_uri=INCLUDEDCC.activity_definition_id, domain=None, range=Optional[Union[str, ActivityDefinitionActivityDefinitionId]])
+
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
 
@@ -1525,3 +1662,15 @@ slots.BiospecimenCollection_biospecimen_collection_id = Slot(uri=INCLUDEDCC.bios
 
 slots.Aliquot_aliquot_id = Slot(uri=INCLUDEDCC.aliquot_id, name="Aliquot_aliquot_id", curie=INCLUDEDCC.curie('aliquot_id'),
                    model_uri=INCLUDEDCC.Aliquot_aliquot_id, domain=Aliquot, range=Union[str, AliquotAliquotId])
+
+slots.Encounter_encounter_id = Slot(uri=INCLUDEDCC.encounter_id, name="Encounter_encounter_id", curie=INCLUDEDCC.curie('encounter_id'),
+                   model_uri=INCLUDEDCC.Encounter_encounter_id, domain=Encounter, range=Union[str, EncounterEncounterId])
+
+slots.EncounterDefinition_encounter_definition_id = Slot(uri=INCLUDEDCC.encounter_definition_id, name="EncounterDefinition_encounter_definition_id", curie=INCLUDEDCC.curie('encounter_definition_id'),
+                   model_uri=INCLUDEDCC.EncounterDefinition_encounter_definition_id, domain=EncounterDefinition, range=Union[str, EncounterDefinitionEncounterDefinitionId])
+
+slots.EncounterDefinition_activity_definition_id = Slot(uri=INCLUDEDCC.activity_definition_id, name="EncounterDefinition_activity_definition_id", curie=INCLUDEDCC.curie('activity_definition_id'),
+                   model_uri=INCLUDEDCC.EncounterDefinition_activity_definition_id, domain=EncounterDefinition, range=Optional[Union[Union[str, ActivityDefinitionActivityDefinitionId], list[Union[str, ActivityDefinitionActivityDefinitionId]]]])
+
+slots.ActivityDefinition_activity_definition_id = Slot(uri=INCLUDEDCC.activity_definition_id, name="ActivityDefinition_activity_definition_id", curie=INCLUDEDCC.curie('activity_definition_id'),
+                   model_uri=INCLUDEDCC.ActivityDefinition_activity_definition_id, domain=ActivityDefinition, range=Union[str, ActivityDefinitionActivityDefinitionId])
