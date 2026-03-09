@@ -538,7 +538,7 @@ enums:
       non_participant:
         text: non_participant
         description: An individual associated with a study who was not explictly consented,
-          eg, the subject | of a reported family history.
+          eg, the subject of a reported family history.
       cell_line:
         text: cell_line
         description: Cell Line
@@ -722,26 +722,78 @@ enums:
         text: other
         description: Data obtained from other source, such as tissue bank
         title: Other
+  EnumAvailabilityStatus:
+    name: EnumAvailabilityStatus
+    definition_uri: https://includedcc.org/include-access-model/EnumAvailabilityStatus
+    description: Is the biospecimen available for use?
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      available:
+        text: available
+        description: Biospecimen is Available
+        meaning: ig2_biospecimen_availability:available
+        title: Available
+      unavailable:
+        text: unavailable
+        description: Biospecimen is Unavailable
+        meaning: ig2_biospecimen_availability:unavailable
+        title: Unavailable
+  EnumSampleCollectionMethod:
+    name: EnumSampleCollectionMethod
+    definition_uri: https://includedcc.org/include-access-model/EnumSampleCollectionMethod
+    description: The approach used to collect the biospecimen. [LOINC](https://loinc.org)
+      is recommended.
+    from_schema: https://includedcc.org/include-access-model
+  EnumSite:
+    name: EnumSite
+    definition_uri: https://includedcc.org/include-access-model/EnumSite
+    description: The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
+      is recommended.
+    from_schema: https://includedcc.org/include-access-model
+  EnumSpatialQualifiers:
+    name: EnumSpatialQualifiers
+    definition_uri: https://includedcc.org/include-access-model/EnumSpatialQualifiers
+    description: Any spatial/location qualifiers.
+    from_schema: https://includedcc.org/include-access-model
+    enum_uri: http://hl7.org/fhir/us/mcode/ValueSet/mcode-body-location-qualifier-vs
+    reachable_from:
+      source_ontology: bioregistry:snomedct
+      source_nodes:
+      - snomedct:106233006
+      - snomedct:272424004
+      - snomedct:51440002
+      - snomedct:399488007
+      - snomedct:24028007
+      - snomedct:7771000
+      relationship_types:
+      - rdfs:subClassOf
+      is_direct: false
+  EnumLaterality:
+    name: EnumLaterality
+    definition_uri: https://includedcc.org/include-access-model/EnumLaterality
+    description: Laterality information for the site
+    from_schema: https://includedcc.org/include-access-model
 slots:
   study_id:
     name: study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
-    description: INLCUDE Global ID for the study
+    description: INCLUDE Global ID for the study
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:study_id
-    owner: Study
+    owner: StudyMetadata
     domain_of:
     - Study
+    - StudyMetadata
     range: Study
     multivalued: false
-  doi:
-    name: doi
-    definition_uri: https://includedcc.org/include-access-model/doi
+  do_id:
+    name: do_id
+    definition_uri: https://includedcc.org/include-access-model/do_id
     description: Digital Object Identifier (DOI) for this Record.
     title: DOI
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:doi
+    slot_uri: includedcc:do_id
     owner: DOI
     domain_of:
     - Study
@@ -751,21 +803,22 @@ slots:
   subject_id:
     name: subject_id
     definition_uri: https://includedcc.org/include-access-model/subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:subject_id
-    owner: SubjectAssertion
+    owner: Encounter
     domain_of:
     - Subject
     - Demographics
     - SubjectAssertion
+    - Encounter
     range: Subject
     multivalued: false
   assertion_id:
     name: assertion_id
     definition_uri: https://includedcc.org/include-access-model/assertion_id
-    description: INLCUDE Global ID for the Assertion
+    description: INCLUDE Global ID for the Assertion
     title: Assertion ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:assertion_id
@@ -865,13 +918,13 @@ slots:
     - Study
     range: string
     required: false
-  invesitgator_title:
-    name: invesitgator_title
-    definition_uri: https://includedcc.org/include-access-model/invesitgator_title
+  investigator_title:
+    name: investigator_title
+    definition_uri: https://includedcc.org/include-access-model/investigator_title
     description: The title of the Investigator, eg, "Assistant Professor"
     title: Investigator Title
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:invesitgator_title
+    slot_uri: includedcc:investigator_title
     owner: Investigator
     domain_of:
     - Investigator
@@ -884,10 +937,12 @@ slots:
     title: Name
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:name
-    owner: Investigator
+    owner: ActivityDefinition
     domain_of:
     - VirtualBiorepository
     - Investigator
+    - EncounterDefinition
+    - ActivityDefinition
     range: string
     required: false
   email:
@@ -976,9 +1031,9 @@ slots:
     title: Virtual Biorepository
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:vbr
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: VirtualBiorepository
     required: false
     inlined: true
@@ -1001,9 +1056,9 @@ slots:
     description: Main research domain(s) of the study, other than Down syndrome
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:research_domain
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: EnumResearchDomain
     required: true
     multivalued: true
@@ -1014,9 +1069,9 @@ slots:
     title: Participant Lifespan Stage
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:participant_lifespan_stage
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: EnumParticipantLifespanStage
     required: true
     multivalued: true
@@ -1028,9 +1083,9 @@ slots:
     title: Selection Criteria
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:selection_criteria
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: string
   study_design:
     name: study_design
@@ -1040,9 +1095,9 @@ slots:
     title: Study Design
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:study_design
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: EnumStudyDesign
     required: true
     multivalued: true
@@ -1054,9 +1109,9 @@ slots:
     title: Data Category
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:data_category
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: EnumDataCategory
     required: true
     multivalued: true
@@ -1067,9 +1122,9 @@ slots:
     title: Clinical Data Source Type
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:clinical_data_source_type
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: EnumClinicalDataSourceType
     required: true
     multivalued: true
@@ -1094,9 +1149,9 @@ slots:
     title: Expected Number of Participants
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:expected_number_of_participants
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: integer
     required: true
   actual_number_of_participants:
@@ -1106,9 +1161,9 @@ slots:
     title: Actual Number of Participants
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:actual_number_of_participants
-    owner: Study
+    owner: StudyMetadata
     domain_of:
-    - Study
+    - StudyMetadata
     range: integer
     required: true
   acknowledgments:
@@ -1298,9 +1353,10 @@ slots:
     title: Age at event
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:age_at_event
-    owner: SubjectAssertion
+    owner: Encounter
     domain_of:
     - SubjectAssertion
+    - Encounter
     range: integer
     unit:
       ucum_code: d
@@ -1396,32 +1452,282 @@ slots:
     domain_of:
     - SubjectAssertion
     range: string
-  value_units:
-    name: value_units
-    definition_uri: https://includedcc.org/include-access-model/value_units
+  value_unit:
+    name: value_unit
+    definition_uri: https://includedcc.org/include-access-model/value_unit
     description: The structured term defining the units of the value.
     title: Value Units
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:value_units
+    slot_uri: includedcc:value_unit
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
     range: Concept
-  value_units_source:
-    name: value_units_source
-    definition_uri: https://includedcc.org/include-access-model/value_units_source
+  value_unit_source:
+    name: value_unit_source
+    definition_uri: https://includedcc.org/include-access-model/value_unit_source
     description: The source text yielding the value's units.
     title: Value Units Source Text
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:value_units_source
+    slot_uri: includedcc:value_unit_source
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
     range: string
+  sample_id:
+    name: sample_id
+    definition_uri: https://includedcc.org/include-access-model/sample_id
+    description: The unique identifier for this Sample.
+    title: Sample ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:sample_id
+    owner: Aliquot
+    domain_of:
+    - Sample
+    - Aliquot
+    range: Sample
+  parent_sample_id:
+    name: parent_sample_id
+    definition_uri: https://includedcc.org/include-access-model/parent_sample_id
+    description: Sample from which this sample is derived
+    title: Parent Sample ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:parent_sample_id
+    owner: Sample
+    domain_of:
+    - Sample
+    range: Sample
+    inlined: false
+  biospecimen_collection_id:
+    name: biospecimen_collection_id
+    definition_uri: https://includedcc.org/include-access-model/biospecimen_collection_id
+    description: Unique identifier for this Biospecimen Collection.
+    title: Biospecimen Collection ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:biospecimen_collection_id
+    owner: BiospecimenCollection
+    domain_of:
+    - Sample
+    - BiospecimenCollection
+    range: BiospecimenCollection
+  aliquot_id:
+    name: aliquot_id
+    definition_uri: https://includedcc.org/include-access-model/aliquot_id
+    description: Unique identifier for an Aliquot.
+    title: Aliquot ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:aliquot_id
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    range: Aliquot
+  sample_type:
+    name: sample_type
+    definition_uri: https://includedcc.org/include-access-model/sample_type
+    description: Type of material of which this Sample is comprised
+    title: Sample Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:sample_type
+    owner: Sample
+    domain_of:
+    - Sample
+    range: uriorcurie
+    required: true
+  processing:
+    name: processing
+    definition_uri: https://includedcc.org/include-access-model/processing
+    description: Processing that was applied to the Parent Sample or from the Biospecimen
+      Collection that yielded this distinct sample
+    title: Sample Processing
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:processing
+    owner: Sample
+    domain_of:
+    - Sample
+    range: uriorcurie
+    multivalued: true
+  availablity_status:
+    name: availablity_status
+    definition_uri: https://includedcc.org/include-access-model/availablity_status
+    description: Can this Sample be requested for further analysis?
+    title: Sample Availability
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:availablity_status
+    owner: Aliquot
+    domain_of:
+    - Sample
+    - Aliquot
+    range: EnumAvailabilityStatus
+  storage_method:
+    name: storage_method
+    definition_uri: https://includedcc.org/include-access-model/storage_method
+    description: Sample storage method, eg, Frozen or with additives
+    title: Sample Storage Method
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:storage_method
+    owner: Sample
+    domain_of:
+    - Sample
+    range: uriorcurie
+    multivalued: true
+  quantity_number:
+    name: quantity_number
+    definition_uri: https://includedcc.org/include-access-model/quantity_number
+    description: The total quantity of the specimen
+    title: Quantity
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:quantity_number
+    owner: Aliquot
+    domain_of:
+    - Sample
+    - Aliquot
+    range: float
+  quantity_unit:
+    name: quantity_unit
+    definition_uri: https://includedcc.org/include-access-model/quantity_unit
+    description: The structured term defining the units of the quantity.
+    title: Quantity Units
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:quantity_unit
+    owner: Aliquot
+    domain_of:
+    - Sample
+    - Aliquot
+    range: Concept
+  concentration_number:
+    name: concentration_number
+    definition_uri: https://includedcc.org/include-access-model/concentration_number
+    description: What is the concentration of the analyte in the Aliquot?
+    title: Concentration
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:concentration_number
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    range: float
+  concentration_unit:
+    name: concentration_unit
+    definition_uri: https://includedcc.org/include-access-model/concentration_unit
+    description: Units associated with the concentration of the analyte in the Aliquot.
+    title: Concentration Units
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:concentration_unit
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    range: Concept
+  age_at_collection:
+    name: age_at_collection
+    definition_uri: https://includedcc.org/include-access-model/age_at_collection
+    description: The age at which this biospecimen was collected in decimal years.
+    title: Age at Biospecimen Collection
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:age_at_collection
+    owner: BiospecimenCollection
+    domain_of:
+    - BiospecimenCollection
+    range: float
+    unit:
+      ucum_code: a
+  method:
+    name: method
+    definition_uri: https://includedcc.org/include-access-model/method
+    description: The approach used to collect the biospecimen.
+    title: Biospecimen Collection Method
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:method
+    owner: BiospecimenCollection
+    domain_of:
+    - BiospecimenCollection
+    range: EnumSampleCollectionMethod
+  site:
+    name: site
+    definition_uri: https://includedcc.org/include-access-model/site
+    description: The location of the specimen collection.
+    title: Biospecimen Collection Site
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:site
+    owner: BiospecimenCollection
+    domain_of:
+    - BiospecimenCollection
+    range: EnumSite
+  spatial_qualifier:
+    name: spatial_qualifier
+    definition_uri: https://includedcc.org/include-access-model/spatial_qualifier
+    description: Qualifier that further refine the specific location of biospecimen
+      collection
+    title: Spatial Qualifier
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:spatial_qualifier
+    owner: BiospecimenCollection
+    domain_of:
+    - BiospecimenCollection
+    range: EnumSpatialQualifiers
+  laterality:
+    name: laterality
+    definition_uri: https://includedcc.org/include-access-model/laterality
+    description: Laterality that further refine the specific location of biospecimen
+      collection
+    title: Location Laterality
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:laterality
+    owner: BiospecimenCollection
+    domain_of:
+    - BiospecimenCollection
+    range: EnumLaterality
+  encounter_id:
+    name: encounter_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:encounter_id
+    owner: Encounter
+    domain_of:
+    - SubjectAssertion
+    - BiospecimenCollection
+    - Encounter
+    range: Encounter
+  description:
+    name: description
+    definition_uri: https://includedcc.org/include-access-model/description
+    description: Description for this entity.
+    title: Description
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:description
+    owner: ActivityDefinition
+    domain_of:
+    - EncounterDefinition
+    - ActivityDefinition
+    range: string
+  encounter_definition_id:
+    name: encounter_definition_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_definition_id
+    description: Unique identifier for this Encounter Definition.
+    title: Encounter Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:encounter_definition_id
+    owner: EncounterDefinition
+    domain_of:
+    - Encounter
+    - EncounterDefinition
+    range: EncounterDefinition
+  activity_definition_id:
+    name: activity_definition_id
+    definition_uri: https://includedcc.org/include-access-model/activity_definition_id
+    description: Unique identifier for this Activity Definition.
+    title: Activity Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:activity_definition_id
+    owner: ActivityDefinition
+    domain_of:
+    - EncounterDefinition
+    - ActivityDefinition
+    range: ActivityDefinition
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
-    description: INLCUDE Global ID for the study
+    description: INCLUDE Global ID for the study
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     is_a: study_id
@@ -1437,29 +1743,48 @@ slots:
     range: string
     required: true
     multivalued: false
-  DOI_doi:
-    name: DOI_doi
-    definition_uri: https://includedcc.org/include-access-model/doi
+  StudyMetadata_study_id:
+    name: StudyMetadata_study_id
+    definition_uri: https://includedcc.org/include-access-model/study_id
+    description: INCLUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: study_id
+    domain: StudyMetadata
+    slot_uri: includedcc:study_id
+    identifier: true
+    alias: study_id
+    owner: StudyMetadata
+    domain_of:
+    - StudyMetadata
+    is_usage_slot: true
+    usage_slot_name: study_id
+    range: Study
+    required: true
+    multivalued: false
+  DOI_do_id:
+    name: DOI_do_id
+    definition_uri: https://includedcc.org/include-access-model/do_id
     description: Digital Object Identifier (DOI) for this Record.
     title: DOI
     from_schema: https://includedcc.org/include-access-model
-    is_a: doi
+    is_a: do_id
     domain: DOI
-    slot_uri: includedcc:doi
+    slot_uri: includedcc:do_id
     identifier: true
-    alias: doi
+    alias: do_id
     owner: DOI
     domain_of:
     - DOI
     is_usage_slot: true
-    usage_slot_name: doi
+    usage_slot_name: do_id
     range: string
     required: true
     multivalued: false
   Subject_subject_id:
     name: Subject_subject_id
     definition_uri: https://includedcc.org/include-access-model/subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     is_a: subject_id
@@ -1478,7 +1803,7 @@ slots:
   Demographics_subject_id:
     name: Demographics_subject_id
     definition_uri: https://includedcc.org/include-access-model/subject_id
-    description: INLCUDE Global ID for the Subject
+    description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     is_a: subject_id
@@ -1497,7 +1822,7 @@ slots:
   SubjectAssertion_assertion_id:
     name: SubjectAssertion_assertion_id
     definition_uri: https://includedcc.org/include-access-model/assertion_id
-    description: INLCUDE Global ID for the Assertion
+    description: INCLUDE Global ID for the Assertion
     title: Assertion ID
     from_schema: https://includedcc.org/include-access-model
     is_a: assertion_id
@@ -1531,6 +1856,147 @@ slots:
     usage_slot_name: concept_curie
     range: uriorcurie
     required: true
+  Sample_sample_id:
+    name: Sample_sample_id
+    definition_uri: https://includedcc.org/include-access-model/sample_id
+    description: The unique identifier for this Sample.
+    title: Sample ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: sample_id
+    domain: Sample
+    slot_uri: includedcc:sample_id
+    identifier: true
+    alias: sample_id
+    owner: Sample
+    domain_of:
+    - Sample
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: string
+    required: true
+  Sample_biospecimen_collection_id:
+    name: Sample_biospecimen_collection_id
+    definition_uri: https://includedcc.org/include-access-model/biospecimen_collection_id
+    description: Biospecimen Collection during which this sample was generated.
+    title: Biospecimen Collection ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: biospecimen_collection_id
+    domain: Sample
+    slot_uri: includedcc:biospecimen_collection_id
+    alias: biospecimen_collection_id
+    owner: Sample
+    domain_of:
+    - Sample
+    is_usage_slot: true
+    usage_slot_name: biospecimen_collection_id
+    range: BiospecimenCollection
+  BiospecimenCollection_biospecimen_collection_id:
+    name: BiospecimenCollection_biospecimen_collection_id
+    definition_uri: https://includedcc.org/include-access-model/biospecimen_collection_id
+    description: Unique identifier for this Biospecimen Collection.
+    title: Biospecimen Collection ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: biospecimen_collection_id
+    domain: BiospecimenCollection
+    slot_uri: includedcc:biospecimen_collection_id
+    identifier: true
+    alias: biospecimen_collection_id
+    owner: BiospecimenCollection
+    domain_of:
+    - BiospecimenCollection
+    is_usage_slot: true
+    usage_slot_name: biospecimen_collection_id
+    range: string
+    required: true
+  Aliquot_aliquot_id:
+    name: Aliquot_aliquot_id
+    definition_uri: https://includedcc.org/include-access-model/aliquot_id
+    description: Unique identifier for an Aliquot.
+    title: Aliquot ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: aliquot_id
+    domain: Aliquot
+    slot_uri: includedcc:aliquot_id
+    identifier: true
+    alias: aliquot_id
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    is_usage_slot: true
+    usage_slot_name: aliquot_id
+    range: string
+    required: true
+  Encounter_encounter_id:
+    name: Encounter_encounter_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: encounter_id
+    domain: Encounter
+    slot_uri: includedcc:encounter_id
+    identifier: true
+    alias: encounter_id
+    owner: Encounter
+    domain_of:
+    - Encounter
+    is_usage_slot: true
+    usage_slot_name: encounter_id
+    range: string
+    required: true
+  EncounterDefinition_encounter_definition_id:
+    name: EncounterDefinition_encounter_definition_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_definition_id
+    description: Unique identifier for this Encounter Definition.
+    title: Encounter Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: encounter_definition_id
+    domain: EncounterDefinition
+    slot_uri: includedcc:encounter_definition_id
+    identifier: true
+    alias: encounter_definition_id
+    owner: EncounterDefinition
+    domain_of:
+    - EncounterDefinition
+    is_usage_slot: true
+    usage_slot_name: encounter_definition_id
+    range: string
+    required: true
+  EncounterDefinition_activity_definition_id:
+    name: EncounterDefinition_activity_definition_id
+    definition_uri: https://includedcc.org/include-access-model/activity_definition_id
+    description: Unique identifier for this Activity Definition.
+    title: Activity Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: activity_definition_id
+    domain: EncounterDefinition
+    slot_uri: includedcc:activity_definition_id
+    alias: activity_definition_id
+    owner: EncounterDefinition
+    domain_of:
+    - EncounterDefinition
+    is_usage_slot: true
+    usage_slot_name: activity_definition_id
+    range: ActivityDefinition
+    multivalued: true
+  ActivityDefinition_activity_definition_id:
+    name: ActivityDefinition_activity_definition_id
+    definition_uri: https://includedcc.org/include-access-model/activity_definition_id
+    description: Unique identifier for this Activity Definition.
+    title: Activity Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: activity_definition_id
+    domain: ActivityDefinition
+    slot_uri: includedcc:activity_definition_id
+    identifier: true
+    alias: activity_definition_id
+    owner: ActivityDefinition
+    domain_of:
+    - ActivityDefinition
+    is_usage_slot: true
+    usage_slot_name: activity_definition_id
+    range: string
+    required: true
 classes:
   Record:
     name: Record
@@ -1553,28 +2019,19 @@ classes:
     - external_id
     - Study_study_id
     - parent_study
-    - funding_source
-    - principal_investigator
-    - contact
     - study_title
     - study_code
     - study_short_name
     - program
+    - funding_source
+    - principal_investigator
+    - contact
     - study_description
-    - vbr
-    - research_domain
-    - participant_lifespan_stage
-    - selection_criteria
-    - study_design
-    - clinical_data_source_type
-    - data_category
     - website
     - publication
-    - expected_number_of_participants
-    - actual_number_of_participants
     - acknowledgments
     - citation_statement
-    - doi
+    - do_id
     slot_usage:
       study_id:
         name: study_id
@@ -1582,6 +2039,31 @@ classes:
         range: string
         required: true
     class_uri: includedcc:Study
+  StudyMetadata:
+    name: StudyMetadata
+    definition_uri: https://includedcc.org/include-access-model/StudyMetadata
+    description: Additional features about studies that may not apply to all studies
+    title: Study Metadata
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - StudyMetadata_study_id
+    - participant_lifespan_stage
+    - selection_criteria
+    - study_design
+    - clinical_data_source_type
+    - data_category
+    - vbr
+    - research_domain
+    - expected_number_of_participants
+    - actual_number_of_participants
+    slot_usage:
+      study_id:
+        name: study_id
+        identifier: true
+        required: true
+    class_uri: includedcc:StudyMetadata
   VirtualBiorepository:
     name: VirtualBiorepository
     definition_uri: https://includedcc.org/include-access-model/VirtualBiorepository
@@ -1606,11 +2088,11 @@ classes:
     is_a: Record
     slots:
     - external_id
-    - DOI_doi
+    - DOI_do_id
     - bibliographic_reference
     slot_usage:
-      doi:
-        name: doi
+      do_id:
+        name: do_id
         identifier: true
         range: string
         required: true
@@ -1627,7 +2109,7 @@ classes:
     - external_id
     - name
     - institution
-    - invesitgator_title
+    - investigator_title
     - email
     class_uri: includedcc:Investigator
   Publication:
@@ -1646,8 +2128,8 @@ classes:
     name: Subject
     definition_uri: https://includedcc.org/include-access-model/Subject
     description: This entity is the subject about which data or references are recorded.
-      | This includes the idea of a human participant in a study, a cell line, an
-      animal model, | or any other similar entity.
+      This includes the idea of a human participant in a study, a cell line, an animal
+      model, or any other similar entity.
     title: Subject
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
@@ -1698,6 +2180,7 @@ classes:
     - external_id
     - SubjectAssertion_assertion_id
     - subject_id
+    - encounter_id
     - assertion_provenance
     - age_at_assertion
     - age_at_event
@@ -1707,8 +2190,8 @@ classes:
     - value_concept
     - value_number
     - value_source
-    - value_units
-    - value_units_source
+    - value_unit
+    - value_unit_source
     slot_usage:
       assertion_id:
         name: assertion_id
@@ -1731,9 +2214,151 @@ classes:
         identifier: true
         required: true
     class_uri: includedcc:Concept
+  Sample:
+    name: Sample
+    definition_uri: https://includedcc.org/include-access-model/Sample
+    description: A functionally equivalent specimen taken from a participant or processed
+      from such a sample.
+    title: Sample
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Sample_sample_id
+    - Sample_biospecimen_collection_id
+    - parent_sample_id
+    - sample_type
+    - processing
+    - availablity_status
+    - storage_method
+    - quantity_number
+    - quantity_unit
+    slot_usage:
+      sample_id:
+        name: sample_id
+        identifier: true
+        range: string
+        required: true
+      biospecimen_collection_id:
+        name: biospecimen_collection_id
+        description: Biospecimen Collection during which this sample was generated.
+    class_uri: includedcc:Sample
+  BiospecimenCollection:
+    name: BiospecimenCollection
+    definition_uri: https://includedcc.org/include-access-model/BiospecimenCollection
+    description: A biospecimen collection event which yields one or more Samples.
+    title: BiospecimenCollection
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - BiospecimenCollection_biospecimen_collection_id
+    - age_at_collection
+    - method
+    - site
+    - spatial_qualifier
+    - laterality
+    - encounter_id
+    slot_usage:
+      biospecimen_collection_id:
+        name: biospecimen_collection_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:BiospecimenCollection
+  Aliquot:
+    name: Aliquot
+    definition_uri: https://includedcc.org/include-access-model/Aliquot
+    description: A specific tube or amount of a biospecimen associated with a Sample.
+    title: Aliquot
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Aliquot_aliquot_id
+    - sample_id
+    - availablity_status
+    - quantity_number
+    - quantity_unit
+    - concentration_number
+    - concentration_unit
+    slot_usage:
+      aliquot_id:
+        name: aliquot_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:Aliquot
+  Encounter:
+    name: Encounter
+    definition_uri: https://includedcc.org/include-access-model/Encounter
+    description: An event at which data was collected about a participant, an intervention
+      was made, or information about a participant was recorded.
+    title: Participant Encounter
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Encounter_encounter_id
+    - subject_id
+    - encounter_definition_id
+    - age_at_event
+    slot_usage:
+      encounter_id:
+        name: encounter_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:Encounter
+  EncounterDefinition:
+    name: EncounterDefinition
+    definition_uri: https://includedcc.org/include-access-model/EncounterDefinition
+    description: A definition of an encounter type in this study, ie, an event at
+      which data was collected about a participant, an intervention was made, or information
+      about a participant was recorded. This may be something planned by a study or
+      a type of data collection.
+    title: Encounter Definition
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - EncounterDefinition_encounter_definition_id
+    - name
+    - description
+    - EncounterDefinition_activity_definition_id
+    slot_usage:
+      encounter_definition_id:
+        name: encounter_definition_id
+        identifier: true
+        range: string
+        required: true
+      activity_definition_id:
+        name: activity_definition_id
+        multivalued: true
+    class_uri: includedcc:EncounterDefinition
+  ActivityDefinition:
+    name: ActivityDefinition
+    definition_uri: https://includedcc.org/include-access-model/ActivityDefinition
+    description: A definition of an activity in this study, eg, a biospecimen collection,
+      intervention, survey, or assessment.
+    title: Activity Definition
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - ActivityDefinition_activity_definition_id
+    - name
+    - description
+    slot_usage:
+      activity_definition_id:
+        name: activity_definition_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:ActivityDefinition
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-01-14T09:08:39'
-source_file_size: 24256
-generation_date: '2026-01-14T12:27:53'
+source_file_date: '2026-03-09T12:47:07'
+source_file_size: 32279
+generation_date: '2026-03-09T13:32:45'
 
