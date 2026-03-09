@@ -213,6 +213,22 @@ EncounterDefinition {
     string description  
     uriorcurieList external_id  
 }
+File {
+    string file_id  
+    string filename  
+    EnumEDAMFormats format  
+    EnumDataCategory data_category  
+    EnumEDAMDataTypes data_type  
+    integer size  
+    uriorcurie staging_url  
+    uriorcurie release_url  
+    uriorcurie drs_uri  
+    uriorcurieList external_id  
+}
+FileHash {
+    EnumFileHashType hash_type  
+    string hash_value  
+}
 Investigator {
     string name  
     string institution  
@@ -295,6 +311,9 @@ Demographics ||--|| Subject : "subject_id"
 Encounter ||--|o EncounterDefinition : "encounter_definition_id"
 Encounter ||--|o Subject : "subject_id"
 EncounterDefinition ||--}o ActivityDefinition : "activity_definition_id"
+File ||--|o FileHash : "hash"
+File ||--}o Sample : "sample_id"
+File ||--}o Subject : "subject_id"
 Sample ||--|o BiospecimenCollection : "biospecimen_collection_id"
 Sample ||--|o Concept : "quantity_unit"
 Sample ||--|o Sample : "parent_sample_id"

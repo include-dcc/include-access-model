@@ -460,6 +460,10 @@ slot_usage:
     name: study_id
     identifier: true
     required: true
+  data_category:
+    name: data_category
+    required: true
+    multivalued: true
 
 </code></pre>
 </details>
@@ -475,6 +479,10 @@ slot_usage:
     name: study_id
     identifier: true
     required: true
+  data_category:
+    name: data_category
+    required: true
+    multivalued: true
 attributes:
   study_id:
     name: study_id
@@ -554,6 +562,7 @@ attributes:
     owner: StudyMetadata
     domain_of:
     - StudyMetadata
+    - File
     range: EnumDataCategory
     required: true
     multivalued: true

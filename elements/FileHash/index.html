@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://include-dcc.github.io/include-access-model/elements/Sample/" rel="canonical"/>
+<link href="https://include-dcc.github.io/include-access-model/elements/FileHash/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Class: Sample (Sample) - include-access-model</title>
+<title>Class: File Hash (FileHash) - include-access-model</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-sample-sample">
+<a class="md-skip" href="#class-file-hash-filehash">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Sample (Sample)
+              Class: File Hash (FileHash)
             
           </span>
 </div>
@@ -159,13 +159,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      Inheritance
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       Slots
@@ -236,80 +229,28 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-sample-sample">Class: Sample (Sample)</h1>
-<p><em>A functionally equivalent specimen taken from a participant or processed from such a sample.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/Sample">includedcc:Sample</a></p>
+<h1 id="class-file-hash-filehash">Class: File Hash (FileHash)</h1>
+<p><em>Type and value of a file content hash.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/FileHash">includedcc:FileHash</a></p>
 <div class="mermaid"> classDiagram
-    class Sample
-    click Sample href "../Sample/"
-      Record &lt;|-- Sample
-        click Record href "../Record/"
-
-      Sample : availablity_status
+    class FileHash
+    click FileHash href "../FileHash/"
+      FileHash : hash_type
 
 
 
 
 
-        Sample --&gt; "0..1" EnumAvailabilityStatus : availablity_status
-        click EnumAvailabilityStatus href "../EnumAvailabilityStatus/"
+        FileHash --&gt; "0..1" EnumFileHashType : hash_type
+        click EnumFileHashType href "../EnumFileHashType/"
 
 
 
-      Sample : biospecimen_collection_id
-
-
-
-
-
-        Sample --&gt; "0..1" BiospecimenCollection : biospecimen_collection_id
-        click BiospecimenCollection href "../BiospecimenCollection/"
-
-
-
-      Sample : external_id
-
-      Sample : parent_sample_id
-
-
-
-
-
-        Sample --&gt; "0..1" Sample : parent_sample_id
-        click Sample href "../Sample/"
-
-
-
-      Sample : processing
-
-      Sample : quantity_number
-
-      Sample : quantity_unit
-
-
-
-
-
-        Sample --&gt; "0..1" Concept : quantity_unit
-        click Concept href "../Concept/"
-
-
-
-      Sample : sample_id
-
-      Sample : sample_type
-
-      Sample : storage_method
+      FileHash : hash_value
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../Record/">Record</a><ul>
-<li><strong>Sample</strong></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -322,64 +263,16 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../sample_id/">sample_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>The unique identifier for this Sample</td>
+<td><a href="../hash_type/">hash_type</a></td>
+<td>0..1 <br/> <a href="../EnumFileHashType/">EnumFileHashType</a></td>
+<td>The type of file hash, eg, md5</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../biospecimen_collection_id/">biospecimen_collection_id</a></td>
-<td>0..1 <br/> <a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
-<td>Biospecimen Collection during which this sample was generated</td>
+<td><a href="../hash_value/">hash_value</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The value of the file hash</td>
 <td>direct</td>
-</tr>
-<tr>
-<td><a href="../parent_sample_id/">parent_sample_id</a></td>
-<td>0..1 <br/> <a href="./">Sample</a></td>
-<td>Sample from which this sample is derived</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../sample_type/">sample_type</a></td>
-<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Type of material of which this Sample is comprised</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../processing/">processing</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Processing that was applied to the Parent Sample or from the Biospecimen Coll...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../availablity_status/">availablity_status</a></td>
-<td>0..1 <br/> <a href="../EnumAvailabilityStatus/">EnumAvailabilityStatus</a></td>
-<td>Can this Sample be requested for further analysis?</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../storage_method/">storage_method</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Sample storage method, eg, Frozen or with additives</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../quantity_number/">quantity_number</a></td>
-<td>0..1 <br/> <a href="../Float/">Float</a></td>
-<td>The total quantity of the specimen</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../quantity_unit/">quantity_unit</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>The structured term defining the units of the quantity</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../Record/">Record</a></td>
 </tr>
 </tbody>
 </table>
@@ -395,22 +288,10 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="./">Sample</a></td>
-<td><a href="../parent_sample_id/">parent_sample_id</a></td>
-<td>range</td>
-<td><a href="./">Sample</a></td>
-</tr>
-<tr>
-<td><a href="../Aliquot/">Aliquot</a></td>
-<td><a href="../sample_id/">sample_id</a></td>
-<td>range</td>
-<td><a href="./">Sample</a></td>
-</tr>
-<tr>
 <td><a href="../File/">File</a></td>
-<td><a href="../sample_id/">sample_id</a></td>
+<td><a href="../hash/">hash</a></td>
 <td>range</td>
-<td><a href="./">Sample</a></td>
+<td><a href="./">FileHash</a></td>
 </tr>
 </tbody>
 </table>
@@ -430,11 +311,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:Sample</td>
+<td>includedcc:FileHash</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:Sample</td>
+<td>includedcc:FileHash</td>
 </tr>
 </tbody>
 </table>
@@ -442,178 +323,45 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Sample
-description: A functionally equivalent specimen taken from a participant or processed
-  from such a sample.
-title: Sample
+<pre><code class="language-yaml">name: FileHash
+description: Type and value of a file content hash.
+title: File Hash
 from_schema: https://includedcc.org/include-access-model
-is_a: Record
 slots:
-- sample_id
-- biospecimen_collection_id
-- parent_sample_id
-- sample_type
-- processing
-- availablity_status
-- storage_method
-- quantity_number
-- quantity_unit
-slot_usage:
-  sample_id:
-    name: sample_id
-    identifier: true
-    range: string
-    required: true
-  biospecimen_collection_id:
-    name: biospecimen_collection_id
-    description: Biospecimen Collection during which this sample was generated.
+- hash_type
+- hash_value
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Sample
-description: A functionally equivalent specimen taken from a participant or processed
-  from such a sample.
-title: Sample
+<pre><code class="language-yaml">name: FileHash
+description: Type and value of a file content hash.
+title: File Hash
 from_schema: https://includedcc.org/include-access-model
-is_a: Record
-slot_usage:
-  sample_id:
-    name: sample_id
-    identifier: true
-    range: string
-    required: true
-  biospecimen_collection_id:
-    name: biospecimen_collection_id
-    description: Biospecimen Collection during which this sample was generated.
 attributes:
-  sample_id:
-    name: sample_id
-    description: The unique identifier for this Sample.
-    title: Sample ID
+  hash_type:
+    name: hash_type
+    description: The type of file hash, eg, md5
+    title: File Hash Type
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    identifier: true
-    alias: sample_id
-    owner: Sample
+    alias: hash_type
+    owner: FileHash
     domain_of:
-    - Sample
-    - Aliquot
-    - File
+    - FileHash
+    range: EnumFileHashType
+  hash_value:
+    name: hash_value
+    description: The value of the file hash
+    title: File Hash Value
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: hash_value
+    owner: FileHash
+    domain_of:
+    - FileHash
     range: string
-    required: true
-  biospecimen_collection_id:
-    name: biospecimen_collection_id
-    description: Biospecimen Collection during which this sample was generated.
-    title: Biospecimen Collection ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: biospecimen_collection_id
-    owner: Sample
-    domain_of:
-    - Sample
-    - BiospecimenCollection
-    range: BiospecimenCollection
-  parent_sample_id:
-    name: parent_sample_id
-    description: Sample from which this sample is derived
-    title: Parent Sample ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: parent_sample_id
-    owner: Sample
-    domain_of:
-    - Sample
-    range: Sample
-    inlined: false
-  sample_type:
-    name: sample_type
-    description: Type of material of which this Sample is comprised
-    title: Sample Type
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: sample_type
-    owner: Sample
-    domain_of:
-    - Sample
-    range: uriorcurie
-    required: true
-  processing:
-    name: processing
-    description: Processing that was applied to the Parent Sample or from the Biospecimen
-      Collection that yielded this distinct sample
-    title: Sample Processing
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: processing
-    owner: Sample
-    domain_of:
-    - Sample
-    range: uriorcurie
-    multivalued: true
-  availablity_status:
-    name: availablity_status
-    description: Can this Sample be requested for further analysis?
-    title: Sample Availability
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: availablity_status
-    owner: Sample
-    domain_of:
-    - Sample
-    - Aliquot
-    range: EnumAvailabilityStatus
-  storage_method:
-    name: storage_method
-    description: Sample storage method, eg, Frozen or with additives
-    title: Sample Storage Method
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: storage_method
-    owner: Sample
-    domain_of:
-    - Sample
-    range: uriorcurie
-    multivalued: true
-  quantity_number:
-    name: quantity_number
-    description: The total quantity of the specimen
-    title: Quantity
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: quantity_number
-    owner: Sample
-    domain_of:
-    - Sample
-    - Aliquot
-    range: float
-  quantity_unit:
-    name: quantity_unit
-    description: The structured term defining the units of the quantity.
-    title: Quantity Units
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: quantity_unit
-    owner: Sample
-    domain_of:
-    - Sample
-    - Aliquot
-    range: Concept
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems like dbGaP
-    title: External Identifiers
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: external_id
-    owner: Sample
-    domain_of:
-    - Record
-    range: uriorcurie
-    required: false
-    multivalued: true
 
 </code></pre>
 </details>

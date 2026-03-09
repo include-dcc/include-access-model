@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/name/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/EnumEDAMFormats/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Slot: Name (name) - include-access-model</title>
+        <title>Enum: EnumEDAMFormats - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name-name" class="md-skip">
+        <a href="#enum-enumedamformats" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Name (name)
+              Enum: EnumEDAMFormats
             
           </span>
         </div>
@@ -308,18 +308,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
-      Applicable Classes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      Properties
+      Slots
     </span>
   </a>
   
@@ -346,15 +337,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Mappings
-    </span>
-  </a>
   
 </li>
       
@@ -386,88 +368,45 @@
   
 
 
-<h1 id="slot-name-name">Slot: Name (name)</h1>
-<p><em>Name of the entity.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/name">includedcc:name</a>
-Alias: name</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumedamformats">Enum: EnumEDAMFormats</h1>
+<p><em>Data formats from the EDAM ontology.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/EnumEDAMFormats">includedcc:EnumEDAMFormats</a></p>
+<p><em>This is a dynamic enum</em></p>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
-<td>A definition of an activity in this study, eg, a biospecimen collection, inte...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../EncounterDefinition/">EncounterDefinition</a></td>
-<td>A definition of an encounter type in this study, ie, an event at which data w...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Investigator/">Investigator</a></td>
-<td>An individual who made contributions to the collection, analysis, or sharing ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
-<td>An organization that can provide access to specimen for further analysis</td>
-<td>no</td>
+<td><a href="../format/">format</a></td>
+<td>The format of the file</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../String/">String</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://includedcc.org/include-access-model</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>includedcc:name</td>
-</tr>
-<tr>
-<td>native</td>
-<td>includedcc:name</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: Name of the entity.
-title: Name
+<pre><code class="language-yaml">name: EnumEDAMFormats
+description: Data formats from the EDAM ontology.
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-alias: name
-domain_of:
-- VirtualBiorepository
-- Investigator
-- EncounterDefinition
-- ActivityDefinition
-range: string
-required: false
+reachable_from:
+  source_ontology: bioregistry:edam
+  source_nodes:
+  - edam:format_1915
+  relationship_types:
+  - rdfs:subClassOf
+  is_direct: false
+  include_self: false
 
 </code></pre>
 

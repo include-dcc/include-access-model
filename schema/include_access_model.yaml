@@ -773,6 +773,47 @@ enums:
     definition_uri: https://includedcc.org/include-access-model/EnumLaterality
     description: Laterality information for the site
     from_schema: https://includedcc.org/include-access-model
+  EnumEDAMFormats:
+    name: EnumEDAMFormats
+    definition_uri: https://includedcc.org/include-access-model/EnumEDAMFormats
+    description: Data formats from the EDAM ontology.
+    from_schema: https://includedcc.org/include-access-model
+    reachable_from:
+      source_ontology: bioregistry:edam
+      source_nodes:
+      - edam:format_1915
+      relationship_types:
+      - rdfs:subClassOf
+      is_direct: false
+      include_self: false
+  EnumEDAMDataTypes:
+    name: EnumEDAMDataTypes
+    definition_uri: https://includedcc.org/include-access-model/EnumEDAMDataTypes
+    description: Data types from the EDAM ontology.
+    from_schema: https://includedcc.org/include-access-model
+    reachable_from:
+      source_ontology: bioregistry:edam
+      source_nodes:
+      - edam:data_0006
+      relationship_types:
+      - rdfs:subClassOf
+      is_direct: false
+      include_self: false
+  EnumFileHashType:
+    name: EnumFileHashType
+    definition_uri: https://includedcc.org/include-access-model/EnumFileHashType
+    description: Types of file hashes supported.
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      md5:
+        text: md5
+        title: MD5
+      etag:
+        text: etag
+        title: ETag
+      sha1:
+        text: sha1
+        title: SHA-1
 slots:
   study_id:
     name: study_id
@@ -807,12 +848,13 @@ slots:
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:subject_id
-    owner: Encounter
+    owner: File
     domain_of:
     - Subject
     - Demographics
     - SubjectAssertion
     - Encounter
+    - File
     range: Subject
     multivalued: false
   assertion_id:
@@ -1109,12 +1151,11 @@ slots:
     title: Data Category
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:data_category
-    owner: StudyMetadata
+    owner: File
     domain_of:
     - StudyMetadata
+    - File
     range: EnumDataCategory
-    required: true
-    multivalued: true
   clinical_data_source_type:
     name: clinical_data_source_type
     definition_uri: https://includedcc.org/include-access-model/clinical_data_source_type
@@ -1481,10 +1522,11 @@ slots:
     title: Sample ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:sample_id
-    owner: Aliquot
+    owner: File
     domain_of:
     - Sample
     - Aliquot
+    - File
     range: Sample
   parent_sample_id:
     name: parent_sample_id
@@ -1724,6 +1766,131 @@ slots:
     - EncounterDefinition
     - ActivityDefinition
     range: ActivityDefinition
+  file_id:
+    name: file_id
+    definition_uri: https://includedcc.org/include-access-model/file_id
+    description: Unique identifier for this File.
+    title: File ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:file_id
+    owner: File
+    domain_of:
+    - File
+    range: File
+  filename:
+    name: filename
+    definition_uri: https://includedcc.org/include-access-model/filename
+    description: The name of the file.
+    title: Filename
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:filename
+    owner: File
+    domain_of:
+    - File
+    range: string
+  format:
+    name: format
+    definition_uri: https://includedcc.org/include-access-model/format
+    description: The format of the file.
+    title: File Format
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:format
+    owner: File
+    domain_of:
+    - File
+    range: EnumEDAMFormats
+  data_type:
+    name: data_type
+    definition_uri: https://includedcc.org/include-access-model/data_type
+    description: The type of data within this file.
+    title: Data Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_type
+    owner: File
+    domain_of:
+    - File
+    range: EnumEDAMDataTypes
+  size:
+    name: size
+    definition_uri: https://includedcc.org/include-access-model/size
+    description: Size of the file, in Bytes.
+    title: File Size
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:size
+    owner: File
+    domain_of:
+    - File
+    range: integer
+    unit:
+      ucum_code: By
+  staging_url:
+    name: staging_url
+    definition_uri: https://includedcc.org/include-access-model/staging_url
+    description: URL for internal access to the data. May be temporary.
+    title: Staging Location
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:staging_url
+    owner: File
+    domain_of:
+    - File
+    range: uriorcurie
+  release_url:
+    name: release_url
+    definition_uri: https://includedcc.org/include-access-model/release_url
+    description: URL for controlled or open access to the data.
+    title: Release Location
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:release_url
+    owner: File
+    domain_of:
+    - File
+    range: uriorcurie
+  drs_uri:
+    name: drs_uri
+    definition_uri: https://includedcc.org/include-access-model/drs_uri
+    description: DRS location to access the data.
+    title: DRS URI
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:drs_uri
+    owner: File
+    domain_of:
+    - File
+    range: uriorcurie
+  hash:
+    name: hash
+    definition_uri: https://includedcc.org/include-access-model/hash
+    description: File hash information
+    title: File Hash
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:hash
+    owner: File
+    domain_of:
+    - File
+    range: FileHash
+    inlined: true
+    inlined_as_list: true
+  hash_type:
+    name: hash_type
+    definition_uri: https://includedcc.org/include-access-model/hash_type
+    description: The type of file hash, eg, md5
+    title: File Hash Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:hash_type
+    owner: FileHash
+    domain_of:
+    - FileHash
+    range: EnumFileHashType
+  hash_value:
+    name: hash_value
+    definition_uri: https://includedcc.org/include-access-model/hash_value
+    description: The value of the file hash
+    title: File Hash Value
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:hash_value
+    owner: FileHash
+    domain_of:
+    - FileHash
+    range: string
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
@@ -1762,6 +1929,25 @@ slots:
     range: Study
     required: true
     multivalued: false
+  StudyMetadata_data_category:
+    name: StudyMetadata_data_category
+    definition_uri: https://includedcc.org/include-access-model/data_category
+    description: General category of data in this Record (e.g. Clinical, Genomics,
+      etc)
+    title: Data Category
+    from_schema: https://includedcc.org/include-access-model
+    is_a: data_category
+    domain: StudyMetadata
+    slot_uri: includedcc:data_category
+    alias: data_category
+    owner: StudyMetadata
+    domain_of:
+    - StudyMetadata
+    is_usage_slot: true
+    usage_slot_name: data_category
+    range: EnumDataCategory
+    required: true
+    multivalued: true
   DOI_do_id:
     name: DOI_do_id
     definition_uri: https://includedcc.org/include-access-model/do_id
@@ -1997,6 +2183,58 @@ slots:
     usage_slot_name: activity_definition_id
     range: string
     required: true
+  File_file_id:
+    name: File_file_id
+    definition_uri: https://includedcc.org/include-access-model/file_id
+    description: Unique identifier for this File.
+    title: File ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: file_id
+    domain: File
+    slot_uri: includedcc:file_id
+    identifier: true
+    alias: file_id
+    owner: File
+    domain_of:
+    - File
+    is_usage_slot: true
+    usage_slot_name: file_id
+    range: string
+    required: true
+  File_subject_id:
+    name: File_subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: INCLUDE Global ID for the Subject
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: subject_id
+    domain: File
+    slot_uri: includedcc:subject_id
+    alias: subject_id
+    owner: File
+    domain_of:
+    - File
+    is_usage_slot: true
+    usage_slot_name: subject_id
+    range: Subject
+    multivalued: true
+  File_sample_id:
+    name: File_sample_id
+    definition_uri: https://includedcc.org/include-access-model/sample_id
+    description: The unique identifier for this Sample.
+    title: Sample ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: sample_id
+    domain: File
+    slot_uri: includedcc:sample_id
+    alias: sample_id
+    owner: File
+    domain_of:
+    - File
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: Sample
+    multivalued: true
 classes:
   Record:
     name: Record
@@ -2053,7 +2291,7 @@ classes:
     - selection_criteria
     - study_design
     - clinical_data_source_type
-    - data_category
+    - StudyMetadata_data_category
     - vbr
     - research_domain
     - expected_number_of_participants
@@ -2063,6 +2301,10 @@ classes:
         name: study_id
         identifier: true
         required: true
+      data_category:
+        name: data_category
+        required: true
+        multivalued: true
     class_uri: includedcc:StudyMetadata
   VirtualBiorepository:
     name: VirtualBiorepository
@@ -2356,9 +2598,54 @@ classes:
         range: string
         required: true
     class_uri: includedcc:ActivityDefinition
+  File:
+    name: File
+    definition_uri: https://includedcc.org/include-access-model/File
+    description: File
+    title: File
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - File_file_id
+    - File_subject_id
+    - File_sample_id
+    - filename
+    - format
+    - data_category
+    - data_type
+    - format
+    - size
+    - staging_url
+    - release_url
+    - drs_uri
+    - hash
+    slot_usage:
+      file_id:
+        name: file_id
+        identifier: true
+        range: string
+        required: true
+      subject_id:
+        name: subject_id
+        multivalued: true
+      sample_id:
+        name: sample_id
+        multivalued: true
+    class_uri: includedcc:File
+  FileHash:
+    name: FileHash
+    definition_uri: https://includedcc.org/include-access-model/FileHash
+    description: Type and value of a file content hash.
+    title: File Hash
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - hash_type
+    - hash_value
+    class_uri: includedcc:FileHash
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-09T18:47:24'
-source_file_size: 31282
-generation_date: '2026-03-09T18:47:34'
+source_file_date: '2026-03-09T21:33:12'
+source_file_size: 33985
+generation_date: '2026-03-09T21:33:22'
 
