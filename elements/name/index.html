@@ -408,8 +408,18 @@ Alias: name</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
+<td>A definition of an activity in this study, eg, a biospecimen collection, inte...</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Investigator/">Investigator</a></td>
 <td>An individual who made contributions to the collection, analysis, or sharing ...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../EncounterDefinition/">EncounterDefinition</a></td>
+<td>A definition of an encounter type in this study, ie, an event at which data w...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -454,6 +464,8 @@ alias: name
 domain_of:
 - VirtualBiorepository
 - Investigator
+- EncounterDefinition
+- ActivityDefinition
 range: string
 required: false
 

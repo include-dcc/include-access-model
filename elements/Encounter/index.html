@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://include-dcc.github.io/include-access-model/elements/Subject/" rel="canonical"/>
+<link href="https://include-dcc.github.io/include-access-model/elements/Encounter/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Class: Subject (Subject) - include-access-model</title>
+<title>Class: Participant Encounter (Encounter) - include-access-model</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-subject-subject">
+<a class="md-skip" href="#class-participant-encounter-encounter">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Subject (Subject)
+              Class: Participant Encounter (Encounter)
             
           </span>
 </div>
@@ -236,29 +236,40 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-subject-subject">Class: Subject (Subject)</h1>
-<p><em>This entity is the subject about which data or references are recorded. This includes the idea of a human participant in a study, a cell line, an animal model, or any other similar entity.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/Subject">includedcc:Subject</a></p>
+<h1 id="class-participant-encounter-encounter">Class: Participant Encounter (Encounter)</h1>
+<p><em>An event at which data was collected about a participant, an intervention was made, or information about a participant was recorded.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/Encounter">includedcc:Encounter</a></p>
 <div class="mermaid"> classDiagram
-    class Subject
-    click Subject href "../Subject/"
-      Record &lt;|-- Subject
+    class Encounter
+    click Encounter href "../Encounter/"
+      Record &lt;|-- Encounter
         click Record href "../Record/"
 
-      Subject : external_id
+      Encounter : age_at_event
 
-      Subject : organism_type
-
-      Subject : subject_id
-
-      Subject : subject_type
+      Encounter : encounter_definition_id
 
 
 
 
 
-        Subject --&gt; "1" EnumSubjectType : subject_type
-        click EnumSubjectType href "../EnumSubjectType/"
+        Encounter --&gt; "0..1" EncounterDefinition : encounter_definition_id
+        click EncounterDefinition href "../EncounterDefinition/"
+
+
+
+      Encounter : encounter_id
+
+      Encounter : external_id
+
+      Encounter : subject_id
+
+
+
+
+
+        Encounter --&gt; "0..1" Subject : subject_id
+        click Subject href "../Subject/"
 
 
 
@@ -267,7 +278,7 @@
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../Record/">Record</a><ul>
-<li><strong>Subject</strong></li>
+<li><strong>Encounter</strong></li>
 </ul>
 </li>
 </ul>
@@ -283,21 +294,27 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../subject_id/">subject_id</a></td>
+<td><a href="../encounter_id/">encounter_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
+<td>Unique identifier for this Encounter</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../subject_id/">subject_id</a></td>
+<td>0..1 <br/> <a href="../Subject/">Subject</a></td>
 <td>INCLUDE Global ID for the Subject</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../subject_type/">subject_type</a></td>
-<td>1 <br/> <a href="../EnumSubjectType/">EnumSubjectType</a></td>
-<td>Type of entity this record represents</td>
+<td><a href="../encounter_definition_id/">encounter_definition_id</a></td>
+<td>0..1 <br/> <a href="../EncounterDefinition/">EncounterDefinition</a></td>
+<td>Unique identifier for this Encounter Definition</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../organism_type/">organism_type</a></td>
-<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Organism Type</td>
+<td><a href="../age_at_event/">age_at_event</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td>The age in days of the Subject at the time point which the assertion describe...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -320,22 +337,16 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Demographics/">Demographics</a></td>
-<td><a href="../subject_id/">subject_id</a></td>
-<td>range</td>
-<td><a href="./">Subject</a></td>
-</tr>
-<tr>
 <td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
-<td><a href="../subject_id/">subject_id</a></td>
+<td><a href="../encounter_id/">encounter_id</a></td>
 <td>range</td>
-<td><a href="./">Subject</a></td>
+<td><a href="./">Encounter</a></td>
 </tr>
 <tr>
-<td><a href="../Encounter/">Encounter</a></td>
-<td><a href="../subject_id/">subject_id</a></td>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../encounter_id/">encounter_id</a></td>
 <td>range</td>
-<td><a href="./">Subject</a></td>
+<td><a href="./">Encounter</a></td>
 </tr>
 </tbody>
 </table>
@@ -355,11 +366,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:Subject</td>
+<td>includedcc:Encounter</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:Subject</td>
+<td>includedcc:Encounter</td>
 </tr>
 </tbody>
 </table>
@@ -367,20 +378,20 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Subject
-description: This entity is the subject about which data or references are recorded.
-  This includes the idea of a human participant in a study, a cell line, an animal
-  model, or any other similar entity.
-title: Subject
+<pre><code class="language-yaml">name: Encounter
+description: An event at which data was collected about a participant, an intervention
+  was made, or information about a participant was recorded.
+title: Participant Encounter
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slots:
+- encounter_id
 - subject_id
-- subject_type
-- organism_type
+- encounter_definition_id
+- age_at_event
 slot_usage:
-  subject_id:
-    name: subject_id
+  encounter_id:
+    name: encounter_id
     identifier: true
     range: string
     required: true
@@ -389,61 +400,76 @@ slot_usage:
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Subject
-description: This entity is the subject about which data or references are recorded.
-  This includes the idea of a human participant in a study, a cell line, an animal
-  model, or any other similar entity.
-title: Subject
+<pre><code class="language-yaml">name: Encounter
+description: An event at which data was collected about a participant, an intervention
+  was made, or information about a participant was recorded.
+title: Participant Encounter
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slot_usage:
-  subject_id:
-    name: subject_id
+  encounter_id:
+    name: encounter_id
     identifier: true
     range: string
     required: true
 attributes:
+  encounter_id:
+    name: encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    identifier: true
+    alias: encounter_id
+    owner: Encounter
+    domain_of:
+    - SubjectAssertion
+    - BiospecimenCollection
+    - Encounter
+    range: string
+    required: true
   subject_id:
     name: subject_id
     description: INCLUDE Global ID for the Subject
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    identifier: true
     alias: subject_id
-    owner: Subject
+    owner: Encounter
     domain_of:
     - Subject
     - Demographics
     - SubjectAssertion
     - Encounter
-    range: string
-    required: true
+    range: Subject
     multivalued: false
-  subject_type:
-    name: subject_type
-    description: Type of entity this record represents
-    title: Subject Type
+  encounter_definition_id:
+    name: encounter_definition_id
+    description: Unique identifier for this Encounter Definition.
+    title: Encounter Definition ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: subject_type
-    owner: Subject
+    alias: encounter_definition_id
+    owner: Encounter
     domain_of:
-    - Subject
-    range: EnumSubjectType
-    required: true
-  organism_type:
-    name: organism_type
-    description: Organism Type
-    title: Organism Type
+    - Encounter
+    - EncounterDefinition
+    range: EncounterDefinition
+  age_at_event:
+    name: age_at_event
+    description: The age in days of the Subject at the time point which the assertion
+      describes, | eg, age of onset or when a measurement was performed.
+    title: Age at event
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: organism_type
-    owner: Subject
+    alias: age_at_event
+    owner: Encounter
     domain_of:
-    - Subject
-    range: uriorcurie
-    required: false
+    - SubjectAssertion
+    - Encounter
+    range: integer
+    unit:
+      ucum_code: d
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study
@@ -452,7 +478,7 @@ attributes:
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
     alias: external_id
-    owner: Subject
+    owner: Encounter
     domain_of:
     - Record
     range: uriorcurie

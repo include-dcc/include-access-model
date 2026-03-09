@@ -161,6 +161,12 @@
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
 <div class="mermaid">erDiagram
+ActivityDefinition {
+    string activity_definition_id  
+    string name  
+    string description  
+    uriorcurieList external_id  
+}
 Aliquot {
     string aliquot_id  
     EnumAvailabilityStatus availablity_status  
@@ -194,6 +200,17 @@ Demographics {
     integer age_at_last_vital_status  
     EnumVitalStatus vital_status  
     integer age_at_first_engagement  
+    uriorcurieList external_id  
+}
+Encounter {
+    string encounter_id  
+    integer age_at_event  
+    uriorcurieList external_id  
+}
+EncounterDefinition {
+    string encounter_definition_id  
+    string name  
+    string description  
     uriorcurieList external_id  
 }
 Investigator {
@@ -273,7 +290,11 @@ VirtualBiorepository {
 Aliquot ||--|o Concept : "concentration_unit"
 Aliquot ||--|o Concept : "quantity_unit"
 Aliquot ||--|o Sample : "sample_id"
+BiospecimenCollection ||--|o Encounter : "encounter_id"
 Demographics ||--|| Subject : "subject_id"
+Encounter ||--|o EncounterDefinition : "encounter_definition_id"
+Encounter ||--|o Subject : "subject_id"
+EncounterDefinition ||--}o ActivityDefinition : "activity_definition_id"
 Sample ||--|o BiospecimenCollection : "biospecimen_collection_id"
 Sample ||--|o Concept : "quantity_unit"
 Sample ||--|o Sample : "parent_sample_id"
@@ -285,6 +306,7 @@ Study ||--}| Investigator : "principal_investigator"
 StudyMetadata ||--|o VirtualBiorepository : "vbr"
 StudyMetadata ||--|| Study : "study_id"
 SubjectAssertion ||--|o Concept : "value_unit"
+SubjectAssertion ||--|o Encounter : "encounter_id"
 SubjectAssertion ||--|o Subject : "subject_id"
 SubjectAssertion ||--}o Concept : "concept"
 SubjectAssertion ||--}o Concept : "value_concept"

@@ -270,6 +270,17 @@
 
       SubjectAssertion : concept_source
 
+      SubjectAssertion : encounter_id
+
+
+
+
+
+        SubjectAssertion --&gt; "0..1" Encounter : encounter_id
+        click Encounter href "../Encounter/"
+
+
+
       SubjectAssertion : external_id
 
       SubjectAssertion : subject_id
@@ -341,6 +352,12 @@
 <td><a href="../subject_id/">subject_id</a></td>
 <td>0..1 <br/> <a href="../Subject/">Subject</a></td>
 <td>INCLUDE Global ID for the Subject</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../encounter_id/">encounter_id</a></td>
+<td>0..1 <br/> <a href="../Encounter/">Encounter</a></td>
+<td>Unique identifier for this Encounter</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -454,6 +471,7 @@ is_a: Record
 slots:
 - assertion_id
 - subject_id
+- encounter_id
 - assertion_provenance
 - age_at_assertion
 - age_at_event
@@ -515,8 +533,22 @@ attributes:
     - Subject
     - Demographics
     - SubjectAssertion
+    - Encounter
     range: Subject
     multivalued: false
+  encounter_id:
+    name: encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: encounter_id
+    owner: SubjectAssertion
+    domain_of:
+    - SubjectAssertion
+    - BiospecimenCollection
+    - Encounter
+    range: Encounter
   assertion_provenance:
     name: assertion_provenance
     description: The original source of this assertion
@@ -552,6 +584,7 @@ attributes:
     owner: SubjectAssertion
     domain_of:
     - SubjectAssertion
+    - Encounter
     range: integer
     unit:
       ucum_code: d

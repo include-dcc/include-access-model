@@ -807,11 +807,12 @@ slots:
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:subject_id
-    owner: SubjectAssertion
+    owner: Encounter
     domain_of:
     - Subject
     - Demographics
     - SubjectAssertion
+    - Encounter
     range: Subject
     multivalued: false
   assertion_id:
@@ -936,10 +937,12 @@ slots:
     title: Name
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:name
-    owner: Investigator
+    owner: ActivityDefinition
     domain_of:
     - VirtualBiorepository
     - Investigator
+    - EncounterDefinition
+    - ActivityDefinition
     range: string
     required: false
   email:
@@ -1350,9 +1353,10 @@ slots:
     title: Age at event
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:age_at_event
-    owner: SubjectAssertion
+    owner: Encounter
     domain_of:
     - SubjectAssertion
+    - Encounter
     range: integer
     unit:
       ucum_code: d
@@ -1671,6 +1675,55 @@ slots:
     domain_of:
     - BiospecimenCollection
     range: EnumLaterality
+  encounter_id:
+    name: encounter_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:encounter_id
+    owner: Encounter
+    domain_of:
+    - SubjectAssertion
+    - BiospecimenCollection
+    - Encounter
+    range: Encounter
+  description:
+    name: description
+    definition_uri: https://includedcc.org/include-access-model/description
+    description: Description for this entity.
+    title: Description
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:description
+    owner: ActivityDefinition
+    domain_of:
+    - EncounterDefinition
+    - ActivityDefinition
+    range: string
+  encounter_definition_id:
+    name: encounter_definition_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_definition_id
+    description: Unique identifier for this Encounter Definition.
+    title: Encounter Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:encounter_definition_id
+    owner: EncounterDefinition
+    domain_of:
+    - Encounter
+    - EncounterDefinition
+    range: EncounterDefinition
+  activity_definition_id:
+    name: activity_definition_id
+    definition_uri: https://includedcc.org/include-access-model/activity_definition_id
+    description: Unique identifier for this Activity Definition.
+    title: Activity Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:activity_definition_id
+    owner: ActivityDefinition
+    domain_of:
+    - EncounterDefinition
+    - ActivityDefinition
+    range: ActivityDefinition
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
@@ -1873,6 +1926,77 @@ slots:
     usage_slot_name: aliquot_id
     range: string
     required: true
+  Encounter_encounter_id:
+    name: Encounter_encounter_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: encounter_id
+    domain: Encounter
+    slot_uri: includedcc:encounter_id
+    identifier: true
+    alias: encounter_id
+    owner: Encounter
+    domain_of:
+    - Encounter
+    is_usage_slot: true
+    usage_slot_name: encounter_id
+    range: string
+    required: true
+  EncounterDefinition_encounter_definition_id:
+    name: EncounterDefinition_encounter_definition_id
+    definition_uri: https://includedcc.org/include-access-model/encounter_definition_id
+    description: Unique identifier for this Encounter Definition.
+    title: Encounter Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: encounter_definition_id
+    domain: EncounterDefinition
+    slot_uri: includedcc:encounter_definition_id
+    identifier: true
+    alias: encounter_definition_id
+    owner: EncounterDefinition
+    domain_of:
+    - EncounterDefinition
+    is_usage_slot: true
+    usage_slot_name: encounter_definition_id
+    range: string
+    required: true
+  EncounterDefinition_activity_definition_id:
+    name: EncounterDefinition_activity_definition_id
+    definition_uri: https://includedcc.org/include-access-model/activity_definition_id
+    description: Unique identifier for this Activity Definition.
+    title: Activity Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: activity_definition_id
+    domain: EncounterDefinition
+    slot_uri: includedcc:activity_definition_id
+    alias: activity_definition_id
+    owner: EncounterDefinition
+    domain_of:
+    - EncounterDefinition
+    is_usage_slot: true
+    usage_slot_name: activity_definition_id
+    range: ActivityDefinition
+    multivalued: true
+  ActivityDefinition_activity_definition_id:
+    name: ActivityDefinition_activity_definition_id
+    definition_uri: https://includedcc.org/include-access-model/activity_definition_id
+    description: Unique identifier for this Activity Definition.
+    title: Activity Definition ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: activity_definition_id
+    domain: ActivityDefinition
+    slot_uri: includedcc:activity_definition_id
+    identifier: true
+    alias: activity_definition_id
+    owner: ActivityDefinition
+    domain_of:
+    - ActivityDefinition
+    is_usage_slot: true
+    usage_slot_name: activity_definition_id
+    range: string
+    required: true
 classes:
   Record:
     name: Record
@@ -2056,6 +2180,7 @@ classes:
     - external_id
     - SubjectAssertion_assertion_id
     - subject_id
+    - encounter_id
     - assertion_provenance
     - age_at_assertion
     - age_at_event
@@ -2133,6 +2258,7 @@ classes:
     - site
     - spatial_qualifier
     - laterality
+    - encounter_id
     slot_usage:
       biospecimen_collection_id:
         name: biospecimen_collection_id
@@ -2163,9 +2289,76 @@ classes:
         range: string
         required: true
     class_uri: includedcc:Aliquot
+  Encounter:
+    name: Encounter
+    definition_uri: https://includedcc.org/include-access-model/Encounter
+    description: An event at which data was collected about a participant, an intervention
+      was made, or information about a participant was recorded.
+    title: Participant Encounter
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Encounter_encounter_id
+    - subject_id
+    - encounter_definition_id
+    - age_at_event
+    slot_usage:
+      encounter_id:
+        name: encounter_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:Encounter
+  EncounterDefinition:
+    name: EncounterDefinition
+    definition_uri: https://includedcc.org/include-access-model/EncounterDefinition
+    description: A definition of an encounter type in this study, ie, an event at
+      which data was collected about a participant, an intervention was made, or information
+      about a participant was recorded. This may be something planned by a study or
+      a type of data collection.
+    title: Encounter Definition
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - EncounterDefinition_encounter_definition_id
+    - name
+    - description
+    - EncounterDefinition_activity_definition_id
+    slot_usage:
+      encounter_definition_id:
+        name: encounter_definition_id
+        identifier: true
+        range: string
+        required: true
+      activity_definition_id:
+        name: activity_definition_id
+        multivalued: true
+    class_uri: includedcc:EncounterDefinition
+  ActivityDefinition:
+    name: ActivityDefinition
+    definition_uri: https://includedcc.org/include-access-model/ActivityDefinition
+    description: A definition of an activity in this study, eg, a biospecimen collection,
+      intervention, survey, or assessment.
+    title: Activity Definition
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - ActivityDefinition_activity_definition_id
+    - name
+    - description
+    slot_usage:
+      activity_definition_id:
+        name: activity_definition_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:ActivityDefinition
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-09T15:48:33'
-source_file_size: 28933
-generation_date: '2026-03-09T15:48:43'
+source_file_date: '2026-03-09T17:40:03'
+source_file_size: 31282
+generation_date: '2026-03-09T17:40:14'
 

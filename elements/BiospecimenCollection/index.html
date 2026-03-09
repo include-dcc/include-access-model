@@ -249,6 +249,17 @@
 
       BiospecimenCollection : biospecimen_collection_id
 
+      BiospecimenCollection : encounter_id
+
+
+
+
+
+        BiospecimenCollection --&gt; "0..1" Encounter : encounter_id
+        click Encounter href "../Encounter/"
+
+
+
       BiospecimenCollection : external_id
 
       BiospecimenCollection : laterality
@@ -352,6 +363,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../encounter_id/">encounter_id</a></td>
+<td>0..1 <br/> <a href="../Encounter/">Encounter</a></td>
+<td>Unique identifier for this Encounter</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
@@ -418,6 +435,7 @@ slots:
 - site
 - spatial_qualifier
 - laterality
+- encounter_id
 slot_usage:
   biospecimen_collection_id:
     name: biospecimen_collection_id
@@ -514,6 +532,19 @@ attributes:
     domain_of:
     - BiospecimenCollection
     range: EnumLaterality
+  encounter_id:
+    name: encounter_id
+    description: Unique identifier for this Encounter.
+    title: Encounter ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: encounter_id
+    owner: BiospecimenCollection
+    domain_of:
+    - SubjectAssertion
+    - BiospecimenCollection
+    - Encounter
+    range: Encounter
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study
