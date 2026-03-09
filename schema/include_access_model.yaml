@@ -538,7 +538,7 @@ enums:
       non_participant:
         text: non_participant
         description: An individual associated with a study who was not explictly consented,
-          eg, the subject | of a reported family history.
+          eg, the subject of a reported family history.
       cell_line:
         text: cell_line
         description: Cell Line
@@ -725,7 +725,7 @@ enums:
   EnumAvailabilityStatus:
     name: EnumAvailabilityStatus
     definition_uri: https://includedcc.org/include-access-model/EnumAvailabilityStatus
-    description: Is the Thing available for use?
+    description: Is the biospecimen available for use?
     from_schema: https://includedcc.org/include-access-model
     permissible_values:
       available:
@@ -741,25 +741,19 @@ enums:
   EnumSampleCollectionMethod:
     name: EnumSampleCollectionMethod
     definition_uri: https://includedcc.org/include-access-model/EnumSampleCollectionMethod
-    description: 'The approach used to collect the biospecimen. Recommend ontology:
-      [LOINC](https://loinc.org).
-
-      '
+    description: The approach used to collect the biospecimen. [LOINC](https://loinc.org)
+      is recommended.
     from_schema: https://includedcc.org/include-access-model
   EnumSite:
     name: EnumSite
     definition_uri: https://includedcc.org/include-access-model/EnumSite
-    description: 'The location of the specimen collection. Recommended ontology: [SNOMED
-      Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
-
-      '
+    description: The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
+      is recommended.
     from_schema: https://includedcc.org/include-access-model
   EnumSpatialQualifiers:
     name: EnumSpatialQualifiers
     definition_uri: https://includedcc.org/include-access-model/EnumSpatialQualifiers
-    description: 'Any spatial/location qualifiers.
-
-      '
+    description: Any spatial/location qualifiers.
     from_schema: https://includedcc.org/include-access-model
     enum_uri: http://hl7.org/fhir/us/mcode/ValueSet/mcode-body-location-qualifier-vs
     reachable_from:
@@ -2010,8 +2004,8 @@ classes:
     name: Subject
     definition_uri: https://includedcc.org/include-access-model/Subject
     description: This entity is the subject about which data or references are recorded.
-      | This includes the idea of a human participant in a study, a cell line, an
-      animal model, | or any other similar entity.
+      This includes the idea of a human participant in a study, a cell line, an animal
+      model, or any other similar entity.
     title: Subject
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
@@ -2171,7 +2165,7 @@ classes:
     class_uri: includedcc:Aliquot
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-02-24T15:33:00'
-source_file_size: 28974
-generation_date: '2026-02-24T15:33:09'
+source_file_date: '2026-03-09T15:48:33'
+source_file_size: 28933
+generation_date: '2026-03-09T15:48:43'
 
