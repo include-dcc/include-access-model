@@ -89,6 +89,10 @@ classes:
       study_id:
         required: true
         identifier: true
+      data_category:
+        required: true
+        multivalued: true
+
   VirtualBiorepository:
     title: Virtual BioRepository (VBR)
     description: An organization that can provide access to specimen for further analysis.
@@ -304,6 +308,40 @@ classes:
         range: string
         required: true
         identifier: true
+  File:
+    title: File
+    description: File
+    is_a: Record 
+    slots: 
+      - file_id
+      - subject_id
+      - sample_id
+      - filename
+      - format
+      - data_category
+      - data_type
+      - format
+      - size
+#TODO: I'm not convinced this is the right strategy- access model vs operations
+      - staging_url
+      - release_url
+      - drs_uri
+      - hash
+    slot_usage:
+      file_id:
+        range: string
+        required: true
+        identifier: true
+      subject_id:
+        multivalued: true
+      sample_id:
+        multivalued: true
+  FileHash:
+    title: File Hash
+    description: Type and value of a file content hash.
+    slots:
+      - hash_type
+      - hash_value
 
 
 
@@ -442,8 +480,6 @@ slots:
     title: Data Category
     description: General category of data in this Record (e.g. Clinical, Genomics, etc)
     range: EnumDataCategory
-    required: true
-    multivalued: true
   clinical_data_source_type:
     title: Clinical Data Source Type
     description: Source(s) of data collected from study participants
@@ -684,6 +720,53 @@ slots:
     title: Activity Definition ID
     description: Unique identifier for this Activity Definition.
     range: ActivityDefinition
+  file_id:
+    title: File ID
+    description: Unique identifier for this File.
+    range: File
+  filename:
+    title: Filename
+    description: The name of the file.
+    range: string
+  format:
+    title: File Format
+    description: The format of the file.
+    range: EnumEDAMFormats
+  data_type:
+    title: Data Type
+    description: The type of data within this file.
+    range: EnumEDAMDataTypes
+  size:
+    title: File Size
+    description: Size of the file, in Bytes.
+    range: integer
+    unit:
+      ucum_code: By   
+  staging_url:
+    title: Staging Location
+    description: URL for internal access to the data. May be temporary.
+    range: uriorcurie
+  release_url:
+    title: Release Location
+    description: URL for controlled or open access to the data.
+    range: uriorcurie  
+  drs_uri:
+    title: DRS URI
+    description: DRS location to access the data.
+    range: uriorcurie
+  hash:
+    title: File Hash
+    description: File hash information
+    range: FileHash
+  hash_type:
+    title: File Hash Type
+    description: The type of file hash, eg, md5
+    range: EnumFileHashType
+  hash_value:
+    title: File Hash Value
+    description: The value of the file hash
+    range: string
+
 
 enums:
   EnumProgram:
@@ -996,3 +1079,34 @@ enums:
         - rdfs:subClassOf
   EnumLaterality:
     description: Laterality information for the site
+  EnumEDAMFormats:
+    description: Data formats from the EDAM ontology.
+    reachable_from:
+      source_ontology: bioregistry:edam
+      source_nodes:
+        - edam:format_1915 #Format
+      include_self: false
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
+  EnumEDAMDataTypes:
+    description: Data types from the EDAM ontology.
+    reachable_from:
+      source_ontology: bioregistry:edam
+      source_nodes:
+        - edam:data_0006 #Data
+      include_self: false
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
+  EnumFileHashType:
+    description: Types of file hashes supported.
+    permissible_values:
+      md5:
+        title: MD5
+      etag: 
+        title: ETag
+      sha1:
+        title: SHA-1
+
+

@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-09T13:32:32
+# Generation date: 2026-03-09T16:30:56
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -134,6 +134,10 @@ class EncounterDefinitionEncounterDefinitionId(extended_str):
 
 
 class ActivityDefinitionActivityDefinitionId(extended_str):
+    pass
+
+
+class FileFileId(extended_str):
     pass
 
 
@@ -902,6 +906,94 @@ class ActivityDefinition(Record):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
+class File(Record):
+    """
+    File
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["File"]
+    class_class_curie: ClassVar[str] = "includedcc:File"
+    class_name: ClassVar[str] = "File"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.File
+
+    file_id: Union[str, FileFileId] = None
+    subject_id: Optional[Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]]] = empty_list()
+    sample_id: Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]] = empty_list()
+    filename: Optional[str] = None
+    format: Optional[Union[str, "EnumEDAMFormats"]] = None
+    data_category: Optional[Union[str, "EnumDataCategory"]] = None
+    data_type: Optional[Union[str, "EnumEDAMDataTypes"]] = None
+    size: Optional[int] = None
+    staging_url: Optional[Union[str, URIorCURIE]] = None
+    release_url: Optional[Union[str, URIorCURIE]] = None
+    drs_uri: Optional[Union[str, URIorCURIE]] = None
+    hash: Optional[Union[dict, "FileHash"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.file_id):
+            self.MissingRequiredField("file_id")
+        if not isinstance(self.file_id, FileFileId):
+            self.file_id = FileFileId(self.file_id)
+
+        if not isinstance(self.subject_id, list):
+            self.subject_id = [self.subject_id] if self.subject_id is not None else []
+        self.subject_id = [v if isinstance(v, SubjectSubjectId) else SubjectSubjectId(v) for v in self.subject_id]
+
+        if not isinstance(self.sample_id, list):
+            self.sample_id = [self.sample_id] if self.sample_id is not None else []
+        self.sample_id = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.sample_id]
+
+        if self.filename is not None and not isinstance(self.filename, str):
+            self.filename = str(self.filename)
+
+        if self.data_category is not None and not isinstance(self.data_category, EnumDataCategory):
+            self.data_category = EnumDataCategory(self.data_category)
+
+        if self.size is not None and not isinstance(self.size, int):
+            self.size = int(self.size)
+
+        if self.staging_url is not None and not isinstance(self.staging_url, URIorCURIE):
+            self.staging_url = URIorCURIE(self.staging_url)
+
+        if self.release_url is not None and not isinstance(self.release_url, URIorCURIE):
+            self.release_url = URIorCURIE(self.release_url)
+
+        if self.drs_uri is not None and not isinstance(self.drs_uri, URIorCURIE):
+            self.drs_uri = URIorCURIE(self.drs_uri)
+
+        if self.hash is not None and not isinstance(self.hash, FileHash):
+            self.hash = FileHash(**as_dict(self.hash))
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FileHash(YAMLRoot):
+    """
+    Type and value of a file content hash.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["FileHash"]
+    class_class_curie: ClassVar[str] = "includedcc:FileHash"
+    class_name: ClassVar[str] = "FileHash"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.FileHash
+
+    hash_type: Optional[Union[str, "EnumFileHashType"]] = None
+    hash_value: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.hash_type is not None and not isinstance(self.hash_type, EnumFileHashType):
+            self.hash_type = EnumFileHashType(self.hash_type)
+
+        if self.hash_value is not None and not isinstance(self.hash_value, str):
+            self.hash_value = str(self.hash_value)
+
+        super().__post_init__(**kwargs)
+
+
 # Enumerations
 class EnumProgram(EnumDefinitionImpl):
     """
@@ -1398,6 +1490,43 @@ class EnumLaterality(EnumDefinitionImpl):
         description="Laterality information for the site",
     )
 
+class EnumEDAMFormats(EnumDefinitionImpl):
+    """
+    Data formats from the EDAM ontology.
+    """
+    _defn = EnumDefinition(
+        name="EnumEDAMFormats",
+        description="Data formats from the EDAM ontology.",
+    )
+
+class EnumEDAMDataTypes(EnumDefinitionImpl):
+    """
+    Data types from the EDAM ontology.
+    """
+    _defn = EnumDefinition(
+        name="EnumEDAMDataTypes",
+        description="Data types from the EDAM ontology.",
+    )
+
+class EnumFileHashType(EnumDefinitionImpl):
+    """
+    Types of file hashes supported.
+    """
+    md5 = PermissibleValue(
+        text="md5",
+        title="MD5")
+    etag = PermissibleValue(
+        text="etag",
+        title="ETag")
+    sha1 = PermissibleValue(
+        text="sha1",
+        title="SHA-1")
+
+    _defn = EnumDefinition(
+        name="EnumFileHashType",
+        description="Types of file hashes supported.",
+    )
+
 # Slots
 class slots:
     pass
@@ -1478,7 +1607,7 @@ slots.study_design = Slot(uri=INCLUDEDCC.study_design, name="study_design", curi
                    model_uri=INCLUDEDCC.study_design, domain=None, range=Union[Union[str, "EnumStudyDesign"], list[Union[str, "EnumStudyDesign"]]])
 
 slots.data_category = Slot(uri=INCLUDEDCC.data_category, name="data_category", curie=INCLUDEDCC.curie('data_category'),
-                   model_uri=INCLUDEDCC.data_category, domain=None, range=Union[Union[str, "EnumDataCategory"], list[Union[str, "EnumDataCategory"]]])
+                   model_uri=INCLUDEDCC.data_category, domain=None, range=Optional[Union[str, "EnumDataCategory"]])
 
 slots.clinical_data_source_type = Slot(uri=INCLUDEDCC.clinical_data_source_type, name="clinical_data_source_type", curie=INCLUDEDCC.curie('clinical_data_source_type'),
                    model_uri=INCLUDEDCC.clinical_data_source_type, domain=None, range=Union[Union[str, "EnumClinicalDataSourceType"], list[Union[str, "EnumClinicalDataSourceType"]]])
@@ -1630,11 +1759,47 @@ slots.encounter_definition_id = Slot(uri=INCLUDEDCC.encounter_definition_id, nam
 slots.activity_definition_id = Slot(uri=INCLUDEDCC.activity_definition_id, name="activity_definition_id", curie=INCLUDEDCC.curie('activity_definition_id'),
                    model_uri=INCLUDEDCC.activity_definition_id, domain=None, range=Optional[Union[str, ActivityDefinitionActivityDefinitionId]])
 
+slots.file_id = Slot(uri=INCLUDEDCC.file_id, name="file_id", curie=INCLUDEDCC.curie('file_id'),
+                   model_uri=INCLUDEDCC.file_id, domain=None, range=Optional[Union[str, FileFileId]])
+
+slots.filename = Slot(uri=INCLUDEDCC.filename, name="filename", curie=INCLUDEDCC.curie('filename'),
+                   model_uri=INCLUDEDCC.filename, domain=None, range=Optional[str])
+
+slots.format = Slot(uri=INCLUDEDCC.format, name="format", curie=INCLUDEDCC.curie('format'),
+                   model_uri=INCLUDEDCC.format, domain=None, range=Optional[Union[str, "EnumEDAMFormats"]])
+
+slots.data_type = Slot(uri=INCLUDEDCC.data_type, name="data_type", curie=INCLUDEDCC.curie('data_type'),
+                   model_uri=INCLUDEDCC.data_type, domain=None, range=Optional[Union[str, "EnumEDAMDataTypes"]])
+
+slots.size = Slot(uri=INCLUDEDCC.size, name="size", curie=INCLUDEDCC.curie('size'),
+                   model_uri=INCLUDEDCC.size, domain=None, range=Optional[int])
+
+slots.staging_url = Slot(uri=INCLUDEDCC.staging_url, name="staging_url", curie=INCLUDEDCC.curie('staging_url'),
+                   model_uri=INCLUDEDCC.staging_url, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.release_url = Slot(uri=INCLUDEDCC.release_url, name="release_url", curie=INCLUDEDCC.curie('release_url'),
+                   model_uri=INCLUDEDCC.release_url, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.drs_uri = Slot(uri=INCLUDEDCC.drs_uri, name="drs_uri", curie=INCLUDEDCC.curie('drs_uri'),
+                   model_uri=INCLUDEDCC.drs_uri, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.hash = Slot(uri=INCLUDEDCC.hash, name="hash", curie=INCLUDEDCC.curie('hash'),
+                   model_uri=INCLUDEDCC.hash, domain=None, range=Optional[Union[dict, FileHash]])
+
+slots.hash_type = Slot(uri=INCLUDEDCC.hash_type, name="hash_type", curie=INCLUDEDCC.curie('hash_type'),
+                   model_uri=INCLUDEDCC.hash_type, domain=None, range=Optional[Union[str, "EnumFileHashType"]])
+
+slots.hash_value = Slot(uri=INCLUDEDCC.hash_value, name="hash_value", curie=INCLUDEDCC.curie('hash_value'),
+                   model_uri=INCLUDEDCC.hash_value, domain=None, range=Optional[str])
+
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
 
 slots.StudyMetadata_study_id = Slot(uri=INCLUDEDCC.study_id, name="StudyMetadata_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.StudyMetadata_study_id, domain=StudyMetadata, range=Union[str, StudyMetadataStudyId])
+
+slots.StudyMetadata_data_category = Slot(uri=INCLUDEDCC.data_category, name="StudyMetadata_data_category", curie=INCLUDEDCC.curie('data_category'),
+                   model_uri=INCLUDEDCC.StudyMetadata_data_category, domain=StudyMetadata, range=Union[Union[str, "EnumDataCategory"], list[Union[str, "EnumDataCategory"]]])
 
 slots.DOI_do_id = Slot(uri=INCLUDEDCC.do_id, name="DOI_do_id", curie=INCLUDEDCC.curie('do_id'),
                    model_uri=INCLUDEDCC.DOI_do_id, domain=DOI, range=Union[str, DOIDoId])
@@ -1674,3 +1839,12 @@ slots.EncounterDefinition_activity_definition_id = Slot(uri=INCLUDEDCC.activity_
 
 slots.ActivityDefinition_activity_definition_id = Slot(uri=INCLUDEDCC.activity_definition_id, name="ActivityDefinition_activity_definition_id", curie=INCLUDEDCC.curie('activity_definition_id'),
                    model_uri=INCLUDEDCC.ActivityDefinition_activity_definition_id, domain=ActivityDefinition, range=Union[str, ActivityDefinitionActivityDefinitionId])
+
+slots.File_file_id = Slot(uri=INCLUDEDCC.file_id, name="File_file_id", curie=INCLUDEDCC.curie('file_id'),
+                   model_uri=INCLUDEDCC.File_file_id, domain=File, range=Union[str, FileFileId])
+
+slots.File_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="File_subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.File_subject_id, domain=File, range=Optional[Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]]])
+
+slots.File_sample_id = Slot(uri=INCLUDEDCC.sample_id, name="File_sample_id", curie=INCLUDEDCC.curie('sample_id'),
+                   model_uri=INCLUDEDCC.File_sample_id, domain=File, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
