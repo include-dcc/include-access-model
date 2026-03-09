@@ -472,7 +472,10 @@ class VirtualBiorepository(Record):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
          'title': 'Virtual BioRepository (VBR)'})
 
-    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository', 'Investigator']} })
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository',
+                       'Investigator',
+                       'EncounterDefinition',
+                       'ActivityDefinition']} })
     institution: Optional[str] = Field(default=None, title="Institution", description="""Name of the institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository', 'Investigator']} })
     contact: list[Investigator] = Field(default=..., title="Contact Person", description="""The individual to contact with questions about this record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository']} })
     website: Optional[str] = Field(default=None, title="Website", description="""Website for the Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository', 'Publication']} })
@@ -503,7 +506,10 @@ class Investigator(Record):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
          'title': 'Investigator'})
 
-    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository', 'Investigator']} })
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository',
+                       'Investigator',
+                       'EncounterDefinition',
+                       'ActivityDefinition']} })
     institution: Optional[str] = Field(default=None, title="Institution", description="""Name of the institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository', 'Investigator']} })
     investigator_title: Optional[str] = Field(default=None, title="Investigator Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Investigator']} })
     email: Optional[str] = Field(default=None, title="Email Address", description="""An email address to reach the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Investigator']} })
@@ -533,7 +539,7 @@ class Subject(Record):
                                        'required': True}},
          'title': 'Subject'})
 
-    subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion']} })
+    subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion', 'Encounter']} })
     subject_type: EnumSubjectType = Field(default=..., title="Subject Type", description="""Type of entity this record represents""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     organism_type: Optional[str] = Field(default=None, title="Organism Type", description="""Organism Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
@@ -549,7 +555,7 @@ class Demographics(Record):
                                        'required': True}},
          'title': 'Demographics'})
 
-    subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion']} })
+    subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion', 'Encounter']} })
     sex: EnumSex = Field(default=..., title="Sex", description="""Sex of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     race: list[EnumRace] = Field(default=..., title="Race", description="""Race of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Ethnicity of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
@@ -572,10 +578,11 @@ class SubjectAssertion(Record):
          'title': 'Subject Assertion'})
 
     assertion_id: str = Field(default=..., title="Assertion ID", description="""INCLUDE Global ID for the Assertion""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
-    subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion']} })
+    subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion', 'Encounter']} })
+    encounter_id: Optional[str] = Field(default=None, title="Encounter ID", description="""Unique identifier for this Encounter.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'BiospecimenCollection', 'Encounter']} })
     assertion_provenance: Optional[EnumAssertionProvenance] = Field(default=None, title="Assertion Provenance", description="""The original source of this assertion""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     age_at_assertion: Optional[int] = Field(default=None, title="Age at assertion", description="""The age in days of the Subject when the assertion was made.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
-    age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, | eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
+    age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, | eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Encounter'], 'unit': {'ucum_code': 'd'}} })
     age_at_resolution: Optional[int] = Field(default=None, title="Age at resolution", description="""The age in days of the Subject when the asserted state was resolved.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
     concept: Optional[list[str]] = Field(default=[], title="Assertion concept", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     concept_source: Optional[str] = Field(default=None, title="Concept Source Text", description="""The source text yielding the standardized concept.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
@@ -647,6 +654,7 @@ class BiospecimenCollection(Record):
     site: Optional[EnumSite] = Field(default=None, title="Biospecimen Collection Site", description="""The location of the specimen collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
     spatial_qualifier: Optional[EnumSpatialQualifiers] = Field(default=None, title="Spatial Qualifier", description="""Qualifier that further refine the specific location of biospecimen collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
     laterality: Optional[EnumLaterality] = Field(default=None, title="Location Laterality", description="""Laterality that further refine the specific location of biospecimen collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
+    encounter_id: Optional[str] = Field(default=None, title="Encounter ID", description="""Unique identifier for this Encounter.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'BiospecimenCollection', 'Encounter']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
@@ -671,6 +679,67 @@ class Aliquot(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
+class Encounter(Record):
+    """
+    An event at which data was collected about a participant, an intervention was made, or information about a participant was recorded.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'encounter_id': {'identifier': True,
+                                         'name': 'encounter_id',
+                                         'range': 'string',
+                                         'required': True}},
+         'title': 'Participant Encounter'})
+
+    encounter_id: str = Field(default=..., title="Encounter ID", description="""Unique identifier for this Encounter.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'BiospecimenCollection', 'Encounter']} })
+    subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject', 'Demographics', 'SubjectAssertion', 'Encounter']} })
+    encounter_definition_id: Optional[str] = Field(default=None, title="Encounter Definition ID", description="""Unique identifier for this Encounter Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Encounter', 'EncounterDefinition']} })
+    age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, | eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Encounter'], 'unit': {'ucum_code': 'd'}} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class EncounterDefinition(Record):
+    """
+    A definition of an encounter type in this study, ie, an event at which data was collected about a participant, an intervention was made, or information about a participant was recorded. This may be something planned by a study or a type of data collection.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'activity_definition_id': {'multivalued': True,
+                                                   'name': 'activity_definition_id'},
+                        'encounter_definition_id': {'identifier': True,
+                                                    'name': 'encounter_definition_id',
+                                                    'range': 'string',
+                                                    'required': True}},
+         'title': 'Encounter Definition'})
+
+    encounter_definition_id: str = Field(default=..., title="Encounter Definition ID", description="""Unique identifier for this Encounter Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Encounter', 'EncounterDefinition']} })
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository',
+                       'Investigator',
+                       'EncounterDefinition',
+                       'ActivityDefinition']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""Description for this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition']} })
+    activity_definition_id: Optional[list[str]] = Field(default=[], title="Activity Definition ID", description="""Unique identifier for this Activity Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class ActivityDefinition(Record):
+    """
+    A definition of an activity in this study, eg, a biospecimen collection, intervention, survey, or assessment.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'activity_definition_id': {'identifier': True,
+                                                   'name': 'activity_definition_id',
+                                                   'range': 'string',
+                                                   'required': True}},
+         'title': 'Activity Definition'})
+
+    activity_definition_id: str = Field(default=..., title="Activity Definition ID", description="""Unique identifier for this Activity Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition']} })
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository',
+                       'Investigator',
+                       'EncounterDefinition',
+                       'ActivityDefinition']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""Description for this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 Record.model_rebuild()
@@ -687,3 +756,6 @@ Concept.model_rebuild()
 Sample.model_rebuild()
 BiospecimenCollection.model_rebuild()
 Aliquot.model_rebuild()
+Encounter.model_rebuild()
+EncounterDefinition.model_rebuild()
+ActivityDefinition.model_rebuild()

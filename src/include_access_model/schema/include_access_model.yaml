@@ -169,7 +169,7 @@ classes:
     slots:
       - assertion_id
       - subject_id
-      #- encounter_id
+      - encounter_id
       - assertion_provenance
       - age_at_assertion
       - age_at_event
@@ -228,6 +228,7 @@ classes:
       - site 
       - spatial_qualifier 
       - laterality 
+      - encounter_id
     slot_usage:
       biospecimen_collection_id:
         range: string
@@ -250,6 +251,61 @@ classes:
         range: string
         required: true
         identifier: true
+  Encounter:
+    title: Participant Encounter
+    description: An event at which data was collected about a participant, 
+      an intervention was made, or information about a participant was recorded.
+    is_a: Record
+    slots:
+      - encounter_id
+      - subject_id
+#TODO: Should this alternatively be an "encounter type", ie, to not require a full definition?
+      - encounter_definition_id
+      - age_at_event
+    slot_usage:
+      encounter_id:
+        range: string
+        required: true
+        identifier: true
+  EncounterDefinition:
+    title: Encounter Definition
+    description: A definition of an encounter type in this study, ie, 
+      an event at which data was collected about a participant, 
+      an intervention was made, or information about a participant was recorded.
+      This may be something planned by a study or a type of data collection.
+#TODO: These are metadata and may not need the same Record basis.
+    is_a: Record
+    slots:
+      - encounter_definition_id
+      - name
+      - description
+      - activity_definition_id
+    slot_usage:
+      encounter_definition_id:
+        range: string
+        required: true
+        identifier: true
+      activity_definition_id:
+        multivalued: true
+  ActivityDefinition:
+    title: Activity Definition
+    description: A definition of an activity in this study, eg, 
+      a biospecimen collection, intervention, survey, or assessment.
+#TODO: These are metadata and may not need the same Record basis.
+    is_a: Record
+    slots:
+      - activity_definition_id
+      - name
+      - description
+#TODO: Probably want an "expected data generated" slot, eg, 
+#observation definitions or dd refs
+    slot_usage:
+      activity_definition_id:
+        range: string
+        required: true
+        identifier: true
+
+
 
 slots: 
   study_id:
@@ -612,6 +668,22 @@ slots:
     title: Location Laterality
     description: Laterality that further refine the specific location of biospecimen collection
     range: EnumLaterality
+  encounter_id:
+    title: Encounter ID
+    description: Unique identifier for this Encounter.
+    range: Encounter
+  description:
+    title: Description
+    description: Description for this entity.
+    range: string
+  encounter_definition_id:
+    title: Encounter Definition ID
+    description: Unique identifier for this Encounter Definition.
+    range: EncounterDefinition
+  activity_definition_id:
+    title: Activity Definition ID
+    description: Unique identifier for this Activity Definition.
+    range: ActivityDefinition
 
 enums:
   EnumProgram:
