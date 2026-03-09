@@ -237,7 +237,7 @@ class EnumSubjectType(str, Enum):
     """
     non_participant = "non_participant"
     """
-    An individual associated with a study who was not explictly consented, eg, the subject | of a reported family history.
+    An individual associated with a study who was not explictly consented, eg, the subject of a reported family history.
     """
     cell_line = "cell_line"
     """
@@ -361,7 +361,7 @@ class EnumAssertionProvenance(str, Enum):
 
 class EnumAvailabilityStatus(str, Enum):
     """
-    Is the Thing available for use?
+    Is the biospecimen available for use?
     """
     Available = "available"
     """
@@ -375,16 +375,14 @@ class EnumAvailabilityStatus(str, Enum):
 
 class EnumSampleCollectionMethod(str):
     """
-    The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).
-
+    The approach used to collect the biospecimen. [LOINC](https://loinc.org) is recommended.
     """
     pass
 
 
 class EnumSite(str):
     """
-    The location of the specimen collection. Recommended ontology: [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
-
+    The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html) is recommended.
     """
     pass
 
@@ -392,7 +390,6 @@ class EnumSite(str):
 class EnumSpatialQualifiers(str):
     """
     Any spatial/location qualifiers.
-
     """
     pass
 
@@ -527,7 +524,7 @@ class Publication(Record):
 
 class Subject(Record):
     """
-    This entity is the subject about which data or references are recorded. | This includes the idea of a human participant in a study, a cell line, an animal model, | or any other similar entity.
+    This entity is the subject about which data or references are recorded. This includes the idea of a human participant in a study, a cell line, an animal model, or any other similar entity.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
          'slot_usage': {'subject_id': {'identifier': True,

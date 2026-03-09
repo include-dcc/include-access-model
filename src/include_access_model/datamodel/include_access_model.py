@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-02-23T16:48:29
+# Generation date: 2026-03-09T10:45:00
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -449,8 +449,8 @@ class Publication(Record):
 @dataclass(repr=False)
 class Subject(Record):
     """
-    This entity is the subject about which data or references are recorded. | This includes the idea of a human
-    participant in a study, a cell line, an animal model, | or any other similar entity.
+    This entity is the subject about which data or references are recorded. This includes the idea of a human
+    participant in a study, a cell line, an animal model, or any other similar entity.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -1001,7 +1001,7 @@ class EnumSubjectType(EnumDefinitionImpl):
         description="Study participant with consent, assent, or waiver of consent.")
     non_participant = PermissibleValue(
         text="non_participant",
-        description="""An individual associated with a study who was not explictly consented, eg, the subject | of a reported family history.""")
+        description="""An individual associated with a study who was not explictly consented, eg, the subject of a reported family history.""")
     cell_line = PermissibleValue(
         text="cell_line",
         description="Cell Line")
@@ -1218,7 +1218,7 @@ class EnumAssertionProvenance(EnumDefinitionImpl):
 
 class EnumAvailabilityStatus(EnumDefinitionImpl):
     """
-    Is the Thing available for use?
+    Is the biospecimen available for use?
     """
     available = PermissibleValue(
         text="available",
@@ -1233,26 +1233,26 @@ class EnumAvailabilityStatus(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="EnumAvailabilityStatus",
-        description="Is the Thing available for use?",
+        description="Is the biospecimen available for use?",
     )
 
 class EnumSampleCollectionMethod(EnumDefinitionImpl):
     """
-    The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).
+    The approach used to collect the biospecimen. [LOINC](https://loinc.org) is recommended.
     """
     _defn = EnumDefinition(
         name="EnumSampleCollectionMethod",
-        description="""The approach used to collect the biospecimen. Recommend ontology: [LOINC](https://loinc.org).""",
+        description="The approach used to collect the biospecimen. [LOINC](https://loinc.org) is recommended.",
     )
 
 class EnumSite(EnumDefinitionImpl):
     """
-    The location of the specimen collection. Recommended ontology: [SNOMED Body
-    Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
+    The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html) is
+    recommended.
     """
     _defn = EnumDefinition(
         name="EnumSite",
-        description="""The location of the specimen collection. Recommended ontology: [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)""",
+        description="""The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html) is recommended.""",
     )
 
 class EnumSpatialQualifiers(EnumDefinitionImpl):
@@ -1261,7 +1261,7 @@ class EnumSpatialQualifiers(EnumDefinitionImpl):
     """
     _defn = EnumDefinition(
         name="EnumSpatialQualifiers",
-        description="""Any spatial/location qualifiers.""",
+        description="Any spatial/location qualifiers.",
     )
 
 class EnumLaterality(EnumDefinitionImpl):
