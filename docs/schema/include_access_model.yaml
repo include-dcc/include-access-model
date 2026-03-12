@@ -1393,7 +1393,7 @@ slots:
     name: age_at_event
     definition_uri: https://includedcc.org/include-access-model/age_at_event
     description: The age in days of the Subject at the time point which the assertion
-      describes, | eg, age of onset or when a measurement was performed.
+      describes, eg, age of onset or when a measurement was performed.
     title: Age at event
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:age_at_event
@@ -2744,7 +2744,7 @@ classes:
     class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-12T11:02:40'
-source_file_size: 36151
-generation_date: '2026-03-12T11:04:20'
+source_file_date: '2026-03-12T11:06:57'
+source_file_size: 36149
+generation_date: '2026-03-12T11:07:27'
 

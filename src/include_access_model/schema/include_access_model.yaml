@@ -597,7 +597,7 @@ slots:
       ucum_code: d
   age_at_event:
     title: Age at event
-    description: The age in days of the Subject at the time point which the assertion describes, |
+    description: The age in days of the Subject at the time point which the assertion describes,
       eg, age of onset or when a measurement was performed.
     range: integer
     unit:
