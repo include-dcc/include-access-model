@@ -342,7 +342,28 @@ classes:
     slots:
       - hash_type
       - hash_value
-
+  Dataset:
+    title: Dataset
+    description: Set of files grouped together for release.
+    slots:
+      - dataset_id
+      - name
+      - description
+      - do_id
+      - file_id
+      - publication
+      #TODO: Are these good elements for the core entity?
+      - data_collection_start
+      - data_collection_end
+      
+    slot_usage:
+      dataset_id:
+        range: string
+        required: true
+        identifier: true
+      file_id: 
+        multivalued: true
+        description: The list of files comprising this dataset.
 
 
 slots: 
@@ -766,7 +787,20 @@ slots:
     title: File Hash Value
     description: The value of the file hash
     range: string
-
+  dataset_id:
+    title: Dataset ID
+    description: Unique identifier for a Dataset.
+    range: Dataset
+  data_collection_start:
+    title: Data Collection Start
+    description: The date that data collection started. May include only a year.
+    #TODO: We could re-evaluate these as dates, but that may be too implementation specific
+    range: string
+  data_collection_end:
+    title: Data Collection End
+    description: The date that data collection started. May include only a year.
+    #TODO: We could re-evaluate these as dates, but that may be too implementation specific
+    range: string
 
 enums:
   EnumProgram:

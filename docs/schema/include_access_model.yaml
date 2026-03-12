@@ -835,10 +835,11 @@ slots:
     title: DOI
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:do_id
-    owner: DOI
+    owner: Dataset
     domain_of:
     - Study
     - DOI
+    - Dataset
     range: DOI
     multivalued: false
   subject_id:
@@ -979,12 +980,13 @@ slots:
     title: Name
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:name
-    owner: ActivityDefinition
+    owner: Dataset
     domain_of:
     - VirtualBiorepository
     - Investigator
     - EncounterDefinition
     - ActivityDefinition
+    - Dataset
     range: string
     required: false
   email:
@@ -1176,9 +1178,10 @@ slots:
     title: Publication
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:publication
-    owner: Study
+    owner: Dataset
     domain_of:
     - Study
+    - Dataset
     range: Publication
     multivalued: true
     inlined: true
@@ -1737,10 +1740,11 @@ slots:
     title: Description
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:description
-    owner: ActivityDefinition
+    owner: Dataset
     domain_of:
     - EncounterDefinition
     - ActivityDefinition
+    - Dataset
     range: string
   encounter_definition_id:
     name: encounter_definition_id
@@ -1773,9 +1777,10 @@ slots:
     title: File ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:file_id
-    owner: File
+    owner: Dataset
     domain_of:
     - File
+    - Dataset
     range: File
   filename:
     name: filename
@@ -1890,6 +1895,39 @@ slots:
     owner: FileHash
     domain_of:
     - FileHash
+    range: string
+  dataset_id:
+    name: dataset_id
+    definition_uri: https://includedcc.org/include-access-model/dataset_id
+    description: Unique identifier for a Dataset.
+    title: Dataset ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:dataset_id
+    owner: Dataset
+    domain_of:
+    - Dataset
+    range: Dataset
+  data_collection_start:
+    name: data_collection_start
+    definition_uri: https://includedcc.org/include-access-model/data_collection_start
+    description: The date that data collection started. May include only a year.
+    title: Data Collection Start
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_collection_start
+    owner: Dataset
+    domain_of:
+    - Dataset
+    range: string
+  data_collection_end:
+    name: data_collection_end
+    definition_uri: https://includedcc.org/include-access-model/data_collection_end
+    description: The date that data collection started. May include only a year.
+    title: Data Collection End
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_collection_end
+    owner: Dataset
+    domain_of:
+    - Dataset
     range: string
   Study_study_id:
     name: Study_study_id
@@ -2234,6 +2272,41 @@ slots:
     is_usage_slot: true
     usage_slot_name: sample_id
     range: Sample
+    multivalued: true
+  Dataset_dataset_id:
+    name: Dataset_dataset_id
+    definition_uri: https://includedcc.org/include-access-model/dataset_id
+    description: Unique identifier for a Dataset.
+    title: Dataset ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: dataset_id
+    domain: Dataset
+    slot_uri: includedcc:dataset_id
+    identifier: true
+    alias: dataset_id
+    owner: Dataset
+    domain_of:
+    - Dataset
+    is_usage_slot: true
+    usage_slot_name: dataset_id
+    range: string
+    required: true
+  Dataset_file_id:
+    name: Dataset_file_id
+    definition_uri: https://includedcc.org/include-access-model/file_id
+    description: The list of files comprising this dataset.
+    title: File ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: file_id
+    domain: Dataset
+    slot_uri: includedcc:file_id
+    alias: file_id
+    owner: Dataset
+    domain_of:
+    - Dataset
+    is_usage_slot: true
+    usage_slot_name: file_id
+    range: File
     multivalued: true
 classes:
   Record:
@@ -2643,9 +2716,35 @@ classes:
     - hash_type
     - hash_value
     class_uri: includedcc:FileHash
+  Dataset:
+    name: Dataset
+    definition_uri: https://includedcc.org/include-access-model/Dataset
+    description: Set of files grouped together for release.
+    title: Dataset
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - Dataset_dataset_id
+    - name
+    - description
+    - do_id
+    - Dataset_file_id
+    - publication
+    - data_collection_start
+    - data_collection_end
+    slot_usage:
+      dataset_id:
+        name: dataset_id
+        identifier: true
+        range: string
+        required: true
+      file_id:
+        name: file_id
+        description: The list of files comprising this dataset.
+        multivalued: true
+    class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-09T16:30:20'
-source_file_size: 35097
-generation_date: '2026-03-09T16:31:10'
+source_file_date: '2026-03-12T10:52:04'
+source_file_size: 36264
+generation_date: '2026-03-12T10:53:07'
 
