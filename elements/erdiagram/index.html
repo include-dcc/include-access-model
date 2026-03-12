@@ -192,6 +192,13 @@ DOI {
     string bibliographic_reference  
     uriorcurieList external_id  
 }
+Dataset {
+    string dataset_id  
+    string name  
+    string description  
+    string data_collection_start  
+    string data_collection_end  
+}
 Demographics {
     EnumSex sex  
     EnumRaceList race  
@@ -307,6 +314,9 @@ Aliquot ||--|o Concept : "concentration_unit"
 Aliquot ||--|o Concept : "quantity_unit"
 Aliquot ||--|o Sample : "sample_id"
 BiospecimenCollection ||--|o Encounter : "encounter_id"
+Dataset ||--|o DOI : "do_id"
+Dataset ||--}o File : "file_id"
+Dataset ||--}o Publication : "publication"
 Demographics ||--|| Subject : "subject_id"
 Encounter ||--|o EncounterDefinition : "encounter_definition_id"
 Encounter ||--|o Subject : "subject_id"
