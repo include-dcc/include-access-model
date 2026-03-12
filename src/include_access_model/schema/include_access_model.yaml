@@ -2,8 +2,7 @@
 id: https://includedcc.org/include-access-model
 name: include-access-model
 title: INCLUDE DCC Access Model
-description: |-
-  LinkML Schema for the internal INCLUDE DCC Access Model
+description: LinkML Schema for the internal INCLUDE DCC Access Model
 license: MIT
 see_also:
   - https://includedcc.github.io/include-access-model
@@ -41,11 +40,11 @@ classes:
     slots:
     - external_id
   Study:
-    title: Study 
+    title: Research Study 
     description: Study Metadata 
     is_a: Record
     slots: 
-#TODO: Split out core Study items and additional study metadata?
+    #TODO: Split out core Study items and additional study metadata?
       - study_id
       - parent_study 
       - study_title
@@ -57,7 +56,7 @@ classes:
       - contact
       - study_description
       - website
-# - dbgap : Should we call this out specifically or just use an external id?
+    # - dbgap : Should we call this out specifically or just use an external id?
       - publication
       - acknowledgments
       - citation_statement
@@ -82,9 +81,9 @@ classes:
       - research_domain
       - expected_number_of_participants
       - actual_number_of_participants
-# Do we need this info, or should it be documented elsewhere?
-#    - guidType
-#    - guidMapped
+      # Do we need this info, or should it be documented elsewhere?
+      #- guidType
+      #- guidMapped
     slot_usage:
       study_id:
         required: true
@@ -108,7 +107,6 @@ classes:
     description: A DOI is a permanent reference with metadata about a digital object.
     is_a: Record
     slots:
-#TODO: Need to split up the doi slot here versus in the study resource- it's self-referential now.
       - do_id
       - bibliographic_reference
     slot_usage:
@@ -263,7 +261,7 @@ classes:
     slots:
       - encounter_id
       - subject_id
-#TODO: Should this alternatively be an "encounter type", ie, to not require a full definition?
+      #TODO: Should this alternatively be an "encounter type", ie, to not require a full definition?
       - encounter_definition_id
       - age_at_event
     slot_usage:
@@ -277,7 +275,7 @@ classes:
       an event at which data was collected about a participant, 
       an intervention was made, or information about a participant was recorded.
       This may be something planned by a study or a type of data collection.
-#TODO: These are metadata and may not need the same Record basis.
+    #TODO: These are metadata and may not need the same Record basis.
     is_a: Record
     slots:
       - encounter_definition_id
@@ -295,14 +293,14 @@ classes:
     title: Activity Definition
     description: A definition of an activity in this study, eg, 
       a biospecimen collection, intervention, survey, or assessment.
-#TODO: These are metadata and may not need the same Record basis.
+    #TODO: These are metadata and may not need the same Record basis.
     is_a: Record
     slots:
       - activity_definition_id
       - name
       - description
-#TODO: Probably want an "expected data generated" slot, eg, 
-#observation definitions or dd refs
+      #TODO: Probably want an "expected data generated" slot, eg, 
+      #observation definitions or dd refs
     slot_usage:
       activity_definition_id:
         range: string
@@ -322,7 +320,7 @@ classes:
       - data_type
       - format
       - size
-#TODO: I'm not convinced this is the right strategy- access model vs operations
+      #TODO: I'm not convinced this is the right strategy- access model vs operations
       - staging_url
       - release_url
       - drs_uri
@@ -566,7 +564,7 @@ slots:
     range: EnumDownSyndromeStatus
     required: true
   age_at_first_engagement:
-#Should this just be a reference out to an encounter?
+    #Should this just be a reference out to an encounter?
     title: Age at First Participant Engagement
     description: Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.
     range: integer
@@ -611,12 +609,10 @@ slots:
     unit:
       ucum_code: d
   concept:
-#TODO: Is this required?
-    title: Assertion concept
+    title: Concept
     description: The structured term defining the meaning of the assertion.
     range: Concept
     multivalued: true
-#    inlined: false
   concept_curie:
     title: Concept Curie
     description: The standardized curie for the term.
@@ -634,7 +630,6 @@ slots:
     description: The structured term defining the value of the assertion.
     range: Concept
     multivalued: true
- #   inlined: false
   value_number:
     title: Value Number
     description: The numeric value of the assertion.
@@ -863,7 +858,7 @@ enums:
   EnumStudyDesign:
     title: Study Design
     description: Approaches for collecting data, investigating interventions, and/or analyzing data.
-  #TODO: Add meanings
+    #TODO: Add meanings
     permissible_values:
       case_control:
         title: Case-Control
@@ -888,7 +883,7 @@ enums:
   EnumClinicalDataSourceType:
     title: Clinical Data Source Type
     description: Approaches to ascertain clinical information about a participant.
-  #TODO: Add meanings
+    #TODO: Add meanings
     permissible_values:
       medical_record:
         title: Medical Record
@@ -907,7 +902,7 @@ enums:
   EnumDataCategory:
     title: Data Category
     description: Categories of data which may be collected about participants.
-  #TODO: Add meanings
+    #TODO: Add meanings
     permissible_values:
     #Should we have these two demo/clinical data categories?
       unharmonized_demographic_clinical_data:
@@ -1080,7 +1075,7 @@ enums:
       other:
         title: Other
         description: Data obtained from other source, such as tissue bank
-#TODO: Revisit these bindings / enumerations
+  #TODO: Revisit these bindings / enumerations
   EnumAvailabilityStatus:
     description: Is the biospecimen available for use?
     permissible_values:

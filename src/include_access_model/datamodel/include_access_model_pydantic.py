@@ -445,7 +445,7 @@ class Study(Record):
                                      'name': 'study_id',
                                      'range': 'string',
                                      'required': True}},
-         'title': 'Study'})
+         'title': 'Research Study'})
 
     study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata']} })
     parent_study: Optional[str] = Field(default=None, title="Parent Study", description="""The parent study for this study, if it is a nested study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
@@ -624,7 +624,7 @@ class SubjectAssertion(Record):
     age_at_assertion: Optional[int] = Field(default=None, title="Age at assertion", description="""The age in days of the Subject when the assertion was made.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
     age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, | eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Encounter'], 'unit': {'ucum_code': 'd'}} })
     age_at_resolution: Optional[int] = Field(default=None, title="Age at resolution", description="""The age in days of the Subject when the asserted state was resolved.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
-    concept: Optional[list[str]] = Field(default=[], title="Assertion concept", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
+    concept: Optional[list[str]] = Field(default=[], title="Concept", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     concept_source: Optional[str] = Field(default=None, title="Concept Source Text", description="""The source text yielding the standardized concept.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_concept: Optional[list[str]] = Field(default=[], title="Value concept", description="""The structured term defining the value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_number: Optional[float] = Field(default=None, title="Value Number", description="""The numeric value of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
