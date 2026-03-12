@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-09T16:30:56
+# Generation date: 2026-03-12T10:52:49
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -138,6 +138,10 @@ class ActivityDefinitionActivityDefinitionId(extended_str):
 
 
 class FileFileId(extended_str):
+    pass
+
+
+class DatasetDatasetId(extended_str):
     pass
 
 
@@ -994,6 +998,59 @@ class FileHash(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
+class Dataset(YAMLRoot):
+    """
+    Set of files grouped together for release.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Dataset"]
+    class_class_curie: ClassVar[str] = "includedcc:Dataset"
+    class_name: ClassVar[str] = "Dataset"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Dataset
+
+    dataset_id: Union[str, DatasetDatasetId] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    do_id: Optional[Union[str, DOIDoId]] = None
+    file_id: Optional[Union[Union[str, FileFileId], list[Union[str, FileFileId]]]] = empty_list()
+    publication: Optional[Union[Union[dict, Publication], list[Union[dict, Publication]]]] = empty_list()
+    data_collection_start: Optional[str] = None
+    data_collection_end: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.dataset_id):
+            self.MissingRequiredField("dataset_id")
+        if not isinstance(self.dataset_id, DatasetDatasetId):
+            self.dataset_id = DatasetDatasetId(self.dataset_id)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        if self.do_id is not None and not isinstance(self.do_id, DOIDoId):
+            self.do_id = DOIDoId(self.do_id)
+
+        if not isinstance(self.file_id, list):
+            self.file_id = [self.file_id] if self.file_id is not None else []
+        self.file_id = [v if isinstance(v, FileFileId) else FileFileId(v) for v in self.file_id]
+
+        if not isinstance(self.publication, list):
+            self.publication = [self.publication] if self.publication is not None else []
+        self.publication = [v if isinstance(v, Publication) else Publication(**as_dict(v)) for v in self.publication]
+
+        if self.data_collection_start is not None and not isinstance(self.data_collection_start, str):
+            self.data_collection_start = str(self.data_collection_start)
+
+        if self.data_collection_end is not None and not isinstance(self.data_collection_end, str):
+            self.data_collection_end = str(self.data_collection_end)
+
+        super().__post_init__(**kwargs)
+
+
 # Enumerations
 class EnumProgram(EnumDefinitionImpl):
     """
@@ -1792,6 +1849,15 @@ slots.hash_type = Slot(uri=INCLUDEDCC.hash_type, name="hash_type", curie=INCLUDE
 slots.hash_value = Slot(uri=INCLUDEDCC.hash_value, name="hash_value", curie=INCLUDEDCC.curie('hash_value'),
                    model_uri=INCLUDEDCC.hash_value, domain=None, range=Optional[str])
 
+slots.dataset_id = Slot(uri=INCLUDEDCC.dataset_id, name="dataset_id", curie=INCLUDEDCC.curie('dataset_id'),
+                   model_uri=INCLUDEDCC.dataset_id, domain=None, range=Optional[Union[str, DatasetDatasetId]])
+
+slots.data_collection_start = Slot(uri=INCLUDEDCC.data_collection_start, name="data_collection_start", curie=INCLUDEDCC.curie('data_collection_start'),
+                   model_uri=INCLUDEDCC.data_collection_start, domain=None, range=Optional[str])
+
+slots.data_collection_end = Slot(uri=INCLUDEDCC.data_collection_end, name="data_collection_end", curie=INCLUDEDCC.curie('data_collection_end'),
+                   model_uri=INCLUDEDCC.data_collection_end, domain=None, range=Optional[str])
+
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
 
@@ -1848,3 +1914,9 @@ slots.File_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="File_subject_id", 
 
 slots.File_sample_id = Slot(uri=INCLUDEDCC.sample_id, name="File_sample_id", curie=INCLUDEDCC.curie('sample_id'),
                    model_uri=INCLUDEDCC.File_sample_id, domain=File, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
+
+slots.Dataset_dataset_id = Slot(uri=INCLUDEDCC.dataset_id, name="Dataset_dataset_id", curie=INCLUDEDCC.curie('dataset_id'),
+                   model_uri=INCLUDEDCC.Dataset_dataset_id, domain=Dataset, range=Union[str, DatasetDatasetId])
+
+slots.Dataset_file_id = Slot(uri=INCLUDEDCC.file_id, name="Dataset_file_id", curie=INCLUDEDCC.curie('file_id'),
+                   model_uri=INCLUDEDCC.Dataset_file_id, domain=Dataset, range=Optional[Union[Union[str, FileFileId], list[Union[str, FileFileId]]]])
