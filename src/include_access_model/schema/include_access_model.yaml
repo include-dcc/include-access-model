@@ -310,38 +310,197 @@ classes:
         identifier: true
   File:
     title: File
-    description: File
+    description: An object and its metadata that exists in s3.
     is_a: Record 
     slots: 
-      - file_id
-      - subject_id
+      - file_id 
+      - subject_id # do we need both a subject and sample id in this table? 
       - sample_id
-      - filename
+      - file_name
       - format
-      - data_category
-      - data_type
-      - format
+      # - data_category - might be better suited for an assay model
+      # - data_type - same as ^ 
+      # below are the file fields d3b use from automatic file inventorying in aws; many fields decscibe object metadata 
+      - file_category 
+        description: a high level classfication of the file (e.g., omics file, imaging file)
       - size
+      - s3_file_path # can name this url if more appropriate 
+        description: full s3 url of an file's location in aws
+      - s3_key
+      - file_extension
+      - data_transfer_id
+        description: jira ticket number associated with a file transfer request to production bucket
+      - aws_account_id
+      - account_name
+      - account_alias
+      - bucket_study_id
+        description: global study ID used to create the bucket
+      - bucket
+      - s3_created_at
+      - s3_modified_at
+      - intelligent_tiering_access
+      - is_delete_marker
+        description: notes whether a file has been deleted from s3
+      - is_latest
+      - storage_class
+      - hash
+      - manifest_hash_value
+      - file_hash_validation_status
+      - file_type
+      - access_url
+      - drs_uri
+
+    # not sure if these are actual useful - but are in the d3b model
+      - encryption_status
+      - is_multipart_uploaded
+      - object_lock_leval_hold_status
+      - object_lock_mode
+      - object_lock_retain_until_date
+      - replication_status
+      - version_id
+
+   
+
 #TODO: I'm not convinced this is the right strategy- access model vs operations
+# this might be good to have in a separate model for drs management 
       - staging_url
       - release_url
-      - drs_uri
-      - hash
+      # - drs_uri
+      # - hash
     slot_usage:
       file_id:
         range: string
         required: true
         identifier: true
       subject_id:
-        multivalued: true
+        multivalued: true 
       sample_id:
         multivalued: true
+      file_name: 
+        range: string
+        required: true 
+      format: 
+        range: string
+        required: true 
+      file_category: 
+        range: string
+        required: true
+      size: 
+        range: integer
+        required: true 
+      s3_file_path:
+        range: string
+        required: true 
+      s3_key: 
+        range: string
+        required: true
+      file_extension: 
+        range: string
+        required: true
+      data_transfer_id: 
+        range: string
+        required: false 
+      aws_account_id: 
+        range: string
+        required: true
+      account_name: 
+        range: string
+        required: true 
+      account_alias: 
+        range: string
+        required: true 
+      bucket_study_id: 
+        range: string
+        required: false 
+      bucket: 
+        range: string
+        required: false
+      s3_created_at: 
+        range: date
+        required: true
+      s3_modified_at: 
+        range: date
+        required: true
+      intelligent_tiering_access: 
+        range: string
+        required: true
+      is_delete_marker: 
+        range: boolean
+        required: true
+      is_latest: 
+        range: boolean
+        required: true
+      storage_class: 
+        range: string
+        required: true
+      hash: 
+        range: 
+        required: true
+      manifest_hash_value: 
+        range: 
+        required: false
+      file_hash_validation_status: 
+        range: string
+        required: false
+      file_type: 
+        range: string
+        required: true
+      access_url: 
+        range: string
+        required: false
+      drs_uri: 
+        range: string
+        required: false
+
   FileHash:
     title: File Hash
     description: Type and value of a file content hash.
     slots:
       - hash_type
       - hash_value
+
+  FileDrs: 
+    title: File DRS
+    description: Access control information for files accessed through a DRS service. 
+    slots: 
+    - file_id
+      description: unique file identifier assigned to a file 
+    - staging_url
+      description: s3 location of a file before its made public
+    - release_url
+      description: production location of a publically available file 
+    - hash
+    - access_type
+      description: notes wheter a file is controlled, open, or registered-tier access
+    - access_url
+    - drs_uri
+    - acl
+      description: access control list for the file
+
+    slot_usage: 
+      file_id: 
+        range: string
+        required: true 
+        identifier: true 
+      staging_url: 
+        range: string
+        required: true 
+      release_url: 
+        range: string
+        required: true 
+      hash: 
+        range: 
+        required: true 
+      access_type: 
+        range: string
+        required: true 
+      access_url:  
+        range: string
+        requried: true 
+      acl: 
+        range: string
+        required: true 
+        multivalued: true 
 
 
 
