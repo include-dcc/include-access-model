@@ -318,8 +318,9 @@ classes:
       - sample_id
       - file_name
       - format
-      # - data_category - might be better suited for an assay model
-      # - data_type - same as ^ 
+      - data_category # might be better suited for the assay model
+      - data_type  # same as ^ 
+
       # below are the file fields d3b use from automatic file inventorying in aws; many fields decscibe object metadata 
       - file_category 
         description: a high level classfication of the file (e.g., omics file, imaging file)
@@ -359,12 +360,18 @@ classes:
       - replication_status
       - version_id
 
+    # new proposed fields
+    - is_released
+      description: notes whether a file has been released to the public
+    - is_registered
+      description: notes whether a file has been registered to a drs service
+
    
 
 #TODO: I'm not convinced this is the right strategy- access model vs operations
 # this might be good to have in a separate model for drs management 
-      - staging_url
-      - release_url
+      # - staging_url
+      # - release_url
       # - drs_uri
       # - hash
     slot_usage:
@@ -470,9 +477,11 @@ classes:
     - release_url
       description: production location of a publically available file 
     - hash
+      description: file hash value
     - access_type
       description: notes wheter a file is controlled, open, or registered-tier access
     - access_url
+      description: 
     - drs_uri
     - acl
       description: access control list for the file
