@@ -336,7 +336,7 @@ classes:
       - drs_uri
       - is_released # maybe can leave this out? should only release ready data be in this model? 
         description: notes whether a file has been released to the public
-      - is_registered
+      - is_registered # maybe can leave this out? should only drs registered data be in this model? 
         description: notes whether a file has been registered to a drs service
       - repository 
         description: name of drs service files are registered to 
@@ -535,6 +535,9 @@ classes:
       file_type: 
         range: string
         required: true
+      size: 
+        range: integer
+        required: true 
       staging_url: 
         range: string
         required: true 
@@ -569,10 +572,66 @@ classes:
       data_category: 
         range: string
         required: true 
+        description: high-level category of the data used for filtering
       data_type: 
         range: string
         required: true 
 
+  FileAssay:
+    title: File Assay
+    # for now group all types into one table; but we may want to split out since different 
+    # assay types collect different types of information
+    # this is a basic model
+    description: A file produced by or associated with an assay or data
+    acquisition process including omics, imaging, actigraphy, and other experimental or observational data.
+    slots:
+      file_id: 
+        range: string
+        required: true 
+        identifier: true 
+      subject_id: 
+        range: string
+        required: true 
+      sample_id: 
+        range: string
+        required: true 
+      data_category: 
+        range: string
+        required: true 
+        description: high-level category of the data used for filtering
+      experimental_strategy: 
+        range: string
+        required: true 
+        descirption: method or assay used to generate the data
+      data_type: 
+        range: string
+        required: true 
+        description: specific type of data contained in the file
+      format: 
+        range: string
+        required: true 
+      size: 
+        range: integer 
+        required: true 
+      access_type: 
+        range: string
+        required: true 
+      assay_center: 
+        range: string
+        required: false 
+        description: the organization or center that generated the file
+      platform:
+        range: string
+        required: false
+        description: instrument or platform family name
+      workflow_name:
+        range: string
+        required: false 
+        description: processing tool that produced the file
+      workflow_version: 
+        range: string
+        required: false 
+      
 
 
 slots: 
