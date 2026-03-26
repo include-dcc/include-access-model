@@ -410,6 +410,7 @@ classes:
       - hash_value
 
   FileAdmin: # names are TBD; can change - idea is this is operational or file universe model
+  # probs doesn't go into the "access model" - but here is what could go there
     title: File Admin
     description: File unvierse; contains all information about a file that may be needed for operational work
     slots:  
