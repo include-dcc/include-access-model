@@ -310,23 +310,120 @@ classes:
         identifier: true
   File:
     title: File
-    description: An object and its metadata that exists in s3.
+    # subset of info; ideally pulls from a file universe table and some kind of assay table
+    description: Required information for portal use.
     is_a: Record 
     slots: 
+      - study_id 
+        description: unique global study identifier file belongs to
       - file_id 
+      description: unique file identifier assigned to a file 
       - subject_id # do we need both a subject and sample id in this table? 
       - sample_id
+      - s3_file_path # can name this url if more appropriate 
+        description: full s3 url of an file's location in aws
       - file_name
+      - size
       - format
-      - data_category # might be better suited for the assay model
-      - data_type  # same as ^ 
+      - data_category 
+      - data_type
+      - experimental_strategy
+      - acl
+        description: access control list for the file
+      - access_type
+        description: notes wheter a file is controlled, open, or registered-tier access
+      - access_url 
+      - drs_uri
+      - is_released # maybe can leave this out? should only release ready data be in this model? 
+        description: notes whether a file has been released to the public
+      - is_registered
+        description: notes whether a file has been registered to a drs service
+      - repository 
+        description: name of drs service files are registered to 
+      - hash 
+        description: file hash value
 
-      # below are the file fields d3b use from automatic file inventorying in aws; many fields decscibe object metadata 
+    slot_usage:
+      study_id: 
+        range: string
+        required: true 
+        identifier: true 
+      file_id:
+        range: string
+        required: true
+        identifier: true
+      subject_id:
+        multivalued: true 
+      sample_id:
+        multivalued: true
+      file_name: 
+        range: string
+        required: true 
+      format: 
+        range: string
+        required: true 
+      size: 
+        range: integer
+        required: true 
+      s3_file_path:
+        range: string
+        required: true 
+      hash: 
+        range: 
+        required: true
+      access_url: 
+        range: string
+        required: false
+      drs_uri: 
+        range: string
+        required: false
+      data_category: 
+        range: string
+        required: true 
+      data_type: 
+        range: string
+        required: true 
+      experimental_strategy: 
+        range: string
+        required: true 
+      access_type: 
+        range: string
+        required: true 
+      is_released: 
+        range: boolean
+        required: true 
+      is_registered: 
+        range: boolean
+        required: true 
+      repository: 
+        range: string
+        required: true 
+      access_url: 
+        range: string
+        required: true 
+
+  FileHash:
+    title: File Hash
+    description: Type and value of a file content hash.
+    slots:
+      - hash_type
+      - hash_value
+
+  FileAdmin: # names are TBD; can change - idea is this is operational or file universe model
+    title: File Admin
+    description: File unvierse; contains all information about a file that may be needed for operational work
+    slots:  
+      - study_id 
+        description: unique global study identifier file belongs to
+      - file_id 
+        description: unique file identifier assigned to a file 
+      - subject_id # do we need both a subject and sample id in this table? 
+      - sample_id
+      - s3_file_path # can name this url if more appropriate 
+        description: full s3 url of an file's location in aws
       - file_category 
         description: a high level classfication of the file (e.g., omics file, imaging file)
       - size
-      - s3_file_path # can name this url if more appropriate 
-        description: full s3 url of an file's location in aws
       - s3_key
       - file_extension
       - data_transfer_id
@@ -344,14 +441,9 @@ classes:
         description: notes whether a file has been deleted from s3
       - is_latest
       - storage_class
-      - hash
       - manifest_hash_value
       - file_hash_validation_status
       - file_type
-      - access_url
-      - drs_uri
-
-    # not sure if these are actual useful - but are in the d3b model
       - encryption_status
       - is_multipart_uploaded
       - object_lock_leval_hold_status
@@ -359,45 +451,39 @@ classes:
       - object_lock_retain_until_date
       - replication_status
       - version_id
+      - staging_url
+        description: s3 location of a file before its made public
+      - release_url
+        description: production location of a publically available file 
+      - hash
+        description: file hash value
+      - access_type
+        description: notes wheter a file is controlled, open, or registered-tier access
+      - access_url
+        description: 
+      - drs_uri
+      - acl
+        description: access control list for the file
+      - is_released
+        description: notes whether a file has been released to the public
+      - is_registered
+        description: notes whether a file has been registered to a drs service
+      - repository 
+        description: name of drs service files are registered to 
+      - experiment_strategy
 
-    # new proposed fields
-    - is_released
-      description: notes whether a file has been released to the public
-    - is_registered
-      description: notes whether a file has been registered to a drs service
-
-   
-
-#TODO: I'm not convinced this is the right strategy- access model vs operations
-# this might be good to have in a separate model for drs management 
-      # - staging_url
-      # - release_url
-      # - drs_uri
-      # - hash
-    slot_usage:
-      file_id:
+    slot_usage: 
+      study_id: 
+        range: string
+        required: true 
+        identifier: true 
+      file_id: 
+        range: string
+        required: true 
+        identifier: true 
+     file_category: 
         range: string
         required: true
-        identifier: true
-      subject_id:
-        multivalued: true 
-      sample_id:
-        multivalued: true
-      file_name: 
-        range: string
-        required: true 
-      format: 
-        range: string
-        required: true 
-      file_category: 
-        range: string
-        required: true
-      size: 
-        range: integer
-        required: true 
-      s3_file_path:
-        range: string
-        required: true 
       s3_key: 
         range: string
         required: true
@@ -440,9 +526,6 @@ classes:
       storage_class: 
         range: string
         required: true
-      hash: 
-        range: 
-        required: true
       manifest_hash_value: 
         range: 
         required: false
@@ -452,45 +535,6 @@ classes:
       file_type: 
         range: string
         required: true
-      access_url: 
-        range: string
-        required: false
-      drs_uri: 
-        range: string
-        required: false
-
-  FileHash:
-    title: File Hash
-    description: Type and value of a file content hash.
-    slots:
-      - hash_type
-      - hash_value
-
-  FileDrs: 
-    title: File DRS
-    description: Access control information for files accessed through a DRS service. 
-    slots: 
-    - file_id
-      description: unique file identifier assigned to a file 
-    - staging_url
-      description: s3 location of a file before its made public
-    - release_url
-      description: production location of a publically available file 
-    - hash
-      description: file hash value
-    - access_type
-      description: notes wheter a file is controlled, open, or registered-tier access
-    - access_url
-      description: 
-    - drs_uri
-    - acl
-      description: access control list for the file
-
-    slot_usage: 
-      file_id: 
-        range: string
-        required: true 
-        identifier: true 
       staging_url: 
         range: string
         required: true 
@@ -510,6 +554,24 @@ classes:
         range: string
         required: true 
         multivalued: true 
+      repository: 
+        range: string
+        required: true 
+      is_released: 
+        range: boolean
+        required: true 
+      is_registered: 
+        range: boolean
+        required: true 
+      experimental_strategy: 
+        range: string
+        required: true 
+      data_category: 
+        range: string
+        required: true 
+      data_type: 
+        range: string
+        required: true 
 
 
 
