@@ -313,14 +313,11 @@ classes:
     is_a: Record 
     slots: 
       - study_id 
-        description: unique global study identifier file belongs to
       - file_id 
-      description: unique file identifier assigned to a file 
       - subject_id # do we need both a subject and sample id in this table? 
       - sample_id
       - s3_file_path # can name this url if more appropriate 
-        description: full s3 url of an file's location in aws
-      - file_name
+      - filename
       - size
       - format
       - data_category 
@@ -331,72 +328,50 @@ classes:
       - staging_url
       - release_url
       - drs_uri
-      - is_released # maybe can leave this out? should only release ready data be in this model? 
-        description: notes whether a file has been released to the public
-      - is_registered # maybe can leave this out? should only drs registered data be in this model? 
-        description: notes whether a file has been registered to a drs service
-      - repository 
-        description: name of drs service files are registered to 
       - hash 
-        description: file hash value
 
     slot_usage:
       study_id: 
-        range: string
         required: true 
         identifier: true 
       file_id:
-        range: string
         required: true
         identifier: true
       subject_id:
-        multivalued: true 
+        required: true 
+        multivalued: true
       sample_id:
+        required: true 
         multivalued: true
       file_name: 
-        range: string
         required: true 
       format: 
-        range: string
         required: true 
       size: 
-        range: integer
         required: true 
       s3_file_path:
-        range: string
         required: true 
       hash: 
-        range: 
         required: true
       access_url: 
-        range: string
         required: false
       drs_uri: 
-        range: string
         required: false
       data_category: 
-        range: string
         required: true 
       data_type: 
-        range: string
         required: true 
       experimental_strategy: 
-        range: string
         required: true 
       access_type: 
-        range: string
         required: true 
       is_released: 
-        range: boolean
         required: true 
       is_registered: 
-        range: boolean
         required: true 
       repository: 
-        range: string
         required: true 
       access_url: 
-        range: string
         required: true 
 
   FileHash:
@@ -435,31 +410,24 @@ FileAdmin: # names are TBD; can change - idea is this is operational or file uni
     description: File unvierse; contains all information about a file that may be needed for operational work
     slots:  
       - study_id 
-        description: unique global study identifier file belongs to
       - file_id 
-        description: unique file identifier assigned to a file 
       - subject_id # do we need both a subject and sample id in this table? 
       - sample_id
       - s3_file_path # can name this url if more appropriate 
-        description: full s3 url of an file's location in aws
       - file_category 
-        description: a high level classfication of the file (e.g., omics file, imaging file)
       - size
       - s3_key
       - file_extension
       - data_transfer_id
-        description: jira ticket number associated with a file transfer request to production bucket
       - aws_account_id
       - account_name
       - account_alias
       - bucket_study_id
-        description: global study ID used to create the bucket
       - bucket
       - s3_created_at
       - s3_modified_at
       - intelligent_tiering_access
       - is_delete_marker
-        description: notes whether a file has been deleted from s3
       - is_latest
       - storage_class
       - manifest_hash_value
@@ -467,135 +435,91 @@ FileAdmin: # names are TBD; can change - idea is this is operational or file uni
       - file_type
       - encryption_status
       - is_multipart_uploaded
-      - object_lock_leval_hold_status
+      - object_lock_level_hold_status
       - object_lock_mode
       - object_lock_retain_until_date
       - replication_status
       - version_id
       - staging_url
-        description: s3 location of a file before its made public
       - release_url
-        description: production location of a publically available file 
       - hash
-        description: file hash value
       - access_type
-        description: notes wheter a file is controlled, open, or registered-tier access
       - access_url
-        description: 
       - drs_uri
       - acl
-        description: access control list for the file
       - is_released
-        description: notes whether a file has been released to the public
       - is_registered
-        description: notes whether a file has been registered to a drs service
       - repository 
-        description: name of drs service files are registered to 
       - experiment_strategy
 
     slot_usage: 
       study_id: 
-        range: string
         required: true 
-        identifier: true 
       file_id: 
-        range: string
         required: true 
         identifier: true 
      file_category: 
-        range: string
         required: true
       s3_key: 
-        range: string
         required: true
       file_extension: 
-        range: string
         required: true
       data_transfer_id: 
-        range: string
         required: false 
       aws_account_id: 
-        range: string
         required: true
       account_name: 
-        range: string
         required: true 
       account_alias: 
-        range: string
         required: true 
       bucket_study_id: 
-        range: string
-        required: false 
+        required: true 
       bucket: 
-        range: string
-        required: false
+        required: true
       s3_created_at: 
-        range: date
         required: true
       s3_modified_at: 
-        range: date
         required: true
       intelligent_tiering_access: 
-        range: string
         required: true
       is_delete_marker: 
-        range: boolean
         required: true
       is_latest: 
-        range: boolean
         required: true
       storage_class: 
-        range: string
         required: true
       manifest_hash_value: 
-        range: 
         required: false
       file_hash_validation_status: 
-        range: string
         required: false
       file_type: 
-        range: string
         required: true
       size: 
-        range: integer
         required: true 
       staging_url: 
-        range: string
         required: true 
       release_url: 
-        range: string
         required: true 
       hash: 
-        range: 
         required: true 
       access_type: 
-        range: string
         required: true 
       access_url:  
-        range: string
         requried: true 
       acl: 
-        range: string
         required: true 
         multivalued: true 
       repository: 
-        range: string
         required: true 
       is_released: 
-        range: boolean
         required: true 
       is_registered: 
-        range: boolean
         required: true 
       experimental_strategy: 
-        range: string
         required: true 
       data_category: 
-        range: string
         required: true 
-        description: high-level category of the data used for filtering
       data_type: 
-        range: string
         required: true 
 
   FileAssay:
@@ -606,52 +530,50 @@ FileAdmin: # names are TBD; can change - idea is this is operational or file uni
     description: A file produced by or associated with an assay or data
     acquisition process including omics, imaging, actigraphy, and other experimental or observational data.
     slots:
+      - file_id
+      - subject_id
+      - sample_id
+      - data_category
+      - experimental_strategy
+      - data_type
+      - format
+      - size
+      - access_type
+      - assay_center
+      - platform
+      - workflow_name
+      - workflow_version
+    
+    slot_usage: 
       file_id: 
-        range: string
         required: true 
         identifier: true 
       subject_id: 
-        range: string
         required: true 
+        multivalued: true 
       sample_id: 
-        range: string
         required: true 
+        multivalued: true 
       data_category: 
-        range: string
         required: true 
-        description: high-level category of the data used for filtering
       experimental_strategy: 
-        range: string
         required: true 
-        descirption: method or assay used to generate the data
       data_type: 
-        range: string
         required: true 
-        description: specific type of data contained in the file
       format: 
-        range: string
         required: true 
       size: 
-        range: integer 
         required: true 
       access_type: 
-        range: string
         required: true 
       assay_center: 
-        range: string
-        required: false 
-        description: the organization or center that generated the file
-      platform:
-        range: string
-        required: false
-        description: instrument or platform family name
-      workflow_name:
-        range: string
-        required: false 
-        description: processing tool that produced the file
+        required: true 
+      platform: 
+        required: true 
+      workflow_name: 
+        required: true 
       workflow_version: 
-        range: string
-        required: false 
+        required: true
       
 slots: 
   study_id:
@@ -1085,6 +1007,154 @@ slots:
     description: The date that data collection started. May include only a year.
     #TODO: We could re-evaluate these as dates, but that may be too implementation specific
     range: string
+  s3_file_path: 
+    title: S3 File Path
+    description: The full s3 url of a file's location in aws
+    range: string
+  is_released:
+    title: Is Released
+    description: A flag that notes whether a file has been released to the public
+    range: boolean 
+  is_registered:
+    title: Is Registered
+    description: A flag that notes whether a file has been registered to a drs service
+    range: boolean
+  repository: 
+    title: Repository
+    description: The name of the drs service which files are registered to 
+    range: string
+  file_category: 
+    title: File Category
+    description: A high level classification of the file
+    range: string
+  s3_key: 
+    title: S3 Key
+    description: The unique identifier for an object within a bucket
+    range: string
+  file_extension: 
+    title: File Extension
+    description: A 3-4 letter code at the end of a filename that identifies the file format.
+    range: string
+  data_transfer_id: 
+    title: Data Transfer ID
+    description: A jira ticket number associated with a file transfer request to production bucket
+    range: string
+  aws_account_id: 
+    title: AWS Account ID
+    description: A 12-digit number that uniquely identifies a specific AWS account
+    range: string
+  account_name: 
+    title: AWS Account Name
+    description: A user-defined label used to define an AWS accoun.
+    range: string
+  account_alias: 
+    title: Account Alias
+    description: A unique user-defined string that replaces the AWS Account ID in the IAM user sign-in URL
+    range: string
+  bucket_study_id: 
+    title: Bucket Study ID
+    description: The global study ID used to create the bucket
+    range: string
+  bucket:
+    title: Bucket
+    description: Cloud storage container in AWS used to manage and store s3 objects
+    range: string
+  s3_created_at: 
+    title: S3 Created At
+    description: Timestamp of when a file was uploaded to an s3 bucket.
+    range: datetime
+  s3_modified_at: 
+    title: S3 Modified At
+    description: Timestamp of when a file was modified in an s3 bucket.
+    range: datetime
+  intelligent_tiering_access_tier: 
+    title: Intelligent Tiering Access Tier
+    description: Storage access tier assigned by AWS intelliegnt tiering, indicating the current access frequency classification of the object
+    range: string
+  is_delete_marker: 
+    title: Is Delete Marker
+    description: A flag that notes whether a file has been deleted from s3
+    range: boolean
+  is_latest: 
+    title: Is Latest
+    description: Specifies whether an object version is the most recent version of that object
+    range: boolean
+  storage_class: 
+    title: Storage Class
+    description: Storage tier of the object in AWS reflecting cost and access characteristics.
+    range: string
+  manifest_hash_value: 
+    title: Manifest Hash Value
+    description: The provided hash value from external users to be validated against internal hash values
+    range: string
+  file_hash_validation_status: 
+    title: File Hash Validation Status
+    description: Notes whether hashes have been generated and verified against manifest hash values.
+    range: string
+  file_type: 
+    title: File Type
+    description: Type or classification of the files based on its format and usuage.
+    range: string
+  encryption_status: 
+    title: Encryption Status
+    description: Indicates whether the object in AWS is encrypted and the type of encryption applied.
+    range: string
+  is_multipart_uploaded: 
+    title: Is Multipart Uploaded
+    description: Indicates whether the object was uploaded using a multipart upload process.
+    range: string
+  object_lock_level_hold_status: 
+    title: Object Lock Level Hold Status
+    description: Whether a legal hold is applied to prevent deletion of the object.
+    range: string
+  object_lock_mode: 
+    title: Object Lock Mode
+    description: Retention mode applied to the object that restricts deletion or modification.
+    range: string
+  replication_status: 
+    title: Replication Status
+    description: Status of the object's replication to another storage location.
+    range: string
+  version_id:
+    title: Version ID
+    description: Identifier for a specific version of the object
+    range: 
+  access_type: 
+    title: Access Type
+    description: Notes wheter a file is controlled, open, or registered-tier access
+    range: string
+  access_url: 
+    title: Access URL
+    description: HTTPS endpoint for accessing a file via a specific data repository service.
+    range: string
+  acl: 
+    title: ACL
+    description: The object access control list.
+    range: string
+  experiment_strategy: 
+    title: Experiment Strategy
+    description: Method or assay used to generate the data
+    range: string
+  assay_center: 
+    title: Assay Center
+    description: The organization or center that generated the file
+    range:
+  platform: 
+    title: Platform
+    description: Instrument or platform family name
+    range: 
+  workflow_name:
+    title: Workflow Name
+    description: Processing tool that produced the file
+    range:
+  workflow_version: 
+    title: Workflow Version
+    description: Version of the process tool that produced the file
+    range: 
+  
+
+ 
+
 
 enums:
   EnumProgram:
