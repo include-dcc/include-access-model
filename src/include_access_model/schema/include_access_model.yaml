@@ -308,7 +308,6 @@ classes:
         identifier: true
   File:
     title: File
-    # subset of info; ideally pulls from a file universe table and some kind of assay table
     description: Required information for portal use.
     is_a: Record 
     slots: 
@@ -352,7 +351,7 @@ classes:
       - hash_type
       - hash_value
 
-Dataset:
+  Dataset:
     title: Dataset
     description: Set of files grouped together for release.
     slots:
@@ -375,9 +374,7 @@ Dataset:
         multivalued: true
         description: The list of files comprising this dataset.
 
-FileAdmin: # names are TBD; can change - idea is this is operational or file universe model
-  # probs doesn't go into the "access model" - but here is what could go there
-    title: File Admin
+  FileAdmin: # names are TBD; can change - idea is this is operational or file universe model    title: File Admin
     description: File unvierse; contains all information about a file that may be needed for operational work
     slots:  
       - study_id 
@@ -397,7 +394,7 @@ FileAdmin: # names are TBD; can change - idea is this is operational or file uni
       - bucket
       - s3_created_at
       - s3_modified_at
-      - intelligent_tiering_access
+      - intelligent_tiering_access_tier
       - is_delete_marker
       - is_latest
       - storage_class
@@ -421,7 +418,7 @@ FileAdmin: # names are TBD; can change - idea is this is operational or file uni
       - is_released
       - is_registered
       - repository 
-      - experiment_strategy
+      - experimental_strategy
 
     slot_usage: 
       study_id: 
@@ -432,11 +429,12 @@ FileAdmin: # names are TBD; can change - idea is this is operational or file uni
 
   FileAssay:
     title: File Assay
-    # for now group all types into one table; but we may want to split out since different 
-    # assay types collect different types of information
-    # this is a basic model
-    description: A file produced by or associated with an assay or data
-    acquisition process including omics, imaging, actigraphy, and other experimental or observational data.
+  # for now group all types into one table; but we may want to split out since different 
+  # assay types collect different types of information
+  # this is a basic model
+    description: A file produced by or associated with an assay 
+      or data acquisition process including omics, imaging, 
+      actigraphy, and other experimental or observational data.
     slots:
       - file_id
       - subject_id
@@ -845,7 +843,7 @@ slots:
     title: Filename
     description: The name of the file.
     range: string
-    requied: true
+    required: true
   format:
     title: File Format
     description: The format of the file.
@@ -1087,6 +1085,11 @@ slots:
     description: Version of the process tool that produced the file
     range: string
     required: false
+  object_lock_retain_until_date: 
+    title: Object Lock Retain Until Date
+    description: Specifies exact date and time when an object's Object Lock rentention period expires.
+    range: datetime
+    required: true
   
 
  
