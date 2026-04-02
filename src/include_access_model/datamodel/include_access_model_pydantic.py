@@ -447,7 +447,7 @@ class Study(Record):
                                      'required': True}},
          'title': 'Research Study'})
 
-    study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata']} })
+    study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata', 'File', 'FileAdmin']} })
     parent_study: Optional[str] = Field(default=None, title="Parent Study", description="""The parent study for this study, if it is a nested study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
     study_title: str = Field(default=..., description="""Full Study Title""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
     study_code: str = Field(default=..., title="Study Code", description="""Unique identifier for the study (generally a short acronym)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
@@ -478,12 +478,12 @@ class StudyMetadata(Record):
                                      'required': True}},
          'title': 'Study Metadata'})
 
-    study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata']} })
+    study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata', 'File', 'FileAdmin']} })
     participant_lifespan_stage: list[EnumParticipantLifespanStage] = Field(default=..., title="Participant Lifespan Stage", description="""Focus age group(s) of the study population""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     selection_criteria: Optional[str] = Field(default=None, title="Selection Criteria", description="""Brief description of inclusion and/or exclusion criteria for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     study_design: list[EnumStudyDesign] = Field(default=..., title="Study Design", description="""Overall design of study, including whether it is longitudinal and whether family members/unrelated controls are also enrolled""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     clinical_data_source_type: list[EnumClinicalDataSourceType] = Field(default=..., title="Clinical Data Source Type", description="""Source(s) of data collected from study participants""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
-    data_category: list[EnumDataCategory] = Field(default=..., title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File']} })
+    data_category: list[EnumDataCategory] = Field(default=..., title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File', 'FileAssay']} })
     vbr: Optional[VirtualBiorepository] = Field(default=None, title="Virtual Biorepository", description="""Information about the study's Virtual Biorepository, if participating""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     research_domain: list[EnumResearchDomain] = Field(default=..., description="""Main research domain(s) of the study, other than Down syndrome""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     expected_number_of_participants: int = Field(default=..., title="Expected Number of Participants", description="""Total expected number of participants to be recruited.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
@@ -571,7 +571,9 @@ class Subject(Record):
                        'Demographics',
                        'SubjectAssertion',
                        'Encounter',
-                       'File']} })
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
     subject_type: EnumSubjectType = Field(default=..., title="Subject Type", description="""Type of entity this record represents""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     organism_type: Optional[str] = Field(default=None, title="Organism Type", description="""Organism Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
@@ -591,7 +593,9 @@ class Demographics(Record):
                        'Demographics',
                        'SubjectAssertion',
                        'Encounter',
-                       'File']} })
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
     sex: EnumSex = Field(default=..., title="Sex", description="""Sex of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     race: list[EnumRace] = Field(default=..., title="Race", description="""Race of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Ethnicity of Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
@@ -618,7 +622,9 @@ class SubjectAssertion(Record):
                        'Demographics',
                        'SubjectAssertion',
                        'Encounter',
-                       'File']} })
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
     encounter_id: Optional[str] = Field(default=None, title="Encounter ID", description="""Unique identifier for this Encounter.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'BiospecimenCollection', 'Encounter']} })
     assertion_provenance: Optional[EnumAssertionProvenance] = Field(default=None, title="Assertion Provenance", description="""The original source of this assertion""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     age_at_assertion: Optional[int] = Field(default=None, title="Age at assertion", description="""The age in days of the Subject when the assertion was made.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion'], 'unit': {'ucum_code': 'd'}} })
@@ -665,7 +671,7 @@ class Sample(Record):
                                       'required': True}},
          'title': 'Sample'})
 
-    sample_id: str = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File']} })
+    sample_id: str = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
     biospecimen_collection_id: Optional[str] = Field(default=None, title="Biospecimen Collection ID", description="""Biospecimen Collection during which this sample was generated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'BiospecimenCollection']} })
     parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample from which this sample is derived""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
     sample_type: str = Field(default=..., title="Sample Type", description="""Type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
@@ -710,7 +716,7 @@ class Aliquot(Record):
          'title': 'Aliquot'})
 
     aliquot_id: str = Field(default=..., title="Aliquot ID", description="""Unique identifier for an Aliquot.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
-    sample_id: Optional[str] = Field(default=None, title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File']} })
+    sample_id: Optional[str] = Field(default=None, title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
     availablity_status: Optional[EnumAvailabilityStatus] = Field(default=None, title="Sample Availability", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
     quantity_number: Optional[float] = Field(default=None, title="Quantity", description="""The total quantity of the specimen""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
     quantity_unit: Optional[str] = Field(default=None, title="Quantity Units", description="""The structured term defining the units of the quantity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
@@ -735,7 +741,9 @@ class Encounter(Record):
                        'Demographics',
                        'SubjectAssertion',
                        'Encounter',
-                       'File']} })
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
     encounter_definition_id: Optional[str] = Field(default=None, title="Encounter Definition ID", description="""Unique identifier for this Encounter Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Encounter', 'EncounterDefinition']} })
     age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Encounter'], 'unit': {'ucum_code': 'd'}} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
@@ -788,33 +796,43 @@ class ActivityDefinition(Record):
 
 class File(Record):
     """
-    File
+    Required information for portal use.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
-         'slot_usage': {'file_id': {'identifier': True,
+         'slot_usage': {'data_category': {'name': 'data_category', 'required': True},
+                        'file_id': {'identifier': True,
                                     'name': 'file_id',
                                     'range': 'string',
                                     'required': True},
-                        'sample_id': {'multivalued': True, 'name': 'sample_id'},
-                        'subject_id': {'multivalued': True, 'name': 'subject_id'}},
+                        'sample_id': {'multivalued': True,
+                                      'name': 'sample_id',
+                                      'required': True},
+                        'study_id': {'name': 'study_id', 'required': True},
+                        'subject_id': {'multivalued': True,
+                                       'name': 'subject_id',
+                                       'required': True}},
          'title': 'File'})
 
-    file_id: str = Field(default=..., title="File ID", description="""Unique identifier for this File.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset']} })
-    subject_id: Optional[list[str]] = Field(default=[], title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
+    study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata', 'File', 'FileAdmin']} })
+    file_id: str = Field(default=..., title="File ID", description="""Unique identifier for this File.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset', 'FileAdmin', 'FileAssay']} })
+    subject_id: list[str] = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
                        'Demographics',
                        'SubjectAssertion',
                        'Encounter',
-                       'File']} })
-    sample_id: Optional[list[str]] = Field(default=[], title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File']} })
-    filename: Optional[str] = Field(default=None, title="Filename", description="""The name of the file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
-    format: Optional[EnumEDAMFormats] = Field(default=None, title="File Format", description="""The format of the file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
-    data_category: Optional[EnumDataCategory] = Field(default=None, title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File']} })
-    data_type: Optional[EnumEDAMDataTypes] = Field(default=None, title="Data Type", description="""The type of data within this file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
-    size: Optional[int] = Field(default=None, title="File Size", description="""Size of the file, in Bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File'], 'unit': {'ucum_code': 'By'}} })
-    staging_url: Optional[str] = Field(default=None, title="Staging Location", description="""URL for internal access to the data. May be temporary.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
-    release_url: Optional[str] = Field(default=None, title="Release Location", description="""URL for controlled or open access to the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
-    drs_uri: Optional[str] = Field(default=None, title="DRS URI", description="""DRS location to access the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
-    hash: Optional[FileHash] = Field(default=None, title="File Hash", description="""File hash information""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
+    sample_id: list[str] = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
+    s3_file_path: str = Field(default=..., title="S3 File Path", description="""The full s3 url of a file's location in aws""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    filename: str = Field(default=..., title="Filename", description="""The name of the file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
+    size: int = Field(default=..., title="File Size", description="""Size of the file, in Bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin', 'FileAssay'], 'unit': {'ucum_code': 'By'}} })
+    format: EnumEDAMFormats = Field(default=..., title="File Format", description="""The format of the file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAssay']} })
+    data_category: EnumDataCategory = Field(default=..., title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File', 'FileAssay']} })
+    data_type: EnumEDAMDataTypes = Field(default=..., title="Data Type", description="""The type of data within this file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAssay']} })
+    staging_url: Optional[str] = Field(default=None, title="Staging Location", description="""URL for internal access to the data. May be temporary.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    release_url: Optional[str] = Field(default=None, title="Release Location", description="""URL for controlled or open access to the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    drs_uri: Optional[str] = Field(default=None, title="DRS URI", description="""DRS location to access the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    hash: FileHash = Field(default=..., title="File Hash", description="""File hash information""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
@@ -825,8 +843,8 @@ class FileHash(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
          'title': 'File Hash'})
 
-    hash_type: Optional[EnumFileHashType] = Field(default=None, title="File Hash Type", description="""The type of file hash, eg, md5""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileHash']} })
-    hash_value: Optional[str] = Field(default=None, title="File Hash Value", description="""The value of the file hash""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileHash']} })
+    hash_type: EnumFileHashType = Field(default=..., title="File Hash Type", description="""The type of file hash, eg, md5""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileHash']} })
+    hash_value: str = Field(default=..., title="File Hash Value", description="""The value of the file hash""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileHash']} })
 
 
 class Dataset(ConfiguredBaseModel):
@@ -852,10 +870,108 @@ class Dataset(ConfiguredBaseModel):
                        'Dataset']} })
     description: Optional[str] = Field(default=None, title="Description", description="""Description for this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition', 'Dataset']} })
     do_id: Optional[str] = Field(default=None, title="DOI", description="""Digital Object Identifier (DOI) for this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'DOI', 'Dataset']} })
-    file_id: Optional[list[str]] = Field(default=[], title="File ID", description="""The list of files comprising this dataset.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset']} })
+    file_id: Optional[list[str]] = Field(default=[], title="File ID", description="""The list of files comprising this dataset.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset', 'FileAdmin', 'FileAssay']} })
     publication: Optional[list[Publication]] = Field(default=[], title="Publication", description="""Publications associated with this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'Dataset']} })
     data_collection_start: Optional[str] = Field(default=None, title="Data Collection Start", description="""The date that data collection started. May include only a year.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Dataset']} })
     data_collection_end: Optional[str] = Field(default=None, title="Data Collection End", description="""The date that data collection started. May include only a year.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Dataset']} })
+
+
+class FileAdmin(ConfiguredBaseModel):
+    """
+    File unvierse; contains all information about a file that may be needed for operational work
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'file_id': {'identifier': True,
+                                    'name': 'file_id',
+                                    'required': True},
+                        'study_id': {'name': 'study_id', 'required': True}}})
+
+    study_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'StudyMetadata', 'File', 'FileAdmin']} })
+    file_id: str = Field(default=..., title="File ID", description="""Unique identifier for this File.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset', 'FileAdmin', 'FileAssay']} })
+    subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
+                       'Demographics',
+                       'SubjectAssertion',
+                       'Encounter',
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
+    sample_id: Optional[str] = Field(default=None, title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
+    s3_file_path: str = Field(default=..., title="S3 File Path", description="""The full s3 url of a file's location in aws""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    file_category: str = Field(default=..., title="File Category", description="""A high level classification of the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    size: int = Field(default=..., title="File Size", description="""Size of the file, in Bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin', 'FileAssay'], 'unit': {'ucum_code': 'By'}} })
+    s3_key: str = Field(default=..., title="S3 Key", description="""The unique identifier for an object within a bucket""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    file_extension: str = Field(default=..., title="File Extension", description="""A 3-4 letter code at the end of a filename that identifies the file format.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    data_transfer_id: Optional[str] = Field(default=None, title="Data Transfer ID", description="""A jira ticket number associated with a file transfer request to production bucket""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    aws_account_id: str = Field(default=..., title="AWS Account ID", description="""A 12-digit number that uniquely identifies a specific AWS account""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    account_name: str = Field(default=..., title="AWS Account Name", description="""A user-defined label used to define an AWS accoun.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    account_alias: str = Field(default=..., title="Account Alias", description="""A unique user-defined string that replaces the AWS Account ID in the IAM user sign-in URL""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    bucket_study_id: str = Field(default=..., title="Bucket Study ID", description="""The global study ID used to create the bucket""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    bucket: str = Field(default=..., title="Bucket", description="""Cloud storage container in AWS used to manage and store s3 objects""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    s3_created_at: datetime  = Field(default=..., title="S3 Created At", description="""Timestamp of when a file was uploaded to an s3 bucket.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    s3_modified_at: datetime  = Field(default=..., title="S3 Modified At", description="""Timestamp of when a file was modified in an s3 bucket.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    intelligent_tiering_access_tier: str = Field(default=..., title="Intelligent Tiering Access Tier", description="""Storage access tier assigned by AWS intelliegnt tiering, indicating the current access frequency classification of the object""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    is_delete_marker: bool = Field(default=..., title="Is Delete Marker", description="""A flag that notes whether a file has been deleted from s3""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    is_latest: bool = Field(default=..., title="Is Latest", description="""Specifies whether an object version is the most recent version of that object""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    storage_class: str = Field(default=..., title="Storage Class", description="""Storage tier of the object in AWS reflecting cost and access characteristics.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    manifest_hash_value: Optional[str] = Field(default=None, title="Manifest Hash Value", description="""The provided hash value from external users to be validated against internal hash values""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    file_hash_validation_status: Optional[str] = Field(default=None, title="File Hash Validation Status", description="""Notes whether hashes have been generated and verified against manifest hash values.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    file_type: str = Field(default=..., title="File Type", description="""Type or classification of the files based on its format and usuage.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    encryption_status: str = Field(default=..., title="Encryption Status", description="""Indicates whether the object in AWS is encrypted and the type of encryption applied.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    is_multipart_uploaded: str = Field(default=..., title="Is Multipart Uploaded", description="""Indicates whether the object was uploaded using a multipart upload process.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    object_lock_level_hold_status: str = Field(default=..., title="Object Lock Level Hold Status", description="""Whether a legal hold is applied to prevent deletion of the object.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    object_lock_mode: str = Field(default=..., title="Object Lock Mode", description="""Retention mode applied to the object that restricts deletion or modification.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    object_lock_retain_until_date: datetime  = Field(default=..., title="Object Lock Retain Until Date", description="""Specifies exact date and time when an object's Object Lock rentention period expires.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    replication_status: str = Field(default=..., title="Replication Status", description="""Status of the object's replication to another storage location.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    version_id: str = Field(default=..., title="Version ID", description="""Identifier for a specific version of the object""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    staging_url: Optional[str] = Field(default=None, title="Staging Location", description="""URL for internal access to the data. May be temporary.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    release_url: Optional[str] = Field(default=None, title="Release Location", description="""URL for controlled or open access to the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    hash: FileHash = Field(default=..., title="File Hash", description="""File hash information""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    access_type: str = Field(default=..., title="Access Type", description="""Notes wheter a file is controlled, open, or registered-tier access""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    access_url: Optional[str] = Field(default=None, title="Access URL", description="""HTTPS endpoint for accessing a file via a specific data repository service.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    drs_uri: Optional[str] = Field(default=None, title="DRS URI", description="""DRS location to access the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
+    acl: str = Field(default=..., title="ACL", description="""The object access control list.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    is_released: bool = Field(default=..., title="Is Released", description="""A flag that notes whether a file has been released to the public""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    is_registered: bool = Field(default=..., title="Is Registered", description="""A flag that notes whether a file has been registered to a drs service""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    repository: Optional[str] = Field(default=None, title="Repository", description="""The name of the drs service which files are registered to""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    experimental_strategy: str = Field(default=..., title="Experimental Strategy", description="""Method or assay used to generate the data""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+
+
+class FileAssay(ConfiguredBaseModel):
+    """
+    A file produced by or associated with an assay or data acquisition process including omics, imaging, actigraphy, and other experimental or observational data.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'data_category': {'name': 'data_category', 'required': True},
+                        'file_id': {'identifier': True,
+                                    'name': 'file_id',
+                                    'required': True},
+                        'sample_id': {'multivalued': True,
+                                      'name': 'sample_id',
+                                      'required': True},
+                        'subject_id': {'multivalued': True,
+                                       'name': 'subject_id',
+                                       'required': True}},
+         'title': 'File Assay'})
+
+    file_id: str = Field(default=..., title="File ID", description="""Unique identifier for this File.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset', 'FileAdmin', 'FileAssay']} })
+    subject_id: list[str] = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
+                       'Demographics',
+                       'SubjectAssertion',
+                       'Encounter',
+                       'File',
+                       'FileAdmin',
+                       'FileAssay']} })
+    sample_id: list[str] = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
+    data_category: EnumDataCategory = Field(default=..., title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File', 'FileAssay']} })
+    experimental_strategy: str = Field(default=..., title="Experimental Strategy", description="""Method or assay used to generate the data""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    data_type: EnumEDAMDataTypes = Field(default=..., title="Data Type", description="""The type of data within this file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAssay']} })
+    format: EnumEDAMFormats = Field(default=..., title="File Format", description="""The format of the file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAssay']} })
+    size: int = Field(default=..., title="File Size", description="""Size of the file, in Bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin', 'FileAssay'], 'unit': {'ucum_code': 'By'}} })
+    access_type: str = Field(default=..., title="Access Type", description="""Notes wheter a file is controlled, open, or registered-tier access""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    assay_center: Optional[str] = Field(default=None, title="Assay Center", description="""The organization or center that generated the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
+    platform: str = Field(default=..., title="Platform", description="""Instrument or platform family name""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
+    workflow_name: Optional[str] = Field(default=None, title="Workflow Name", description="""Processing tool that produced the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
+    workflow_version: Optional[str] = Field(default=None, title="Workflow Version", description="""Version of the process tool that produced the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
 
 
 # Model rebuild
@@ -880,3 +996,5 @@ ActivityDefinition.model_rebuild()
 File.model_rebuild()
 FileHash.model_rebuild()
 Dataset.model_rebuild()
+FileAdmin.model_rebuild()
+FileAssay.model_rebuild()

@@ -333,6 +333,7 @@ classes:
       study_id: 
         required: true 
       file_id:
+        range: string
         required: true
         identifier: true
       subject_id:

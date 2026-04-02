@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-12T11:07:16
+# Generation date: 2026-04-02T09:39:22
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -56,8 +56,8 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Float, Integer, String, Uri, Uriorcurie
-from linkml_runtime.utils.metamodelcore import URI, URIorCURIE
+from linkml_runtime.linkml_model.types import Boolean, Datetime, Float, Integer, String, Uri, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Bool, URI, URIorCURIE, XSDDateTime
 
 metamodel_version = "1.7.0"
 version = None
@@ -142,6 +142,14 @@ class FileFileId(extended_str):
 
 
 class DatasetDatasetId(extended_str):
+    pass
+
+
+class FileAdminFileId(FileFileId):
+    pass
+
+
+class FileAssayFileId(FileFileId):
     pass
 
 
@@ -913,7 +921,7 @@ class ActivityDefinition(Record):
 @dataclass(repr=False)
 class File(Record):
     """
-    File
+    Required information for portal use.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -923,17 +931,19 @@ class File(Record):
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.File
 
     file_id: Union[str, FileFileId] = None
-    subject_id: Optional[Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]]] = empty_list()
-    sample_id: Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]] = empty_list()
-    filename: Optional[str] = None
-    format: Optional[Union[str, "EnumEDAMFormats"]] = None
-    data_category: Optional[Union[str, "EnumDataCategory"]] = None
-    data_type: Optional[Union[str, "EnumEDAMDataTypes"]] = None
-    size: Optional[int] = None
+    study_id: Union[str, StudyStudyId] = None
+    subject_id: Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]] = None
+    sample_id: Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]] = None
+    s3_file_path: str = None
+    filename: str = None
+    size: int = None
+    format: Union[str, "EnumEDAMFormats"] = None
+    data_category: Union[str, "EnumDataCategory"] = None
+    data_type: Union[str, "EnumEDAMDataTypes"] = None
+    hash: Union[dict, "FileHash"] = None
     staging_url: Optional[Union[str, URIorCURIE]] = None
     release_url: Optional[Union[str, URIorCURIE]] = None
     drs_uri: Optional[Union[str, URIorCURIE]] = None
-    hash: Optional[Union[dict, "FileHash"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.file_id):
@@ -941,22 +951,52 @@ class File(Record):
         if not isinstance(self.file_id, FileFileId):
             self.file_id = FileFileId(self.file_id)
 
+        if self._is_empty(self.study_id):
+            self.MissingRequiredField("study_id")
+        if not isinstance(self.study_id, StudyStudyId):
+            self.study_id = StudyStudyId(self.study_id)
+
+        if self._is_empty(self.subject_id):
+            self.MissingRequiredField("subject_id")
         if not isinstance(self.subject_id, list):
             self.subject_id = [self.subject_id] if self.subject_id is not None else []
         self.subject_id = [v if isinstance(v, SubjectSubjectId) else SubjectSubjectId(v) for v in self.subject_id]
 
+        if self._is_empty(self.sample_id):
+            self.MissingRequiredField("sample_id")
         if not isinstance(self.sample_id, list):
             self.sample_id = [self.sample_id] if self.sample_id is not None else []
         self.sample_id = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.sample_id]
 
-        if self.filename is not None and not isinstance(self.filename, str):
+        if self._is_empty(self.s3_file_path):
+            self.MissingRequiredField("s3_file_path")
+        if not isinstance(self.s3_file_path, str):
+            self.s3_file_path = str(self.s3_file_path)
+
+        if self._is_empty(self.filename):
+            self.MissingRequiredField("filename")
+        if not isinstance(self.filename, str):
             self.filename = str(self.filename)
 
-        if self.data_category is not None and not isinstance(self.data_category, EnumDataCategory):
+        if self._is_empty(self.size):
+            self.MissingRequiredField("size")
+        if not isinstance(self.size, int):
+            self.size = int(self.size)
+
+        if self._is_empty(self.data_category):
+            self.MissingRequiredField("data_category")
+        if not isinstance(self.data_category, EnumDataCategory):
             self.data_category = EnumDataCategory(self.data_category)
 
-        if self.size is not None and not isinstance(self.size, int):
+        if self._is_empty(self.size):
+            self.MissingRequiredField("size")
+        if not isinstance(self.size, int):
             self.size = int(self.size)
+
+        if self._is_empty(self.hash):
+            self.MissingRequiredField("hash")
+        if not isinstance(self.hash, FileHash):
+            self.hash = FileHash(**as_dict(self.hash))
 
         if self.staging_url is not None and not isinstance(self.staging_url, URIorCURIE):
             self.staging_url = URIorCURIE(self.staging_url)
@@ -966,9 +1006,6 @@ class File(Record):
 
         if self.drs_uri is not None and not isinstance(self.drs_uri, URIorCURIE):
             self.drs_uri = URIorCURIE(self.drs_uri)
-
-        if self.hash is not None and not isinstance(self.hash, FileHash):
-            self.hash = FileHash(**as_dict(self.hash))
 
         super().__post_init__(**kwargs)
 
@@ -985,14 +1022,18 @@ class FileHash(YAMLRoot):
     class_name: ClassVar[str] = "FileHash"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.FileHash
 
-    hash_type: Optional[Union[str, "EnumFileHashType"]] = None
-    hash_value: Optional[str] = None
+    hash_type: Union[str, "EnumFileHashType"] = None
+    hash_value: str = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self.hash_type is not None and not isinstance(self.hash_type, EnumFileHashType):
+        if self._is_empty(self.hash_type):
+            self.MissingRequiredField("hash_type")
+        if not isinstance(self.hash_type, EnumFileHashType):
             self.hash_type = EnumFileHashType(self.hash_type)
 
-        if self.hash_value is not None and not isinstance(self.hash_value, str):
+        if self._is_empty(self.hash_value):
+            self.MissingRequiredField("hash_value")
+        if not isinstance(self.hash_value, str):
             self.hash_value = str(self.hash_value)
 
         super().__post_init__(**kwargs)
@@ -1047,6 +1088,337 @@ class Dataset(YAMLRoot):
 
         if self.data_collection_end is not None and not isinstance(self.data_collection_end, str):
             self.data_collection_end = str(self.data_collection_end)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FileAdmin(YAMLRoot):
+    """
+    File unvierse; contains all information about a file that may be needed for operational work
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["FileAdmin"]
+    class_class_curie: ClassVar[str] = "includedcc:FileAdmin"
+    class_name: ClassVar[str] = "FileAdmin"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.FileAdmin
+
+    file_id: Union[str, FileAdminFileId] = None
+    study_id: Union[str, StudyStudyId] = None
+    s3_file_path: str = None
+    file_category: str = None
+    size: int = None
+    s3_key: str = None
+    file_extension: str = None
+    aws_account_id: str = None
+    account_name: str = None
+    account_alias: str = None
+    bucket_study_id: str = None
+    bucket: str = None
+    s3_created_at: Union[str, XSDDateTime] = None
+    s3_modified_at: Union[str, XSDDateTime] = None
+    intelligent_tiering_access_tier: str = None
+    is_delete_marker: Union[bool, Bool] = None
+    is_latest: Union[bool, Bool] = None
+    storage_class: str = None
+    file_type: str = None
+    encryption_status: str = None
+    is_multipart_uploaded: str = None
+    object_lock_level_hold_status: str = None
+    object_lock_mode: str = None
+    object_lock_retain_until_date: Union[str, XSDDateTime] = None
+    replication_status: str = None
+    version_id: str = None
+    hash: Union[dict, FileHash] = None
+    access_type: str = None
+    acl: str = None
+    is_released: Union[bool, Bool] = None
+    is_registered: Union[bool, Bool] = None
+    experimental_strategy: str = None
+    subject_id: Optional[Union[str, SubjectSubjectId]] = None
+    sample_id: Optional[Union[str, SampleSampleId]] = None
+    data_transfer_id: Optional[str] = None
+    manifest_hash_value: Optional[str] = None
+    file_hash_validation_status: Optional[str] = None
+    staging_url: Optional[Union[str, URIorCURIE]] = None
+    release_url: Optional[Union[str, URIorCURIE]] = None
+    access_url: Optional[str] = None
+    drs_uri: Optional[Union[str, URIorCURIE]] = None
+    repository: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.file_id):
+            self.MissingRequiredField("file_id")
+        if not isinstance(self.file_id, FileAdminFileId):
+            self.file_id = FileAdminFileId(self.file_id)
+
+        if self._is_empty(self.study_id):
+            self.MissingRequiredField("study_id")
+        if not isinstance(self.study_id, StudyStudyId):
+            self.study_id = StudyStudyId(self.study_id)
+
+        if self._is_empty(self.s3_file_path):
+            self.MissingRequiredField("s3_file_path")
+        if not isinstance(self.s3_file_path, str):
+            self.s3_file_path = str(self.s3_file_path)
+
+        if self._is_empty(self.file_category):
+            self.MissingRequiredField("file_category")
+        if not isinstance(self.file_category, str):
+            self.file_category = str(self.file_category)
+
+        if self._is_empty(self.size):
+            self.MissingRequiredField("size")
+        if not isinstance(self.size, int):
+            self.size = int(self.size)
+
+        if self._is_empty(self.s3_key):
+            self.MissingRequiredField("s3_key")
+        if not isinstance(self.s3_key, str):
+            self.s3_key = str(self.s3_key)
+
+        if self._is_empty(self.file_extension):
+            self.MissingRequiredField("file_extension")
+        if not isinstance(self.file_extension, str):
+            self.file_extension = str(self.file_extension)
+
+        if self._is_empty(self.aws_account_id):
+            self.MissingRequiredField("aws_account_id")
+        if not isinstance(self.aws_account_id, str):
+            self.aws_account_id = str(self.aws_account_id)
+
+        if self._is_empty(self.account_name):
+            self.MissingRequiredField("account_name")
+        if not isinstance(self.account_name, str):
+            self.account_name = str(self.account_name)
+
+        if self._is_empty(self.account_alias):
+            self.MissingRequiredField("account_alias")
+        if not isinstance(self.account_alias, str):
+            self.account_alias = str(self.account_alias)
+
+        if self._is_empty(self.bucket_study_id):
+            self.MissingRequiredField("bucket_study_id")
+        if not isinstance(self.bucket_study_id, str):
+            self.bucket_study_id = str(self.bucket_study_id)
+
+        if self._is_empty(self.bucket):
+            self.MissingRequiredField("bucket")
+        if not isinstance(self.bucket, str):
+            self.bucket = str(self.bucket)
+
+        if self._is_empty(self.s3_created_at):
+            self.MissingRequiredField("s3_created_at")
+        if not isinstance(self.s3_created_at, XSDDateTime):
+            self.s3_created_at = XSDDateTime(self.s3_created_at)
+
+        if self._is_empty(self.s3_modified_at):
+            self.MissingRequiredField("s3_modified_at")
+        if not isinstance(self.s3_modified_at, XSDDateTime):
+            self.s3_modified_at = XSDDateTime(self.s3_modified_at)
+
+        if self._is_empty(self.intelligent_tiering_access_tier):
+            self.MissingRequiredField("intelligent_tiering_access_tier")
+        if not isinstance(self.intelligent_tiering_access_tier, str):
+            self.intelligent_tiering_access_tier = str(self.intelligent_tiering_access_tier)
+
+        if self._is_empty(self.is_delete_marker):
+            self.MissingRequiredField("is_delete_marker")
+        if not isinstance(self.is_delete_marker, Bool):
+            self.is_delete_marker = Bool(self.is_delete_marker)
+
+        if self._is_empty(self.is_latest):
+            self.MissingRequiredField("is_latest")
+        if not isinstance(self.is_latest, Bool):
+            self.is_latest = Bool(self.is_latest)
+
+        if self._is_empty(self.storage_class):
+            self.MissingRequiredField("storage_class")
+        if not isinstance(self.storage_class, str):
+            self.storage_class = str(self.storage_class)
+
+        if self._is_empty(self.file_type):
+            self.MissingRequiredField("file_type")
+        if not isinstance(self.file_type, str):
+            self.file_type = str(self.file_type)
+
+        if self._is_empty(self.encryption_status):
+            self.MissingRequiredField("encryption_status")
+        if not isinstance(self.encryption_status, str):
+            self.encryption_status = str(self.encryption_status)
+
+        if self._is_empty(self.is_multipart_uploaded):
+            self.MissingRequiredField("is_multipart_uploaded")
+        if not isinstance(self.is_multipart_uploaded, str):
+            self.is_multipart_uploaded = str(self.is_multipart_uploaded)
+
+        if self._is_empty(self.object_lock_level_hold_status):
+            self.MissingRequiredField("object_lock_level_hold_status")
+        if not isinstance(self.object_lock_level_hold_status, str):
+            self.object_lock_level_hold_status = str(self.object_lock_level_hold_status)
+
+        if self._is_empty(self.object_lock_mode):
+            self.MissingRequiredField("object_lock_mode")
+        if not isinstance(self.object_lock_mode, str):
+            self.object_lock_mode = str(self.object_lock_mode)
+
+        if self._is_empty(self.object_lock_retain_until_date):
+            self.MissingRequiredField("object_lock_retain_until_date")
+        if not isinstance(self.object_lock_retain_until_date, XSDDateTime):
+            self.object_lock_retain_until_date = XSDDateTime(self.object_lock_retain_until_date)
+
+        if self._is_empty(self.replication_status):
+            self.MissingRequiredField("replication_status")
+        if not isinstance(self.replication_status, str):
+            self.replication_status = str(self.replication_status)
+
+        if self._is_empty(self.version_id):
+            self.MissingRequiredField("version_id")
+        if not isinstance(self.version_id, str):
+            self.version_id = str(self.version_id)
+
+        if self._is_empty(self.hash):
+            self.MissingRequiredField("hash")
+        if not isinstance(self.hash, FileHash):
+            self.hash = FileHash(**as_dict(self.hash))
+
+        if self._is_empty(self.access_type):
+            self.MissingRequiredField("access_type")
+        if not isinstance(self.access_type, str):
+            self.access_type = str(self.access_type)
+
+        if self._is_empty(self.acl):
+            self.MissingRequiredField("acl")
+        if not isinstance(self.acl, str):
+            self.acl = str(self.acl)
+
+        if self._is_empty(self.is_released):
+            self.MissingRequiredField("is_released")
+        if not isinstance(self.is_released, Bool):
+            self.is_released = Bool(self.is_released)
+
+        if self._is_empty(self.is_registered):
+            self.MissingRequiredField("is_registered")
+        if not isinstance(self.is_registered, Bool):
+            self.is_registered = Bool(self.is_registered)
+
+        if self._is_empty(self.experimental_strategy):
+            self.MissingRequiredField("experimental_strategy")
+        if not isinstance(self.experimental_strategy, str):
+            self.experimental_strategy = str(self.experimental_strategy)
+
+        if self.subject_id is not None and not isinstance(self.subject_id, SubjectSubjectId):
+            self.subject_id = SubjectSubjectId(self.subject_id)
+
+        if self.sample_id is not None and not isinstance(self.sample_id, SampleSampleId):
+            self.sample_id = SampleSampleId(self.sample_id)
+
+        if self.data_transfer_id is not None and not isinstance(self.data_transfer_id, str):
+            self.data_transfer_id = str(self.data_transfer_id)
+
+        if self.manifest_hash_value is not None and not isinstance(self.manifest_hash_value, str):
+            self.manifest_hash_value = str(self.manifest_hash_value)
+
+        if self.file_hash_validation_status is not None and not isinstance(self.file_hash_validation_status, str):
+            self.file_hash_validation_status = str(self.file_hash_validation_status)
+
+        if self.staging_url is not None and not isinstance(self.staging_url, URIorCURIE):
+            self.staging_url = URIorCURIE(self.staging_url)
+
+        if self.release_url is not None and not isinstance(self.release_url, URIorCURIE):
+            self.release_url = URIorCURIE(self.release_url)
+
+        if self.access_url is not None and not isinstance(self.access_url, str):
+            self.access_url = str(self.access_url)
+
+        if self.drs_uri is not None and not isinstance(self.drs_uri, URIorCURIE):
+            self.drs_uri = URIorCURIE(self.drs_uri)
+
+        if self.repository is not None and not isinstance(self.repository, str):
+            self.repository = str(self.repository)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FileAssay(YAMLRoot):
+    """
+    A file produced by or associated with an assay or data acquisition process including omics, imaging, actigraphy,
+    and other experimental or observational data.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["FileAssay"]
+    class_class_curie: ClassVar[str] = "includedcc:FileAssay"
+    class_name: ClassVar[str] = "FileAssay"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.FileAssay
+
+    file_id: Union[str, FileAssayFileId] = None
+    subject_id: Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]] = None
+    sample_id: Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]] = None
+    data_category: Union[str, "EnumDataCategory"] = None
+    experimental_strategy: str = None
+    data_type: Union[str, "EnumEDAMDataTypes"] = None
+    format: Union[str, "EnumEDAMFormats"] = None
+    size: int = None
+    access_type: str = None
+    platform: str = None
+    assay_center: Optional[str] = None
+    workflow_name: Optional[str] = None
+    workflow_version: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.file_id):
+            self.MissingRequiredField("file_id")
+        if not isinstance(self.file_id, FileAssayFileId):
+            self.file_id = FileAssayFileId(self.file_id)
+
+        if self._is_empty(self.subject_id):
+            self.MissingRequiredField("subject_id")
+        if not isinstance(self.subject_id, list):
+            self.subject_id = [self.subject_id] if self.subject_id is not None else []
+        self.subject_id = [v if isinstance(v, SubjectSubjectId) else SubjectSubjectId(v) for v in self.subject_id]
+
+        if self._is_empty(self.sample_id):
+            self.MissingRequiredField("sample_id")
+        if not isinstance(self.sample_id, list):
+            self.sample_id = [self.sample_id] if self.sample_id is not None else []
+        self.sample_id = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.sample_id]
+
+        if self._is_empty(self.data_category):
+            self.MissingRequiredField("data_category")
+        if not isinstance(self.data_category, EnumDataCategory):
+            self.data_category = EnumDataCategory(self.data_category)
+
+        if self._is_empty(self.experimental_strategy):
+            self.MissingRequiredField("experimental_strategy")
+        if not isinstance(self.experimental_strategy, str):
+            self.experimental_strategy = str(self.experimental_strategy)
+
+        if self._is_empty(self.size):
+            self.MissingRequiredField("size")
+        if not isinstance(self.size, int):
+            self.size = int(self.size)
+
+        if self._is_empty(self.access_type):
+            self.MissingRequiredField("access_type")
+        if not isinstance(self.access_type, str):
+            self.access_type = str(self.access_type)
+
+        if self._is_empty(self.platform):
+            self.MissingRequiredField("platform")
+        if not isinstance(self.platform, str):
+            self.platform = str(self.platform)
+
+        if self.assay_center is not None and not isinstance(self.assay_center, str):
+            self.assay_center = str(self.assay_center)
+
+        if self.workflow_name is not None and not isinstance(self.workflow_name, str):
+            self.workflow_name = str(self.workflow_name)
+
+        if self.workflow_version is not None and not isinstance(self.workflow_version, str):
+            self.workflow_version = str(self.workflow_version)
 
         super().__post_init__(**kwargs)
 
@@ -1820,16 +2192,16 @@ slots.file_id = Slot(uri=INCLUDEDCC.file_id, name="file_id", curie=INCLUDEDCC.cu
                    model_uri=INCLUDEDCC.file_id, domain=None, range=Optional[Union[str, FileFileId]])
 
 slots.filename = Slot(uri=INCLUDEDCC.filename, name="filename", curie=INCLUDEDCC.curie('filename'),
-                   model_uri=INCLUDEDCC.filename, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.filename, domain=None, range=str)
 
 slots.format = Slot(uri=INCLUDEDCC.format, name="format", curie=INCLUDEDCC.curie('format'),
-                   model_uri=INCLUDEDCC.format, domain=None, range=Optional[Union[str, "EnumEDAMFormats"]])
+                   model_uri=INCLUDEDCC.format, domain=None, range=Union[str, "EnumEDAMFormats"])
 
 slots.data_type = Slot(uri=INCLUDEDCC.data_type, name="data_type", curie=INCLUDEDCC.curie('data_type'),
-                   model_uri=INCLUDEDCC.data_type, domain=None, range=Optional[Union[str, "EnumEDAMDataTypes"]])
+                   model_uri=INCLUDEDCC.data_type, domain=None, range=Union[str, "EnumEDAMDataTypes"])
 
 slots.size = Slot(uri=INCLUDEDCC.size, name="size", curie=INCLUDEDCC.curie('size'),
-                   model_uri=INCLUDEDCC.size, domain=None, range=Optional[int])
+                   model_uri=INCLUDEDCC.size, domain=None, range=int)
 
 slots.staging_url = Slot(uri=INCLUDEDCC.staging_url, name="staging_url", curie=INCLUDEDCC.curie('staging_url'),
                    model_uri=INCLUDEDCC.staging_url, domain=None, range=Optional[Union[str, URIorCURIE]])
@@ -1841,13 +2213,13 @@ slots.drs_uri = Slot(uri=INCLUDEDCC.drs_uri, name="drs_uri", curie=INCLUDEDCC.cu
                    model_uri=INCLUDEDCC.drs_uri, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.hash = Slot(uri=INCLUDEDCC.hash, name="hash", curie=INCLUDEDCC.curie('hash'),
-                   model_uri=INCLUDEDCC.hash, domain=None, range=Optional[Union[dict, FileHash]])
+                   model_uri=INCLUDEDCC.hash, domain=None, range=Union[dict, FileHash])
 
 slots.hash_type = Slot(uri=INCLUDEDCC.hash_type, name="hash_type", curie=INCLUDEDCC.curie('hash_type'),
-                   model_uri=INCLUDEDCC.hash_type, domain=None, range=Optional[Union[str, "EnumFileHashType"]])
+                   model_uri=INCLUDEDCC.hash_type, domain=None, range=Union[str, "EnumFileHashType"])
 
 slots.hash_value = Slot(uri=INCLUDEDCC.hash_value, name="hash_value", curie=INCLUDEDCC.curie('hash_value'),
-                   model_uri=INCLUDEDCC.hash_value, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.hash_value, domain=None, range=str)
 
 slots.dataset_id = Slot(uri=INCLUDEDCC.dataset_id, name="dataset_id", curie=INCLUDEDCC.curie('dataset_id'),
                    model_uri=INCLUDEDCC.dataset_id, domain=None, range=Optional[Union[str, DatasetDatasetId]])
@@ -1857,6 +2229,117 @@ slots.data_collection_start = Slot(uri=INCLUDEDCC.data_collection_start, name="d
 
 slots.data_collection_end = Slot(uri=INCLUDEDCC.data_collection_end, name="data_collection_end", curie=INCLUDEDCC.curie('data_collection_end'),
                    model_uri=INCLUDEDCC.data_collection_end, domain=None, range=Optional[str])
+
+slots.s3_file_path = Slot(uri=INCLUDEDCC.s3_file_path, name="s3_file_path", curie=INCLUDEDCC.curie('s3_file_path'),
+                   model_uri=INCLUDEDCC.s3_file_path, domain=None, range=str)
+
+slots.is_released = Slot(uri=INCLUDEDCC.is_released, name="is_released", curie=INCLUDEDCC.curie('is_released'),
+                   model_uri=INCLUDEDCC.is_released, domain=None, range=Union[bool, Bool])
+
+slots.is_registered = Slot(uri=INCLUDEDCC.is_registered, name="is_registered", curie=INCLUDEDCC.curie('is_registered'),
+                   model_uri=INCLUDEDCC.is_registered, domain=None, range=Union[bool, Bool])
+
+slots.repository = Slot(uri=INCLUDEDCC.repository, name="repository", curie=INCLUDEDCC.curie('repository'),
+                   model_uri=INCLUDEDCC.repository, domain=None, range=Optional[str])
+
+slots.file_category = Slot(uri=INCLUDEDCC.file_category, name="file_category", curie=INCLUDEDCC.curie('file_category'),
+                   model_uri=INCLUDEDCC.file_category, domain=None, range=str)
+
+slots.s3_key = Slot(uri=INCLUDEDCC.s3_key, name="s3_key", curie=INCLUDEDCC.curie('s3_key'),
+                   model_uri=INCLUDEDCC.s3_key, domain=None, range=str)
+
+slots.file_extension = Slot(uri=INCLUDEDCC.file_extension, name="file_extension", curie=INCLUDEDCC.curie('file_extension'),
+                   model_uri=INCLUDEDCC.file_extension, domain=None, range=str)
+
+slots.data_transfer_id = Slot(uri=INCLUDEDCC.data_transfer_id, name="data_transfer_id", curie=INCLUDEDCC.curie('data_transfer_id'),
+                   model_uri=INCLUDEDCC.data_transfer_id, domain=None, range=Optional[str])
+
+slots.aws_account_id = Slot(uri=INCLUDEDCC.aws_account_id, name="aws_account_id", curie=INCLUDEDCC.curie('aws_account_id'),
+                   model_uri=INCLUDEDCC.aws_account_id, domain=None, range=str)
+
+slots.account_name = Slot(uri=INCLUDEDCC.account_name, name="account_name", curie=INCLUDEDCC.curie('account_name'),
+                   model_uri=INCLUDEDCC.account_name, domain=None, range=str)
+
+slots.account_alias = Slot(uri=INCLUDEDCC.account_alias, name="account_alias", curie=INCLUDEDCC.curie('account_alias'),
+                   model_uri=INCLUDEDCC.account_alias, domain=None, range=str)
+
+slots.bucket_study_id = Slot(uri=INCLUDEDCC.bucket_study_id, name="bucket_study_id", curie=INCLUDEDCC.curie('bucket_study_id'),
+                   model_uri=INCLUDEDCC.bucket_study_id, domain=None, range=str)
+
+slots.bucket = Slot(uri=INCLUDEDCC.bucket, name="bucket", curie=INCLUDEDCC.curie('bucket'),
+                   model_uri=INCLUDEDCC.bucket, domain=None, range=str)
+
+slots.s3_created_at = Slot(uri=INCLUDEDCC.s3_created_at, name="s3_created_at", curie=INCLUDEDCC.curie('s3_created_at'),
+                   model_uri=INCLUDEDCC.s3_created_at, domain=None, range=Union[str, XSDDateTime])
+
+slots.s3_modified_at = Slot(uri=INCLUDEDCC.s3_modified_at, name="s3_modified_at", curie=INCLUDEDCC.curie('s3_modified_at'),
+                   model_uri=INCLUDEDCC.s3_modified_at, domain=None, range=Union[str, XSDDateTime])
+
+slots.intelligent_tiering_access_tier = Slot(uri=INCLUDEDCC.intelligent_tiering_access_tier, name="intelligent_tiering_access_tier", curie=INCLUDEDCC.curie('intelligent_tiering_access_tier'),
+                   model_uri=INCLUDEDCC.intelligent_tiering_access_tier, domain=None, range=str)
+
+slots.is_delete_marker = Slot(uri=INCLUDEDCC.is_delete_marker, name="is_delete_marker", curie=INCLUDEDCC.curie('is_delete_marker'),
+                   model_uri=INCLUDEDCC.is_delete_marker, domain=None, range=Union[bool, Bool])
+
+slots.is_latest = Slot(uri=INCLUDEDCC.is_latest, name="is_latest", curie=INCLUDEDCC.curie('is_latest'),
+                   model_uri=INCLUDEDCC.is_latest, domain=None, range=Union[bool, Bool])
+
+slots.storage_class = Slot(uri=INCLUDEDCC.storage_class, name="storage_class", curie=INCLUDEDCC.curie('storage_class'),
+                   model_uri=INCLUDEDCC.storage_class, domain=None, range=str)
+
+slots.manifest_hash_value = Slot(uri=INCLUDEDCC.manifest_hash_value, name="manifest_hash_value", curie=INCLUDEDCC.curie('manifest_hash_value'),
+                   model_uri=INCLUDEDCC.manifest_hash_value, domain=None, range=Optional[str])
+
+slots.file_hash_validation_status = Slot(uri=INCLUDEDCC.file_hash_validation_status, name="file_hash_validation_status", curie=INCLUDEDCC.curie('file_hash_validation_status'),
+                   model_uri=INCLUDEDCC.file_hash_validation_status, domain=None, range=Optional[str])
+
+slots.file_type = Slot(uri=INCLUDEDCC.file_type, name="file_type", curie=INCLUDEDCC.curie('file_type'),
+                   model_uri=INCLUDEDCC.file_type, domain=None, range=str)
+
+slots.encryption_status = Slot(uri=INCLUDEDCC.encryption_status, name="encryption_status", curie=INCLUDEDCC.curie('encryption_status'),
+                   model_uri=INCLUDEDCC.encryption_status, domain=None, range=str)
+
+slots.is_multipart_uploaded = Slot(uri=INCLUDEDCC.is_multipart_uploaded, name="is_multipart_uploaded", curie=INCLUDEDCC.curie('is_multipart_uploaded'),
+                   model_uri=INCLUDEDCC.is_multipart_uploaded, domain=None, range=str)
+
+slots.object_lock_level_hold_status = Slot(uri=INCLUDEDCC.object_lock_level_hold_status, name="object_lock_level_hold_status", curie=INCLUDEDCC.curie('object_lock_level_hold_status'),
+                   model_uri=INCLUDEDCC.object_lock_level_hold_status, domain=None, range=str)
+
+slots.object_lock_mode = Slot(uri=INCLUDEDCC.object_lock_mode, name="object_lock_mode", curie=INCLUDEDCC.curie('object_lock_mode'),
+                   model_uri=INCLUDEDCC.object_lock_mode, domain=None, range=str)
+
+slots.replication_status = Slot(uri=INCLUDEDCC.replication_status, name="replication_status", curie=INCLUDEDCC.curie('replication_status'),
+                   model_uri=INCLUDEDCC.replication_status, domain=None, range=str)
+
+slots.version_id = Slot(uri=INCLUDEDCC.version_id, name="version_id", curie=INCLUDEDCC.curie('version_id'),
+                   model_uri=INCLUDEDCC.version_id, domain=None, range=str)
+
+slots.access_type = Slot(uri=INCLUDEDCC.access_type, name="access_type", curie=INCLUDEDCC.curie('access_type'),
+                   model_uri=INCLUDEDCC.access_type, domain=None, range=str)
+
+slots.access_url = Slot(uri=INCLUDEDCC.access_url, name="access_url", curie=INCLUDEDCC.curie('access_url'),
+                   model_uri=INCLUDEDCC.access_url, domain=None, range=Optional[str])
+
+slots.acl = Slot(uri=INCLUDEDCC.acl, name="acl", curie=INCLUDEDCC.curie('acl'),
+                   model_uri=INCLUDEDCC.acl, domain=None, range=str)
+
+slots.experimental_strategy = Slot(uri=INCLUDEDCC.experimental_strategy, name="experimental_strategy", curie=INCLUDEDCC.curie('experimental_strategy'),
+                   model_uri=INCLUDEDCC.experimental_strategy, domain=None, range=str)
+
+slots.assay_center = Slot(uri=INCLUDEDCC.assay_center, name="assay_center", curie=INCLUDEDCC.curie('assay_center'),
+                   model_uri=INCLUDEDCC.assay_center, domain=None, range=Optional[str])
+
+slots.platform = Slot(uri=INCLUDEDCC.platform, name="platform", curie=INCLUDEDCC.curie('platform'),
+                   model_uri=INCLUDEDCC.platform, domain=None, range=str)
+
+slots.workflow_name = Slot(uri=INCLUDEDCC.workflow_name, name="workflow_name", curie=INCLUDEDCC.curie('workflow_name'),
+                   model_uri=INCLUDEDCC.workflow_name, domain=None, range=Optional[str])
+
+slots.workflow_version = Slot(uri=INCLUDEDCC.workflow_version, name="workflow_version", curie=INCLUDEDCC.curie('workflow_version'),
+                   model_uri=INCLUDEDCC.workflow_version, domain=None, range=Optional[str])
+
+slots.object_lock_retain_until_date = Slot(uri=INCLUDEDCC.object_lock_retain_until_date, name="object_lock_retain_until_date", curie=INCLUDEDCC.curie('object_lock_retain_until_date'),
+                   model_uri=INCLUDEDCC.object_lock_retain_until_date, domain=None, range=Union[str, XSDDateTime])
 
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])
@@ -1906,17 +2389,41 @@ slots.EncounterDefinition_activity_definition_id = Slot(uri=INCLUDEDCC.activity_
 slots.ActivityDefinition_activity_definition_id = Slot(uri=INCLUDEDCC.activity_definition_id, name="ActivityDefinition_activity_definition_id", curie=INCLUDEDCC.curie('activity_definition_id'),
                    model_uri=INCLUDEDCC.ActivityDefinition_activity_definition_id, domain=ActivityDefinition, range=Union[str, ActivityDefinitionActivityDefinitionId])
 
+slots.File_study_id = Slot(uri=INCLUDEDCC.study_id, name="File_study_id", curie=INCLUDEDCC.curie('study_id'),
+                   model_uri=INCLUDEDCC.File_study_id, domain=File, range=Union[str, StudyStudyId])
+
 slots.File_file_id = Slot(uri=INCLUDEDCC.file_id, name="File_file_id", curie=INCLUDEDCC.curie('file_id'),
                    model_uri=INCLUDEDCC.File_file_id, domain=File, range=Union[str, FileFileId])
 
 slots.File_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="File_subject_id", curie=INCLUDEDCC.curie('subject_id'),
-                   model_uri=INCLUDEDCC.File_subject_id, domain=File, range=Optional[Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]]])
+                   model_uri=INCLUDEDCC.File_subject_id, domain=File, range=Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]])
 
 slots.File_sample_id = Slot(uri=INCLUDEDCC.sample_id, name="File_sample_id", curie=INCLUDEDCC.curie('sample_id'),
-                   model_uri=INCLUDEDCC.File_sample_id, domain=File, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
+                   model_uri=INCLUDEDCC.File_sample_id, domain=File, range=Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]])
+
+slots.File_data_category = Slot(uri=INCLUDEDCC.data_category, name="File_data_category", curie=INCLUDEDCC.curie('data_category'),
+                   model_uri=INCLUDEDCC.File_data_category, domain=File, range=Union[str, "EnumDataCategory"])
 
 slots.Dataset_dataset_id = Slot(uri=INCLUDEDCC.dataset_id, name="Dataset_dataset_id", curie=INCLUDEDCC.curie('dataset_id'),
                    model_uri=INCLUDEDCC.Dataset_dataset_id, domain=Dataset, range=Union[str, DatasetDatasetId])
 
 slots.Dataset_file_id = Slot(uri=INCLUDEDCC.file_id, name="Dataset_file_id", curie=INCLUDEDCC.curie('file_id'),
                    model_uri=INCLUDEDCC.Dataset_file_id, domain=Dataset, range=Optional[Union[Union[str, FileFileId], list[Union[str, FileFileId]]]])
+
+slots.FileAdmin_study_id = Slot(uri=INCLUDEDCC.study_id, name="FileAdmin_study_id", curie=INCLUDEDCC.curie('study_id'),
+                   model_uri=INCLUDEDCC.FileAdmin_study_id, domain=FileAdmin, range=Union[str, StudyStudyId])
+
+slots.FileAdmin_file_id = Slot(uri=INCLUDEDCC.file_id, name="FileAdmin_file_id", curie=INCLUDEDCC.curie('file_id'),
+                   model_uri=INCLUDEDCC.FileAdmin_file_id, domain=FileAdmin, range=Union[str, FileAdminFileId])
+
+slots.FileAssay_file_id = Slot(uri=INCLUDEDCC.file_id, name="FileAssay_file_id", curie=INCLUDEDCC.curie('file_id'),
+                   model_uri=INCLUDEDCC.FileAssay_file_id, domain=FileAssay, range=Union[str, FileAssayFileId])
+
+slots.FileAssay_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="FileAssay_subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.FileAssay_subject_id, domain=FileAssay, range=Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]])
+
+slots.FileAssay_sample_id = Slot(uri=INCLUDEDCC.sample_id, name="FileAssay_sample_id", curie=INCLUDEDCC.curie('sample_id'),
+                   model_uri=INCLUDEDCC.FileAssay_sample_id, domain=FileAssay, range=Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]])
+
+slots.FileAssay_data_category = Slot(uri=INCLUDEDCC.data_category, name="FileAssay_data_category", curie=INCLUDEDCC.curie('data_category'),
+                   model_uri=INCLUDEDCC.FileAssay_data_category, domain=FileAssay, range=Union[str, "EnumDataCategory"])
