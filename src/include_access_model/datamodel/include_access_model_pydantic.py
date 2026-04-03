@@ -424,6 +424,67 @@ class EnumFileHashType(str, Enum):
     SHA_1 = "sha1"
 
 
+class EnumAccessType(str, Enum):
+    """
+    Types of file access levels.
+    """
+    Open_Access = "open"
+    Controlled_Access = "controlled"
+    Registered_tier_Access = "registered"
+
+
+class EnumExperimentalStrategy(str, Enum):
+    """
+    Types of sequencing methods.
+    """
+    Whole_Genome_Sequencing = "wgs"
+    RNA_Seq = "rnaseq"
+    Whole_Exome_Sequencing = "wxs"
+    Methylation = "methlyation"
+    Continuous_Long_Reads_WGS = "clr_wgs"
+    Proteomics = "proteomics"
+    Targeted_Sequencing = "targeted_seq"
+    Circular_Consensus_Sequencing_WGS = "ccs_wgs"
+    Panel = "panel"
+    Circular_Consensus_Sequencing_RNA_Se = "ccs_rnaseq"
+    Oxford_Nanopore_Technologies_WGS = "ont_wgs"
+    Continuous_Long_Reads_RNA_Seq = "clr_rnaseq"
+
+
+class EnumAssayCenter(str, Enum):
+    """
+    Organizations or centers producing raw or harmonized sequencing files.
+    """
+    The_Broad_Institute = "broad"
+    HudsonAlpha_Institute_for_Biotechnology = "hudsonalpha"
+    StFULL_STOP_Jude = "stjude"
+    Baylor_College_of_Medicine = "baylor"
+    The_ChildrenAPOSTROPHEs_Hospital_of_Philadelphia = "chop"
+    Other = "other"
+    Unknown = "unknown"
+
+
+class EnumRepository(str, Enum):
+    """
+    specific drs service used for registration
+    """
+    Cavatica_DRS = "cavatica"
+    NCI_DCF = "dcf"
+    Other = "other"
+
+
+class EnumPlatform(str, Enum):
+    """
+    names of instrument or platforms used for assay data generation
+    """
+    Illumina = "illumina"
+    PacBio = "pacbio"
+    ONT = "ont"
+    Illumina_Infinium_HumanMethylationEPICv2 = "illumina_epic"
+    Other = "other"
+    Unknown = "unknown"
+
+
 
 class Record(ConfiguredBaseModel):
     """
@@ -897,7 +958,7 @@ class FileAdmin(ConfiguredBaseModel):
                        'FileAssay']} })
     sample_id: Optional[str] = Field(default=None, title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
     s3_file_path: str = Field(default=..., title="S3 File Path", description="""The full s3 url of a file's location in aws""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
-    file_category: str = Field(default=..., title="File Category", description="""A high level classification of the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    file_category: str = Field(default=..., title="File Category", description="""A high level classification of the file used for operations.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     size: int = Field(default=..., title="File Size", description="""Size of the file, in Bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin', 'FileAssay'], 'unit': {'ucum_code': 'By'}} })
     s3_key: str = Field(default=..., title="S3 Key", description="""The unique identifier for an object within a bucket""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     file_extension: str = Field(default=..., title="File Extension", description="""A 3-4 letter code at the end of a filename that identifies the file format.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
@@ -915,7 +976,7 @@ class FileAdmin(ConfiguredBaseModel):
     storage_class: str = Field(default=..., title="Storage Class", description="""Storage tier of the object in AWS reflecting cost and access characteristics.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     manifest_hash_value: Optional[str] = Field(default=None, title="Manifest Hash Value", description="""The provided hash value from external users to be validated against internal hash values""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     file_hash_validation_status: Optional[str] = Field(default=None, title="File Hash Validation Status", description="""Notes whether hashes have been generated and verified against manifest hash values.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
-    file_type: str = Field(default=..., title="File Type", description="""Type or classification of the files based on its format and usuage.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    file_type: str = Field(default=..., title="File Type", description="""An internal type or classification of the files based on its operational usuage.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     encryption_status: str = Field(default=..., title="Encryption Status", description="""Indicates whether the object in AWS is encrypted and the type of encryption applied.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     is_multipart_uploaded: str = Field(default=..., title="Is Multipart Uploaded", description="""Indicates whether the object was uploaded using a multipart upload process.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     object_lock_level_hold_status: str = Field(default=..., title="Object Lock Level Hold Status", description="""Whether a legal hold is applied to prevent deletion of the object.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
@@ -926,14 +987,14 @@ class FileAdmin(ConfiguredBaseModel):
     staging_url: Optional[str] = Field(default=None, title="Staging Location", description="""URL for internal access to the data. May be temporary.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
     release_url: Optional[str] = Field(default=None, title="Release Location", description="""URL for controlled or open access to the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
     hash: FileHash = Field(default=..., title="File Hash", description="""File hash information""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
-    access_type: str = Field(default=..., title="Access Type", description="""Notes wheter a file is controlled, open, or registered-tier access""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    access_type: EnumAccessType = Field(default=..., title="Access Type", description="""Notes wheter a file is controlled, open, or registered-tier access""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
     access_url: Optional[str] = Field(default=None, title="Access URL", description="""HTTPS endpoint for accessing a file via a specific data repository service.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     drs_uri: Optional[str] = Field(default=None, title="DRS URI", description="""DRS location to access the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin']} })
     acl: str = Field(default=..., title="ACL", description="""The object access control list.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     is_released: bool = Field(default=..., title="Is Released", description="""A flag that notes whether a file has been released to the public""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
     is_registered: bool = Field(default=..., title="Is Registered", description="""A flag that notes whether a file has been registered to a drs service""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
-    repository: Optional[str] = Field(default=None, title="Repository", description="""The name of the drs service which files are registered to""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
-    experimental_strategy: str = Field(default=..., title="Experimental Strategy", description="""Method or assay used to generate the data""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    repository: Optional[EnumRepository] = Field(default=None, title="Repository", description="""The name of the drs service which files are registered to""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin']} })
+    experimental_strategy: EnumExperimentalStrategy = Field(default=..., title="Experimental Strategy", description="""Method or assay used to generate the data""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
 
 
 class FileAssay(ConfiguredBaseModel):
@@ -963,13 +1024,13 @@ class FileAssay(ConfiguredBaseModel):
                        'FileAssay']} })
     sample_id: list[str] = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File', 'FileAdmin', 'FileAssay']} })
     data_category: EnumDataCategory = Field(default=..., title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File', 'FileAssay']} })
-    experimental_strategy: str = Field(default=..., title="Experimental Strategy", description="""Method or assay used to generate the data""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    experimental_strategy: EnumExperimentalStrategy = Field(default=..., title="Experimental Strategy", description="""Method or assay used to generate the data""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
     data_type: EnumEDAMDataTypes = Field(default=..., title="Data Type", description="""The type of data within this file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAssay']} })
     format: EnumEDAMFormats = Field(default=..., title="File Format", description="""The format of the file.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAssay']} })
     size: int = Field(default=..., title="File Size", description="""Size of the file, in Bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'FileAdmin', 'FileAssay'], 'unit': {'ucum_code': 'By'}} })
-    access_type: str = Field(default=..., title="Access Type", description="""Notes wheter a file is controlled, open, or registered-tier access""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
-    assay_center: Optional[str] = Field(default=None, title="Assay Center", description="""The organization or center that generated the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
-    platform: str = Field(default=..., title="Platform", description="""Instrument or platform family name""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
+    access_type: EnumAccessType = Field(default=..., title="Access Type", description="""Notes wheter a file is controlled, open, or registered-tier access""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAdmin', 'FileAssay']} })
+    assay_center: Optional[EnumAssayCenter] = Field(default=None, title="Assay Center", description="""The organization or center that generated the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
+    platform: EnumPlatform = Field(default=..., title="Platform", description="""Instrument or platform family name""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
     workflow_name: Optional[str] = Field(default=None, title="Workflow Name", description="""Processing tool that produced the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
     workflow_version: Optional[str] = Field(default=None, title="Workflow Version", description="""Version of the process tool that produced the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileAssay']} })
 

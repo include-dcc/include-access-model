@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-02T09:39:22
+# Generation date: 2026-04-03T17:20:29
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -1131,11 +1131,11 @@ class FileAdmin(YAMLRoot):
     replication_status: str = None
     version_id: str = None
     hash: Union[dict, FileHash] = None
-    access_type: str = None
+    access_type: Union[str, "EnumAccessType"] = None
     acl: str = None
     is_released: Union[bool, Bool] = None
     is_registered: Union[bool, Bool] = None
-    experimental_strategy: str = None
+    experimental_strategy: Union[str, "EnumExperimentalStrategy"] = None
     subject_id: Optional[Union[str, SubjectSubjectId]] = None
     sample_id: Optional[Union[str, SampleSampleId]] = None
     data_transfer_id: Optional[str] = None
@@ -1145,7 +1145,7 @@ class FileAdmin(YAMLRoot):
     release_url: Optional[Union[str, URIorCURIE]] = None
     access_url: Optional[str] = None
     drs_uri: Optional[Union[str, URIorCURIE]] = None
-    repository: Optional[str] = None
+    repository: Optional[Union[str, "EnumRepository"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.file_id):
@@ -1285,8 +1285,8 @@ class FileAdmin(YAMLRoot):
 
         if self._is_empty(self.access_type):
             self.MissingRequiredField("access_type")
-        if not isinstance(self.access_type, str):
-            self.access_type = str(self.access_type)
+        if not isinstance(self.access_type, EnumAccessType):
+            self.access_type = EnumAccessType(self.access_type)
 
         if self._is_empty(self.acl):
             self.MissingRequiredField("acl")
@@ -1305,8 +1305,8 @@ class FileAdmin(YAMLRoot):
 
         if self._is_empty(self.experimental_strategy):
             self.MissingRequiredField("experimental_strategy")
-        if not isinstance(self.experimental_strategy, str):
-            self.experimental_strategy = str(self.experimental_strategy)
+        if not isinstance(self.experimental_strategy, EnumExperimentalStrategy):
+            self.experimental_strategy = EnumExperimentalStrategy(self.experimental_strategy)
 
         if self.subject_id is not None and not isinstance(self.subject_id, SubjectSubjectId):
             self.subject_id = SubjectSubjectId(self.subject_id)
@@ -1335,8 +1335,8 @@ class FileAdmin(YAMLRoot):
         if self.drs_uri is not None and not isinstance(self.drs_uri, URIorCURIE):
             self.drs_uri = URIorCURIE(self.drs_uri)
 
-        if self.repository is not None and not isinstance(self.repository, str):
-            self.repository = str(self.repository)
+        if self.repository is not None and not isinstance(self.repository, EnumRepository):
+            self.repository = EnumRepository(self.repository)
 
         super().__post_init__(**kwargs)
 
@@ -1358,13 +1358,13 @@ class FileAssay(YAMLRoot):
     subject_id: Union[Union[str, SubjectSubjectId], list[Union[str, SubjectSubjectId]]] = None
     sample_id: Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]] = None
     data_category: Union[str, "EnumDataCategory"] = None
-    experimental_strategy: str = None
+    experimental_strategy: Union[str, "EnumExperimentalStrategy"] = None
     data_type: Union[str, "EnumEDAMDataTypes"] = None
     format: Union[str, "EnumEDAMFormats"] = None
     size: int = None
-    access_type: str = None
-    platform: str = None
-    assay_center: Optional[str] = None
+    access_type: Union[str, "EnumAccessType"] = None
+    platform: Union[str, "EnumPlatform"] = None
+    assay_center: Optional[Union[str, "EnumAssayCenter"]] = None
     workflow_name: Optional[str] = None
     workflow_version: Optional[str] = None
 
@@ -1393,8 +1393,8 @@ class FileAssay(YAMLRoot):
 
         if self._is_empty(self.experimental_strategy):
             self.MissingRequiredField("experimental_strategy")
-        if not isinstance(self.experimental_strategy, str):
-            self.experimental_strategy = str(self.experimental_strategy)
+        if not isinstance(self.experimental_strategy, EnumExperimentalStrategy):
+            self.experimental_strategy = EnumExperimentalStrategy(self.experimental_strategy)
 
         if self._is_empty(self.size):
             self.MissingRequiredField("size")
@@ -1403,16 +1403,16 @@ class FileAssay(YAMLRoot):
 
         if self._is_empty(self.access_type):
             self.MissingRequiredField("access_type")
-        if not isinstance(self.access_type, str):
-            self.access_type = str(self.access_type)
+        if not isinstance(self.access_type, EnumAccessType):
+            self.access_type = EnumAccessType(self.access_type)
 
         if self._is_empty(self.platform):
             self.MissingRequiredField("platform")
-        if not isinstance(self.platform, str):
-            self.platform = str(self.platform)
+        if not isinstance(self.platform, EnumPlatform):
+            self.platform = EnumPlatform(self.platform)
 
-        if self.assay_center is not None and not isinstance(self.assay_center, str):
-            self.assay_center = str(self.assay_center)
+        if self.assay_center is not None and not isinstance(self.assay_center, EnumAssayCenter):
+            self.assay_center = EnumAssayCenter(self.assay_center)
 
         if self.workflow_name is not None and not isinstance(self.workflow_name, str):
             self.workflow_name = str(self.workflow_name)
@@ -1956,6 +1956,149 @@ class EnumFileHashType(EnumDefinitionImpl):
         description="Types of file hashes supported.",
     )
 
+class EnumAccessType(EnumDefinitionImpl):
+    """
+    Types of file access levels.
+    """
+    open = PermissibleValue(
+        text="open",
+        title="Open Access")
+    controlled = PermissibleValue(
+        text="controlled",
+        title="Controlled Access")
+    registered = PermissibleValue(
+        text="registered",
+        title="Registered-tier Access")
+
+    _defn = EnumDefinition(
+        name="EnumAccessType",
+        description="Types of file access levels.",
+    )
+
+class EnumExperimentalStrategy(EnumDefinitionImpl):
+    """
+    Types of sequencing methods.
+    """
+    wgs = PermissibleValue(
+        text="wgs",
+        title="Whole Genome Sequencing")
+    rnaseq = PermissibleValue(
+        text="rnaseq",
+        title="RNA-Seq")
+    wxs = PermissibleValue(
+        text="wxs",
+        title="Whole Exome Sequencing")
+    methlyation = PermissibleValue(
+        text="methlyation",
+        title="Methylation")
+    clr_wgs = PermissibleValue(
+        text="clr_wgs",
+        title="Continuous Long Reads WGS")
+    proteomics = PermissibleValue(
+        text="proteomics",
+        title="Proteomics")
+    targeted_seq = PermissibleValue(
+        text="targeted_seq",
+        title="Targeted Sequencing")
+    ccs_wgs = PermissibleValue(
+        text="ccs_wgs",
+        title="Circular Consensus Sequencing WGS")
+    panel = PermissibleValue(
+        text="panel",
+        title="Panel")
+    ccs_rnaseq = PermissibleValue(
+        text="ccs_rnaseq",
+        title="Circular Consensus Sequencing RNA-Se")
+    ont_wgs = PermissibleValue(
+        text="ont_wgs",
+        title="Oxford Nanopore Technologies WGS")
+    clr_rnaseq = PermissibleValue(
+        text="clr_rnaseq",
+        title="Continuous Long Reads RNA-Seq")
+
+    _defn = EnumDefinition(
+        name="EnumExperimentalStrategy",
+        description="Types of sequencing methods.",
+    )
+
+class EnumAssayCenter(EnumDefinitionImpl):
+    """
+    Organizations or centers producing raw or harmonized sequencing files.
+    """
+    broad = PermissibleValue(
+        text="broad",
+        title="The Broad Institute")
+    hudsonalpha = PermissibleValue(
+        text="hudsonalpha",
+        title="HudsonAlpha Institute for Biotechnology")
+    stjude = PermissibleValue(
+        text="stjude",
+        title="St. Jude")
+    baylor = PermissibleValue(
+        text="baylor",
+        title="Baylor College of Medicine")
+    chop = PermissibleValue(
+        text="chop",
+        title="The Children's Hospital of Philadelphia")
+    other = PermissibleValue(
+        text="other",
+        title="Other")
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown")
+
+    _defn = EnumDefinition(
+        name="EnumAssayCenter",
+        description="Organizations or centers producing raw or harmonized sequencing files.",
+    )
+
+class EnumRepository(EnumDefinitionImpl):
+    """
+    specific drs service used for registration
+    """
+    cavatica = PermissibleValue(
+        text="cavatica",
+        title="Cavatica DRS")
+    dcf = PermissibleValue(
+        text="dcf",
+        title="NCI DCF")
+    other = PermissibleValue(
+        text="other",
+        title="Other")
+
+    _defn = EnumDefinition(
+        name="EnumRepository",
+        description="specific drs service used for registration",
+    )
+
+class EnumPlatform(EnumDefinitionImpl):
+    """
+    names of instrument or platforms used for assay data generation
+    """
+    illumina = PermissibleValue(
+        text="illumina",
+        title="Illumina")
+    pacbio = PermissibleValue(
+        text="pacbio",
+        title="PacBio")
+    ont = PermissibleValue(
+        text="ont",
+        title="ONT")
+    illumina_epic = PermissibleValue(
+        text="illumina_epic",
+        title="Illumina Infinium HumanMethylationEPICv2")
+    other = PermissibleValue(
+        text="other",
+        title="Other")
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown")
+
+    _defn = EnumDefinition(
+        name="EnumPlatform",
+        description="names of instrument or platforms used for assay data generation",
+    )
+
 # Slots
 class slots:
     pass
@@ -2240,7 +2383,7 @@ slots.is_registered = Slot(uri=INCLUDEDCC.is_registered, name="is_registered", c
                    model_uri=INCLUDEDCC.is_registered, domain=None, range=Union[bool, Bool])
 
 slots.repository = Slot(uri=INCLUDEDCC.repository, name="repository", curie=INCLUDEDCC.curie('repository'),
-                   model_uri=INCLUDEDCC.repository, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.repository, domain=None, range=Optional[Union[str, "EnumRepository"]])
 
 slots.file_category = Slot(uri=INCLUDEDCC.file_category, name="file_category", curie=INCLUDEDCC.curie('file_category'),
                    model_uri=INCLUDEDCC.file_category, domain=None, range=str)
@@ -2315,7 +2458,7 @@ slots.version_id = Slot(uri=INCLUDEDCC.version_id, name="version_id", curie=INCL
                    model_uri=INCLUDEDCC.version_id, domain=None, range=str)
 
 slots.access_type = Slot(uri=INCLUDEDCC.access_type, name="access_type", curie=INCLUDEDCC.curie('access_type'),
-                   model_uri=INCLUDEDCC.access_type, domain=None, range=str)
+                   model_uri=INCLUDEDCC.access_type, domain=None, range=Union[str, "EnumAccessType"])
 
 slots.access_url = Slot(uri=INCLUDEDCC.access_url, name="access_url", curie=INCLUDEDCC.curie('access_url'),
                    model_uri=INCLUDEDCC.access_url, domain=None, range=Optional[str])
@@ -2324,13 +2467,13 @@ slots.acl = Slot(uri=INCLUDEDCC.acl, name="acl", curie=INCLUDEDCC.curie('acl'),
                    model_uri=INCLUDEDCC.acl, domain=None, range=str)
 
 slots.experimental_strategy = Slot(uri=INCLUDEDCC.experimental_strategy, name="experimental_strategy", curie=INCLUDEDCC.curie('experimental_strategy'),
-                   model_uri=INCLUDEDCC.experimental_strategy, domain=None, range=str)
+                   model_uri=INCLUDEDCC.experimental_strategy, domain=None, range=Union[str, "EnumExperimentalStrategy"])
 
 slots.assay_center = Slot(uri=INCLUDEDCC.assay_center, name="assay_center", curie=INCLUDEDCC.curie('assay_center'),
-                   model_uri=INCLUDEDCC.assay_center, domain=None, range=Optional[str])
+                   model_uri=INCLUDEDCC.assay_center, domain=None, range=Optional[Union[str, "EnumAssayCenter"]])
 
 slots.platform = Slot(uri=INCLUDEDCC.platform, name="platform", curie=INCLUDEDCC.curie('platform'),
-                   model_uri=INCLUDEDCC.platform, domain=None, range=str)
+                   model_uri=INCLUDEDCC.platform, domain=None, range=Union[str, "EnumPlatform"])
 
 slots.workflow_name = Slot(uri=INCLUDEDCC.workflow_name, name="workflow_name", curie=INCLUDEDCC.curie('workflow_name'),
                    model_uri=INCLUDEDCC.workflow_name, domain=None, range=Optional[str])
