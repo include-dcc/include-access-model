@@ -814,6 +814,129 @@ enums:
       sha1:
         text: sha1
         title: SHA-1
+  EnumAccessType:
+    name: EnumAccessType
+    definition_uri: https://includedcc.org/include-access-model/EnumAccessType
+    description: Types of file access levels.
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      open:
+        text: open
+        title: Open Access
+      controlled:
+        text: controlled
+        title: Controlled Access
+      registered:
+        text: registered
+        title: Registered-tier Access
+  EnumExperimentalStrategy:
+    name: EnumExperimentalStrategy
+    definition_uri: https://includedcc.org/include-access-model/EnumExperimentalStrategy
+    description: Types of sequencing methods.
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      wgs:
+        text: wgs
+        title: Whole Genome Sequencing
+      rnaseq:
+        text: rnaseq
+        title: RNA-Seq
+      wxs:
+        text: wxs
+        title: Whole Exome Sequencing
+      methlyation:
+        text: methlyation
+        title: Methylation
+      clr_wgs:
+        text: clr_wgs
+        title: Continuous Long Reads WGS
+      proteomics:
+        text: proteomics
+        title: Proteomics
+      targeted_seq:
+        text: targeted_seq
+        title: Targeted Sequencing
+      ccs_wgs:
+        text: ccs_wgs
+        title: Circular Consensus Sequencing WGS
+      panel:
+        text: panel
+        title: Panel
+      ccs_rnaseq:
+        text: ccs_rnaseq
+        title: Circular Consensus Sequencing RNA-Se
+      ont_wgs:
+        text: ont_wgs
+        title: Oxford Nanopore Technologies WGS
+      clr_rnaseq:
+        text: clr_rnaseq
+        title: Continuous Long Reads RNA-Seq
+  EnumAssayCenter:
+    name: EnumAssayCenter
+    definition_uri: https://includedcc.org/include-access-model/EnumAssayCenter
+    description: Organizations or centers producing raw or harmonized sequencing files.
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      broad:
+        text: broad
+        title: The Broad Institute
+      hudsonalpha:
+        text: hudsonalpha
+        title: HudsonAlpha Institute for Biotechnology
+      stjude:
+        text: stjude
+        title: St. Jude
+      baylor:
+        text: baylor
+        title: Baylor College of Medicine
+      chop:
+        text: chop
+        title: The Children's Hospital of Philadelphia
+      other:
+        text: other
+        title: Other
+      unknown:
+        text: unknown
+        title: Unknown
+  EnumRepository:
+    name: EnumRepository
+    definition_uri: https://includedcc.org/include-access-model/EnumRepository
+    description: specific drs service used for registration
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      cavatica:
+        text: cavatica
+        title: Cavatica DRS
+      dcf:
+        text: dcf
+        title: NCI DCF
+      other:
+        text: other
+        title: Other
+  EnumPlatform:
+    name: EnumPlatform
+    definition_uri: https://includedcc.org/include-access-model/EnumPlatform
+    description: names of instrument or platforms used for assay data generation
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      illumina:
+        text: illumina
+        title: Illumina
+      pacbio:
+        text: pacbio
+        title: PacBio
+      ont:
+        text: ont
+        title: ONT
+      illumina_epic:
+        text: illumina_epic
+        title: Illumina Infinium HumanMethylationEPICv2
+      other:
+        text: other
+        title: Other
+      unknown:
+        text: unknown
+        title: Unknown
 slots:
   study_id:
     name: study_id
@@ -822,10 +945,12 @@ slots:
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:study_id
-    owner: StudyMetadata
+    owner: FileAdmin
     domain_of:
     - Study
     - StudyMetadata
+    - File
+    - FileAdmin
     range: Study
     multivalued: false
   do_id:
@@ -849,13 +974,15 @@ slots:
     title: Study ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:subject_id
-    owner: File
+    owner: FileAssay
     domain_of:
     - Subject
     - Demographics
     - SubjectAssertion
     - Encounter
     - File
+    - FileAdmin
+    - FileAssay
     range: Subject
     multivalued: false
   assertion_id:
@@ -1153,10 +1280,11 @@ slots:
     title: Data Category
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:data_category
-    owner: File
+    owner: FileAssay
     domain_of:
     - StudyMetadata
     - File
+    - FileAssay
     range: EnumDataCategory
   clinical_data_source_type:
     name: clinical_data_source_type
@@ -1525,11 +1653,13 @@ slots:
     title: Sample ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:sample_id
-    owner: File
+    owner: FileAssay
     domain_of:
     - Sample
     - Aliquot
     - File
+    - FileAdmin
+    - FileAssay
     range: Sample
   parent_sample_id:
     name: parent_sample_id
@@ -1777,10 +1907,12 @@ slots:
     title: File ID
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:file_id
-    owner: Dataset
+    owner: FileAssay
     domain_of:
     - File
     - Dataset
+    - FileAdmin
+    - FileAssay
     range: File
   filename:
     name: filename
@@ -1793,6 +1925,7 @@ slots:
     domain_of:
     - File
     range: string
+    required: true
   format:
     name: format
     definition_uri: https://includedcc.org/include-access-model/format
@@ -1800,10 +1933,12 @@ slots:
     title: File Format
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:format
-    owner: File
+    owner: FileAssay
     domain_of:
     - File
+    - FileAssay
     range: EnumEDAMFormats
+    required: true
   data_type:
     name: data_type
     definition_uri: https://includedcc.org/include-access-model/data_type
@@ -1811,10 +1946,12 @@ slots:
     title: Data Type
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:data_type
-    owner: File
+    owner: FileAssay
     domain_of:
     - File
+    - FileAssay
     range: EnumEDAMDataTypes
+    required: true
   size:
     name: size
     definition_uri: https://includedcc.org/include-access-model/size
@@ -1822,10 +1959,13 @@ slots:
     title: File Size
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:size
-    owner: File
+    owner: FileAssay
     domain_of:
     - File
+    - FileAdmin
+    - FileAssay
     range: integer
+    required: true
     unit:
       ucum_code: By
   staging_url:
@@ -1835,10 +1975,12 @@ slots:
     title: Staging Location
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:staging_url
-    owner: File
+    owner: FileAdmin
     domain_of:
     - File
+    - FileAdmin
     range: uriorcurie
+    required: false
   release_url:
     name: release_url
     definition_uri: https://includedcc.org/include-access-model/release_url
@@ -1846,10 +1988,12 @@ slots:
     title: Release Location
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:release_url
-    owner: File
+    owner: FileAdmin
     domain_of:
     - File
+    - FileAdmin
     range: uriorcurie
+    required: false
   drs_uri:
     name: drs_uri
     definition_uri: https://includedcc.org/include-access-model/drs_uri
@@ -1857,10 +2001,12 @@ slots:
     title: DRS URI
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:drs_uri
-    owner: File
+    owner: FileAdmin
     domain_of:
     - File
+    - FileAdmin
     range: uriorcurie
+    required: false
   hash:
     name: hash
     definition_uri: https://includedcc.org/include-access-model/hash
@@ -1868,10 +2014,12 @@ slots:
     title: File Hash
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:hash
-    owner: File
+    owner: FileAdmin
     domain_of:
     - File
+    - FileAdmin
     range: FileHash
+    required: true
     inlined: true
     inlined_as_list: true
   hash_type:
@@ -1885,6 +2033,7 @@ slots:
     domain_of:
     - FileHash
     range: EnumFileHashType
+    required: true
   hash_value:
     name: hash_value
     definition_uri: https://includedcc.org/include-access-model/hash_value
@@ -1896,6 +2045,7 @@ slots:
     domain_of:
     - FileHash
     range: string
+    required: true
   dataset_id:
     name: dataset_id
     definition_uri: https://includedcc.org/include-access-model/dataset_id
@@ -1929,6 +2079,465 @@ slots:
     domain_of:
     - Dataset
     range: string
+  s3_file_path:
+    name: s3_file_path
+    definition_uri: https://includedcc.org/include-access-model/s3_file_path
+    description: The full s3 url of a file's location in aws
+    title: S3 File Path
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:s3_file_path
+    owner: FileAdmin
+    domain_of:
+    - File
+    - FileAdmin
+    range: string
+    required: true
+  is_released:
+    name: is_released
+    definition_uri: https://includedcc.org/include-access-model/is_released
+    description: A flag that notes whether a file has been released to the public
+    title: Is Released
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:is_released
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: boolean
+    required: true
+  is_registered:
+    name: is_registered
+    definition_uri: https://includedcc.org/include-access-model/is_registered
+    description: A flag that notes whether a file has been registered to a drs service
+    title: Is Registered
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:is_registered
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: boolean
+    required: true
+  repository:
+    name: repository
+    definition_uri: https://includedcc.org/include-access-model/repository
+    description: The name of the drs service which files are registered to
+    title: Repository
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:repository
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: EnumRepository
+    required: false
+  file_category:
+    name: file_category
+    definition_uri: https://includedcc.org/include-access-model/file_category
+    description: A high level classification of the file used for operations.
+    title: File Category
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:file_category
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  s3_key:
+    name: s3_key
+    definition_uri: https://includedcc.org/include-access-model/s3_key
+    description: The unique identifier for an object within a bucket
+    title: S3 Key
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:s3_key
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  file_extension:
+    name: file_extension
+    definition_uri: https://includedcc.org/include-access-model/file_extension
+    description: A 3-4 letter code at the end of a filename that identifies the file
+      format.
+    title: File Extension
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:file_extension
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  data_transfer_id:
+    name: data_transfer_id
+    definition_uri: https://includedcc.org/include-access-model/data_transfer_id
+    description: A jira ticket number associated with a file transfer request to production
+      bucket
+    title: Data Transfer ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_transfer_id
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: false
+  aws_account_id:
+    name: aws_account_id
+    definition_uri: https://includedcc.org/include-access-model/aws_account_id
+    description: A 12-digit number that uniquely identifies a specific AWS account
+    title: AWS Account ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:aws_account_id
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  account_name:
+    name: account_name
+    definition_uri: https://includedcc.org/include-access-model/account_name
+    description: A user-defined label used to define an AWS accoun.
+    title: AWS Account Name
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:account_name
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  account_alias:
+    name: account_alias
+    definition_uri: https://includedcc.org/include-access-model/account_alias
+    description: A unique user-defined string that replaces the AWS Account ID in
+      the IAM user sign-in URL
+    title: Account Alias
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:account_alias
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  bucket_study_id:
+    name: bucket_study_id
+    definition_uri: https://includedcc.org/include-access-model/bucket_study_id
+    description: The global study ID used to create the bucket
+    title: Bucket Study ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:bucket_study_id
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  bucket:
+    name: bucket
+    definition_uri: https://includedcc.org/include-access-model/bucket
+    description: Cloud storage container in AWS used to manage and store s3 objects
+    title: Bucket
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:bucket
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  s3_created_at:
+    name: s3_created_at
+    definition_uri: https://includedcc.org/include-access-model/s3_created_at
+    description: Timestamp of when a file was uploaded to an s3 bucket.
+    title: S3 Created At
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:s3_created_at
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: datetime
+    required: true
+  s3_modified_at:
+    name: s3_modified_at
+    definition_uri: https://includedcc.org/include-access-model/s3_modified_at
+    description: Timestamp of when a file was modified in an s3 bucket.
+    title: S3 Modified At
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:s3_modified_at
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: datetime
+    required: true
+  intelligent_tiering_access_tier:
+    name: intelligent_tiering_access_tier
+    definition_uri: https://includedcc.org/include-access-model/intelligent_tiering_access_tier
+    description: Storage access tier assigned by AWS intelliegnt tiering, indicating
+      the current access frequency classification of the object
+    title: Intelligent Tiering Access Tier
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:intelligent_tiering_access_tier
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  is_delete_marker:
+    name: is_delete_marker
+    definition_uri: https://includedcc.org/include-access-model/is_delete_marker
+    description: A flag that notes whether a file has been deleted from s3
+    title: Is Delete Marker
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:is_delete_marker
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: boolean
+    required: true
+  is_latest:
+    name: is_latest
+    definition_uri: https://includedcc.org/include-access-model/is_latest
+    description: Specifies whether an object version is the most recent version of
+      that object
+    title: Is Latest
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:is_latest
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: boolean
+    required: true
+  storage_class:
+    name: storage_class
+    definition_uri: https://includedcc.org/include-access-model/storage_class
+    description: Storage tier of the object in AWS reflecting cost and access characteristics.
+    title: Storage Class
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:storage_class
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  manifest_hash_value:
+    name: manifest_hash_value
+    definition_uri: https://includedcc.org/include-access-model/manifest_hash_value
+    description: The provided hash value from external users to be validated against
+      internal hash values
+    title: Manifest Hash Value
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:manifest_hash_value
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: false
+  file_hash_validation_status:
+    name: file_hash_validation_status
+    definition_uri: https://includedcc.org/include-access-model/file_hash_validation_status
+    description: Notes whether hashes have been generated and verified against manifest
+      hash values.
+    title: File Hash Validation Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:file_hash_validation_status
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: false
+  file_type:
+    name: file_type
+    definition_uri: https://includedcc.org/include-access-model/file_type
+    description: An internal type or classification of the files based on its operational
+      usuage.
+    title: File Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:file_type
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  encryption_status:
+    name: encryption_status
+    definition_uri: https://includedcc.org/include-access-model/encryption_status
+    description: Indicates whether the object in AWS is encrypted and the type of
+      encryption applied.
+    title: Encryption Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:encryption_status
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  is_multipart_uploaded:
+    name: is_multipart_uploaded
+    definition_uri: https://includedcc.org/include-access-model/is_multipart_uploaded
+    description: Indicates whether the object was uploaded using a multipart upload
+      process.
+    title: Is Multipart Uploaded
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:is_multipart_uploaded
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  object_lock_level_hold_status:
+    name: object_lock_level_hold_status
+    definition_uri: https://includedcc.org/include-access-model/object_lock_level_hold_status
+    description: Whether a legal hold is applied to prevent deletion of the object.
+    title: Object Lock Level Hold Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:object_lock_level_hold_status
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  object_lock_mode:
+    name: object_lock_mode
+    definition_uri: https://includedcc.org/include-access-model/object_lock_mode
+    description: Retention mode applied to the object that restricts deletion or modification.
+    title: Object Lock Mode
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:object_lock_mode
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  replication_status:
+    name: replication_status
+    definition_uri: https://includedcc.org/include-access-model/replication_status
+    description: Status of the object's replication to another storage location.
+    title: Replication Status
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:replication_status
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  version_id:
+    name: version_id
+    definition_uri: https://includedcc.org/include-access-model/version_id
+    description: Identifier for a specific version of the object
+    title: Version ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:version_id
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  access_type:
+    name: access_type
+    definition_uri: https://includedcc.org/include-access-model/access_type
+    description: Notes wheter a file is controlled, open, or registered-tier access
+    title: Access Type
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:access_type
+    owner: FileAssay
+    domain_of:
+    - FileAdmin
+    - FileAssay
+    range: EnumAccessType
+    required: true
+  access_url:
+    name: access_url
+    definition_uri: https://includedcc.org/include-access-model/access_url
+    description: HTTPS endpoint for accessing a file via a specific data repository
+      service.
+    title: Access URL
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:access_url
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: false
+  acl:
+    name: acl
+    definition_uri: https://includedcc.org/include-access-model/acl
+    description: The object access control list.
+    title: ACL
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:acl
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: string
+    required: true
+  experimental_strategy:
+    name: experimental_strategy
+    definition_uri: https://includedcc.org/include-access-model/experimental_strategy
+    description: Method or assay used to generate the data
+    title: Experimental Strategy
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:experimental_strategy
+    owner: FileAssay
+    domain_of:
+    - FileAdmin
+    - FileAssay
+    range: EnumExperimentalStrategy
+    required: true
+  assay_center:
+    name: assay_center
+    definition_uri: https://includedcc.org/include-access-model/assay_center
+    description: The organization or center that generated the file
+    title: Assay Center
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:assay_center
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    range: EnumAssayCenter
+    required: false
+  platform:
+    name: platform
+    definition_uri: https://includedcc.org/include-access-model/platform
+    description: Instrument or platform family name
+    title: Platform
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:platform
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    range: EnumPlatform
+    required: true
+  workflow_name:
+    name: workflow_name
+    definition_uri: https://includedcc.org/include-access-model/workflow_name
+    description: Processing tool that produced the file
+    title: Workflow Name
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:workflow_name
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    range: string
+    required: false
+  workflow_version:
+    name: workflow_version
+    definition_uri: https://includedcc.org/include-access-model/workflow_version
+    description: Version of the process tool that produced the file
+    title: Workflow Version
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:workflow_version
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    range: string
+    required: false
+  object_lock_retain_until_date:
+    name: object_lock_retain_until_date
+    definition_uri: https://includedcc.org/include-access-model/object_lock_retain_until_date
+    description: Specifies exact date and time when an object's Object Lock rentention
+      period expires.
+    title: Object Lock Retain Until Date
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:object_lock_retain_until_date
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    range: datetime
+    required: true
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
@@ -2221,6 +2830,24 @@ slots:
     usage_slot_name: activity_definition_id
     range: string
     required: true
+  File_study_id:
+    name: File_study_id
+    definition_uri: https://includedcc.org/include-access-model/study_id
+    description: INCLUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: study_id
+    domain: File
+    slot_uri: includedcc:study_id
+    alias: study_id
+    owner: File
+    domain_of:
+    - File
+    is_usage_slot: true
+    usage_slot_name: study_id
+    range: Study
+    required: true
+    multivalued: false
   File_file_id:
     name: File_file_id
     definition_uri: https://includedcc.org/include-access-model/file_id
@@ -2255,6 +2882,7 @@ slots:
     is_usage_slot: true
     usage_slot_name: subject_id
     range: Subject
+    required: true
     multivalued: true
   File_sample_id:
     name: File_sample_id
@@ -2272,7 +2900,26 @@ slots:
     is_usage_slot: true
     usage_slot_name: sample_id
     range: Sample
+    required: true
     multivalued: true
+  File_data_category:
+    name: File_data_category
+    definition_uri: https://includedcc.org/include-access-model/data_category
+    description: General category of data in this Record (e.g. Clinical, Genomics,
+      etc)
+    title: Data Category
+    from_schema: https://includedcc.org/include-access-model
+    is_a: data_category
+    domain: File
+    slot_uri: includedcc:data_category
+    alias: data_category
+    owner: File
+    domain_of:
+    - File
+    is_usage_slot: true
+    usage_slot_name: data_category
+    range: EnumDataCategory
+    required: true
   Dataset_dataset_id:
     name: Dataset_dataset_id
     definition_uri: https://includedcc.org/include-access-model/dataset_id
@@ -2308,6 +2955,114 @@ slots:
     usage_slot_name: file_id
     range: File
     multivalued: true
+  FileAdmin_study_id:
+    name: FileAdmin_study_id
+    definition_uri: https://includedcc.org/include-access-model/study_id
+    description: INCLUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: study_id
+    domain: FileAdmin
+    slot_uri: includedcc:study_id
+    alias: study_id
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    is_usage_slot: true
+    usage_slot_name: study_id
+    range: Study
+    required: true
+    multivalued: false
+  FileAdmin_file_id:
+    name: FileAdmin_file_id
+    definition_uri: https://includedcc.org/include-access-model/file_id
+    description: Unique identifier for this File.
+    title: File ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: file_id
+    domain: FileAdmin
+    slot_uri: includedcc:file_id
+    identifier: true
+    alias: file_id
+    owner: FileAdmin
+    domain_of:
+    - FileAdmin
+    is_usage_slot: true
+    usage_slot_name: file_id
+    range: File
+    required: true
+  FileAssay_file_id:
+    name: FileAssay_file_id
+    definition_uri: https://includedcc.org/include-access-model/file_id
+    description: Unique identifier for this File.
+    title: File ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: file_id
+    domain: FileAssay
+    slot_uri: includedcc:file_id
+    identifier: true
+    alias: file_id
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    is_usage_slot: true
+    usage_slot_name: file_id
+    range: File
+    required: true
+  FileAssay_subject_id:
+    name: FileAssay_subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: INCLUDE Global ID for the Subject
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: subject_id
+    domain: FileAssay
+    slot_uri: includedcc:subject_id
+    alias: subject_id
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    is_usage_slot: true
+    usage_slot_name: subject_id
+    range: Subject
+    required: true
+    multivalued: true
+  FileAssay_sample_id:
+    name: FileAssay_sample_id
+    definition_uri: https://includedcc.org/include-access-model/sample_id
+    description: The unique identifier for this Sample.
+    title: Sample ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: sample_id
+    domain: FileAssay
+    slot_uri: includedcc:sample_id
+    alias: sample_id
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: Sample
+    required: true
+    multivalued: true
+  FileAssay_data_category:
+    name: FileAssay_data_category
+    definition_uri: https://includedcc.org/include-access-model/data_category
+    description: General category of data in this Record (e.g. Clinical, Genomics,
+      etc)
+    title: Data Category
+    from_schema: https://includedcc.org/include-access-model
+    is_a: data_category
+    domain: FileAssay
+    slot_uri: includedcc:data_category
+    alias: data_category
+    owner: FileAssay
+    domain_of:
+    - FileAssay
+    is_usage_slot: true
+    usage_slot_name: data_category
+    range: EnumDataCategory
+    required: true
 classes:
   Record:
     name: Record
@@ -2674,18 +3429,21 @@ classes:
   File:
     name: File
     definition_uri: https://includedcc.org/include-access-model/File
-    description: File
+    description: Required information for portal use.
     title: File
     from_schema: https://includedcc.org/include-access-model
     is_a: Record
     slots:
     - external_id
+    - File_study_id
     - File_file_id
     - File_subject_id
     - File_sample_id
+    - s3_file_path
     - filename
+    - size
     - format
-    - data_category
+    - File_data_category
     - data_type
     - format
     - size
@@ -2694,6 +3452,9 @@ classes:
     - drs_uri
     - hash
     slot_usage:
+      study_id:
+        name: study_id
+        required: true
       file_id:
         name: file_id
         identifier: true
@@ -2701,10 +3462,15 @@ classes:
         required: true
       subject_id:
         name: subject_id
+        required: true
         multivalued: true
       sample_id:
         name: sample_id
+        required: true
         multivalued: true
+      data_category:
+        name: data_category
+        required: true
     class_uri: includedcc:File
   FileHash:
     name: FileHash
@@ -2742,9 +3508,106 @@ classes:
         description: The list of files comprising this dataset.
         multivalued: true
     class_uri: includedcc:Dataset
+  FileAdmin:
+    name: FileAdmin
+    definition_uri: https://includedcc.org/include-access-model/FileAdmin
+    description: File unvierse; contains all information about a file that may be
+      needed for operational work
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - FileAdmin_study_id
+    - FileAdmin_file_id
+    - subject_id
+    - sample_id
+    - s3_file_path
+    - file_category
+    - size
+    - s3_key
+    - file_extension
+    - data_transfer_id
+    - aws_account_id
+    - account_name
+    - account_alias
+    - bucket_study_id
+    - bucket
+    - s3_created_at
+    - s3_modified_at
+    - intelligent_tiering_access_tier
+    - is_delete_marker
+    - is_latest
+    - storage_class
+    - manifest_hash_value
+    - file_hash_validation_status
+    - file_type
+    - encryption_status
+    - is_multipart_uploaded
+    - object_lock_level_hold_status
+    - object_lock_mode
+    - object_lock_retain_until_date
+    - replication_status
+    - version_id
+    - staging_url
+    - release_url
+    - hash
+    - access_type
+    - access_url
+    - drs_uri
+    - acl
+    - is_released
+    - is_registered
+    - repository
+    - experimental_strategy
+    slot_usage:
+      study_id:
+        name: study_id
+        required: true
+      file_id:
+        name: file_id
+        identifier: true
+        required: true
+    class_uri: includedcc:FileAdmin
+  FileAssay:
+    name: FileAssay
+    definition_uri: https://includedcc.org/include-access-model/FileAssay
+    description: A file produced by or associated with an assay or data acquisition
+      process including omics, imaging, actigraphy, and other experimental or observational
+      data.
+    title: File Assay
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - FileAssay_file_id
+    - FileAssay_subject_id
+    - FileAssay_sample_id
+    - FileAssay_data_category
+    - experimental_strategy
+    - data_type
+    - format
+    - size
+    - access_type
+    - assay_center
+    - platform
+    - workflow_name
+    - workflow_version
+    slot_usage:
+      file_id:
+        name: file_id
+        identifier: true
+        required: true
+      subject_id:
+        name: subject_id
+        required: true
+        multivalued: true
+      sample_id:
+        name: sample_id
+        required: true
+        multivalued: true
+      data_category:
+        name: data_category
+        required: true
+    class_uri: includedcc:FileAssay
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-12T11:06:57'
-source_file_size: 36149
-generation_date: '2026-03-12T11:07:27'
+source_file_date: '2026-04-03T17:19:20'
+source_file_size: 46203
+generation_date: '2026-04-03T17:21:01'
 
