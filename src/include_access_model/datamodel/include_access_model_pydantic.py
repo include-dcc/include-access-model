@@ -484,7 +484,7 @@ class StudyMetadata(Record):
     study_design: list[EnumStudyDesign] = Field(default=..., title="Study Design", description="""Overall design of study, including whether it is longitudinal and whether family members/unrelated controls are also enrolled""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     clinical_data_source_type: list[EnumClinicalDataSourceType] = Field(default=..., title="Clinical Data Source Type", description="""Source(s) of data collected from study participants""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     data_category: list[EnumDataCategory] = Field(default=..., title="Data Category", description="""General category of data in this Record (e.g. Clinical, Genomics, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'File']} })
-    vbr: Optional[VirtualBiorepository] = Field(default=None, title="Virtual Biorepository", description="""Information about the study's Virtual Biorepository, if participating""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
+    vbr_id: Optional[str] = Field(default=None, title="Virtual Biorepository", description="""Information about the study's Virtual Biorepository, if participating""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'VirtualBiorepository']} })
     research_domain: list[EnumResearchDomain] = Field(default=..., description="""Main research domain(s) of the study, other than Down syndrome""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     expected_number_of_participants: int = Field(default=..., title="Expected Number of Participants", description="""Total expected number of participants to be recruited.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     actual_number_of_participants: int = Field(default=..., title="Actual Number of Participants", description="""Total participants included at this time.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
@@ -496,8 +496,13 @@ class VirtualBiorepository(Record):
     An organization that can provide access to specimen for further analysis.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'vbr_id': {'identifier': True,
+                                   'name': 'vbr_id',
+                                   'range': 'string',
+                                   'required': True}},
          'title': 'Virtual BioRepository (VBR)'})
 
+    vbr_id: str = Field(default=..., title="Virtual Biorepository", description="""Information about the study's Virtual Biorepository, if participating""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata', 'VirtualBiorepository']} })
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository',
                        'Investigator',
                        'EncounterDefinition',

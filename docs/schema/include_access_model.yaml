@@ -1068,20 +1068,18 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  vbr:
-    name: vbr
-    definition_uri: https://includedcc.org/include-access-model/vbr
+  vbr_id:
+    name: vbr_id
+    definition_uri: https://includedcc.org/include-access-model/vbr_id
     description: Information about the study's Virtual Biorepository, if participating
     title: Virtual Biorepository
     from_schema: https://includedcc.org/include-access-model
-    slot_uri: includedcc:vbr
-    owner: StudyMetadata
+    slot_uri: includedcc:vbr_id
+    owner: VirtualBiorepository
     domain_of:
     - StudyMetadata
+    - VirtualBiorepository
     range: VirtualBiorepository
-    required: false
-    inlined: true
-    inlined_as_list: true
   vbr_readme:
     name: vbr_readme
     definition_uri: https://includedcc.org/include-access-model/vbr_readme
@@ -1986,6 +1984,24 @@ slots:
     range: EnumDataCategory
     required: true
     multivalued: true
+  VirtualBiorepository_vbr_id:
+    name: VirtualBiorepository_vbr_id
+    definition_uri: https://includedcc.org/include-access-model/vbr_id
+    description: Information about the study's Virtual Biorepository, if participating
+    title: Virtual Biorepository
+    from_schema: https://includedcc.org/include-access-model
+    is_a: vbr_id
+    domain: VirtualBiorepository
+    slot_uri: includedcc:vbr_id
+    identifier: true
+    alias: vbr_id
+    owner: VirtualBiorepository
+    domain_of:
+    - VirtualBiorepository
+    is_usage_slot: true
+    usage_slot_name: vbr_id
+    range: string
+    required: true
   DOI_do_id:
     name: DOI_do_id
     definition_uri: https://includedcc.org/include-access-model/do_id
@@ -2365,7 +2381,7 @@ classes:
     - study_design
     - clinical_data_source_type
     - StudyMetadata_data_category
-    - vbr
+    - vbr_id
     - research_domain
     - expected_number_of_participants
     - actual_number_of_participants
@@ -2388,11 +2404,18 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - VirtualBiorepository_vbr_id
     - name
     - institution
     - contact
     - website
     - vbr_readme
+    slot_usage:
+      vbr_id:
+        name: vbr_id
+        identifier: true
+        range: string
+        required: true
     class_uri: includedcc:VirtualBiorepository
   DOI:
     name: DOI
@@ -2744,7 +2767,7 @@ classes:
     class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-12T11:06:57'
-source_file_size: 36149
-generation_date: '2026-03-12T11:07:27'
+source_file_date: '2026-04-10T14:06:28'
+source_file_size: 36257
+generation_date: '2026-04-10T14:07:12'
 

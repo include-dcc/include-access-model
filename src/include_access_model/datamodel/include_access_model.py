@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-12T11:07:16
+# Generation date: 2026-04-10T14:06:57
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -90,6 +90,10 @@ class StudyStudyId(extended_str):
 
 
 class StudyMetadataStudyId(StudyStudyId):
+    pass
+
+
+class VirtualBiorepositoryVbrId(extended_str):
     pass
 
 
@@ -284,7 +288,7 @@ class StudyMetadata(Record):
     expected_number_of_participants: int = None
     actual_number_of_participants: int = None
     selection_criteria: Optional[str] = None
-    vbr: Optional[Union[dict, "VirtualBiorepository"]] = None
+    vbr_id: Optional[Union[str, VirtualBiorepositoryVbrId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.study_id):
@@ -335,8 +339,8 @@ class StudyMetadata(Record):
         if self.selection_criteria is not None and not isinstance(self.selection_criteria, str):
             self.selection_criteria = str(self.selection_criteria)
 
-        if self.vbr is not None and not isinstance(self.vbr, VirtualBiorepository):
-            self.vbr = VirtualBiorepository(**as_dict(self.vbr))
+        if self.vbr_id is not None and not isinstance(self.vbr_id, VirtualBiorepositoryVbrId):
+            self.vbr_id = VirtualBiorepositoryVbrId(self.vbr_id)
 
         super().__post_init__(**kwargs)
 
@@ -353,6 +357,7 @@ class VirtualBiorepository(Record):
     class_name: ClassVar[str] = "VirtualBiorepository"
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.VirtualBiorepository
 
+    vbr_id: Union[str, VirtualBiorepositoryVbrId] = None
     contact: Union[Union[dict, "Investigator"], list[Union[dict, "Investigator"]]] = None
     name: Optional[str] = None
     institution: Optional[str] = None
@@ -360,6 +365,11 @@ class VirtualBiorepository(Record):
     vbr_readme: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.vbr_id):
+            self.MissingRequiredField("vbr_id")
+        if not isinstance(self.vbr_id, VirtualBiorepositoryVbrId):
+            self.vbr_id = VirtualBiorepositoryVbrId(self.vbr_id)
+
         if self._is_empty(self.contact):
             self.MissingRequiredField("contact")
         if not isinstance(self.contact, list):
@@ -1645,8 +1655,8 @@ slots.website = Slot(uri=INCLUDEDCC.website, name="website", curie=INCLUDEDCC.cu
 slots.contact = Slot(uri=INCLUDEDCC.contact, name="contact", curie=INCLUDEDCC.curie('contact'),
                    model_uri=INCLUDEDCC.contact, domain=None, range=Union[Union[dict, Investigator], list[Union[dict, Investigator]]])
 
-slots.vbr = Slot(uri=INCLUDEDCC.vbr, name="vbr", curie=INCLUDEDCC.curie('vbr'),
-                   model_uri=INCLUDEDCC.vbr, domain=None, range=Optional[Union[dict, VirtualBiorepository]])
+slots.vbr_id = Slot(uri=INCLUDEDCC.vbr_id, name="vbr_id", curie=INCLUDEDCC.curie('vbr_id'),
+                   model_uri=INCLUDEDCC.vbr_id, domain=None, range=Optional[Union[str, VirtualBiorepositoryVbrId]])
 
 slots.vbr_readme = Slot(uri=INCLUDEDCC.vbr_readme, name="vbr_readme", curie=INCLUDEDCC.curie('vbr_readme'),
                    model_uri=INCLUDEDCC.vbr_readme, domain=None, range=Optional[str])
@@ -1866,6 +1876,9 @@ slots.StudyMetadata_study_id = Slot(uri=INCLUDEDCC.study_id, name="StudyMetadata
 
 slots.StudyMetadata_data_category = Slot(uri=INCLUDEDCC.data_category, name="StudyMetadata_data_category", curie=INCLUDEDCC.curie('data_category'),
                    model_uri=INCLUDEDCC.StudyMetadata_data_category, domain=StudyMetadata, range=Union[Union[str, "EnumDataCategory"], list[Union[str, "EnumDataCategory"]]])
+
+slots.VirtualBiorepository_vbr_id = Slot(uri=INCLUDEDCC.vbr_id, name="VirtualBiorepository_vbr_id", curie=INCLUDEDCC.curie('vbr_id'),
+                   model_uri=INCLUDEDCC.VirtualBiorepository_vbr_id, domain=VirtualBiorepository, range=Union[str, VirtualBiorepositoryVbrId])
 
 slots.DOI_do_id = Slot(uri=INCLUDEDCC.do_id, name="DOI_do_id", curie=INCLUDEDCC.curie('do_id'),
                    model_uri=INCLUDEDCC.DOI_do_id, domain=DOI, range=Union[str, DOIDoId])
