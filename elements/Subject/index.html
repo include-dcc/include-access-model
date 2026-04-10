@@ -297,7 +297,7 @@
 <tr>
 <td><a href="../organism_type/">organism_type</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Organism Type</td>
+<td>Organism Type, typically from NCBITaxon</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -441,7 +441,8 @@ attributes:
     required: true
   organism_type:
     name: organism_type
-    description: Organism Type
+    description: Organism Type, typically from NCBITaxon. For reference, Human is
+      NCBITaxon:9606.
     title: Organism Type
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -450,7 +451,6 @@ attributes:
     domain_of:
     - Subject
     range: uriorcurie
-    required: false
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study

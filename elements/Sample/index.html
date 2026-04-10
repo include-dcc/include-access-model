@@ -529,7 +529,7 @@ attributes:
     inlined: false
   sample_type:
     name: sample_type
-    description: Type of material of which this Sample is comprised
+    description: Type of material of which this Sample is comprised. UBERON is recommended.
     title: Sample Type
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -542,7 +542,7 @@ attributes:
   processing:
     name: processing
     description: Processing that was applied to the Parent Sample or from the Biospecimen
-      Collection that yielded this distinct sample
+      Collection that yielded this distinct sample. OBI is recommended.
     title: Sample Processing
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
@@ -566,7 +566,8 @@ attributes:
     range: EnumAvailabilityStatus
   storage_method:
     name: storage_method
-    description: Sample storage method, eg, Frozen or with additives
+    description: Sample storage method, eg, Frozen or with additives. OBI may be suitable,
+      or ChEBI for additives.
     title: Sample Storage Method
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
