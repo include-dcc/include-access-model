@@ -698,6 +698,59 @@ enums:
         text: unknown
         meaning: NCIT:C17998
         title: Unknown
+  EnumFamilyType:
+    name: EnumFamilyType
+    definition_uri: https://includedcc.org/include-access-model/EnumFamilyType
+    description: Enumerations describing research family type
+    from_schema: https://includedcc.org/include-access-model
+    is_a: EnumNull
+    permissible_values:
+      control_only:
+        text: control_only
+        description: Control Only
+        title: Control-only
+      duo:
+        text: duo
+        description: Duo
+        title: Duo
+      proband_only:
+        text: proband_only
+        description: Proband Only
+        title: Proband-only
+      trio:
+        text: trio
+        description: Trio (2 parents and affected child)
+        title: Trio
+      trio_plus:
+        text: trio_plus
+        description: 2 Parents and 2 or more children
+        title: Trio+
+  EnumConsanguinityAssertion:
+    name: EnumConsanguinityAssertion
+    definition_uri: https://includedcc.org/include-access-model/EnumConsanguinityAssertion
+    description: Asserts known or suspected consanguinity in this study family
+    from_schema: https://includedcc.org/include-access-model
+    permissible_values:
+      not_suspected:
+        text: not_suspected
+        description: Not suspected
+        meaning: snomed_ct:428263003
+        title: not-suspected
+      suspected:
+        text: suspected
+        description: Suspected
+        meaning: snomed_ct:415684004
+        title: suspected
+      known_present:
+        text: known_present
+        description: Known Present
+        meaning: snomed_ct:410515003
+        title: known-present
+      unknown:
+        text: unknown
+        description: Unknown
+        meaning: snomed_ct:261665006
+        title: unknown
   EnumAssertionProvenance:
     name: EnumAssertionProvenance
     definition_uri: https://includedcc.org/include-access-model/EnumAssertionProvenance
@@ -853,6 +906,8 @@ slots:
     domain_of:
     - Subject
     - Demographics
+    - FamilyRelationship
+    - FamilyMember
     - SubjectAssertion
     - Encounter
     - File
@@ -1365,6 +1420,105 @@ slots:
     maximum_value: 32507
     unit:
       ucum_code: d
+  family_id:
+    name: family_id
+    definition_uri: https://includedcc.org/include-access-model/family_id
+    description: Global ID for the Family
+    title: Family ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_id
+    owner: FamilyMember
+    domain_of:
+    - Family
+    - FamilyMember
+    range: Family
+  family_type:
+    name: family_type
+    definition_uri: https://includedcc.org/include-access-model/family_type
+    description: Describes the 'type' of study family, eg, trio.
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_type
+    owner: Family
+    domain_of:
+    - Family
+    range: EnumFamilyType
+  family_description:
+    name: family_description
+    definition_uri: https://includedcc.org/include-access-model/family_description
+    description: Free text describing the study family, such as potential inheritance
+      or details about consanguinity
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_description
+    owner: Family
+    domain_of:
+    - Family
+    range: string
+  consanguinity:
+    name: consanguinity
+    definition_uri: https://includedcc.org/include-access-model/consanguinity
+    description: Is there known or suspected consanguinity in this study family?
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:consanguinity
+    owner: Family
+    domain_of:
+    - Family
+    range: EnumConsanguinityAssertion
+  family_study_focus:
+    name: family_study_focus
+    definition_uri: https://includedcc.org/include-access-model/family_study_focus
+    description: The specific focus of the investigation, eg, a condition.
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_study_focus
+    owner: Family
+    domain_of:
+    - Family
+    range: uriorcurie
+  family_relationship_id:
+    name: family_relationship_id
+    definition_uri: https://includedcc.org/include-access-model/family_relationship_id
+    description: Global ID for the Family Relationship
+    title: Family Relationship ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_relationship_id
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: FamilyRelationship
+  family_member_id:
+    name: family_member_id
+    definition_uri: https://includedcc.org/include-access-model/family_member_id
+    description: The family member Subject who is the relationship "subject".
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_member_id
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: Subject
+    required: true
+    inlined: false
+  relationship:
+    name: relationship
+    definition_uri: https://includedcc.org/include-access-model/relationship
+    description: Code definting the relationship predicate. Relationship of the "Family
+      Member" to the "Subject", eg, mother of.
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:relationship
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: uriorcurie
+    required: true
+  family_role:
+    name: family_role
+    definition_uri: https://includedcc.org/include-access-model/family_role
+    description: The "role" of this individual in this family. Could include terms
+      like "proband", "mother", etc.
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:family_role
+    owner: FamilyMember
+    domain_of:
+    - FamilyMember
+    range: uriorcurie
   assertion_provenance:
     name: assertion_provenance
     definition_uri: https://includedcc.org/include-access-model/assertion_provenance
@@ -2043,6 +2197,95 @@ slots:
     range: Subject
     required: true
     multivalued: false
+  Family_family_id:
+    name: Family_family_id
+    definition_uri: https://includedcc.org/include-access-model/family_id
+    description: Global ID for the Family
+    title: Family ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: family_id
+    domain: Family
+    slot_uri: includedcc:family_id
+    identifier: true
+    alias: family_id
+    owner: Family
+    domain_of:
+    - Family
+    is_usage_slot: true
+    usage_slot_name: family_id
+    range: string
+    required: true
+  FamilyRelationship_family_relationship_id:
+    name: FamilyRelationship_family_relationship_id
+    definition_uri: https://includedcc.org/include-access-model/family_relationship_id
+    description: Global ID for the Family Relationship
+    title: Family Relationship ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: family_relationship_id
+    domain: FamilyRelationship
+    slot_uri: includedcc:family_relationship_id
+    identifier: true
+    alias: family_relationship_id
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    is_usage_slot: true
+    usage_slot_name: family_relationship_id
+    range: string
+    required: true
+  FamilyRelationship_subject_id:
+    name: FamilyRelationship_subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: The family member Subject who is the relationship "object".
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: subject_id
+    domain: FamilyRelationship
+    slot_uri: includedcc:subject_id
+    alias: subject_id
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    is_usage_slot: true
+    usage_slot_name: subject_id
+    range: Subject
+    required: true
+    multivalued: false
+  FamilyMember_family_id:
+    name: FamilyMember_family_id
+    definition_uri: https://includedcc.org/include-access-model/family_id
+    description: Global ID for the Family
+    title: Family ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: family_id
+    domain: FamilyMember
+    slot_uri: includedcc:family_id
+    alias: family_id
+    owner: FamilyMember
+    domain_of:
+    - FamilyMember
+    is_usage_slot: true
+    usage_slot_name: family_id
+    range: Family
+    required: true
+  FamilyMember_subject_id:
+    name: FamilyMember_subject_id
+    definition_uri: https://includedcc.org/include-access-model/subject_id
+    description: INCLUDE Global ID for the Subject
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: subject_id
+    domain: FamilyMember
+    slot_uri: includedcc:subject_id
+    alias: subject_id
+    owner: FamilyMember
+    domain_of:
+    - FamilyMember
+    is_usage_slot: true
+    usage_slot_name: subject_id
+    range: Subject
+    required: true
+    multivalued: false
   SubjectAssertion_assertion_id:
     name: SubjectAssertion_assertion_id
     definition_uri: https://includedcc.org/include-access-model/assertion_id
@@ -2483,6 +2726,80 @@ classes:
         identifier: true
         required: true
     class_uri: includedcc:Demographics
+  Family:
+    name: Family
+    definition_uri: https://includedcc.org/include-access-model/Family
+    description: A group of individuals of some relation who are grouped together
+      in a study.
+    title: Family
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - Family_family_id
+    - family_type
+    - family_description
+    - consanguinity
+    - family_study_focus
+    slot_usage:
+      family_id:
+        name: family_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:Family
+  FamilyRelationship:
+    name: FamilyRelationship
+    definition_uri: https://includedcc.org/include-access-model/FamilyRelationship
+    description: A relationship between two Subjects. Directed as follows <family_member_id>
+      <relationship> <subject_id> <Mother's id> <KIN:027 "isBiologicalMotherOf"> <subject_id>
+    title: Family Member Relationship
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - FamilyRelationship_family_relationship_id
+    - family_member_id
+    - relationship
+    - FamilyRelationship_subject_id
+    slot_usage:
+      family_relationship_id:
+        name: family_relationship_id
+        identifier: true
+        range: string
+        required: true
+      subject_id:
+        name: subject_id
+        description: The family member Subject who is the relationship "object".
+        required: true
+    class_uri: includedcc:FamilyRelationship
+  FamilyMember:
+    name: FamilyMember
+    definition_uri: https://includedcc.org/include-access-model/FamilyMember
+    description: Designates a Subject as a member of a family with a specified role.
+    title: Family Member
+    from_schema: https://includedcc.org/include-access-model
+    is_a: Record
+    slots:
+    - external_id
+    - FamilyMember_family_id
+    - FamilyMember_subject_id
+    - family_role
+    slot_usage:
+      family_id:
+        name: family_id
+        required: true
+      subject_id:
+        name: subject_id
+        required: true
+    class_uri: includedcc:FamilyMember
+    unique_keys:
+      main:
+        unique_key_name: main
+        unique_key_slots:
+        - family_id
+        - subject_id
+        description: Family membership is defined by family and subject ids.
   SubjectAssertion:
     name: SubjectAssertion
     definition_uri: https://includedcc.org/include-access-model/SubjectAssertion
@@ -2744,7 +3061,7 @@ classes:
     class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-12T11:06:57'
-source_file_size: 36149
-generation_date: '2026-03-12T11:07:27'
+source_file_date: '2026-04-10T13:59:33'
+source_file_size: 40131
+generation_date: '2026-04-10T14:00:18'
 

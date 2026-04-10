@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-12T11:07:16
+# Generation date: 2026-04-10T14:00:05
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -102,6 +102,14 @@ class SubjectSubjectId(extended_str):
 
 
 class DemographicsSubjectId(SubjectSubjectId):
+    pass
+
+
+class FamilyFamilyId(extended_str):
+    pass
+
+
+class FamilyRelationshipFamilyRelationshipId(extended_str):
     pass
 
 
@@ -556,6 +564,120 @@ class Demographics(Record):
 
         if self.age_at_first_engagement is not None and not isinstance(self.age_at_first_engagement, int):
             self.age_at_first_engagement = int(self.age_at_first_engagement)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Family(Record):
+    """
+    A group of individuals of some relation who are grouped together in a study.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["Family"]
+    class_class_curie: ClassVar[str] = "includedcc:Family"
+    class_name: ClassVar[str] = "Family"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Family
+
+    family_id: Union[str, FamilyFamilyId] = None
+    family_type: Optional[Union[str, "EnumFamilyType"]] = None
+    family_description: Optional[str] = None
+    consanguinity: Optional[Union[str, "EnumConsanguinityAssertion"]] = None
+    family_study_focus: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.family_id):
+            self.MissingRequiredField("family_id")
+        if not isinstance(self.family_id, FamilyFamilyId):
+            self.family_id = FamilyFamilyId(self.family_id)
+
+        if self.family_type is not None and not isinstance(self.family_type, EnumFamilyType):
+            self.family_type = EnumFamilyType(self.family_type)
+
+        if self.family_description is not None and not isinstance(self.family_description, str):
+            self.family_description = str(self.family_description)
+
+        if self.consanguinity is not None and not isinstance(self.consanguinity, EnumConsanguinityAssertion):
+            self.consanguinity = EnumConsanguinityAssertion(self.consanguinity)
+
+        if self.family_study_focus is not None and not isinstance(self.family_study_focus, URIorCURIE):
+            self.family_study_focus = URIorCURIE(self.family_study_focus)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FamilyRelationship(Record):
+    """
+    A relationship between two Subjects. Directed as follows <family_member_id> <relationship> <subject_id> <Mother's
+    id> <KIN:027 "isBiologicalMotherOf"> <subject_id>
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["FamilyRelationship"]
+    class_class_curie: ClassVar[str] = "includedcc:FamilyRelationship"
+    class_name: ClassVar[str] = "FamilyRelationship"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.FamilyRelationship
+
+    family_relationship_id: Union[str, FamilyRelationshipFamilyRelationshipId] = None
+    family_member_id: Union[str, SubjectSubjectId] = None
+    relationship: Union[str, URIorCURIE] = None
+    subject_id: Union[str, SubjectSubjectId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.family_relationship_id):
+            self.MissingRequiredField("family_relationship_id")
+        if not isinstance(self.family_relationship_id, FamilyRelationshipFamilyRelationshipId):
+            self.family_relationship_id = FamilyRelationshipFamilyRelationshipId(self.family_relationship_id)
+
+        if self._is_empty(self.family_member_id):
+            self.MissingRequiredField("family_member_id")
+        if not isinstance(self.family_member_id, SubjectSubjectId):
+            self.family_member_id = SubjectSubjectId(self.family_member_id)
+
+        if self._is_empty(self.relationship):
+            self.MissingRequiredField("relationship")
+        if not isinstance(self.relationship, URIorCURIE):
+            self.relationship = URIorCURIE(self.relationship)
+
+        if self._is_empty(self.subject_id):
+            self.MissingRequiredField("subject_id")
+        if not isinstance(self.subject_id, SubjectSubjectId):
+            self.subject_id = SubjectSubjectId(self.subject_id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FamilyMember(Record):
+    """
+    Designates a Subject as a member of a family with a specified role.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["FamilyMember"]
+    class_class_curie: ClassVar[str] = "includedcc:FamilyMember"
+    class_name: ClassVar[str] = "FamilyMember"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.FamilyMember
+
+    family_id: Union[str, FamilyFamilyId] = None
+    subject_id: Union[str, SubjectSubjectId] = None
+    family_role: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.family_id):
+            self.MissingRequiredField("family_id")
+        if not isinstance(self.family_id, FamilyFamilyId):
+            self.family_id = FamilyFamilyId(self.family_id)
+
+        if self._is_empty(self.subject_id):
+            self.MissingRequiredField("subject_id")
+        if not isinstance(self.subject_id, SubjectSubjectId):
+            self.subject_id = SubjectSubjectId(self.subject_id)
+
+        if self.family_role is not None and not isinstance(self.family_role, URIorCURIE):
+            self.family_role = URIorCURIE(self.family_role)
 
         super().__post_init__(**kwargs)
 
@@ -1464,6 +1586,66 @@ class EnumNull(EnumDefinitionImpl):
         description="Base enumeration providing null options.",
     )
 
+class EnumFamilyType(EnumDefinitionImpl):
+    """
+    Enumerations describing research family type
+    """
+    control_only = PermissibleValue(
+        text="control_only",
+        title="Control-only",
+        description="Control Only")
+    duo = PermissibleValue(
+        text="duo",
+        title="Duo",
+        description="Duo")
+    proband_only = PermissibleValue(
+        text="proband_only",
+        title="Proband-only",
+        description="Proband Only")
+    trio = PermissibleValue(
+        text="trio",
+        title="Trio",
+        description="Trio (2 parents and affected child)")
+    trio_plus = PermissibleValue(
+        text="trio_plus",
+        title="Trio+",
+        description="2 Parents and 2 or more children")
+
+    _defn = EnumDefinition(
+        name="EnumFamilyType",
+        description="Enumerations describing research family type",
+    )
+
+class EnumConsanguinityAssertion(EnumDefinitionImpl):
+    """
+    Asserts known or suspected consanguinity in this study family
+    """
+    not_suspected = PermissibleValue(
+        text="not_suspected",
+        title="not-suspected",
+        description="Not suspected",
+        meaning=SNOMED_CT["428263003"])
+    suspected = PermissibleValue(
+        text="suspected",
+        title="suspected",
+        description="Suspected",
+        meaning=SNOMED_CT["415684004"])
+    known_present = PermissibleValue(
+        text="known_present",
+        title="known-present",
+        description="Known Present",
+        meaning=SNOMED_CT["410515003"])
+    unknown = PermissibleValue(
+        text="unknown",
+        title="unknown",
+        description="Unknown",
+        meaning=SNOMED_CT["261665006"])
+
+    _defn = EnumDefinition(
+        name="EnumConsanguinityAssertion",
+        description="Asserts known or suspected consanguinity in this study family",
+    )
+
 class EnumAssertionProvenance(EnumDefinitionImpl):
     """
     Possible data sources for assertions.
@@ -1714,6 +1896,33 @@ slots.vital_status = Slot(uri=INCLUDEDCC.vital_status, name="vital_status", curi
 slots.age_at_last_vital_status = Slot(uri=INCLUDEDCC.age_at_last_vital_status, name="age_at_last_vital_status", curie=INCLUDEDCC.curie('age_at_last_vital_status'),
                    model_uri=INCLUDEDCC.age_at_last_vital_status, domain=None, range=Optional[int])
 
+slots.family_id = Slot(uri=INCLUDEDCC.family_id, name="family_id", curie=INCLUDEDCC.curie('family_id'),
+                   model_uri=INCLUDEDCC.family_id, domain=None, range=Optional[Union[str, FamilyFamilyId]])
+
+slots.family_type = Slot(uri=INCLUDEDCC.family_type, name="family_type", curie=INCLUDEDCC.curie('family_type'),
+                   model_uri=INCLUDEDCC.family_type, domain=None, range=Optional[Union[str, "EnumFamilyType"]])
+
+slots.family_description = Slot(uri=INCLUDEDCC.family_description, name="family_description", curie=INCLUDEDCC.curie('family_description'),
+                   model_uri=INCLUDEDCC.family_description, domain=None, range=Optional[str])
+
+slots.consanguinity = Slot(uri=INCLUDEDCC.consanguinity, name="consanguinity", curie=INCLUDEDCC.curie('consanguinity'),
+                   model_uri=INCLUDEDCC.consanguinity, domain=None, range=Optional[Union[str, "EnumConsanguinityAssertion"]])
+
+slots.family_study_focus = Slot(uri=INCLUDEDCC.family_study_focus, name="family_study_focus", curie=INCLUDEDCC.curie('family_study_focus'),
+                   model_uri=INCLUDEDCC.family_study_focus, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.family_relationship_id = Slot(uri=INCLUDEDCC.family_relationship_id, name="family_relationship_id", curie=INCLUDEDCC.curie('family_relationship_id'),
+                   model_uri=INCLUDEDCC.family_relationship_id, domain=None, range=Optional[Union[str, FamilyRelationshipFamilyRelationshipId]])
+
+slots.family_member_id = Slot(uri=INCLUDEDCC.family_member_id, name="family_member_id", curie=INCLUDEDCC.curie('family_member_id'),
+                   model_uri=INCLUDEDCC.family_member_id, domain=None, range=Union[str, SubjectSubjectId])
+
+slots.relationship = Slot(uri=INCLUDEDCC.relationship, name="relationship", curie=INCLUDEDCC.curie('relationship'),
+                   model_uri=INCLUDEDCC.relationship, domain=None, range=Union[str, URIorCURIE])
+
+slots.family_role = Slot(uri=INCLUDEDCC.family_role, name="family_role", curie=INCLUDEDCC.curie('family_role'),
+                   model_uri=INCLUDEDCC.family_role, domain=None, range=Optional[Union[str, URIorCURIE]])
+
 slots.assertion_provenance = Slot(uri=INCLUDEDCC.assertion_provenance, name="assertion_provenance", curie=INCLUDEDCC.curie('assertion_provenance'),
                    model_uri=INCLUDEDCC.assertion_provenance, domain=None, range=Optional[Union[str, "EnumAssertionProvenance"]])
 
@@ -1875,6 +2084,21 @@ slots.Subject_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Subject_subject
 
 slots.Demographics_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="Demographics_subject_id", curie=INCLUDEDCC.curie('subject_id'),
                    model_uri=INCLUDEDCC.Demographics_subject_id, domain=Demographics, range=Union[str, DemographicsSubjectId])
+
+slots.Family_family_id = Slot(uri=INCLUDEDCC.family_id, name="Family_family_id", curie=INCLUDEDCC.curie('family_id'),
+                   model_uri=INCLUDEDCC.Family_family_id, domain=Family, range=Union[str, FamilyFamilyId])
+
+slots.FamilyRelationship_family_relationship_id = Slot(uri=INCLUDEDCC.family_relationship_id, name="FamilyRelationship_family_relationship_id", curie=INCLUDEDCC.curie('family_relationship_id'),
+                   model_uri=INCLUDEDCC.FamilyRelationship_family_relationship_id, domain=FamilyRelationship, range=Union[str, FamilyRelationshipFamilyRelationshipId])
+
+slots.FamilyRelationship_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="FamilyRelationship_subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.FamilyRelationship_subject_id, domain=FamilyRelationship, range=Union[str, SubjectSubjectId])
+
+slots.FamilyMember_family_id = Slot(uri=INCLUDEDCC.family_id, name="FamilyMember_family_id", curie=INCLUDEDCC.curie('family_id'),
+                   model_uri=INCLUDEDCC.FamilyMember_family_id, domain=FamilyMember, range=Union[str, FamilyFamilyId])
+
+slots.FamilyMember_subject_id = Slot(uri=INCLUDEDCC.subject_id, name="FamilyMember_subject_id", curie=INCLUDEDCC.curie('subject_id'),
+                   model_uri=INCLUDEDCC.FamilyMember_subject_id, domain=FamilyMember, range=Union[str, SubjectSubjectId])
 
 slots.SubjectAssertion_assertion_id = Slot(uri=INCLUDEDCC.assertion_id, name="SubjectAssertion_assertion_id", curie=INCLUDEDCC.curie('assertion_id'),
                    model_uri=INCLUDEDCC.SubjectAssertion_assertion_id, domain=SubjectAssertion, range=Union[str, SubjectAssertionAssertionId])

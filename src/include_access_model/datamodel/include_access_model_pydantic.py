@@ -337,6 +337,54 @@ class EnumNull(str, Enum):
     Unknown = "unknown"
 
 
+class EnumFamilyType(str, Enum):
+    """
+    Enumerations describing research family type
+    """
+    Control_only = "control_only"
+    """
+    Control Only
+    """
+    Duo = "duo"
+    """
+    Duo
+    """
+    Proband_only = "proband_only"
+    """
+    Proband Only
+    """
+    Trio = "trio"
+    """
+    Trio (2 parents and affected child)
+    """
+    TrioPLUS_SIGN = "trio_plus"
+    """
+    2 Parents and 2 or more children
+    """
+
+
+class EnumConsanguinityAssertion(str, Enum):
+    """
+    Asserts known or suspected consanguinity in this study family
+    """
+    not_suspected = "not_suspected"
+    """
+    Not suspected
+    """
+    suspected = "suspected"
+    """
+    Suspected
+    """
+    known_present = "known_present"
+    """
+    Known Present
+    """
+    unknown = "unknown"
+    """
+    Unknown
+    """
+
+
 class EnumAssertionProvenance(str, Enum):
     """
     Possible data sources for assertions.
@@ -569,6 +617,8 @@ class Subject(Record):
 
     subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
                        'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
                        'SubjectAssertion',
                        'Encounter',
                        'File']} })
@@ -589,6 +639,8 @@ class Demographics(Record):
 
     subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
                        'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
                        'SubjectAssertion',
                        'Encounter',
                        'File']} })
@@ -599,6 +651,78 @@ class Demographics(Record):
     age_at_last_vital_status: Optional[int] = Field(default=None, title="Age at Last Vital Status", description="""Age in days when participant's vital status was last recorded""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics'], 'unit': {'ucum_code': 'd'}} })
     vital_status: Optional[EnumVitalStatus] = Field(default=None, title="Vital Status", description="""Whether participant is alive or dead""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     age_at_first_engagement: Optional[int] = Field(default=None, title="Age at First Participant Engagement", description="""Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics'], 'unit': {'ucum_code': 'd'}} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class Family(Record):
+    """
+    A group of individuals of some relation who are grouped together in a study.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'family_id': {'identifier': True,
+                                      'name': 'family_id',
+                                      'range': 'string',
+                                      'required': True}},
+         'title': 'Family'})
+
+    family_id: str = Field(default=..., title="Family ID", description="""Global ID for the Family""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family', 'FamilyMember']} })
+    family_type: Optional[EnumFamilyType] = Field(default=None, description="""Describes the 'type' of study family, eg, trio.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_description: Optional[str] = Field(default=None, description="""Free text describing the study family, such as potential inheritance or details about consanguinity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    consanguinity: Optional[EnumConsanguinityAssertion] = Field(default=None, description="""Is there known or suspected consanguinity in this study family?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_study_focus: Optional[str] = Field(default=None, description="""The specific focus of the investigation, eg, a condition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class FamilyRelationship(Record):
+    """
+    A relationship between two Subjects. Directed as follows <family_member_id> <relationship> <subject_id> <Mother's id> <KIN:027 \"isBiologicalMotherOf\"> <subject_id>
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'family_relationship_id': {'identifier': True,
+                                                   'name': 'family_relationship_id',
+                                                   'range': 'string',
+                                                   'required': True},
+                        'subject_id': {'description': 'The family member Subject who '
+                                                      'is the relationship "object".',
+                                       'name': 'subject_id',
+                                       'required': True}},
+         'title': 'Family Member Relationship'})
+
+    family_relationship_id: str = Field(default=..., title="Family Relationship ID", description="""Global ID for the Family Relationship""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    family_member_id: str = Field(default=..., description="""The family member Subject who is the relationship \"subject\".""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    relationship: str = Field(default=..., description="""Code definting the relationship predicate. Relationship of the \"Family Member\" to the \"Subject\", eg, mother of.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    subject_id: str = Field(default=..., title="Study ID", description="""The family member Subject who is the relationship \"object\".""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
+                       'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
+                       'SubjectAssertion',
+                       'Encounter',
+                       'File']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class FamilyMember(Record):
+    """
+    Designates a Subject as a member of a family with a specified role.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'family_id': {'name': 'family_id', 'required': True},
+                        'subject_id': {'name': 'subject_id', 'required': True}},
+         'title': 'Family Member',
+         'unique_keys': {'main': {'description': 'Family membership is defined by '
+                                                 'family and subject ids.',
+                                  'unique_key_name': 'main',
+                                  'unique_key_slots': ['family_id', 'subject_id']}}})
+
+    family_id: str = Field(default=..., title="Family ID", description="""Global ID for the Family""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family', 'FamilyMember']} })
+    subject_id: str = Field(default=..., title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
+                       'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
+                       'SubjectAssertion',
+                       'Encounter',
+                       'File']} })
+    family_role: Optional[str] = Field(default=None, description="""The \"role\" of this individual in this family. Could include terms like \"proband\", \"mother\", etc.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyMember']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
@@ -616,6 +740,8 @@ class SubjectAssertion(Record):
     assertion_id: str = Field(default=..., title="Assertion ID", description="""INCLUDE Global ID for the Assertion""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
                        'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
                        'SubjectAssertion',
                        'Encounter',
                        'File']} })
@@ -733,6 +859,8 @@ class Encounter(Record):
     encounter_id: str = Field(default=..., title="Encounter ID", description="""Unique identifier for this Encounter.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'BiospecimenCollection', 'Encounter']} })
     subject_id: Optional[str] = Field(default=None, title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
                        'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
                        'SubjectAssertion',
                        'Encounter',
                        'File']} })
@@ -802,6 +930,8 @@ class File(Record):
     file_id: str = Field(default=..., title="File ID", description="""Unique identifier for this File.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File', 'Dataset']} })
     subject_id: Optional[list[str]] = Field(default=[], title="Study ID", description="""INCLUDE Global ID for the Subject""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject',
                        'Demographics',
+                       'FamilyRelationship',
+                       'FamilyMember',
                        'SubjectAssertion',
                        'Encounter',
                        'File']} })
@@ -869,6 +999,9 @@ Investigator.model_rebuild()
 Publication.model_rebuild()
 Subject.model_rebuild()
 Demographics.model_rebuild()
+Family.model_rebuild()
+FamilyRelationship.model_rebuild()
+FamilyMember.model_rebuild()
 SubjectAssertion.model_rebuild()
 Concept.model_rebuild()
 Sample.model_rebuild()
