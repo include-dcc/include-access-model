@@ -573,7 +573,7 @@ class Subject(Record):
                        'Encounter',
                        'File']} })
     subject_type: EnumSubjectType = Field(default=..., title="Subject Type", description="""Type of entity this record represents""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
-    organism_type: Optional[str] = Field(default=None, title="Organism Type", description="""Organism Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
+    organism_type: Optional[str] = Field(default=None, title="Organism Type", description="""Organism Type, typically from NCBITaxon. For reference, Human is NCBITaxon:9606.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
@@ -668,10 +668,10 @@ class Sample(Record):
     sample_id: str = Field(default=..., title="Sample ID", description="""The unique identifier for this Sample.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot', 'File']} })
     biospecimen_collection_id: Optional[str] = Field(default=None, title="Biospecimen Collection ID", description="""Biospecimen Collection during which this sample was generated.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'BiospecimenCollection']} })
     parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample from which this sample is derived""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
-    sample_type: str = Field(default=..., title="Sample Type", description="""Type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
-    processing: Optional[list[str]] = Field(default=[], title="Sample Processing", description="""Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    sample_type: str = Field(default=..., title="Sample Type", description="""Type of material of which this Sample is comprised. UBERON is recommended.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    processing: Optional[list[str]] = Field(default=[], title="Sample Processing", description="""Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample. OBI is recommended.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
     availablity_status: Optional[EnumAvailabilityStatus] = Field(default=None, title="Sample Availability", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
-    storage_method: Optional[list[str]] = Field(default=[], title="Sample Storage Method", description="""Sample storage method, eg, Frozen or with additives""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    storage_method: Optional[list[str]] = Field(default=[], title="Sample Storage Method", description="""Sample storage method, eg, Frozen or with additives. OBI may be suitable, or ChEBI for additives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
     quantity_number: Optional[float] = Field(default=None, title="Quantity", description="""The total quantity of the specimen""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
     quantity_unit: Optional[str] = Field(default=None, title="Quantity Units", description="""The structured term defining the units of the quantity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })

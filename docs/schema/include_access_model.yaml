@@ -1252,7 +1252,8 @@ slots:
   organism_type:
     name: organism_type
     definition_uri: https://includedcc.org/include-access-model/organism_type
-    description: Organism Type
+    description: Organism Type, typically from NCBITaxon. For reference, Human is
+      NCBITaxon:9606.
     title: Organism Type
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:organism_type
@@ -1260,7 +1261,6 @@ slots:
     domain_of:
     - Subject
     range: uriorcurie
-    required: false
   subject_type:
     name: subject_type
     definition_uri: https://includedcc.org/include-access-model/subject_type
@@ -1569,7 +1569,7 @@ slots:
   sample_type:
     name: sample_type
     definition_uri: https://includedcc.org/include-access-model/sample_type
-    description: Type of material of which this Sample is comprised
+    description: Type of material of which this Sample is comprised. UBERON is recommended.
     title: Sample Type
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:sample_type
@@ -1582,7 +1582,7 @@ slots:
     name: processing
     definition_uri: https://includedcc.org/include-access-model/processing
     description: Processing that was applied to the Parent Sample or from the Biospecimen
-      Collection that yielded this distinct sample
+      Collection that yielded this distinct sample. OBI is recommended.
     title: Sample Processing
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:processing
@@ -1606,7 +1606,8 @@ slots:
   storage_method:
     name: storage_method
     definition_uri: https://includedcc.org/include-access-model/storage_method
-    description: Sample storage method, eg, Frozen or with additives
+    description: Sample storage method, eg, Frozen or with additives. OBI may be suitable,
+      or ChEBI for additives.
     title: Sample Storage Method
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:storage_method
@@ -2744,7 +2745,7 @@ classes:
     class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-12T11:06:57'
-source_file_size: 36149
-generation_date: '2026-03-12T11:07:27'
+source_file_date: '2026-04-10T14:31:41'
+source_file_size: 36319
+generation_date: '2026-04-10T14:32:01'
 
