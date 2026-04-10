@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-12T11:07:16
+# Generation date: 2026-04-10T13:10:37
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -63,6 +63,7 @@ metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
+DUO = CurieNamespace('DUO', 'http://purl.obolibrary.org/obo/DUO_')
 HP = CurieNamespace('HP', 'http://purl.obolibrary.org/obo/HP_')
 MONDO = CurieNamespace('MONDO', 'http://purl.obolibrary.org/obo/MONDO_')
 NCIT = CurieNamespace('NCIT', 'http://purl.obolibrary.org/obo/NCIT_')
@@ -85,6 +86,10 @@ DEFAULT_ = INCLUDEDCC
 # Types
 
 # Class references
+class AccessPolicyAccessPolicyId(extended_str):
+    pass
+
+
 class StudyStudyId(extended_str):
     pass
 
@@ -158,11 +163,56 @@ class Record(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = INCLUDEDCC.Record
 
     external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    access_policy_id: Optional[Union[str, AccessPolicyAccessPolicyId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if not isinstance(self.external_id, list):
             self.external_id = [self.external_id] if self.external_id is not None else []
         self.external_id = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.external_id]
+
+        if self.access_policy_id is not None and not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class AccessPolicy(YAMLRoot):
+    """
+    The access policy that describes the controls around use of data
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = INCLUDEDCC["AccessPolicy"]
+    class_class_curie: ClassVar[str] = "includedcc:AccessPolicy"
+    class_name: ClassVar[str] = "AccessPolicy"
+    class_model_uri: ClassVar[URIRef] = INCLUDEDCC.AccessPolicy
+
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    data_use_permission: Union[str, "EnumDataUsePermission"] = None
+    data_use_accession: Optional[Union[str, URIorCURIE]] = None
+    data_use_modifier: Optional[Union[str, "EnumDataUseModifier"]] = None
+    disease_limitation: Optional[str] = None
+    access_description: Optional[str] = None
+    website: Optional[Union[str, URI]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        if self.data_use_accession is not None and not isinstance(self.data_use_accession, URIorCURIE):
+            self.data_use_accession = URIorCURIE(self.data_use_accession)
+
+        if self.disease_limitation is not None and not isinstance(self.disease_limitation, str):
+            self.disease_limitation = str(self.disease_limitation)
+
+        if self.access_description is not None and not isinstance(self.access_description, str):
+            self.access_description = str(self.access_description)
+
+        if self.website is not None and not isinstance(self.website, URI):
+            self.website = URI(self.website)
 
         super().__post_init__(**kwargs)
 
@@ -1052,6 +1102,24 @@ class Dataset(YAMLRoot):
 
 
 # Enumerations
+class EnumDataUsePermission(EnumDefinitionImpl):
+    """
+    Data Use Ontology (DUO) terms for data use permissions.
+    """
+    _defn = EnumDefinition(
+        name="EnumDataUsePermission",
+        description="Data Use Ontology (DUO) terms for data use permissions.",
+    )
+
+class EnumDataUseModifier(EnumDefinitionImpl):
+    """
+    Data Use Ontology (DUO) terms for data use modifiers.
+    """
+    _defn = EnumDefinition(
+        name="EnumDataUseModifier",
+        description="Data Use Ontology (DUO) terms for data use modifiers.",
+    )
+
 class EnumProgram(EnumDefinitionImpl):
     """
     Funding programs relevant to inform operations.
@@ -1591,6 +1659,24 @@ class slots:
 slots.study_id = Slot(uri=INCLUDEDCC.study_id, name="study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.study_id, domain=None, range=Optional[Union[str, StudyStudyId]])
 
+slots.access_policy_id = Slot(uri=INCLUDEDCC.access_policy_id, name="access_policy_id", curie=INCLUDEDCC.curie('access_policy_id'),
+                   model_uri=INCLUDEDCC.access_policy_id, domain=None, range=Optional[Union[str, AccessPolicyAccessPolicyId]])
+
+slots.data_use_accession = Slot(uri=INCLUDEDCC.data_use_accession, name="data_use_accession", curie=INCLUDEDCC.curie('data_use_accession'),
+                   model_uri=INCLUDEDCC.data_use_accession, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.data_use_permission = Slot(uri=INCLUDEDCC.data_use_permission, name="data_use_permission", curie=INCLUDEDCC.curie('data_use_permission'),
+                   model_uri=INCLUDEDCC.data_use_permission, domain=None, range=Union[str, "EnumDataUsePermission"])
+
+slots.data_use_modifier = Slot(uri=INCLUDEDCC.data_use_modifier, name="data_use_modifier", curie=INCLUDEDCC.curie('data_use_modifier'),
+                   model_uri=INCLUDEDCC.data_use_modifier, domain=None, range=Optional[Union[str, "EnumDataUseModifier"]])
+
+slots.disease_limitation = Slot(uri=INCLUDEDCC.disease_limitation, name="disease_limitation", curie=INCLUDEDCC.curie('disease_limitation'),
+                   model_uri=INCLUDEDCC.disease_limitation, domain=None, range=Optional[str])
+
+slots.access_description = Slot(uri=INCLUDEDCC.access_description, name="access_description", curie=INCLUDEDCC.curie('access_description'),
+                   model_uri=INCLUDEDCC.access_description, domain=None, range=Optional[str])
+
 slots.do_id = Slot(uri=INCLUDEDCC.do_id, name="do_id", curie=INCLUDEDCC.curie('do_id'),
                    model_uri=INCLUDEDCC.do_id, domain=None, range=Optional[Union[str, DOIDoId]])
 
@@ -1857,6 +1943,9 @@ slots.data_collection_start = Slot(uri=INCLUDEDCC.data_collection_start, name="d
 
 slots.data_collection_end = Slot(uri=INCLUDEDCC.data_collection_end, name="data_collection_end", curie=INCLUDEDCC.curie('data_collection_end'),
                    model_uri=INCLUDEDCC.data_collection_end, domain=None, range=Optional[str])
+
+slots.AccessPolicy_access_policy_id = Slot(uri=INCLUDEDCC.access_policy_id, name="AccessPolicy_access_policy_id", curie=INCLUDEDCC.curie('access_policy_id'),
+                   model_uri=INCLUDEDCC.AccessPolicy_access_policy_id, domain=AccessPolicy, range=Union[str, AccessPolicyAccessPolicyId])
 
 slots.Study_study_id = Slot(uri=INCLUDEDCC.study_id, name="Study_study_id", curie=INCLUDEDCC.curie('study_id'),
                    model_uri=INCLUDEDCC.Study_study_id, domain=Study, range=Union[str, StudyStudyId])

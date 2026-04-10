@@ -56,6 +56,9 @@ prefixes:
   PATO:
     prefix_prefix: PATO
     prefix_reference: http://purl.obolibrary.org/obo/PATO_
+  DUO:
+    prefix_prefix: DUO
+    prefix_reference: http://purl.obolibrary.org/obo/DUO_
 default_prefix: includedcc
 default_range: string
 types:
@@ -328,6 +331,32 @@ types:
     uri: xsd:string
     repr: str
 enums:
+  EnumDataUsePermission:
+    name: EnumDataUsePermission
+    definition_uri: https://includedcc.org/include-access-model/EnumDataUsePermission
+    description: Data Use Ontology (DUO) terms for data use permissions.
+    title: Data Use Permission
+    from_schema: https://includedcc.org/include-access-model
+    reachable_from:
+      source_ontology: bioregistry:duo
+      source_nodes:
+      - DUO:0000001
+      relationship_types:
+      - rdfs:subClassOf
+      is_direct: false
+  EnumDataUseModifier:
+    name: EnumDataUseModifier
+    definition_uri: https://includedcc.org/include-access-model/EnumDataUseModifier
+    description: Data Use Ontology (DUO) terms for data use modifiers.
+    title: Data Use Modifier
+    from_schema: https://includedcc.org/include-access-model
+    reachable_from:
+      source_ontology: bioregistry:duo
+      source_nodes:
+      - DUO:0000017
+      relationship_types:
+      - rdfs:subClassOf
+      is_direct: false
   EnumProgram:
     name: EnumProgram
     definition_uri: https://includedcc.org/include-access-model/EnumProgram
@@ -828,6 +857,76 @@ slots:
     - StudyMetadata
     range: Study
     multivalued: false
+  access_policy_id:
+    name: access_policy_id
+    definition_uri: https://includedcc.org/include-access-model/access_policy_id
+    description: Global identifier for the access policy that applies to this row
+      of data.
+    title: Access Policy ID
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:access_policy_id
+    owner: AccessPolicy
+    domain_of:
+    - Record
+    - AccessPolicy
+    range: AccessPolicy
+  data_use_accession:
+    name: data_use_accession
+    definition_uri: https://includedcc.org/include-access-model/data_use_accession
+    description: Accession used to provision access to the record, eg, a dbGaP phsID.
+    title: Data Use Accession
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_use_accession
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: uriorcurie
+  data_use_permission:
+    name: data_use_permission
+    definition_uri: https://includedcc.org/include-access-model/data_use_permission
+    description: Broad category of restrictions on data use.
+    title: Data Use Permission
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_use_permission
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumDataUsePermission
+    required: true
+  data_use_modifier:
+    name: data_use_modifier
+    definition_uri: https://includedcc.org/include-access-model/data_use_modifier
+    description: Additional modifiers that limit data use.
+    title: Data Use Modifier
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:data_use_modifier
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumDataUseModifier
+  disease_limitation:
+    name: disease_limitation
+    definition_uri: https://includedcc.org/include-access-model/disease_limitation
+    description: If the access is limited to a specific disease purpose, it is specified
+      here.
+    title: Data Use Disease Limitation
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:disease_limitation
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+  access_description:
+    name: access_description
+    definition_uri: https://includedcc.org/include-access-model/access_description
+    description: Any additional information to support access requests.
+    title: Access Description
+    from_schema: https://includedcc.org/include-access-model
+    slot_uri: includedcc:access_description
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
   do_id:
     name: do_id
     definition_uri: https://includedcc.org/include-access-model/do_id
@@ -1042,12 +1141,13 @@ slots:
   website:
     name: website
     definition_uri: https://includedcc.org/include-access-model/website
-    description: Website for the Record.
+    description: Website with more information about this entity.
     title: Website
     from_schema: https://includedcc.org/include-access-model
     slot_uri: includedcc:website
     owner: Publication
     domain_of:
+    - AccessPolicy
     - Study
     - VirtualBiorepository
     - Publication
@@ -1929,6 +2029,25 @@ slots:
     domain_of:
     - Dataset
     range: string
+  AccessPolicy_access_policy_id:
+    name: AccessPolicy_access_policy_id
+    definition_uri: https://includedcc.org/include-access-model/access_policy_id
+    description: Global identifier for the access policy that applies to this row
+      of data.
+    title: Access Policy ID
+    from_schema: https://includedcc.org/include-access-model
+    is_a: access_policy_id
+    domain: AccessPolicy
+    slot_uri: includedcc:access_policy_id
+    identifier: true
+    alias: access_policy_id
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    is_usage_slot: true
+    usage_slot_name: access_policy_id
+    range: string
+    required: true
   Study_study_id:
     name: Study_study_id
     definition_uri: https://includedcc.org/include-access-model/study_id
@@ -2318,7 +2437,29 @@ classes:
     abstract: true
     slots:
     - external_id
+    - access_policy_id
     class_uri: includedcc:Record
+  AccessPolicy:
+    name: AccessPolicy
+    definition_uri: https://includedcc.org/include-access-model/AccessPolicy
+    description: The access policy that describes the controls around use of data
+    title: Access Policy
+    from_schema: https://includedcc.org/include-access-model
+    slots:
+    - AccessPolicy_access_policy_id
+    - data_use_accession
+    - data_use_permission
+    - data_use_modifier
+    - disease_limitation
+    - access_description
+    - website
+    slot_usage:
+      access_policy_id:
+        name: access_policy_id
+        identifier: true
+        range: string
+        required: true
+    class_uri: includedcc:AccessPolicy
   Study:
     name: Study
     definition_uri: https://includedcc.org/include-access-model/Study
@@ -2328,6 +2469,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - Study_study_id
     - parent_study
     - study_title
@@ -2359,6 +2501,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - StudyMetadata_study_id
     - participant_lifespan_stage
     - selection_criteria
@@ -2388,6 +2531,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - name
     - institution
     - contact
@@ -2403,6 +2547,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - DOI_do_id
     - bibliographic_reference
     slot_usage:
@@ -2422,6 +2567,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - name
     - institution
     - investigator_title
@@ -2436,6 +2582,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - bibliographic_reference
     - website
     class_uri: includedcc:Publication
@@ -2450,6 +2597,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - Subject_subject_id
     - subject_type
     - organism_type
@@ -2469,6 +2617,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - Demographics_subject_id
     - sex
     - race
@@ -2493,6 +2642,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - SubjectAssertion_assertion_id
     - subject_id
     - encounter_id
@@ -2539,6 +2689,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - Sample_sample_id
     - Sample_biospecimen_collection_id
     - parent_sample_id
@@ -2567,6 +2718,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - BiospecimenCollection_biospecimen_collection_id
     - age_at_collection
     - method
@@ -2590,6 +2742,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - Aliquot_aliquot_id
     - sample_id
     - availablity_status
@@ -2614,6 +2767,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - Encounter_encounter_id
     - subject_id
     - encounter_definition_id
@@ -2637,6 +2791,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - EncounterDefinition_encounter_definition_id
     - name
     - description
@@ -2661,6 +2816,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - ActivityDefinition_activity_definition_id
     - name
     - description
@@ -2680,6 +2836,7 @@ classes:
     is_a: Record
     slots:
     - external_id
+    - access_policy_id
     - File_file_id
     - File_subject_id
     - File_sample_id
@@ -2744,7 +2901,7 @@ classes:
     class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-03-12T11:06:57'
-source_file_size: 36149
-generation_date: '2026-03-12T11:07:27'
+source_file_date: '2026-04-10T13:09:59'
+source_file_size: 38322
+generation_date: '2026-04-10T13:10:20'
 

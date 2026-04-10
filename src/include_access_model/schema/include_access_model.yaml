@@ -25,6 +25,7 @@ prefixes:
   mesh: http://id.nlm.nih.gov/mesh/
   NCIT: http://purl.obolibrary.org/obo/NCIT_
   PATO: http://purl.obolibrary.org/obo/PATO_
+  DUO: http://purl.obolibrary.org/obo/DUO_
 
 default_prefix: includedcc
 default_range: string
@@ -39,6 +40,23 @@ classes:
     abstract: true
     slots:
     - external_id
+    - access_policy_id
+  AccessPolicy:
+    title: Access Policy
+    description: The access policy that describes the controls around use of data
+    slots:
+    - access_policy_id
+    - data_use_accession
+    - data_use_permission
+    - data_use_modifier
+    - disease_limitation
+    - access_description
+    - website
+    slot_usage:
+      access_policy_id:
+        range: string
+        required: true
+        identifier: true
   Study:
     title: Research Study 
     description: Study Metadata 
@@ -370,6 +388,34 @@ slots:
     description: INCLUDE Global ID for the study
     range: Study
     multivalued: false 
+  access_policy_id:
+    title: Access Policy ID
+    description: Global identifier for the access policy that applies to
+     this row of data.
+    range: AccessPolicy
+  data_use_accession:
+    title: Data Use Accession
+    description: Accession used to provision access to the record, eg,
+     a dbGaP phsID. 
+    range: uriorcurie
+  data_use_permission:
+    title: Data Use Permission
+    description: Broad category of restrictions on data use.
+    range: EnumDataUsePermission
+    required: true
+  data_use_modifier:
+    title: Data Use Modifier
+    description: Additional modifiers that limit data use.
+    range: EnumDataUseModifier
+  disease_limitation:
+    title: Data Use Disease Limitation
+    description: If the access is limited to a specific disease purpose,
+     it is specified here.
+    range: string
+  access_description:
+    title: Access Description
+    description: Any additional information to support access requests.
+    range: string
   do_id:
     title: DOI
     description: Digital Object Identifier (DOI) for this Record.
@@ -457,7 +503,7 @@ slots:
     required: true
   website:
     title: Website
-    description: Website for the Record.
+    description: Website with more information about this entity.
     range: uri
   contact:
     title: Contact Person
@@ -798,6 +844,27 @@ slots:
     range: string
 
 enums:
+  EnumDataUsePermission:
+    title: Data Use Permission
+    description: Data Use Ontology (DUO) terms for data use permissions.
+     #Do we need a "registered tier" item?
+    reachable_from:
+      source_ontology: bioregistry:duo
+      source_nodes:
+        - DUO:0000001
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
+  EnumDataUseModifier:
+    title: Data Use Modifier
+    description: Data Use Ontology (DUO) terms for data use modifiers.
+    reachable_from:
+      source_ontology: bioregistry:duo
+      source_nodes:
+        - DUO:0000017
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
   EnumProgram:
     title: Funding Programs
     description: Funding programs relevant to inform operations.

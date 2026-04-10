@@ -85,7 +85,9 @@ linkml_meta = LinkMLMeta({'default_prefix': 'includedcc',
      'imports': ['linkml:types'],
      'license': 'MIT',
      'name': 'include-access-model',
-     'prefixes': {'HP': {'prefix_prefix': 'HP',
+     'prefixes': {'DUO': {'prefix_prefix': 'DUO',
+                          'prefix_reference': 'http://purl.obolibrary.org/obo/DUO_'},
+                  'HP': {'prefix_prefix': 'HP',
                          'prefix_reference': 'http://purl.obolibrary.org/obo/HP_'},
                   'MONDO': {'prefix_prefix': 'MONDO',
                             'prefix_reference': 'http://purl.obolibrary.org/obo/MONDO_'},
@@ -120,6 +122,20 @@ linkml_meta = LinkMLMeta({'default_prefix': 'includedcc',
      'see_also': ['https://includedcc.github.io/include-access-model'],
      'source_file': 'src/include_access_model/schema/include_access_model.yaml',
      'title': 'INCLUDE DCC Access Model'} )
+
+class EnumDataUsePermission(str):
+    """
+    Data Use Ontology (DUO) terms for data use permissions.
+    """
+    pass
+
+
+class EnumDataUseModifier(str):
+    """
+    Data Use Ontology (DUO) terms for data use modifiers.
+    """
+    pass
+
 
 class EnumProgram(str, Enum):
     """
@@ -434,6 +450,27 @@ class Record(ConfiguredBaseModel):
          'title': 'Record'})
 
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
+
+
+class AccessPolicy(ConfiguredBaseModel):
+    """
+    The access policy that describes the controls around use of data
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://includedcc.org/include-access-model',
+         'slot_usage': {'access_policy_id': {'identifier': True,
+                                             'name': 'access_policy_id',
+                                             'range': 'string',
+                                             'required': True}},
+         'title': 'Access Policy'})
+
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
+    data_use_accession: Optional[str] = Field(default=None, title="Data Use Accession", description="""Accession used to provision access to the record, eg, a dbGaP phsID.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    data_use_permission: EnumDataUsePermission = Field(default=..., title="Data Use Permission", description="""Broad category of restrictions on data use.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    data_use_modifier: Optional[EnumDataUseModifier] = Field(default=None, title="Data Use Modifier", description="""Additional modifiers that limit data use.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    disease_limitation: Optional[str] = Field(default=None, title="Data Use Disease Limitation", description="""If the access is limited to a specific disease purpose, it is specified here.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    access_description: Optional[str] = Field(default=None, title="Access Description", description="""Any additional information to support access requests.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    website: Optional[str] = Field(default=None, title="Website", description="""Website with more information about this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'Study', 'VirtualBiorepository', 'Publication']} })
 
 
 class Study(Record):
@@ -457,12 +494,13 @@ class Study(Record):
     principal_investigator: list[Investigator] = Field(default=..., title="Principal Investigator", description="""The Principal Investigator(s) responsible for the study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
     contact: list[Investigator] = Field(default=..., title="Contact Person", description="""The individual to contact with questions about this record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository']} })
     study_description: str = Field(default=..., title="Study Description", description="""Brief description of the study (2-4 sentences)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
-    website: Optional[str] = Field(default=None, title="Website", description="""Website for the Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository', 'Publication']} })
+    website: Optional[str] = Field(default=None, title="Website", description="""Website with more information about this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'Study', 'VirtualBiorepository', 'Publication']} })
     publication: Optional[list[Publication]] = Field(default=[], title="Publication", description="""Publications associated with this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'Dataset']} })
     acknowledgments: Optional[str] = Field(default=None, title="Acknowledgments", description="""Funding statement and acknowledgments for this study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
     citation_statement: Optional[str] = Field(default=None, title="Citation Statement", description="""Statement that secondary data users should use to acknowledge use of this study or dataset. E.g., \"The results analyzed and <published or shown> here are based in whole or in part upon data generated by the INCLUDE (INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE) Project <insert accession number(s) and/or study DOI(s)>, and were accessed from the INCLUDE Data Hub and <insert other database(s)>.\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study']} })
     do_id: Optional[str] = Field(default=None, title="DOI", description="""Digital Object Identifier (DOI) for this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'DOI', 'Dataset']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class StudyMetadata(Record):
@@ -489,6 +527,7 @@ class StudyMetadata(Record):
     expected_number_of_participants: int = Field(default=..., title="Expected Number of Participants", description="""Total expected number of participants to be recruited.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     actual_number_of_participants: int = Field(default=..., title="Actual Number of Participants", description="""Total participants included at this time.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMetadata']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class VirtualBiorepository(Record):
@@ -505,9 +544,10 @@ class VirtualBiorepository(Record):
                        'Dataset']} })
     institution: Optional[str] = Field(default=None, title="Institution", description="""Name of the institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository', 'Investigator']} })
     contact: list[Investigator] = Field(default=..., title="Contact Person", description="""The individual to contact with questions about this record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository']} })
-    website: Optional[str] = Field(default=None, title="Website", description="""Website for the Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository', 'Publication']} })
+    website: Optional[str] = Field(default=None, title="Website", description="""Website with more information about this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'Study', 'VirtualBiorepository', 'Publication']} })
     vbr_readme: Optional[str] = Field(default=None, title="VBR Readme", description="""Instructions for contacting or requesting samples from Virtual Biorepository, if participating""", json_schema_extra = { "linkml_meta": {'domain_of': ['VirtualBiorepository']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class DOI(Record):
@@ -524,6 +564,7 @@ class DOI(Record):
     do_id: str = Field(default=..., title="DOI", description="""Digital Object Identifier (DOI) for this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'DOI', 'Dataset']} })
     bibliographic_reference: Optional[str] = Field(default=None, title="Bibiliographic Reference", description="""Text use to reference this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['DOI', 'Publication']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Investigator(Record):
@@ -542,6 +583,7 @@ class Investigator(Record):
     investigator_title: Optional[str] = Field(default=None, title="Investigator Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Investigator']} })
     email: Optional[str] = Field(default=None, title="Email Address", description="""An email address to reach the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Investigator']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Publication(Record):
@@ -552,8 +594,9 @@ class Publication(Record):
          'title': 'Publication'})
 
     bibliographic_reference: Optional[str] = Field(default=None, title="Bibiliographic Reference", description="""Text use to reference this Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['DOI', 'Publication']} })
-    website: Optional[str] = Field(default=None, title="Website", description="""Website for the Record.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Study', 'VirtualBiorepository', 'Publication']} })
+    website: Optional[str] = Field(default=None, title="Website", description="""Website with more information about this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'Study', 'VirtualBiorepository', 'Publication']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Subject(Record):
@@ -575,6 +618,7 @@ class Subject(Record):
     subject_type: EnumSubjectType = Field(default=..., title="Subject Type", description="""Type of entity this record represents""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     organism_type: Optional[str] = Field(default=None, title="Organism Type", description="""Organism Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['Subject']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Demographics(Record):
@@ -600,6 +644,7 @@ class Demographics(Record):
     vital_status: Optional[EnumVitalStatus] = Field(default=None, title="Vital Status", description="""Whether participant is alive or dead""", json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics']} })
     age_at_first_engagement: Optional[int] = Field(default=None, title="Age at First Participant Engagement", description="""Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.""", ge=-365, le=32507, json_schema_extra = { "linkml_meta": {'domain_of': ['Demographics'], 'unit': {'ucum_code': 'd'}} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class SubjectAssertion(Record):
@@ -632,6 +677,7 @@ class SubjectAssertion(Record):
     value_unit: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     value_unit_source: Optional[str] = Field(default=None, title="Value Units Source Text", description="""The source text yielding the value's units.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Concept(ConfiguredBaseModel):
@@ -675,6 +721,7 @@ class Sample(Record):
     quantity_number: Optional[float] = Field(default=None, title="Quantity", description="""The total quantity of the specimen""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
     quantity_unit: Optional[str] = Field(default=None, title="Quantity Units", description="""The structured term defining the units of the quantity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample', 'Aliquot']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class BiospecimenCollection(Record):
@@ -696,6 +743,7 @@ class BiospecimenCollection(Record):
     laterality: Optional[EnumLaterality] = Field(default=None, title="Location Laterality", description="""Laterality that further refine the specific location of biospecimen collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['BiospecimenCollection']} })
     encounter_id: Optional[str] = Field(default=None, title="Encounter ID", description="""Unique identifier for this Encounter.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'BiospecimenCollection', 'Encounter']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Aliquot(Record):
@@ -717,6 +765,7 @@ class Aliquot(Record):
     concentration_number: Optional[float] = Field(default=None, title="Concentration", description="""What is the concentration of the analyte in the Aliquot?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
     concentration_unit: Optional[str] = Field(default=None, title="Concentration Units", description="""Units associated with the concentration of the analyte in the Aliquot.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class Encounter(Record):
@@ -739,6 +788,7 @@ class Encounter(Record):
     encounter_definition_id: Optional[str] = Field(default=None, title="Encounter Definition ID", description="""Unique identifier for this Encounter Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Encounter', 'EncounterDefinition']} })
     age_at_event: Optional[int] = Field(default=None, title="Age at event", description="""The age in days of the Subject at the time point which the assertion describes, eg, age of onset or when a measurement was performed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubjectAssertion', 'Encounter'], 'unit': {'ucum_code': 'd'}} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class EncounterDefinition(Record):
@@ -763,6 +813,7 @@ class EncounterDefinition(Record):
     description: Optional[str] = Field(default=None, title="Description", description="""Description for this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition', 'Dataset']} })
     activity_definition_id: Optional[list[str]] = Field(default=[], title="Activity Definition ID", description="""Unique identifier for this Activity Definition.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class ActivityDefinition(Record):
@@ -784,6 +835,7 @@ class ActivityDefinition(Record):
                        'Dataset']} })
     description: Optional[str] = Field(default=None, title="Description", description="""Description for this entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['EncounterDefinition', 'ActivityDefinition', 'Dataset']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class File(Record):
@@ -816,6 +868,7 @@ class File(Record):
     drs_uri: Optional[str] = Field(default=None, title="DRS URI", description="""DRS location to access the data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
     hash: Optional[FileHash] = Field(default=None, title="File Hash", description="""File hash information""", json_schema_extra = { "linkml_meta": {'domain_of': ['File']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    access_policy_id: Optional[str] = Field(default=None, title="Access Policy ID", description="""Global identifier for the access policy that applies to this row of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record', 'AccessPolicy']} })
 
 
 class FileHash(ConfiguredBaseModel):
@@ -861,6 +914,7 @@ class Dataset(ConfiguredBaseModel):
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 Record.model_rebuild()
+AccessPolicy.model_rebuild()
 Study.model_rebuild()
 StudyMetadata.model_rebuild()
 VirtualBiorepository.model_rebuild()
