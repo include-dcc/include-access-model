@@ -1,6 +1,11 @@
 # generated part of documentation
 /docs/elements/*.md
 /docs/schema/*.yaml
+
+# generated pydantic model
+/src/include_access_model/*.py
+/src/include_access_model/datamodel/
+
 # linkml-run-examples output (not useful to have in git in its current form)
 /examples/output/
 
