@@ -35,7 +35,7 @@ gen_ts_args := env_var_or_default("LINKML_GENERATORS_TYPESCRIPT_ARGS", "")
 # Directory variables
 src := "src"
 dest := "project"
-pymodel := "project" / schema_name / "datamodel"
+pymodel := src / schema_name / "datamodel"
 source_schema_path := source_schema_dir / schema_name + ".yaml"
 docdir := "docs/elements"  # Directory for generated documentation
 merged_schema_path := "docs/schema" / schema_name + ".yaml"
