@@ -303,6 +303,7 @@ SubjectAssertion {
     uriorcurieList external_id  
 }
 VirtualBiorepository {
+    string vbr_id  
     string name  
     string institution  
     uri website  
@@ -332,7 +333,7 @@ Study ||--|o Study : "parent_study"
 Study ||--}o Publication : "publication"
 Study ||--}| Investigator : "contact"
 Study ||--}| Investigator : "principal_investigator"
-StudyMetadata ||--|o VirtualBiorepository : "vbr"
+StudyMetadata ||--|o VirtualBiorepository : "vbr_id"
 StudyMetadata ||--|| Study : "study_id"
 SubjectAssertion ||--|o Concept : "value_unit"
 SubjectAssertion ||--|o Encounter : "encounter_id"

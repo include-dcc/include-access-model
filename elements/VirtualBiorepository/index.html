@@ -262,6 +262,8 @@
 
       VirtualBiorepository : name
 
+      VirtualBiorepository : vbr_id
+
       VirtualBiorepository : vbr_readme
 
       VirtualBiorepository : website
@@ -286,6 +288,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../vbr_id/">vbr_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Information about the study's Virtual Biorepository, if participating</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
@@ -337,7 +345,7 @@
 <tbody>
 <tr>
 <td><a href="../StudyMetadata/">StudyMetadata</a></td>
-<td><a href="../vbr/">vbr</a></td>
+<td><a href="../vbr_id/">vbr_id</a></td>
 <td>range</td>
 <td><a href="./">VirtualBiorepository</a></td>
 </tr>
@@ -377,11 +385,18 @@ title: Virtual BioRepository (VBR)
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slots:
+- vbr_id
 - name
 - institution
 - contact
 - website
 - vbr_readme
+slot_usage:
+  vbr_id:
+    name: vbr_id
+    identifier: true
+    range: string
+    required: true
 
 </code></pre>
 </details>
@@ -392,7 +407,27 @@ description: An organization that can provide access to specimen for further ana
 title: Virtual BioRepository (VBR)
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
+slot_usage:
+  vbr_id:
+    name: vbr_id
+    identifier: true
+    range: string
+    required: true
 attributes:
+  vbr_id:
+    name: vbr_id
+    description: Information about the study's Virtual Biorepository, if participating
+    title: Virtual Biorepository
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    identifier: true
+    alias: vbr_id
+    owner: VirtualBiorepository
+    domain_of:
+    - StudyMetadata
+    - VirtualBiorepository
+    range: string
+    required: true
   name:
     name: name
     description: Name of the entity.

@@ -312,13 +312,13 @@
 
 
 
-      StudyMetadata : vbr
+      StudyMetadata : vbr_id
 
 
 
 
 
-        StudyMetadata --&gt; "0..1" VirtualBiorepository : vbr
+        StudyMetadata --&gt; "0..1" VirtualBiorepository : vbr_id
         click VirtualBiorepository href "../VirtualBiorepository/"
 
 
@@ -380,7 +380,7 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../vbr/">vbr</a></td>
+<td><a href="../vbr_id/">vbr_id</a></td>
 <td>0..1 <br/> <a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
 <td>Information about the study's Virtual Biorepository, if participating</td>
 <td>direct</td>
@@ -451,7 +451,7 @@ slots:
 - study_design
 - clinical_data_source_type
 - data_category
-- vbr
+- vbr_id
 - research_domain
 - expected_number_of_participants
 - actual_number_of_participants
@@ -566,18 +566,18 @@ attributes:
     range: EnumDataCategory
     required: true
     multivalued: true
-  vbr:
-    name: vbr
+  vbr_id:
+    name: vbr_id
     description: Information about the study's Virtual Biorepository, if participating
     title: Virtual Biorepository
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
-    alias: vbr
+    alias: vbr_id
     owner: StudyMetadata
     domain_of:
     - StudyMetadata
+    - VirtualBiorepository
     range: VirtualBiorepository
-    required: false
   research_domain:
     name: research_domain
     description: Main research domain(s) of the study, other than Down syndrome
