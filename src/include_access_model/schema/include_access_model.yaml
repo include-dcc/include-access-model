@@ -77,7 +77,7 @@ classes:
       - study_design
       - clinical_data_source_type
       - data_category
-      - vbr
+      - vbr_id
       - research_domain
       - expected_number_of_participants
       - actual_number_of_participants
@@ -97,11 +97,18 @@ classes:
     description: An organization that can provide access to specimen for further analysis.
     is_a: Record
     slots:
+      - vbr_id
       - name
       - institution
       - contact
       - website
       - vbr_readme
+    slot_usage:
+      vbr_id:
+        range: string
+        required: true
+        identifier: true
+
   DOI:
     title: Digital Object Identifier (DOI)
     description: A DOI is a permanent reference with metadata about a digital object.
@@ -465,11 +472,10 @@ slots:
     required: true 
     range: Investigator
     multivalued: true 
-  vbr:
+  vbr_id:
     title: Virtual Biorepository
     description: Information about the study's Virtual Biorepository, if participating
     range: VirtualBiorepository
-    required: false
   vbr_readme:
     title: VBR Readme
     description: Instructions for contacting or requesting samples from Virtual Biorepository, if participating
