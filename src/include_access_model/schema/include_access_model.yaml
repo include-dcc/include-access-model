@@ -19,12 +19,13 @@ prefixes:
   ig2dac: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
   ig2dat: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type/
   ig2_biospecimen_availability: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability/
-  snomed_ct: 	http://snomed.info/id/
+  snomed_ct: http://snomed.info/id/
   MONDO: http://purl.obolibrary.org/obo/MONDO_
   HP: http://purl.obolibrary.org/obo/HP_
   mesh: http://id.nlm.nih.gov/mesh/
   NCIT: http://purl.obolibrary.org/obo/NCIT_
   PATO: http://purl.obolibrary.org/obo/PATO_
+  EFO: http://identifiers.org/efo/
 
 default_prefix: includedcc
 default_range: string
@@ -38,25 +39,25 @@ classes:
     title: Record
     abstract: true
     slots:
-    - external_id
+      - external_id
   Study:
-    title: Research Study 
-    description: Study Metadata 
+    title: Research Study
+    description: Study Metadata
     is_a: Record
-    slots: 
-    #TODO: Split out core Study items and additional study metadata?
+    slots:
+      #TODO: Split out core Study items and additional study metadata?
       - study_id
-      - parent_study 
+      - parent_study
       - study_title
       - study_code
       - study_short_name
       - program
       - funding_source
-      - principal_investigator 
+      - principal_investigator
       - contact
       - study_description
       - website
-    # - dbgap : Should we call this out specifically or just use an external id?
+      # - dbgap : Should we call this out specifically or just use an external id?
       - publication
       - acknowledgments
       - citation_statement
@@ -134,8 +135,9 @@ classes:
       - website
   Subject:
     title: Subject
-    description: This entity is the subject about which data or references are recorded. 
-      This includes the idea of a human participant in a study, a cell line, an animal model, 
+    description:
+      This entity is the subject about which data or references are recorded.
+      This includes the idea of a human participant in a study, a cell line, an animal model,
       or any other similar entity.
     is_a: Record
     slots:
@@ -157,7 +159,7 @@ classes:
       - race
       - ethnicity
       - down_syndrome_status
-      - age_at_last_vital_status 
+      - age_at_last_vital_status
       - vital_status
       - age_at_first_engagement
     slot_usage:
@@ -165,9 +167,9 @@ classes:
         required: true
         identifier: true
   SubjectAssertion:
-    title: Subject Assertion 
+    title: Subject Assertion
     description: Assertion about a particular Subject. May include Conditions, Measurements, etc.
-    is_a: Record 
+    is_a: Record
     slots:
       - assertion_id
       - subject_id
@@ -199,19 +201,19 @@ classes:
         required: true
         identifier: true
   Sample:
-    title: Sample 
+    title: Sample
     description: A functionally equivalent specimen taken from a participant or processed from such a sample.
     is_a: Record
-    slots: 
+    slots:
       - sample_id
-      - biospecimen_collection_id 
-      - parent_sample_id 
+      - biospecimen_collection_id
+      - parent_sample_id
       - sample_type
-      - processing 
-      - availablity_status 
-      - storage_method 
+      - processing
+      - availablity_status
+      - storage_method
       - quantity_number
-      - quantity_unit 
+      - quantity_unit
     slot_usage:
       sample_id:
         range: string
@@ -222,14 +224,14 @@ classes:
   BiospecimenCollection:
     title: BiospecimenCollection
     description: A biospecimen collection event which yields one or more Samples.
-    is_a: Record 
-    slots: 
+    is_a: Record
+    slots:
       - biospecimen_collection_id
       - age_at_collection
-      - method 
-      - site 
-      - spatial_qualifier 
-      - laterality 
+      - method
+      - site
+      - spatial_qualifier
+      - laterality
       - encounter_id
     slot_usage:
       biospecimen_collection_id:
@@ -239,13 +241,13 @@ classes:
   Aliquot:
     title: Aliquot
     description: A specific tube or amount of a biospecimen associated with a Sample.
-    is_a: Record 
-    slots: 
+    is_a: Record
+    slots:
       - aliquot_id
       - sample_id
       - availablity_status
       - quantity_number
-      - quantity_unit 
+      - quantity_unit
       - concentration_number
       - concentration_unit
     slot_usage:
@@ -255,7 +257,7 @@ classes:
         identifier: true
   Encounter:
     title: Participant Encounter
-    description: An event at which data was collected about a participant, 
+    description: An event at which data was collected about a participant,
       an intervention was made, or information about a participant was recorded.
     is_a: Record
     slots:
@@ -271,8 +273,8 @@ classes:
         identifier: true
   EncounterDefinition:
     title: Encounter Definition
-    description: A definition of an encounter type in this study, ie, 
-      an event at which data was collected about a participant, 
+    description: A definition of an encounter type in this study, ie,
+      an event at which data was collected about a participant,
       an intervention was made, or information about a participant was recorded.
       This may be something planned by a study or a type of data collection.
     #TODO: These are metadata and may not need the same Record basis.
@@ -291,7 +293,7 @@ classes:
         multivalued: true
   ActivityDefinition:
     title: Activity Definition
-    description: A definition of an activity in this study, eg, 
+    description: A definition of an activity in this study, eg,
       a biospecimen collection, intervention, survey, or assessment.
     #TODO: These are metadata and may not need the same Record basis.
     is_a: Record
@@ -299,7 +301,7 @@ classes:
       - activity_definition_id
       - name
       - description
-      #TODO: Probably want an "expected data generated" slot, eg, 
+      #TODO: Probably want an "expected data generated" slot, eg,
       #observation definitions or dd refs
     slot_usage:
       activity_definition_id:
@@ -309,17 +311,17 @@ classes:
   File:
     title: File
     description: Required information for portal use.
-    is_a: Record 
-    slots: 
-      - study_id 
-      - file_id 
-      - subject_id # do we need both a subject and sample id in this table? 
+    is_a: Record
+    slots:
+      - study_id
+      - file_id
+      - subject_id # do we need both a subject and sample id in this table?
       - sample_id
-      - s3_file_path # can name this url if more appropriate 
+      - s3_file_path # can name this url if more appropriate
       - filename
       - size
       - format
-      - data_category 
+      - data_category
       - data_type
       - format
       - size
@@ -327,20 +329,20 @@ classes:
       - staging_url
       - release_url
       - drs_uri
-      - hash 
+      - hash
 
     slot_usage:
-      study_id: 
-        required: true 
+      study_id:
+        required: true
       file_id:
         range: string
         required: true
         identifier: true
       subject_id:
-        required: true 
+        required: true
         multivalued: true
       sample_id:
-        required: true 
+        required: true
         multivalued: true
       data_category:
         required: true
@@ -365,26 +367,26 @@ classes:
       #TODO: Are these good elements for the core entity?
       - data_collection_start
       - data_collection_end
-      
+
     slot_usage:
       dataset_id:
         range: string
         required: true
         identifier: true
-      file_id: 
+      file_id:
         multivalued: true
         description: The list of files comprising this dataset.
 
   FileAdmin: # names are TBD; can change - idea is this is operational or file universe model    
     title: File Admin
     description: File unvierse; contains all information about a file that may be needed for operational work
-    slots:  
-      - study_id 
-      - file_id 
-      - subject_id # do we need both a subject and sample id in this table? 
+    slots:
+      - study_id
+      - file_id
+      - subject_id # do we need both a subject and sample id in this table?
       - sample_id
-      - s3_file_path # can name this url if more appropriate 
-      - file_category 
+      - s3_file_path # can name this url if more appropriate
+      - file_category
       - size
       - s3_key
       - file_extension
@@ -419,23 +421,23 @@ classes:
       - acl
       - is_released
       - is_registered
-      - repository 
+      - repository
       - experimental_strategy
 
-    slot_usage: 
-      study_id: 
-        required: true 
-      file_id: 
-        required: true 
-        identifier: true 
+    slot_usage:
+      study_id:
+        required: true
+      file_id:
+        required: true
+        identifier: true
 
   FileAssay:
     title: File Assay
-  # for now group all types into one table; but we may want to split out since different 
-  # assay types collect different types of information
-  # this is a basic model
-    description: A file produced by or associated with an assay 
-      or data acquisition process including omics, imaging, 
+    # for now group all types into one table; but we may want to split out since different
+    # assay types collect different types of information
+    # this is a basic model
+    description: A file produced by or associated with an assay
+      or data acquisition process including omics, imaging,
       actigraphy, and other experimental or observational data.
     slots:
       - file_id
@@ -451,70 +453,70 @@ classes:
       - platform
       - workflow_name
       - workflow_version
-    
-    slot_usage: 
-      file_id: 
-        required: true 
-        identifier: true 
-      subject_id: 
-        required: true 
-        multivalued: true 
-      sample_id: 
-        required: true 
-        multivalued: true 
-      data_category: 
+
+    slot_usage:
+      file_id:
         required: true
-      
-slots: 
+        identifier: true
+      subject_id:
+        required: true
+        multivalued: true
+      sample_id:
+        required: true
+        multivalued: true
+      data_category:
+        required: true
+
+slots:
   study_id:
     title: Study ID
     description: INCLUDE Global ID for the study
     range: Study
-    multivalued: false 
+    multivalued: false
   do_id:
     title: DOI
     description: Digital Object Identifier (DOI) for this Record.
     range: DOI
-    multivalued: false 
+    multivalued: false
   subject_id:
     title: Study ID
     description: INCLUDE Global ID for the Subject
     range: Subject
-    multivalued: false 
+    multivalued: false
   assertion_id:
     title: Assertion ID
     description: INCLUDE Global ID for the Assertion
     range: SubjectAssertion
-    multivalued: false 
-  external_id: 
+    multivalued: false
+  external_id:
     title: External Identifiers
     description: Other identifiers for this entity, eg, from the submitting study or in systems like dbGaP
-    required: false 
-    range: uriorcurie 
-    multivalued: true 
+    required: false
+    range: uriorcurie
+    multivalued: true
   parent_study:
     title: Parent Study
     description: The parent study for this study, if it is a nested study.
-    required: false 
-    range: Study 
+    required: false
+    range: Study
     multivalued: false
   funding_source:
-    title: Funding Source 
+    title: Funding Source
     description: The funding source(s) of the study.
-    required: false 
-    range: string 
-    multivalued: true 
-  principal_investigator:  
-    title: Principal Investigator 
+    required: false
+    range: string
+    multivalued: true
+  principal_investigator:
+    title: Principal Investigator
     description: The Principal Investigator(s) responsible for the study.
-    required: true 
+    required: true
     range: Investigator
-    multivalued: true 
-  study_title: 
-    description: Full Study Title  
-    required: true 
-    range: string 
-    multivalued: false 
+    multivalued: true
+  study_title:
+    description: Full Study Title
+    required: true
+    range: string
+    multivalued: false
   study_code:
     description: Unique identifier for the study (generally a short acronym)
     title: Study Code
@@ -563,9 +565,9 @@ slots:
   contact:
     title: Contact Person
     description: The individual to contact with questions about this record.
-    required: true 
+    required: true
     range: Investigator
-    multivalued: true 
+    multivalued: true
   vbr:
     title: Virtual Biorepository
     description: Information about the study's Virtual Biorepository, if participating
@@ -634,15 +636,15 @@ slots:
     description: Text use to reference this Record.
     range: string
   organism_type:
-    title: Organism Type 
+    title: Organism Type
     description: Organism Type
-    required: false 
-    range: uriorcurie 
-  subject_type: 
-    title: Subject Type 
+    required: false
+    range: uriorcurie
+  subject_type:
+    title: Subject Type
     description: Type of entity this record represents
-    required: true 
-    range: EnumSubjectType 
+    required: true
+    range: EnumSubjectType
   sex:
     title: Sex
     description: Sex of Participant
@@ -673,7 +675,7 @@ slots:
       ucum_code: d
     #Range -1 year to 89*365.25 (Privacy upper bound for ages over 89 years)
     minimum_value: -365
-    maximum_value: 32507    
+    maximum_value: 32507
   vital_status:
     title: Vital Status
     description: Whether participant is alive or dead
@@ -698,7 +700,8 @@ slots:
       ucum_code: d
   age_at_event:
     title: Age at event
-    description: The age in days of the Subject at the time point which the assertion describes,
+    description:
+      The age in days of the Subject at the time point which the assertion describes,
       eg, age of onset or when a measurement was performed.
     range: integer
     unit:
@@ -751,34 +754,34 @@ slots:
     title: Sample ID
     description: The unique identifier for this Sample.
     range: Sample
-  parent_sample_id: 
+  parent_sample_id:
     title: Parent Sample ID
     description: Sample from which this sample is derived
-    range: Sample 
+    range: Sample
     inlined: false
-  biospecimen_collection_id: 
+  biospecimen_collection_id:
     title: Biospecimen Collection ID
     description: Unique identifier for this Biospecimen Collection.
-    range: BiospecimenCollection 
-  aliquot_id: 
+    range: BiospecimenCollection
+  aliquot_id:
     title: Aliquot ID
     description: Unique identifier for an Aliquot.
-    range: Aliquot 
+    range: Aliquot
   sample_type:
     title: Sample Type
-    description: Type of material of which this Sample is comprised 
-    required: true 
-    range: uriorcurie  
+    description: Type of material of which this Sample is comprised
+    required: true
+    range: uriorcurie
   processing:
     title: Sample Processing
     description: Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample
-    range: uriorcurie 
-    multivalued: true 
-  availablity_status: 
+    range: uriorcurie
+    multivalued: true
+  availablity_status:
     title: Sample Availability
     description: Can this Sample be requested for further analysis?
-    range: EnumAvailabilityStatus 
-  storage_method: 
+    range: EnumAvailabilityStatus
+  storage_method:
     title: Sample Storage Method
     description: Sample storage method, eg, Frozen or with additives
     range: uriorcurie
@@ -791,33 +794,33 @@ slots:
     title: Quantity Units
     description: The structured term defining the units of the quantity.
     range: Concept
-  concentration_number: 
+  concentration_number:
     title: Concentration
     description: What is the concentration of the analyte in the Aliquot?
-    range: float 
-  concentration_unit: 
+    range: float
+  concentration_unit:
     title: Concentration Units
     description: Units associated with the concentration of the analyte in the Aliquot.
-    range: Concept 
+    range: Concept
   age_at_collection:
     title: Age at Biospecimen Collection
     description: The age at which this biospecimen was collected in decimal years.
-    range: float 
+    range: float
     unit:
-      ucum_code: a   
-  method: 
-    title: Biospecimen Collection Method 
+      ucum_code: a
+  method:
+    title: Biospecimen Collection Method
     description: The approach used to collect the biospecimen.
     range: EnumSampleCollectionMethod
-  site: 
-    title: Biospecimen Collection Site  
+  site:
+    title: Biospecimen Collection Site
     description: The location of the specimen collection.
     range: EnumSite
-  spatial_qualifier: 
+  spatial_qualifier:
     title: Spatial Qualifier
     description: Qualifier that further refine the specific location of biospecimen collection
     range: EnumSpatialQualifiers
-  laterality: 
+  laterality:
     title: Location Laterality
     description: Laterality that further refine the specific location of biospecimen collection
     range: EnumLaterality
@@ -861,8 +864,8 @@ slots:
     description: Size of the file, in Bytes.
     range: integer
     unit:
-      ucum_code: By 
-    required: true   
+      ucum_code: By
+    required: true
   staging_url:
     title: Staging Location
     description: URL for internal access to the data. May be temporary.
@@ -871,8 +874,8 @@ slots:
   release_url:
     title: Release Location
     description: URL for controlled or open access to the data.
-    range: uriorcurie  
-    required: false 
+    range: uriorcurie
+    required: false
   drs_uri:
     title: DRS URI
     description: DRS location to access the data.
@@ -907,7 +910,7 @@ slots:
     description: The date that data collection started. May include only a year.
     #TODO: We could re-evaluate these as dates, but that may be too implementation specific
     range: string
-  s3_file_path: 
+  s3_file_path:
     title: S3 File Path
     description: The full s3 url of a file's location in aws
     range: string
@@ -915,54 +918,54 @@ slots:
   is_released:
     title: Is Released
     description: A flag that notes whether a file has been released to the public
-    range: boolean 
+    range: boolean
     required: true
   is_registered:
     title: Is Registered
     description: A flag that notes whether a file has been registered to a drs service
     range: boolean
     required: true
-  repository: 
+  repository:
     title: Repository
-    description: The name of the drs service which files are registered to 
+    description: The name of the drs service which files are registered to
     range: EnumRepository
     required: false
-  file_category: 
+  file_category:
     title: File Category
     description: A high level classification of the file used for operations.
     range: string
     required: true
-  s3_key: 
+  s3_key:
     title: S3 Key
     description: The unique identifier for an object within a bucket
     range: string
     required: true
-  file_extension: 
+  file_extension:
     title: File Extension
     description: A 3-4 letter code at the end of a filename that identifies the file format.
     range: string
     required: true
-  data_transfer_id: 
+  data_transfer_id:
     title: Data Transfer ID
     description: A jira ticket number associated with a file transfer request to production bucket
     range: string
     required: false
-  aws_account_id: 
+  aws_account_id:
     title: AWS Account ID
     description: A 12-digit number that uniquely identifies a specific AWS account
     range: string
     required: true
-  account_name: 
+  account_name:
     title: AWS Account Name
     description: A user-defined label used to define an AWS accoun.
     range: string
     required: true
-  account_alias: 
+  account_alias:
     title: Account Alias
     description: A unique user-defined string that replaces the AWS Account ID in the IAM user sign-in URL
     range: string
     required: true
-  bucket_study_id: 
+  bucket_study_id:
     title: Bucket Study ID
     description: The global study ID used to create the bucket
     range: string
@@ -972,72 +975,72 @@ slots:
     description: Cloud storage container in AWS used to manage and store s3 objects
     range: string
     required: true
-  s3_created_at: 
+  s3_created_at:
     title: S3 Created At
     description: Timestamp of when a file was uploaded to an s3 bucket.
     range: datetime
     required: true
-  s3_modified_at: 
+  s3_modified_at:
     title: S3 Modified At
     description: Timestamp of when a file was modified in an s3 bucket.
     range: datetime
     required: true
-  intelligent_tiering_access_tier: 
+  intelligent_tiering_access_tier:
     title: Intelligent Tiering Access Tier
     description: Storage access tier assigned by AWS intelliegnt tiering, indicating the current access frequency classification of the object
     range: string
     required: true
-  is_delete_marker: 
+  is_delete_marker:
     title: Is Delete Marker
     description: A flag that notes whether a file has been deleted from s3
     range: boolean
     required: true
-  is_latest: 
+  is_latest:
     title: Is Latest
     description: Specifies whether an object version is the most recent version of that object
     range: boolean
     required: true
-  storage_class: 
+  storage_class:
     title: Storage Class
     description: Storage tier of the object in AWS reflecting cost and access characteristics.
     range: string
     required: true
-  manifest_hash_value: 
+  manifest_hash_value:
     title: Manifest Hash Value
     description: The provided hash value from external users to be validated against internal hash values
     range: string
     required: false
-  file_hash_validation_status: 
+  file_hash_validation_status:
     title: File Hash Validation Status
     description: Notes whether hashes have been generated and verified against manifest hash values.
     range: string
     required: false
-  file_type: 
+  file_type:
     title: File Type
     description: An internal type or classification of the files based on its operational usuage.
     range: string
     required: true
-  encryption_status: 
+  encryption_status:
     title: Encryption Status
     description: Indicates whether the object in AWS is encrypted and the type of encryption applied.
     range: string
     required: true
-  is_multipart_uploaded: 
+  is_multipart_uploaded:
     title: Is Multipart Uploaded
     description: Indicates whether the object was uploaded using a multipart upload process.
     range: string
     required: true
-  object_lock_level_hold_status: 
+  object_lock_level_hold_status:
     title: Object Lock Level Hold Status
     description: Whether a legal hold is applied to prevent deletion of the object.
     range: string
     required: true
-  object_lock_mode: 
+  object_lock_mode:
     title: Object Lock Mode
     description: Retention mode applied to the object that restricts deletion or modification.
     range: string
     required: true
-  replication_status: 
+  replication_status:
     title: Replication Status
     description: Status of the object's replication to another storage location.
     range: string
@@ -1047,55 +1050,51 @@ slots:
     description: Identifier for a specific version of the object
     range: string
     required: true
-  access_type: 
+  access_type:
     title: Access Type
     description: Notes wheter a file is controlled, open, or registered-tier access
     range: EnumAccessType
     required: true
-  access_url: 
+  access_url:
     title: Access URL
     description: HTTPS endpoint for accessing a file via a specific data repository service.
     range: string
     required: false
-  acl: 
+  acl:
     title: ACL
     description: The object access control list.
     range: string
     required: true
-  experimental_strategy: 
+  experimental_strategy:
     title: Experimental Strategy
     description: Method or assay used to generate the data
     range: EnumExperimentalStrategy
     required: true
-  assay_center: 
+  assay_center:
     title: Assay Center
     description: The organization or center that generated the file
     range: EnumAssayCenter
     required: false
-  platform: 
+  platform:
     title: Platform
     description: Instrument or platform family name
-    range: EnumPlatform 
+    range: EnumPlatform
     required: true
   workflow_name:
     title: Workflow Name
     description: Processing tool that produced the file
-    range: string 
-    required: false 
-  workflow_version: 
+    range: string
+    required: false
+  workflow_version:
     title: Workflow Version
     description: Version of the process tool that produced the file
     range: string
     required: false
-  object_lock_retain_until_date: 
+  object_lock_retain_until_date:
     title: Object Lock Retain Until Date
     description: Specifies exact date and time when an object's Object Lock rentention period expires.
     range: datetime
     required: true
-  
-
- 
-
 
 enums:
   EnumProgram:
@@ -1204,7 +1203,7 @@ enums:
     description: Categories of data which may be collected about participants.
     #TODO: Add meanings
     permissible_values:
-    #Should we have these two demo/clinical data categories?
+      #Should we have these two demo/clinical data categories?
       unharmonized_demographic_clinical_data:
         title: Unharmonized Demographic/Clinical Data
       harmonized_demographic_clinical_data:
@@ -1238,15 +1237,16 @@ enums:
         title: Sleep Study
   EnumSubjectType:
     description: Types of Subject entities
-    permissible_values: 
-      participant: 
+    permissible_values:
+      participant:
         description: Study participant with consent, assent, or waiver of consent.
       non_participant:
-        description: An individual associated with a study who was not explictly consented, eg, the subject
+        description:
+          An individual associated with a study who was not explictly consented, eg, the subject
           of a reported family history.
-      cell_line: 
+      cell_line:
         description: Cell Line
-      animal_model: 
+      animal_model:
         description: Animal model
       group:
         description: A group of individuals or entities.
@@ -1380,12 +1380,12 @@ enums:
     description: Is the biospecimen available for use?
     permissible_values:
       available:
-        title: Available 
-        meaning: ig2_biospecimen_availability:available 
+        title: Available
+        meaning: ig2_biospecimen_availability:available
         description: Biospecimen is Available
-      unavailable: 
-        title: Unavailable 
-        meaning: ig2_biospecimen_availability:unavailable 
+      unavailable:
+        title: Unavailable
+        meaning: ig2_biospecimen_availability:unavailable
         description: Biospecimen is Unavailable
   EnumSampleCollectionMethod:
     description: The approach used to collect the biospecimen. [LOINC](https://loinc.org) is recommended.
@@ -1393,12 +1393,12 @@ enums:
     description: The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html) is recommended.
   EnumSpatialQualifiers:
     description: Any spatial/location qualifiers.
-    enum_uri: http://hl7.org/fhir/us/mcode/ValueSet/mcode-body-location-qualifier-vs 
+    enum_uri: http://hl7.org/fhir/us/mcode/ValueSet/mcode-body-location-qualifier-vs
     reachable_from:
       source_ontology: bioregistry:snomedct
       source_nodes:
         - snomedct:106233006
-        - snomedct:272424004 
+        - snomedct:272424004
         - snomedct:51440002
         - snomedct:399488007
         - snomedct:24028007
@@ -1433,88 +1433,156 @@ enums:
     permissible_values:
       md5:
         title: MD5
-      etag: 
+      etag:
         title: ETag
       sha1:
         title: SHA-1
-  EnumAccessType: 
-    description: Types of file access levels. 
-    permissible_values: 
-      open: 
-        title: Open Access 
-      controlled: 
+  EnumAccessType:
+    description: Types of file access levels.
+    permissible_values:
+      open:
+        title: Open Access
+      controlled:
         title: Controlled Access
-      registered: 
+      registered:
         title: Registered-tier Access
-  EnumExperimentalStrategy: 
+  EnumExperimentalStrategy:
     description: Types of sequencing methods.
-    permissible_values: 
+    permissible_values:
       wgs:
         title: Whole Genome Sequencing
-      rnaseq: 
+      rnaseq:
         title: RNA-Seq
-      wxs: 
+      wxs:
         title: Whole Exome Sequencing
-      methlyation: 
+      methlyation:
         title: Methylation
-      clr_wgs: 
+      clr_wgs:
         title: Continuous Long Reads WGS
-      proteomics: 
-        title: Proteomics 
-      targeted_seq: 
+      proteomics:
+        title: Proteomics
+      targeted_seq:
         title: Targeted Sequencing
-      ccs_wgs: 
+      ccs_wgs:
         title: Circular Consensus Sequencing WGS
-      panel: 
+      panel:
         title: Panel
-      ccs_rnaseq: 
+      ccs_rnaseq:
         title: Circular Consensus Sequencing RNA-Se
-      ont_wgs: 
+      ont_wgs:
         title: Oxford Nanopore Technologies WGS
-      clr_rnaseq: 
+      clr_rnaseq:
         title: Continuous Long Reads RNA-Seq
-  EnumAssayCenter: 
+  EnumAssayCenter:
     description: Organizations or centers producing raw or harmonized sequencing files.
-    permissible_values: 
-    # can add more as needed
-      broad: 
-        title: The Broad Institute 
-      hudsonalpha: 
-        title: HudsonAlpha Institute for Biotechnology 
-      stjude: 
+    permissible_values:
+      # can add more as needed
+      broad:
+        title: The Broad Institute
+      hudsonalpha:
+        title: HudsonAlpha Institute for Biotechnology
+      stjude:
         title: St. Jude
-      baylor: 
+      baylor:
         title: Baylor College of Medicine
-      chop: 
+      chop:
         title: The Children's Hospital of Philadelphia
-      other: 
+      other:
         title: Other
-      unknown: 
+      unknown:
         title: Unknown
-  EnumRepository: 
+  EnumRepository:
     description: specific drs service used for registration
-    permissible_values: 
-      cavatica: 
+    permissible_values:
+      cavatica:
         title: Cavatica DRS
-      dcf: 
-        title: NCI DCF 
-      other: 
+      dcf:
+        title: NCI DCF
+      other:
         title: Other
-  EnumPlatform: 
+  EnumPlatform:
     description: names of instrument or platforms used for assay data generation
-    permissible_values: 
-      illumina: 
+    permissible_values:
+      illumina:
         title: Illumina
-      pacbio: 
-        title: PacBio
-      ont: 
-        title: ONT 
-      illumina_epic: 
-        title: Illumina Infinium HumanMethylationEPICv2
-      other: 
-        title: Other
-      unknown: 
+        description: Illumina Platform
+      long_read:
+        description: Single-molecule sequencing technologies (PacBio, ONT).
+      unknown:
         title: Unknown
-      
+        description: Unknown platform
 
+      # --- Illumina Sub-grouping ---
+      # High-Throughput / Production
+      novaseq_x:
+        is_a: illumina
+        title: NovaSeq X Series
+        description: Ultra-high throughput (NovaSeq X, X Plus).
+        meaning: EFO:EFO_0022840
+      novaseq_6000:
+        title: NovaSeq 6000
+        is_a: illumina
+        description: Standard high-throughput production platform.
+        meaning: EFO:EFO_0008637
+      # Mid-to-Low Throughput
+      nextseq_1000:
+        title: NextSeq 1000
+        is_a: illumina
+        description: Mid-range sequencing (P1, P2, P3 flowcells).
+        meaning: EFO:EFO_0010962
+      nextseq_2000:
+        title: NextSeq 1000-2000
+        is_a: illumina
+        description: Mid-range sequencing (P1, P2, P3 flowcells).
+        meaning: EFO:EFO_0010963
+      nextseq_500:
+        title: NextSeq 500_550
+        is_a: illumina
+        description: Older mid-range 2-channel systems.
+        meaning: EFO:EFO_0009173
+      nextseq_550:
+        title: NextSeq 550
+        is_a: illumina
+        description: Older mid-range 2-channel systems.
+        meaning: EFO:EFO_0008566
+      miseq:
+        title: MiSeq Series
+        is_a: illumina
+        description: Benchtop low-throughput (MiSeq, MiSeqDx).
+      miniseq_iseq:
+        title: MiniSeq iSeq
+        is_a: illumina
+        description: Smallest entry-level sequencers.
 
+      # Array
+      iscan_system:
+        is_a: illumina
+        description: Hardware for Infinium arrays (EPIC, GSA).
+
+      # --- PacBio (Pacific Biosciences) ---
+      pacbio_revio:
+        title: PacBio  Revio
+        is_a: long_read
+        description: Current flagship high-throughput HiFi system.
+      pacbio_sequel_iie:
+        title: PacBio Sequel IIe
+        is_a: long_read
+        description: Reliable mid-to-high throughput HiFi system.
+      pacbio_onso:
+        title: PacBio Onso
+        is_a: long_read
+        description: Short-read SBB (Sequencing by Binding) platform from PacBio.
+
+      # --- ONT (Oxford Nanopore Technologies) ---
+      ont_promethion:
+        title: ONT PromethION
+        is_a: long_read
+        description: Ultra-high throughput scalable nanopore system.
+      ont_gridion:
+        title: ONT GridION
+        is_a: long_read
+        description: Benchtop nanopore system running up to 5 flow cells.
+      ont_minion:
+        title: ONT MiniION
+        is_a: long_read
+        description: Portable, pocket-sized nanopore sequencer.
