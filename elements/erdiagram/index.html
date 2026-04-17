@@ -220,6 +220,23 @@ EncounterDefinition {
     string description  
     uriorcurieList external_id  
 }
+Family {
+    string family_id  
+    EnumFamilyType family_type  
+    string family_description  
+    EnumConsanguinityAssertion consanguinity  
+    uriorcurie family_study_focus  
+    uriorcurieList external_id  
+}
+FamilyMember {
+    uriorcurie family_role  
+    uriorcurieList external_id  
+}
+FamilyRelationship {
+    string family_relationship_id  
+    uriorcurie relationship  
+    uriorcurieList external_id  
+}
 File {
     string file_id  
     string filename  
@@ -322,6 +339,10 @@ Demographics ||--|| Subject : "subject_id"
 Encounter ||--|o EncounterDefinition : "encounter_definition_id"
 Encounter ||--|o Subject : "subject_id"
 EncounterDefinition ||--}o ActivityDefinition : "activity_definition_id"
+FamilyMember ||--|| Family : "family_id"
+FamilyMember ||--|| Subject : "subject_id"
+FamilyRelationship ||--|| Subject : "family_member_id"
+FamilyRelationship ||--|| Subject : "subject_id"
 File ||--|o FileHash : "hash"
 File ||--}o Sample : "sample_id"
 File ||--}o Subject : "subject_id"
