@@ -41,6 +41,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
   AccessPolicy:
     title: Access Policy
     description: The access policy that describes the controls around use of data
@@ -63,7 +64,7 @@ classes:
     is_a: Record
     slots: 
     #TODO: Split out core Study items and additional study metadata?
-      - study_id
+      #- study_id Inherits study_id from Record now.
       - parent_study 
       - study_title
       - study_code
