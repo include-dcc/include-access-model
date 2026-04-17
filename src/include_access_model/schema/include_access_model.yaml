@@ -323,7 +323,7 @@ classes:
       - data_type
       - format
       - size
-#TODO: I'm not convinced this is the right strategy- access model vs operations
+      #TODO: I'm not convinced this is the right strategy- access model vs operations
       - staging_url
       - release_url
       - drs_uri
@@ -375,7 +375,8 @@ classes:
         multivalued: true
         description: The list of files comprising this dataset.
 
-  FileAdmin: # names are TBD; can change - idea is this is operational or file universe model    title: File Admin
+  FileAdmin: # names are TBD; can change - idea is this is operational or file universe model    
+    title: File Admin
     description: File unvierse; contains all information about a file that may be needed for operational work
     slots:  
       - study_id 
