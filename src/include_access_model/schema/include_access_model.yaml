@@ -26,6 +26,7 @@ prefixes:
   NCIT: http://purl.obolibrary.org/obo/NCIT_
   PATO: http://purl.obolibrary.org/obo/PATO_
   EFO: http://identifiers.org/efo/
+  DUO: http://purl.obolibrary.org/obo/DUO_
 
 default_prefix: includedcc
 default_range: string
@@ -39,15 +40,33 @@ classes:
     title: Record
     abstract: true
     slots:
-      - external_id
+    - external_id
+    - access_policy_id
+    - study_id
+  AccessPolicy:
+    title: Access Policy
+    description: The access policy that describes the controls around use of data
+    slots:
+    - access_policy_id
+    - data_use_accession
+    - data_use_permission
+    - data_use_modifier
+    - disease_limitation
+    - access_description
+    - website
+    slot_usage:
+      access_policy_id:
+        range: string
+        required: true
+        identifier: true
   Study:
     title: Research Study
     description: Study Metadata
     is_a: Record
-    slots:
-      #TODO: Split out core Study items and additional study metadata?
-      - study_id
-      - parent_study
+    slots: 
+    #TODO: Split out core Study items and additional study metadata?
+      #- study_id Inherits study_id from Record now.
+      - parent_study 
       - study_title
       - study_code
       - study_short_name
@@ -78,7 +97,7 @@ classes:
       - study_design
       - clinical_data_source_type
       - data_category
-      - vbr
+      - vbr_id
       - research_domain
       - expected_number_of_participants
       - actual_number_of_participants
@@ -98,11 +117,18 @@ classes:
     description: An organization that can provide access to specimen for further analysis.
     is_a: Record
     slots:
+      - vbr_id
       - name
       - institution
       - contact
       - website
       - vbr_readme
+    slot_usage:
+      vbr_id:
+        range: string
+        required: true
+        identifier: true
+
   DOI:
     title: Digital Object Identifier (DOI)
     description: A DOI is a permanent reference with metadata about a digital object.
@@ -166,6 +192,59 @@ classes:
       subject_id:
         required: true
         identifier: true
+  Family:
+    title: Family
+    description: A group of individuals of some relation who are grouped together in a study.
+    is_a: Record
+    slots:
+    - family_id
+    - family_type
+    - family_description 
+    - consanguinity
+    - family_study_focus
+    slot_usage:
+      family_id:
+        range: string
+        required: true
+        identifier: true
+  FamilyRelationship:
+    title: Family Member Relationship
+    description: A relationship between two Subjects. Directed as follows
+     <family_member_id> <relationship> <subject_id>
+     <Mother's id> <KIN:027 "isBiologicalMotherOf"> <subject_id> 
+    is_a: Record
+    slots:
+    - family_relationship_id
+    - family_member_id
+    - relationship
+    - subject_id
+    slot_usage:
+      family_relationship_id:
+        range: string
+        required: true
+        identifier: true
+      subject_id:
+        required: true
+        description: The family member Subject who is the relationship "object".
+  FamilyMember:
+    title: Family Member
+    description: Designates a Subject as a member of a family with a specified role.
+    is_a: Record
+    slots:
+      - family_id
+      - subject_id
+      - family_role
+    unique_keys:
+      main:
+        description: Family membership is defined by family and subject ids.
+        unique_key_slots:
+          - family_id
+          - subject_id
+    slot_usage:
+      family_id:
+        required: true
+      subject_id:
+        required: true
   SubjectAssertion:
     title: Subject Assertion
     description: Assertion about a particular Subject. May include Conditions, Measurements, etc.
@@ -472,7 +551,35 @@ slots:
     title: Study ID
     description: INCLUDE Global ID for the study
     range: Study
-    multivalued: false
+    multivalued: false 
+  access_policy_id:
+    title: Access Policy ID
+    description: Global identifier for the access policy that applies to
+     this row of data.
+    range: AccessPolicy
+  data_use_accession:
+    title: Data Use Accession
+    description: Accession used to provision access to the record, eg,
+     a dbGaP phsID. 
+    range: uriorcurie
+  data_use_permission:
+    title: Data Use Permission
+    description: Broad category of restrictions on data use.
+    range: EnumDataUsePermission
+    required: true
+  data_use_modifier:
+    title: Data Use Modifier
+    description: Additional modifiers that limit data use.
+    range: EnumDataUseModifier
+  disease_limitation:
+    title: Data Use Disease Limitation
+    description: If the access is limited to a specific disease purpose,
+     it is specified here.
+    range: string
+  access_description:
+    title: Access Description
+    description: Any additional information to support access requests.
+    range: string
   do_id:
     title: DOI
     description: Digital Object Identifier (DOI) for this Record.
@@ -560,19 +667,18 @@ slots:
     required: true
   website:
     title: Website
-    description: Website for the Record.
+    description: Website with more information about this entity.
     range: uri
   contact:
     title: Contact Person
     description: The individual to contact with questions about this record.
     required: true
     range: Investigator
-    multivalued: true
-  vbr:
+    multivalued: true 
+  vbr_id:
     title: Virtual Biorepository
     description: Information about the study's Virtual Biorepository, if participating
     range: VirtualBiorepository
-    required: false
   vbr_readme:
     title: VBR Readme
     description: Instructions for contacting or requesting samples from Virtual Biorepository, if participating
@@ -629,19 +735,21 @@ slots:
     range: string
   citation_statement:
     title: Citation Statement
-    description: Statement that secondary data users should use to acknowledge use of this study or dataset. E.g., "The results analyzed and <published or shown> here are based in whole or in part upon data generated by the INCLUDE (INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE) Project <insert accession number(s) and/or study DOI(s)>, and were accessed from the INCLUDE Data Hub and <insert other database(s)>."
+    description: Statement that secondary data users should use to acknowledge use of this study or dataset. E.g., 
+     "The results analyzed and <published or shown> here are based in whole or in part upon data generated by the INCLUDE 
+     (INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE) Project <insert accession 
+     number(s) and/or study DOI(s)>, and were accessed from the INCLUDE Data Hub and <insert other database(s)>."
     range: string
   bibliographic_reference:
     title: Bibiliographic Reference
     description: Text use to reference this Record.
     range: string
   organism_type:
-    title: Organism Type
-    description: Organism Type
-    required: false
-    range: uriorcurie
-  subject_type:
-    title: Subject Type
+    title: Organism Type 
+    description: Organism Type, typically from NCBITaxon. For reference, Human is NCBITaxon:9606.
+    range: uriorcurie 
+  subject_type: 
+    title: Subject Type 
     description: Type of entity this record represents
     required: true
     range: EnumSubjectType
@@ -669,7 +777,8 @@ slots:
   age_at_first_engagement:
     #Should this just be a reference out to an encounter?
     title: Age at First Participant Engagement
-    description: Age in days of Participant at first recorded study event (enrollment, visit, observation, sample collection, survey completion, etc.). Age at enrollment is preferred, if available.
+    description: Age in days of Participant at first recorded study event (enrollment, visit, observation, 
+     sample collection, survey completion, etc.). Age at enrollment is preferred, if available.
     range: integer
     unit:
       ucum_code: d
@@ -688,6 +797,40 @@ slots:
       ucum_code: d
     minimum_value: -365
     maximum_value: 32507
+  family_id:
+    title: Family ID
+    description: Global ID for the Family
+    range: Family
+  family_type: 
+    description: Describes the 'type' of study family, eg, trio.
+    range: EnumFamilyType 
+  family_description: 
+    description: Free text describing the study family, such as potential 
+     inheritance or details about consanguinity
+    range: string 
+  consanguinity: 
+    description: Is there known or suspected consanguinity in this study family?
+    range: EnumConsanguinityAssertion
+  family_study_focus: 
+    description: The specific focus of the investigation, eg, a condition. 
+    range: uriorcurie 
+  family_relationship_id:
+    title: Family Relationship ID
+    description: Global ID for the Family Relationship
+    range: FamilyRelationship
+  family_member_id:
+    description: The family member Subject who is the relationship "subject".
+    required: true
+    range: Subject
+    inlined: false
+  relationship:
+    description: Code definting the relationship predicate. Relationship of the "Family Member" 
+     to the "Subject", eg, mother of.
+    required: true
+    range: uriorcurie
+  family_role: 
+    description: The "role" of this individual in this family. Could include terms like "proband", "mother", etc.
+    range: uriorcurie
   assertion_provenance:
     title: Assertion Provenance
     description: The original source of this assertion
@@ -769,21 +912,22 @@ slots:
     range: Aliquot
   sample_type:
     title: Sample Type
-    description: Type of material of which this Sample is comprised
-    required: true
-    range: uriorcurie
+    description: Type of material of which this Sample is comprised. UBERON is recommended.
+    required: true 
+    range: uriorcurie  
   processing:
     title: Sample Processing
-    description: Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample
-    range: uriorcurie
-    multivalued: true
-  availablity_status:
+    description: Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded 
+     this distinct sample. OBI is recommended.
+    range: uriorcurie 
+    multivalued: true 
+  availablity_status: 
     title: Sample Availability
     description: Can this Sample be requested for further analysis?
     range: EnumAvailabilityStatus
   storage_method:
     title: Sample Storage Method
-    description: Sample storage method, eg, Frozen or with additives
+    description: Sample storage method, eg, Frozen or with additives. OBI may be suitable, or ChEBI for additives.
     range: uriorcurie
     multivalued: true
   quantity_number:
@@ -1097,6 +1241,27 @@ slots:
     required: true
 
 enums:
+  EnumDataUsePermission:
+    title: Data Use Permission
+    description: Data Use Ontology (DUO) terms for data use permissions.
+     #Do we need a "registered tier" item?
+    reachable_from:
+      source_ontology: bioregistry:duo
+      source_nodes:
+        - DUO:0000001
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
+  EnumDataUseModifier:
+    title: Data Use Modifier
+    description: Data Use Ontology (DUO) terms for data use modifiers.
+    reachable_from:
+      source_ontology: bioregistry:duo
+      source_nodes:
+        - DUO:0000017
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf
   EnumProgram:
     title: Funding Programs
     description: Funding programs relevant to inform operations.
@@ -1359,6 +1524,44 @@ enums:
       unknown:
         title: Unknown
         meaning: NCIT:C17998
+  EnumFamilyType:
+    description: Enumerations describing research family type 
+    is_a: EnumNull
+    permissible_values: 
+      control_only:
+        title: Control-only 
+        description: Control Only 
+      duo: 
+        title: Duo
+        description: Duo 
+      proband_only: 
+        title: Proband-only 
+        description: Proband Only 
+      trio: 
+        title: Trio 
+        description: Trio (2 parents and affected child)
+      trio_plus: 
+        title: Trio+ 
+        description: 2 Parents and 2 or more children
+  EnumConsanguinityAssertion: 
+    description: Asserts known or suspected consanguinity in this study family
+    permissible_values:  
+      not_suspected: 
+        title: not-suspected
+        description: Not suspected 
+        meaning: snomed_ct:428263003
+      suspected: 
+        title: suspected 
+        description: Suspected
+        meaning: snomed_ct:415684004
+      known_present: 
+        title: known-present 
+        description: Known Present
+        meaning: snomed_ct:410515003
+      unknown: 
+        title: unknown 
+        description: Unknown
+        meaning: snomed_ct:261665006
   EnumAssertionProvenance:
     description: Possible data sources for assertions.
     is_a: EnumNull
