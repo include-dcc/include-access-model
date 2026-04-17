@@ -1,5 +1,5 @@
 # Auto generated from include_access_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-03T17:20:29
+# Generation date: 2026-04-17T14:05:35
 # Schema: include-access-model
 #
 # id: https://includedcc.org/include-access-model
@@ -63,6 +63,7 @@ metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
+EFO = CurieNamespace('EFO', 'http://identifiers.org/efo/')
 HP = CurieNamespace('HP', 'http://purl.obolibrary.org/obo/HP_')
 MONDO = CurieNamespace('MONDO', 'http://purl.obolibrary.org/obo/MONDO_')
 NCIT = CurieNamespace('NCIT', 'http://purl.obolibrary.org/obo/NCIT_')
@@ -2077,22 +2078,80 @@ class EnumPlatform(EnumDefinitionImpl):
     """
     illumina = PermissibleValue(
         text="illumina",
-        title="Illumina")
-    pacbio = PermissibleValue(
-        text="pacbio",
-        title="PacBio")
-    ont = PermissibleValue(
-        text="ont",
-        title="ONT")
-    illumina_epic = PermissibleValue(
-        text="illumina_epic",
-        title="Illumina Infinium HumanMethylationEPICv2")
-    other = PermissibleValue(
-        text="other",
-        title="Other")
+        title="Illumina",
+        description="Illumina Platform")
+    long_read = PermissibleValue(
+        text="long_read",
+        description="Single-molecule sequencing technologies (PacBio, ONT).")
     unknown = PermissibleValue(
         text="unknown",
-        title="Unknown")
+        title="Unknown",
+        description="Unknown platform")
+    novaseq_x = PermissibleValue(
+        text="novaseq_x",
+        title="NovaSeq X Series",
+        description="Ultra-high throughput (NovaSeq X, X Plus).",
+        meaning=EFO["EFO_0022840"])
+    novaseq_6000 = PermissibleValue(
+        text="novaseq_6000",
+        title="NovaSeq 6000",
+        description="Standard high-throughput production platform.",
+        meaning=EFO["EFO_0008637"])
+    nextseq_1000 = PermissibleValue(
+        text="nextseq_1000",
+        title="NextSeq 1000",
+        description="Mid-range sequencing (P1, P2, P3 flowcells).",
+        meaning=EFO["EFO_0010962"])
+    nextseq_2000 = PermissibleValue(
+        text="nextseq_2000",
+        title="NextSeq 1000-2000",
+        description="Mid-range sequencing (P1, P2, P3 flowcells).",
+        meaning=EFO["EFO_0010963"])
+    nextseq_500 = PermissibleValue(
+        text="nextseq_500",
+        title="NextSeq 500_550",
+        description="Older mid-range 2-channel systems.",
+        meaning=EFO["EFO_0009173"])
+    nextseq_550 = PermissibleValue(
+        text="nextseq_550",
+        title="NextSeq 550",
+        description="Older mid-range 2-channel systems.",
+        meaning=EFO["EFO_0008566"])
+    miseq = PermissibleValue(
+        text="miseq",
+        title="MiSeq Series",
+        description="Benchtop low-throughput (MiSeq, MiSeqDx).")
+    miniseq_iseq = PermissibleValue(
+        text="miniseq_iseq",
+        title="MiniSeq iSeq",
+        description="Smallest entry-level sequencers.")
+    iscan_system = PermissibleValue(
+        text="iscan_system",
+        description="Hardware for Infinium arrays (EPIC, GSA).")
+    pacbio_revio = PermissibleValue(
+        text="pacbio_revio",
+        title="PacBio  Revio",
+        description="Current flagship high-throughput HiFi system.")
+    pacbio_sequel_iie = PermissibleValue(
+        text="pacbio_sequel_iie",
+        title="PacBio Sequel IIe",
+        description="Reliable mid-to-high throughput HiFi system.")
+    pacbio_onso = PermissibleValue(
+        text="pacbio_onso",
+        title="PacBio Onso",
+        description="Short-read SBB (Sequencing by Binding) platform from PacBio.")
+    ont_promethion = PermissibleValue(
+        text="ont_promethion",
+        title="ONT PromethION",
+        description="Ultra-high throughput scalable nanopore system.")
+    ont_gridion = PermissibleValue(
+        text="ont_gridion",
+        title="ONT GridION",
+        description="Benchtop nanopore system running up to 5 flow cells.")
+    ont_minion = PermissibleValue(
+        text="ont_minion",
+        title="ONT MiniION",
+        description="Portable, pocket-sized nanopore sequencer.")
 
     _defn = EnumDefinition(
         name="EnumPlatform",

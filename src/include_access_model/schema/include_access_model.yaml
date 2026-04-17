@@ -25,7 +25,7 @@ prefixes:
   mesh: http://id.nlm.nih.gov/mesh/
   NCIT: http://purl.obolibrary.org/obo/NCIT_
   PATO: http://purl.obolibrary.org/obo/PATO_
-  EFO: http://www.ebi.ac.uk/efo
+  EFO: http://identifiers.org/efo/
 
 default_prefix: includedcc
 default_range: string

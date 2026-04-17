@@ -85,7 +85,9 @@ linkml_meta = LinkMLMeta({'default_prefix': 'includedcc',
      'imports': ['linkml:types'],
      'license': 'MIT',
      'name': 'include-access-model',
-     'prefixes': {'HP': {'prefix_prefix': 'HP',
+     'prefixes': {'EFO': {'prefix_prefix': 'EFO',
+                          'prefix_reference': 'http://identifiers.org/efo/'},
+                  'HP': {'prefix_prefix': 'HP',
                          'prefix_reference': 'http://purl.obolibrary.org/obo/HP_'},
                   'MONDO': {'prefix_prefix': 'MONDO',
                             'prefix_reference': 'http://purl.obolibrary.org/obo/MONDO_'},
@@ -478,11 +480,77 @@ class EnumPlatform(str, Enum):
     names of instrument or platforms used for assay data generation
     """
     Illumina = "illumina"
-    PacBio = "pacbio"
-    ONT = "ont"
-    Illumina_Infinium_HumanMethylationEPICv2 = "illumina_epic"
-    Other = "other"
+    """
+    Illumina Platform
+    """
+    long_read = "long_read"
+    """
+    Single-molecule sequencing technologies (PacBio, ONT).
+    """
     Unknown = "unknown"
+    """
+    Unknown platform
+    """
+    NovaSeq_X_Series = "novaseq_x"
+    """
+    Ultra-high throughput (NovaSeq X, X Plus).
+    """
+    NovaSeq_6000 = "novaseq_6000"
+    """
+    Standard high-throughput production platform.
+    """
+    NextSeq_1000 = "nextseq_1000"
+    """
+    Mid-range sequencing (P1, P2, P3 flowcells).
+    """
+    NextSeq_1000_2000 = "nextseq_2000"
+    """
+    Mid-range sequencing (P1, P2, P3 flowcells).
+    """
+    NextSeq_500_550 = "nextseq_500"
+    """
+    Older mid-range 2-channel systems.
+    """
+    NextSeq_550 = "nextseq_550"
+    """
+    Older mid-range 2-channel systems.
+    """
+    MiSeq_Series = "miseq"
+    """
+    Benchtop low-throughput (MiSeq, MiSeqDx).
+    """
+    MiniSeq_iSeq = "miniseq_iseq"
+    """
+    Smallest entry-level sequencers.
+    """
+    iscan_system = "iscan_system"
+    """
+    Hardware for Infinium arrays (EPIC, GSA).
+    """
+    PacBio_Revio = "pacbio_revio"
+    """
+    Current flagship high-throughput HiFi system.
+    """
+    PacBio_Sequel_IIe = "pacbio_sequel_iie"
+    """
+    Reliable mid-to-high throughput HiFi system.
+    """
+    PacBio_Onso = "pacbio_onso"
+    """
+    Short-read SBB (Sequencing by Binding) platform from PacBio.
+    """
+    ONT_PromethION = "ont_promethion"
+    """
+    Ultra-high throughput scalable nanopore system.
+    """
+    ONT_GridION = "ont_gridion"
+    """
+    Benchtop nanopore system running up to 5 flow cells.
+    """
+    ONT_MiniION = "ont_minion"
+    """
+    Portable, pocket-sized nanopore sequencer.
+    """
 
 
 
