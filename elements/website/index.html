@@ -387,7 +387,7 @@
 
 
 <h1 id="slot-website-website">Slot: Website (website)</h1>
-<p><em>Website for the Record.</em></p>
+<p><em>Website with more information about this entity.</em></p>
 <p>URI: <a href="https://includedcc.org/include-access-model/website">includedcc:website</a>
 Alias: website</p>
 <!-- no inheritance hierarchy -->
@@ -403,6 +403,11 @@ Alias: website</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
+<td>An organization that can provide access to specimen for further analysis</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Study/">Study</a></td>
 <td>Study Metadata</td>
 <td>no</td>
@@ -413,8 +418,8 @@ Alias: website</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
-<td>An organization that can provide access to specimen for further analysis</td>
+<td><a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>The access policy that describes the controls around use of data</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -451,12 +456,13 @@ Alias: website</p>
 <details>
 
 <pre><code class="language-yaml">name: website
-description: Website for the Record.
+description: Website with more information about this entity.
 title: Website
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
 alias: website
 domain_of:
+- AccessPolicy
 - Study
 - VirtualBiorepository
 - Publication

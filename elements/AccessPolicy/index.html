@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://include-dcc.github.io/include-access-model/elements/ActivityDefinition/" rel="canonical"/>
+<link href="https://include-dcc.github.io/include-access-model/elements/AccessPolicy/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Class: Activity Definition (ActivityDefinition) - include-access-model</title>
+<title>Class: Access Policy (AccessPolicy) - include-access-model</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-activity-definition-activitydefinition">
+<a class="md-skip" href="#class-access-policy-accesspolicy">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Activity Definition (ActivityDefinition)
+              Class: Access Policy (AccessPolicy)
             
           </span>
 </div>
@@ -159,13 +159,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      Inheritance
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       Slots
@@ -236,43 +229,47 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-activity-definition-activitydefinition">Class: Activity Definition (ActivityDefinition)</h1>
-<p><em>A definition of an activity in this study, eg, a biospecimen collection, intervention, survey, or assessment.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/ActivityDefinition">includedcc:ActivityDefinition</a></p>
+<h1 id="class-access-policy-accesspolicy">Class: Access Policy (AccessPolicy)</h1>
+<p><em>The access policy that describes the controls around use of data</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/AccessPolicy">includedcc:AccessPolicy</a></p>
 <div class="mermaid"> classDiagram
-    class ActivityDefinition
-    click ActivityDefinition href "../ActivityDefinition/"
-      Record &lt;|-- ActivityDefinition
-        click Record href "../Record/"
+    class AccessPolicy
+    click AccessPolicy href "../AccessPolicy/"
+      AccessPolicy : access_description
 
-      ActivityDefinition : access_policy_id
+      AccessPolicy : access_policy_id
 
+      AccessPolicy : data_use_accession
 
-
-
-
-        ActivityDefinition --&gt; "0..1" AccessPolicy : access_policy_id
-        click AccessPolicy href "../AccessPolicy/"
+      AccessPolicy : data_use_modifier
 
 
 
-      ActivityDefinition : activity_definition_id
 
-      ActivityDefinition : description
 
-      ActivityDefinition : external_id
+        AccessPolicy --&gt; "0..1" EnumDataUseModifier : data_use_modifier
+        click EnumDataUseModifier href "../EnumDataUseModifier/"
 
-      ActivityDefinition : name
+
+
+      AccessPolicy : data_use_permission
+
+
+
+
+
+        AccessPolicy --&gt; "1" EnumDataUsePermission : data_use_permission
+        click EnumDataUsePermission href "../EnumDataUsePermission/"
+
+
+
+      AccessPolicy : disease_limitation
+
+      AccessPolicy : website
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../Record/">Record</a><ul>
-<li><strong>ActivityDefinition</strong></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -285,34 +282,46 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../activity_definition_id/">activity_definition_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Unique identifier for this Activity Definition</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Name of the entity</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Description for this entity</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../Record/">Record</a></td>
-</tr>
-<tr>
 <td><a href="../access_policy_id/">access_policy_id</a></td>
-<td>0..1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
 <td>Global identifier for the access policy that applies to this row of data</td>
-<td><a href="../Record/">Record</a></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../data_use_accession/">data_use_accession</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Accession used to provision access to the record, eg, a dbGaP phsID</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../data_use_permission/">data_use_permission</a></td>
+<td>1 <br/> <a href="../EnumDataUsePermission/">EnumDataUsePermission</a></td>
+<td>Broad category of restrictions on data use</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../data_use_modifier/">data_use_modifier</a></td>
+<td>0..1 <br/> <a href="../EnumDataUseModifier/">EnumDataUseModifier</a></td>
+<td>Additional modifiers that limit data use</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../disease_limitation/">disease_limitation</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>If the access is limited to a specific disease purpose, it is specified here</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../access_description/">access_description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Any additional information to support access requests</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../website/">website</a></td>
+<td>0..1 <br/> <a href="../Uri/">Uri</a></td>
+<td>Website with more information about this entity</td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -328,10 +337,124 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../EncounterDefinition/">EncounterDefinition</a></td>
-<td><a href="../activity_definition_id/">activity_definition_id</a></td>
+<td><a href="../Record/">Record</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>range</td>
-<td><a href="./">ActivityDefinition</a></td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Study/">Study</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../DOI/">DOI</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Investigator/">Investigator</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Publication/">Publication</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Subject/">Subject</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Family/">Family</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyMember/">FamilyMember</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Sample/">Sample</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Encounter/">Encounter</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../EncounterDefinition/">EncounterDefinition</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../File/">File</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
 </tr>
 </tbody>
 </table>
@@ -351,11 +474,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:ActivityDefinition</td>
+<td>includedcc:AccessPolicy</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:ActivityDefinition</td>
+<td>includedcc:AccessPolicy</td>
 </tr>
 </tbody>
 </table>
@@ -363,19 +486,21 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: ActivityDefinition
-description: A definition of an activity in this study, eg, a biospecimen collection,
-  intervention, survey, or assessment.
-title: Activity Definition
+<pre><code class="language-yaml">name: AccessPolicy
+description: The access policy that describes the controls around use of data
+title: Access Policy
 from_schema: https://includedcc.org/include-access-model
-is_a: Record
 slots:
-- activity_definition_id
-- name
-- description
+- access_policy_id
+- data_use_accession
+- data_use_permission
+- data_use_modifier
+- disease_limitation
+- access_description
+- website
 slot_usage:
-  activity_definition_id:
-    name: activity_definition_id
+  access_policy_id:
+    name: access_policy_id
     identifier: true
     range: string
     required: true
@@ -384,76 +509,17 @@ slot_usage:
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: ActivityDefinition
-description: A definition of an activity in this study, eg, a biospecimen collection,
-  intervention, survey, or assessment.
-title: Activity Definition
+<pre><code class="language-yaml">name: AccessPolicy
+description: The access policy that describes the controls around use of data
+title: Access Policy
 from_schema: https://includedcc.org/include-access-model
-is_a: Record
 slot_usage:
-  activity_definition_id:
-    name: activity_definition_id
+  access_policy_id:
+    name: access_policy_id
     identifier: true
     range: string
     required: true
 attributes:
-  activity_definition_id:
-    name: activity_definition_id
-    description: Unique identifier for this Activity Definition.
-    title: Activity Definition ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    identifier: true
-    alias: activity_definition_id
-    owner: ActivityDefinition
-    domain_of:
-    - EncounterDefinition
-    - ActivityDefinition
-    range: string
-    required: true
-  name:
-    name: name
-    description: Name of the entity.
-    title: Name
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: name
-    owner: ActivityDefinition
-    domain_of:
-    - VirtualBiorepository
-    - Investigator
-    - EncounterDefinition
-    - ActivityDefinition
-    - Dataset
-    range: string
-    required: false
-  description:
-    name: description
-    description: Description for this entity.
-    title: Description
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: description
-    owner: ActivityDefinition
-    domain_of:
-    - EncounterDefinition
-    - ActivityDefinition
-    - Dataset
-    range: string
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems like dbGaP
-    title: External Identifiers
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: external_id
-    owner: ActivityDefinition
-    domain_of:
-    - Record
-    range: uriorcurie
-    required: false
-    multivalued: true
   access_policy_id:
     name: access_policy_id
     description: Global identifier for the access policy that applies to this row
@@ -461,12 +527,85 @@ attributes:
     title: Access Policy ID
     from_schema: https://includedcc.org/include-access-model
     rank: 1000
+    identifier: true
     alias: access_policy_id
-    owner: ActivityDefinition
+    owner: AccessPolicy
     domain_of:
     - Record
     - AccessPolicy
-    range: AccessPolicy
+    range: string
+    required: true
+  data_use_accession:
+    name: data_use_accession
+    description: Accession used to provision access to the record, eg, a dbGaP phsID.
+    title: Data Use Accession
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: data_use_accession
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: uriorcurie
+  data_use_permission:
+    name: data_use_permission
+    description: Broad category of restrictions on data use.
+    title: Data Use Permission
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: data_use_permission
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumDataUsePermission
+    required: true
+  data_use_modifier:
+    name: data_use_modifier
+    description: Additional modifiers that limit data use.
+    title: Data Use Modifier
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: data_use_modifier
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumDataUseModifier
+  disease_limitation:
+    name: disease_limitation
+    description: If the access is limited to a specific disease purpose, it is specified
+      here.
+    title: Data Use Disease Limitation
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: disease_limitation
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+  access_description:
+    name: access_description
+    description: Any additional information to support access requests.
+    title: Access Description
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: access_description
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+  website:
+    name: website
+    description: Website with more information about this entity.
+    title: Website
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: website
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    - Study
+    - VirtualBiorepository
+    - Publication
+    range: uri
 
 </code></pre>
 </details>

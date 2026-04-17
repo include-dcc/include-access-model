@@ -245,6 +245,17 @@
       Record &lt;|-- Encounter
         click Record href "../Record/"
 
+      Encounter : access_policy_id
+
+
+
+
+
+        Encounter --&gt; "0..1" AccessPolicy : access_policy_id
+        click AccessPolicy href "../AccessPolicy/"
+
+
+
       Encounter : age_at_event
 
       Encounter : encounter_definition_id
@@ -321,6 +332,12 @@
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../Record/">Record</a></td>
+</tr>
+<tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>0..1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Global identifier for the access policy that applies to this row of data</td>
 <td><a href="../Record/">Record</a></td>
 </tr>
 </tbody>
@@ -487,6 +504,19 @@ attributes:
     range: uriorcurie
     required: false
     multivalued: true
+  access_policy_id:
+    name: access_policy_id
+    description: Global identifier for the access policy that applies to this row
+      of data.
+    title: Access Policy ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: access_policy_id
+    owner: Encounter
+    domain_of:
+    - Record
+    - AccessPolicy
+    range: AccessPolicy
 
 </code></pre>
 </details>

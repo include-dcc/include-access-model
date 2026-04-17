@@ -161,6 +161,15 @@
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
 <div class="mermaid">erDiagram
+AccessPolicy {
+    string access_policy_id  
+    uriorcurie data_use_accession  
+    EnumDataUsePermission data_use_permission  
+    EnumDataUseModifier data_use_modifier  
+    string disease_limitation  
+    string access_description  
+    uri website  
+}
 ActivityDefinition {
     string activity_definition_id  
     string name  
@@ -328,39 +337,59 @@ VirtualBiorepository {
     uriorcurieList external_id  
 }
 
+ActivityDefinition ||--|o AccessPolicy : "access_policy_id"
+Aliquot ||--|o AccessPolicy : "access_policy_id"
 Aliquot ||--|o Concept : "concentration_unit"
 Aliquot ||--|o Concept : "quantity_unit"
 Aliquot ||--|o Sample : "sample_id"
+BiospecimenCollection ||--|o AccessPolicy : "access_policy_id"
 BiospecimenCollection ||--|o Encounter : "encounter_id"
+DOI ||--|o AccessPolicy : "access_policy_id"
 Dataset ||--|o DOI : "do_id"
 Dataset ||--}o File : "file_id"
 Dataset ||--}o Publication : "publication"
+Demographics ||--|o AccessPolicy : "access_policy_id"
 Demographics ||--|| Subject : "subject_id"
+Encounter ||--|o AccessPolicy : "access_policy_id"
 Encounter ||--|o EncounterDefinition : "encounter_definition_id"
 Encounter ||--|o Subject : "subject_id"
+EncounterDefinition ||--|o AccessPolicy : "access_policy_id"
 EncounterDefinition ||--}o ActivityDefinition : "activity_definition_id"
+Family ||--|o AccessPolicy : "access_policy_id"
+FamilyMember ||--|o AccessPolicy : "access_policy_id"
 FamilyMember ||--|| Family : "family_id"
 FamilyMember ||--|| Subject : "subject_id"
+FamilyRelationship ||--|o AccessPolicy : "access_policy_id"
 FamilyRelationship ||--|| Subject : "family_member_id"
 FamilyRelationship ||--|| Subject : "subject_id"
+File ||--|o AccessPolicy : "access_policy_id"
 File ||--|o FileHash : "hash"
 File ||--}o Sample : "sample_id"
 File ||--}o Subject : "subject_id"
+Investigator ||--|o AccessPolicy : "access_policy_id"
+Publication ||--|o AccessPolicy : "access_policy_id"
+Record ||--|o AccessPolicy : "access_policy_id"
+Sample ||--|o AccessPolicy : "access_policy_id"
 Sample ||--|o BiospecimenCollection : "biospecimen_collection_id"
 Sample ||--|o Concept : "quantity_unit"
 Sample ||--|o Sample : "parent_sample_id"
+Study ||--|o AccessPolicy : "access_policy_id"
 Study ||--|o DOI : "do_id"
 Study ||--|o Study : "parent_study"
 Study ||--}o Publication : "publication"
 Study ||--}| Investigator : "contact"
 Study ||--}| Investigator : "principal_investigator"
+StudyMetadata ||--|o AccessPolicy : "access_policy_id"
 StudyMetadata ||--|o VirtualBiorepository : "vbr_id"
 StudyMetadata ||--|| Study : "study_id"
+Subject ||--|o AccessPolicy : "access_policy_id"
+SubjectAssertion ||--|o AccessPolicy : "access_policy_id"
 SubjectAssertion ||--|o Concept : "value_unit"
 SubjectAssertion ||--|o Encounter : "encounter_id"
 SubjectAssertion ||--|o Subject : "subject_id"
 SubjectAssertion ||--}o Concept : "concept"
 SubjectAssertion ||--}o Concept : "value_concept"
+VirtualBiorepository ||--|o AccessPolicy : "access_policy_id"
 VirtualBiorepository ||--}| Investigator : "contact"
 
 </div>

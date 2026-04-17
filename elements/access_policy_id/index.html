@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/name/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/access_policy_id/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Slot: Name (name) - include-access-model</title>
+        <title>Slot: Access Policy ID (access_policy_id) - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name-name" class="md-skip">
+        <a href="#slot-access-policy-id-access_policy_id" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Name (name)
+              Slot: Access Policy ID (access_policy_id)
             
           </span>
         </div>
@@ -386,10 +386,10 @@
   
 
 
-<h1 id="slot-name-name">Slot: Name (name)</h1>
-<p><em>Name of the entity.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/name">includedcc:name</a>
-Alias: name</p>
+<h1 id="slot-access-policy-id-access_policy_id">Slot: Access Policy ID (access_policy_id)</h1>
+<p><em>Global identifier for the access policy that applies to this row of data.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/access_policy_id">includedcc:access_policy_id</a>
+Alias: access_policy_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -403,8 +403,78 @@ Alias: name</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../Subject/">Subject</a></td>
+<td>This entity is the subject about which data or references are recorded</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Record/">Record</a></td>
+<td>One row / entity within the database</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Encounter/">Encounter</a></td>
+<td>An event at which data was collected about a participant, an intervention was...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../DOI/">DOI</a></td>
+<td>A DOI is a permanent reference with metadata about a digital object</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
+<td>Assertion about a particular Subject</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../File/">File</a></td>
+<td>File</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Sample/">Sample</a></td>
+<td>A functionally equivalent specimen taken from a participant or processed from...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Family/">Family</a></td>
+<td>A group of individuals of some relation who are grouped together in a study</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
+<td>A definition of an activity in this study, eg, a biospecimen collection, inte...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Study/">Study</a></td>
+<td>Study Metadata</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Investigator/">Investigator</a></td>
 <td>An individual who made contributions to the collection, analysis, or sharing ...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>The access policy that describes the controls around use of data</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
+<td>An organization that can provide access to specimen for further analysis</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td>Basic participant demographics summary</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
+<td>A relationship between two Subjects</td>
 <td>no</td>
 </tr>
 <tr>
@@ -413,25 +483,35 @@ Alias: name</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td>Set of files grouped together for release</td>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td>A biospecimen collection event which yields one or more Samples</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
-<td>An organization that can provide access to specimen for further analysis</td>
+<td><a href="../FamilyMember/">FamilyMember</a></td>
+<td>Designates a Subject as a member of a family with a specified role</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
-<td>A definition of an activity in this study, eg, a biospecimen collection, inte...</td>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td>Additional features about studies that may not apply to all studies</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td>A specific tube or amount of a biospecimen associated with a Sample</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Publication/">Publication</a></td>
+<td>Information about a specific publication</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../AccessPolicy/">AccessPolicy</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -449,31 +529,27 @@ Alias: name</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:name</td>
+<td>includedcc:access_policy_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:name</td>
+<td>includedcc:access_policy_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: Name of the entity.
-title: Name
+<pre><code class="language-yaml">name: access_policy_id
+description: Global identifier for the access policy that applies to this row of data.
+title: Access Policy ID
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-alias: name
+alias: access_policy_id
 domain_of:
-- VirtualBiorepository
-- Investigator
-- EncounterDefinition
-- ActivityDefinition
-- Dataset
-range: string
-required: false
+- Record
+- AccessPolicy
+range: AccessPolicy
 
 </code></pre>
 

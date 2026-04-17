@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/name/">
+        <link rel="canonical" href="https://include-dcc.github.io/include-access-model/elements/data_use_permission/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Slot: Name (name) - include-access-model</title>
+        <title>Slot: Data Use Permission (data_use_permission) - include-access-model</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name-name" class="md-skip">
+        <a href="#slot-data-use-permission-data_use_permission" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Name (name)
+              Slot: Data Use Permission (data_use_permission)
             
           </span>
         </div>
@@ -386,10 +386,10 @@
   
 
 
-<h1 id="slot-name-name">Slot: Name (name)</h1>
-<p><em>Name of the entity.</em></p>
-<p>URI: <a href="https://includedcc.org/include-access-model/name">includedcc:name</a>
-Alias: name</p>
+<h1 id="slot-data-use-permission-data_use_permission">Slot: Data Use Permission (data_use_permission)</h1>
+<p><em>Broad category of restrictions on data use.</em></p>
+<p>URI: <a href="https://includedcc.org/include-access-model/data_use_permission">includedcc:data_use_permission</a>
+Alias: data_use_permission</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -403,35 +403,20 @@ Alias: name</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Investigator/">Investigator</a></td>
-<td>An individual who made contributions to the collection, analysis, or sharing ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../EncounterDefinition/">EncounterDefinition</a></td>
-<td>A definition of an encounter type in this study, ie, an event at which data w...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td>Set of files grouped together for release</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
-<td>An organization that can provide access to specimen for further analysis</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
-<td>A definition of an activity in this study, eg, a biospecimen collection, inte...</td>
+<td><a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>The access policy that describes the controls around use of data</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>
+<p>Range: <a href="../EnumDataUsePermission/">EnumDataUsePermission</a></p>
+</li>
+<li>
+<p>Required: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -449,31 +434,27 @@ Alias: name</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>includedcc:name</td>
+<td>includedcc:data_use_permission</td>
 </tr>
 <tr>
 <td>native</td>
-<td>includedcc:name</td>
+<td>includedcc:data_use_permission</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: Name of the entity.
-title: Name
+<pre><code class="language-yaml">name: data_use_permission
+description: Broad category of restrictions on data use.
+title: Data Use Permission
 from_schema: https://includedcc.org/include-access-model
 rank: 1000
-alias: name
+alias: data_use_permission
 domain_of:
-- VirtualBiorepository
-- Investigator
-- EncounterDefinition
-- ActivityDefinition
-- Dataset
-range: string
-required: false
+- AccessPolicy
+range: EnumDataUsePermission
+required: true
 
 </code></pre>
 

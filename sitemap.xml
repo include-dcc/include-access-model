@@ -13,6 +13,10 @@
          <lastmod>2026-04-17</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/AccessPolicy/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/ActivityDefinition/</loc>
          <lastmod>2026-04-17</lastmod>
     </url>
@@ -94,6 +98,14 @@
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/EnumDataCategory/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumDataUseModifier/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/EnumDataUsePermission/</loc>
          <lastmod>2026-04-17</lastmod>
     </url>
     <url>
@@ -277,6 +289,14 @@
          <lastmod>2026-04-17</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/access_description/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/access_policy_id/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/acknowledgments/</loc>
          <lastmod>2026-04-17</lastmod>
     </url>
@@ -389,11 +409,27 @@
          <lastmod>2026-04-17</lastmod>
     </url>
     <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/data_use_accession/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/data_use_modifier/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/data_use_permission/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/dataset_id/</loc>
          <lastmod>2026-04-17</lastmod>
     </url>
     <url>
          <loc>https://include-dcc.github.io/include-access-model/elements/description/</loc>
+         <lastmod>2026-04-17</lastmod>
+    </url>
+    <url>
+         <loc>https://include-dcc.github.io/include-access-model/elements/disease_limitation/</loc>
          <lastmod>2026-04-17</lastmod>
     </url>
     <url>
