@@ -171,6 +171,59 @@ classes:
       subject_id:
         required: true
         identifier: true
+  Family:
+    title: Family
+    description: A group of individuals of some relation who are grouped together in a study.
+    is_a: Record
+    slots:
+    - family_id
+    - family_type
+    - family_description 
+    - consanguinity
+    - family_study_focus
+    slot_usage:
+      family_id:
+        range: string
+        required: true
+        identifier: true
+  FamilyRelationship:
+    title: Family Member Relationship
+    description: A relationship between two Subjects. Directed as follows
+     <family_member_id> <relationship> <subject_id>
+     <Mother's id> <KIN:027 "isBiologicalMotherOf"> <subject_id> 
+    is_a: Record
+    slots:
+    - family_relationship_id
+    - family_member_id
+    - relationship
+    - subject_id
+    slot_usage:
+      family_relationship_id:
+        range: string
+        required: true
+        identifier: true
+      subject_id:
+        required: true
+        description: The family member Subject who is the relationship "object".
+  FamilyMember:
+    title: Family Member
+    description: Designates a Subject as a member of a family with a specified role.
+    is_a: Record
+    slots:
+      - family_id
+      - subject_id
+      - family_role
+    unique_keys:
+      main:
+        description: Family membership is defined by family and subject ids.
+        unique_key_slots:
+          - family_id
+          - subject_id
+    slot_usage:
+      family_id:
+        required: true
+      subject_id:
+        required: true
   SubjectAssertion:
     title: Subject Assertion 
     description: Assertion about a particular Subject. May include Conditions, Measurements, etc.
@@ -594,6 +647,40 @@ slots:
       ucum_code: d
     minimum_value: -365
     maximum_value: 32507
+  family_id:
+    title: Family ID
+    description: Global ID for the Family
+    range: Family
+  family_type: 
+    description: Describes the 'type' of study family, eg, trio.
+    range: EnumFamilyType 
+  family_description: 
+    description: Free text describing the study family, such as potential 
+     inheritance or details about consanguinity
+    range: string 
+  consanguinity: 
+    description: Is there known or suspected consanguinity in this study family?
+    range: EnumConsanguinityAssertion
+  family_study_focus: 
+    description: The specific focus of the investigation, eg, a condition. 
+    range: uriorcurie 
+  family_relationship_id:
+    title: Family Relationship ID
+    description: Global ID for the Family Relationship
+    range: FamilyRelationship
+  family_member_id:
+    description: The family member Subject who is the relationship "subject".
+    required: true
+    range: Subject
+    inlined: false
+  relationship:
+    description: Code definting the relationship predicate. Relationship of the "Family Member" 
+     to the "Subject", eg, mother of.
+    required: true
+    range: uriorcurie
+  family_role: 
+    description: The "role" of this individual in this family. Could include terms like "proband", "mother", etc.
+    range: uriorcurie
   assertion_provenance:
     title: Assertion Provenance
     description: The original source of this assertion
@@ -1069,6 +1156,44 @@ enums:
       unknown:
         title: Unknown
         meaning: NCIT:C17998
+  EnumFamilyType:
+    description: Enumerations describing research family type 
+    is_a: EnumNull
+    permissible_values: 
+      control_only:
+        title: Control-only 
+        description: Control Only 
+      duo: 
+        title: Duo
+        description: Duo 
+      proband_only: 
+        title: Proband-only 
+        description: Proband Only 
+      trio: 
+        title: Trio 
+        description: Trio (2 parents and affected child)
+      trio_plus: 
+        title: Trio+ 
+        description: 2 Parents and 2 or more children
+  EnumConsanguinityAssertion: 
+    description: Asserts known or suspected consanguinity in this study family
+    permissible_values:  
+      not_suspected: 
+        title: not-suspected
+        description: Not suspected 
+        meaning: snomed_ct:428263003
+      suspected: 
+        title: suspected 
+        description: Suspected
+        meaning: snomed_ct:415684004
+      known_present: 
+        title: known-present 
+        description: Known Present
+        meaning: snomed_ct:410515003
+      unknown: 
+        title: unknown 
+        description: Unknown
+        meaning: snomed_ct:261665006
   EnumAssertionProvenance:
     description: Possible data sources for assertions.
     is_a: EnumNull
