@@ -363,12 +363,6 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../study_id/">study_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>INCLUDE Global ID for the study</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../parent_study/">parent_study</a></td>
 <td>0..1 <br/> <a href="./">Study</a></td>
 <td>The parent study for this study, if it is a nested study</td>
@@ -464,6 +458,12 @@
 <td>Global identifier for the access policy that applies to this row of data</td>
 <td><a href="../Record/">Record</a></td>
 </tr>
+<tr>
+<td><a href="../study_id/">study_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>INCLUDE Global ID for the study</td>
+<td><a href="../Record/">Record</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -478,6 +478,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../Record/">Record</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
 <td><a href="./">Study</a></td>
 <td><a href="../parent_study/">parent_study</a></td>
 <td>range</td>
@@ -485,6 +491,108 @@
 </tr>
 <tr>
 <td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../VirtualBiorepository/">VirtualBiorepository</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../DOI/">DOI</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Investigator/">Investigator</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Publication/">Publication</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Subject/">Subject</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Family/">Family</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyMember/">FamilyMember</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Sample/">Sample</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../Encounter/">Encounter</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../EncounterDefinition/">EncounterDefinition</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../ActivityDefinition/">ActivityDefinition</a></td>
+<td><a href="../study_id/">study_id</a></td>
+<td>range</td>
+<td><a href="./">Study</a></td>
+</tr>
+<tr>
+<td><a href="../File/">File</a></td>
 <td><a href="../study_id/">study_id</a></td>
 <td>range</td>
 <td><a href="./">Study</a></td>
@@ -525,7 +633,6 @@ title: Research Study
 from_schema: https://includedcc.org/include-access-model
 is_a: Record
 slots:
-- study_id
 - parent_study
 - study_title
 - study_code
@@ -563,21 +670,6 @@ slot_usage:
     range: string
     required: true
 attributes:
-  study_id:
-    name: study_id
-    description: INCLUDE Global ID for the study
-    title: Study ID
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    identifier: true
-    alias: study_id
-    owner: Study
-    domain_of:
-    - Study
-    - StudyMetadata
-    range: string
-    required: true
-    multivalued: false
   parent_study:
     name: parent_study
     description: The parent study for this study, if it is a nested study.
@@ -787,6 +879,21 @@ attributes:
     - Record
     - AccessPolicy
     range: AccessPolicy
+  study_id:
+    name: study_id
+    description: INCLUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    identifier: true
+    alias: study_id
+    owner: Study
+    domain_of:
+    - Record
+    - StudyMetadata
+    range: string
+    required: true
+    multivalued: false
 
 </code></pre>
 </details>

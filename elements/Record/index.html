@@ -290,6 +290,17 @@
 
       Record : external_id
 
+      Record : study_id
+
+
+
+
+
+        Record --&gt; "0..1" Study : study_id
+        click Study href "../Study/"
+
+
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -340,6 +351,12 @@
 <td>Global identifier for the access policy that applies to this row of data</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../study_id/">study_id</a></td>
+<td>0..1 <br/> <a href="../Study/">Study</a></td>
+<td>INCLUDE Global ID for the study</td>
+<td>direct</td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -378,6 +395,7 @@ abstract: true
 slots:
 - external_id
 - access_policy_id
+- study_id
 
 </code></pre>
 </details>
@@ -416,6 +434,19 @@ attributes:
     - Record
     - AccessPolicy
     range: AccessPolicy
+  study_id:
+    name: study_id
+    description: INCLUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: study_id
+    owner: Record
+    domain_of:
+    - Record
+    - StudyMetadata
+    range: Study
+    multivalued: false
 
 </code></pre>
 </details>

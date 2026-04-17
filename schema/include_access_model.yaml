@@ -906,7 +906,7 @@ slots:
     slot_uri: includedcc:study_id
     owner: StudyMetadata
     domain_of:
-    - Study
+    - Record
     - StudyMetadata
     range: Study
     multivalued: false
@@ -2698,6 +2698,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     class_uri: includedcc:Record
   AccessPolicy:
     name: AccessPolicy
@@ -2730,7 +2731,6 @@ classes:
     slots:
     - external_id
     - access_policy_id
-    - Study_study_id
     - parent_study
     - study_title
     - study_code
@@ -2745,6 +2745,7 @@ classes:
     - acknowledgments
     - citation_statement
     - do_id
+    - Study_study_id
     slot_usage:
       study_id:
         name: study_id
@@ -2792,6 +2793,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - VirtualBiorepository_vbr_id
     - name
     - institution
@@ -2815,6 +2817,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - DOI_do_id
     - bibliographic_reference
     slot_usage:
@@ -2835,6 +2838,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - name
     - institution
     - investigator_title
@@ -2850,6 +2854,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - bibliographic_reference
     - website
     class_uri: includedcc:Publication
@@ -2865,6 +2870,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - Subject_subject_id
     - subject_type
     - organism_type
@@ -2885,6 +2891,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - Demographics_subject_id
     - sex
     - race
@@ -2910,6 +2917,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - Family_family_id
     - family_type
     - family_description
@@ -2933,6 +2941,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - FamilyRelationship_family_relationship_id
     - family_member_id
     - relationship
@@ -2958,6 +2967,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - FamilyMember_family_id
     - FamilyMember_subject_id
     - family_role
@@ -2987,6 +2997,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - SubjectAssertion_assertion_id
     - subject_id
     - encounter_id
@@ -3034,6 +3045,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - Sample_sample_id
     - Sample_biospecimen_collection_id
     - parent_sample_id
@@ -3063,6 +3075,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - BiospecimenCollection_biospecimen_collection_id
     - age_at_collection
     - method
@@ -3087,6 +3100,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - Aliquot_aliquot_id
     - sample_id
     - availablity_status
@@ -3112,6 +3126,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - Encounter_encounter_id
     - subject_id
     - encounter_definition_id
@@ -3136,6 +3151,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - EncounterDefinition_encounter_definition_id
     - name
     - description
@@ -3161,6 +3177,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - ActivityDefinition_activity_definition_id
     - name
     - description
@@ -3181,6 +3198,7 @@ classes:
     slots:
     - external_id
     - access_policy_id
+    - study_id
     - File_file_id
     - File_subject_id
     - File_sample_id
@@ -3245,7 +3263,7 @@ classes:
     class_uri: includedcc:Dataset
 metamodel_version: 1.7.0
 source_file: include_access_model.yaml
-source_file_date: '2026-04-17T16:41:58'
-source_file_size: 41239
-generation_date: '2026-04-17T16:42:08'
+source_file_date: '2026-04-17T16:56:20'
+source_file_size: 41290
+generation_date: '2026-04-17T16:56:30'
 

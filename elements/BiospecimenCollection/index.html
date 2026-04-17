@@ -317,6 +317,17 @@
 
 
 
+      BiospecimenCollection : study_id
+
+
+
+
+
+        BiospecimenCollection --&gt; "0..1" Study : study_id
+        click Study href "../Study/"
+
+
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -389,6 +400,12 @@
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>0..1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
 <td>Global identifier for the access policy that applies to this row of data</td>
+<td><a href="../Record/">Record</a></td>
+</tr>
+<tr>
+<td><a href="../study_id/">study_id</a></td>
+<td>0..1 <br/> <a href="../Study/">Study</a></td>
+<td>INCLUDE Global ID for the study</td>
 <td><a href="../Record/">Record</a></td>
 </tr>
 </tbody>
@@ -589,6 +606,19 @@ attributes:
     - Record
     - AccessPolicy
     range: AccessPolicy
+  study_id:
+    name: study_id
+    description: INCLUDE Global ID for the study
+    title: Study ID
+    from_schema: https://includedcc.org/include-access-model
+    rank: 1000
+    alias: study_id
+    owner: BiospecimenCollection
+    domain_of:
+    - Record
+    - StudyMetadata
+    range: Study
+    multivalued: false
 
 </code></pre>
 </details>

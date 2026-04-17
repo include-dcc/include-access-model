@@ -287,7 +287,6 @@ Sample {
     uriorcurieList external_id  
 }
 Study {
-    string study_id  
     string study_title  
     string study_code  
     string study_short_name  
@@ -298,6 +297,7 @@ Study {
     string acknowledgments  
     string citation_statement  
     uriorcurieList external_id  
+    string study_id  
 }
 StudyMetadata {
     EnumParticipantLifespanStageList participant_lifespan_stage  
@@ -338,41 +338,56 @@ VirtualBiorepository {
 }
 
 ActivityDefinition ||--|o AccessPolicy : "access_policy_id"
+ActivityDefinition ||--|o Study : "study_id"
 Aliquot ||--|o AccessPolicy : "access_policy_id"
 Aliquot ||--|o Concept : "concentration_unit"
 Aliquot ||--|o Concept : "quantity_unit"
 Aliquot ||--|o Sample : "sample_id"
+Aliquot ||--|o Study : "study_id"
 BiospecimenCollection ||--|o AccessPolicy : "access_policy_id"
 BiospecimenCollection ||--|o Encounter : "encounter_id"
+BiospecimenCollection ||--|o Study : "study_id"
 DOI ||--|o AccessPolicy : "access_policy_id"
+DOI ||--|o Study : "study_id"
 Dataset ||--|o DOI : "do_id"
 Dataset ||--}o File : "file_id"
 Dataset ||--}o Publication : "publication"
 Demographics ||--|o AccessPolicy : "access_policy_id"
+Demographics ||--|o Study : "study_id"
 Demographics ||--|| Subject : "subject_id"
 Encounter ||--|o AccessPolicy : "access_policy_id"
 Encounter ||--|o EncounterDefinition : "encounter_definition_id"
+Encounter ||--|o Study : "study_id"
 Encounter ||--|o Subject : "subject_id"
 EncounterDefinition ||--|o AccessPolicy : "access_policy_id"
+EncounterDefinition ||--|o Study : "study_id"
 EncounterDefinition ||--}o ActivityDefinition : "activity_definition_id"
 Family ||--|o AccessPolicy : "access_policy_id"
+Family ||--|o Study : "study_id"
 FamilyMember ||--|o AccessPolicy : "access_policy_id"
+FamilyMember ||--|o Study : "study_id"
 FamilyMember ||--|| Family : "family_id"
 FamilyMember ||--|| Subject : "subject_id"
 FamilyRelationship ||--|o AccessPolicy : "access_policy_id"
+FamilyRelationship ||--|o Study : "study_id"
 FamilyRelationship ||--|| Subject : "family_member_id"
 FamilyRelationship ||--|| Subject : "subject_id"
 File ||--|o AccessPolicy : "access_policy_id"
 File ||--|o FileHash : "hash"
+File ||--|o Study : "study_id"
 File ||--}o Sample : "sample_id"
 File ||--}o Subject : "subject_id"
 Investigator ||--|o AccessPolicy : "access_policy_id"
+Investigator ||--|o Study : "study_id"
 Publication ||--|o AccessPolicy : "access_policy_id"
+Publication ||--|o Study : "study_id"
 Record ||--|o AccessPolicy : "access_policy_id"
+Record ||--|o Study : "study_id"
 Sample ||--|o AccessPolicy : "access_policy_id"
 Sample ||--|o BiospecimenCollection : "biospecimen_collection_id"
 Sample ||--|o Concept : "quantity_unit"
 Sample ||--|o Sample : "parent_sample_id"
+Sample ||--|o Study : "study_id"
 Study ||--|o AccessPolicy : "access_policy_id"
 Study ||--|o DOI : "do_id"
 Study ||--|o Study : "parent_study"
@@ -383,13 +398,16 @@ StudyMetadata ||--|o AccessPolicy : "access_policy_id"
 StudyMetadata ||--|o VirtualBiorepository : "vbr_id"
 StudyMetadata ||--|| Study : "study_id"
 Subject ||--|o AccessPolicy : "access_policy_id"
+Subject ||--|o Study : "study_id"
 SubjectAssertion ||--|o AccessPolicy : "access_policy_id"
 SubjectAssertion ||--|o Concept : "value_unit"
 SubjectAssertion ||--|o Encounter : "encounter_id"
+SubjectAssertion ||--|o Study : "study_id"
 SubjectAssertion ||--|o Subject : "subject_id"
 SubjectAssertion ||--}o Concept : "concept"
 SubjectAssertion ||--}o Concept : "value_concept"
 VirtualBiorepository ||--|o AccessPolicy : "access_policy_id"
+VirtualBiorepository ||--|o Study : "study_id"
 VirtualBiorepository ||--}| Investigator : "contact"
 
 </div>
