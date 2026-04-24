@@ -182,14 +182,19 @@ classes:
       - sex
       - race
       - ethnicity
-      - down_syndrome_status
       - age_at_last_vital_status 
       - vital_status
-      - age_at_first_engagement
     slot_usage:
       subject_id:
         required: true
         identifier: true
+  IncludeParticipant:
+    title: INCLUDE Participant
+    description: Information specific to INCLUDE participants
+    is_a: Demographics
+    slots:
+      - down_syndrome_status
+      - age_at_first_engagement
   Family:
     title: Family
     description: A group of individuals of some relation who are grouped together in a study.
