@@ -54,6 +54,7 @@ jobs:
       - name: Build documentation
         run: |
           just gen-doc
+          uv run mkdocs build -d site
           touch site/.nojekyll
 
       # https://github.com/rossjrw/pr-preview-action
