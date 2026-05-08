@@ -1,0 +1,66 @@
+---
+id: https://includedcc.org/include-access-model
+name: include-access-model
+title: INCLUDE DCC Access Model
+description: LinkML Schema for the internal INCLUDE DCC Access Model
+license: MIT
+see_also:
+  - https://includedcc.github.io/include-access-model
+
+prefixes:
+  includedcc: https://includedcc.org/include-access-model/
+  cam: https://includedcc.org/common-access-model/
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+ # subset of CDC Race and Ethnicity Code Set Version 1.0
+  cdc_race_eth: urn:oid:2.16.840.1.113883.6.238/
+  hl7_null: http://terminology.hl7.org/CodeSystem/v3-NullFlavor/
+  ig_dob_method: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method/
+  igcondtype: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
+  ig2dac: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
+  ig2dat: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type/
+  ig2_biospecimen_availability: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability/
+  snomed_ct: 	http://snomed.info/id/
+  MONDO: http://purl.obolibrary.org/obo/MONDO_
+  HP: http://purl.obolibrary.org/obo/HP_
+  mesh: http://id.nlm.nih.gov/mesh/
+  NCIT: http://purl.obolibrary.org/obo/NCIT_
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  DUO: http://purl.obolibrary.org/obo/DUO_
+
+
+default_prefix: includedcc
+default_range: linkml:string
+
+imports:
+  - linkml:types
+  - common-access-model/src/common_access_model/schema/common_access_model
+
+classes:
+  IncludeParticipant:
+    title: INCLUDE Participant
+    description: Information specific to INCLUDE participants
+    is_a: Demographics
+    slots:
+      - down_syndrome_status
+
+slots: 
+  down_syndrome_status:
+    title: Down Syndrome Status
+    description: Down Syndrome status of participant
+    range: EnumDownSyndromeStatus
+    required: true
+
+enums:
+  EnumDownSyndromeStatus:
+    description: Down syndrome / chromosome 21 status
+    permissible_values:
+      d21:
+        title: D21
+        description: Disomy 21 (euploid)
+        meaning: PATO:0001393
+      t21:
+        title: T21
+        description: Trisomy 21 (Down syndrome)
+        meaning: MONDO:0008608
+

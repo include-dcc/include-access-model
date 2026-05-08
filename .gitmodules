@@ -1,0 +1,6 @@
+[submodule "common-access-model"]
+	path = common-access-model
+	url = https://github.com/include-dcc/common-access-model
+[submodule "src/include_access_model/schema/common-access-model"]
+	path = src/include_access_model/schema/common-access-model
+	url = https://github.com/include-dcc/common-access-model
