@@ -76,7 +76,12 @@ clean: _clean_project
 
 # (Re-)Generate project and documentation locally
 [group('model development')]
-site: gen-project gen-doc
+site: gen-project gen-doc gensqla
+
+# SQL Alchemy model
+[group('model development')]
+gensqla: _gen_sqla
+
 
 # Deploy documentation site to Github Pages
 [group('deployment')]
@@ -113,7 +118,7 @@ gen-python:
 
 # Generate project files including Python data model
 [group('model development')]
-gen-project:
+gen-project: _merge_common
   uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}}
   mv {{dest}}/*.py {{pymodel}}
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
