@@ -5,7 +5,7 @@
 # https://github.com/casey/just/issues/2540
 [group('model development')]
 _merge_common:
-    git submodule update --remote --merge --init
+    git submodule update --init --recursive
 
 [group('model development')]
 _gen_sqla:
