@@ -1,6 +1,6 @@
 subject_id: subject000
-sex: male
-race: 
- - american_indian_or_alaska_native
-ethnicity: hispanic_or_latino
+sex: snomedct:248153007
+race:
+ - CDCREC:1002-5
+ethnicity: CDCREC:2135-2
 down_syndrome_status: d21

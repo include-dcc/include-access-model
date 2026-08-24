@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.12", "3.13", "3.14"]
       fail-fast: false
 
     steps:
@@ -30,7 +30,7 @@ jobs:
         with:
           persist-credentials: false
           submodules: 'recursive' # grab submodules
-          
+
       # https://github.com/astral-sh/setup-uv
       - name: Install uv
         uses: astral-sh/setup-uv@v8.2.0
