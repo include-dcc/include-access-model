@@ -323,6 +323,65 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#permissible-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permissible Values
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slots
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identifier-and-mapping-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identifier and Mapping Information
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Identifier and Mapping Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linkml-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      LinkML Source
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -342,74 +401,72 @@
 
 <h1 id="enum-enumdownsyndromestatus">Enum: EnumDownSyndromeStatus</h1>
 <p><em>Down syndrome / chromosome 21 status</em></p>
-<div data-search-exclude markdown="1">
-
-URI: [includedcc:EnumDownSyndromeStatus](https://includedcc.org/include-access-model/EnumDownSyndromeStatus)
-
-## Permissible Values
-| Value | Meaning | Description | Additional Info |
-| --- | --- | --- | --- |
-| d21 | PATO:0001393 | Disomy 21 (euploid) | Title: D21<br>|
-| t21 | MONDO:0008608 | Trisomy 21 (Down syndrome) | Title: T21<br>|
-
-
-
-
-## Slots
-
-| Name | Description |
-| ---  | --- |
-| [down_syndrome_status](down_syndrome_status.md) | Down Syndrome status of participant |
-
-
-
-
-
-
-
-
-
-
-## Identifier and Mapping Information
-
-
-
-
-
-### Schema Source
-
-
-* from schema: https://includedcc.org/include-access-model
-
-
-
-
-
-
-## LinkML Source
-
+<div>
+<p>URI: <a href="https://includedcc.org/include-access-model/EnumDownSyndromeStatus">includedcc:EnumDownSyndromeStatus</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d21</td>
+<td>PATO:0001393</td>
+<td>Disomy 21 (euploid)</td>
+<td>Title: D21<br></td>
+</tr>
+<tr>
+<td>t21</td>
+<td>MONDO:0008608</td>
+<td>Trisomy 21 (Down syndrome)</td>
+<td>Title: T21<br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../down_syndrome_status/">down_syndrome_status</a></td>
+<td>Down Syndrome status of participant</td>
+</tr>
+</tbody>
+</table>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
+</ul>
+<h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumDownSyndromeStatus
-description: Down syndrome / chromosome 21 status
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-permissible_values:
-  d21:
-    text: d21
-    description: Disomy 21 (euploid)
-    meaning: PATO:0001393
-    title: D21
-  t21:
-    text: t21
-    description: Trisomy 21 (Down syndrome)
-    meaning: MONDO:0008608
-    title: T21
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumDownSyndromeStatus</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Down syndrome / chromosome 21 status</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">d21</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d21</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Disomy 21 (euploid)</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PATO:0001393</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">D21</span>
+<span class="w">  </span><span class="nt">t21</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">t21</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Trisomy 21 (Down syndrome)</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MONDO:0008608</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T21</span>
+</code></pre></div>
 </details>
-
 </div>
 
 

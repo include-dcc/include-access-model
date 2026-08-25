@@ -415,11 +415,11 @@ a semantic version based tag that starts with v: v1.0.0, etc.</p>
 <p>A dumb wrapper recipe has been created with dependencies to trigger the
 production of each of those dbt related artifacts.</p>
 <p>This recipe has been added as a dependency of the standard recipe, <em>site</em>.</p>
-<pre><code class="language-bash">just dbt
-</code></pre>
+<div class="highlight"><pre><span></span><code>just<span class="w"> </span>dbt
+</code></pre></div>
 <p>Example command to add the model to your uv based python project:</p>
-<pre><code class="language-bash">uv add common_access_model@https://github.com/include-dcc/common-access-model/releases/download/0.0.1/common_access_model-0.0.0.post89.dev0+d378cee-py3-none-any.whl
-</code></pre>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>add<span class="w"> </span>common_access_model@https://github.com/include-dcc/common-access-model/releases/download/0.0.1/common_access_model-0.0.0.post89.dev0+d378cee-py3-none-any.whl
+</code></pre></div>
 <p>Please note the <em>releases/download/0.0.1</em> portion of the url. That is to a
 specific version of the model itself, which is by design. You will need to
 update your project each time you want to update to a new model.</p>
@@ -428,14 +428,14 @@ pyproject.toml file using a similar pattern.</p>
 <h3 id="sql-alchemy-model">SQL Alchemy Model</h3>
 <p>Many of our tools rely on the SQL Alchemy models produced using LinkML's SQL
 Alchemy generator. We've added just recipe's to run build these:</p>
-<pre><code class="language-bash">just sqla
-</code></pre>
+<div class="highlight"><pre><span></span><code>just<span class="w"> </span>sqla
+</code></pre></div>
 <p>The resulting file is found inside <em>project/sqlalchemy/{model_name}.py</em></p>
 <h3 id="data-dictionary-csv-files">Data Dictionary csv files</h3>
 <p>The pipeline utitilies created by the FTD team rely on csv data dictionaries to
 the target .sql files.</p>
-<pre><code class="language-bash">just _gen_ftddd
-</code></pre>
+<div class="highlight"><pre><span></span><code>just<span class="w"> </span>_gen_ftddd
+</code></pre></div>
 <p>Resulting csv files can be found inside: <em>project/data-dictionary/*.csv</em></p>
 <p>Each class from the model and any of the SQL specific join tables will be found
 in their own file, conforming to the

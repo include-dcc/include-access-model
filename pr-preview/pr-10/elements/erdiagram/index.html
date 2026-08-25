@@ -168,7 +168,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
-<div class="mermaid">erDiagram
+<pre class="mermaid"><code>erDiagram
 AccessPolicy {
     string access_description  
     coGlobalID access_policy_id  
@@ -439,8 +439,7 @@ SubjectAssertion ||--}o Concept : "concept, value_concept"
 VirtualBiorepository ||--|o AccessPolicy : "access_policy_id"
 VirtualBiorepository ||--|o Study : "study_id"
 VirtualBiorepository ||--}| Investigator : "contact"
-
-</div>
+</code></pre>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
@@ -467,6 +466,5 @@ VirtualBiorepository ||--}| Investigator : "contact"
 </div>
 <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
 <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
-<script type="module">import mermaid from "https://unpkg.com/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
-mermaid.initialize({});</script></body>
+</body>
 </html>
