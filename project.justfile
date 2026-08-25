@@ -25,4 +25,4 @@ gen-dbtmodel:
 
 [group('model development')]
 update-cam:
-  uv run update-cam -d src/include_access_model/schema/upstream-models
+  uv run update-cam -l src/include_access_model/schema/include_access_model.yaml -d src/include_access_model/schema/upstream-models
