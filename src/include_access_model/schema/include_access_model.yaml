@@ -1,11 +1,10 @@
----
 id: https://includedcc.org/include-access-model
 name: include-access-model
 title: INCLUDE DCC Access Model
 description: LinkML Schema for the internal INCLUDE DCC Access Model
 license: MIT
 see_also:
-  - https://includedcc.github.io/include-access-model
+- https://includedcc.github.io/include-access-model
 
 prefixes:
   includedcc: https://includedcc.org/include-access-model/
@@ -85,15 +84,14 @@ default_prefix: includedcc
 default_range: linkml:string
 
 imports:
-  - upstream-models/common_access_model
-
+- upstream-models/common_access_model-0.0.7
 classes:
   IncludeParticipant:
     title: INCLUDE Participant
     description: Information specific to INCLUDE participants
     is_a: Demographics
     slots:
-      - down_syndrome_status
+    - down_syndrome_status
 
 slots:
   down_syndrome_status:
