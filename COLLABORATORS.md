@@ -1,4 +1,4 @@
-## Welcome to the Kids First Access Model 🚀
+## Welcome to the INCLUDE Access Model 🚀
 
 This repository serves as a downstream model designed to specialize the
 [Common Access Model](https://github.com/include-dcc/common-access-model). A
@@ -6,7 +6,7 @@ pinned version of this upstream model is captured in
 src/kf_access_model/schema/upstream-models/common_access_model*.yaml.
 
 The purpose of this model is to build out a program-specific extension (or
-profile) by importing the core elements and layering the Kids First unique data
+profile) by importing the core elements and layering the INCLUDE unique data
 requirements on top.
 
 ## Key Integration Guidelines
