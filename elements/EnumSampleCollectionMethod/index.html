@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -306,6 +328,15 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enumeration-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enumeration Source
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#slots" class="md-nav__link">
@@ -369,8 +400,14 @@
 
 
 <h1 id="enum-enumsamplecollectionmethod">Enum: EnumSampleCollectionMethod</h1>
-<p><em>The approach used to collect the biospecimen. <a href="https://loinc.org">LOINC</a> is recommended.</em></p>
+<p><em>The approach used to collect the biospecimen.</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumSampleCollectionMethod">includedcc:EnumSampleCollectionMethod</a></p>
+<h2 id="enumeration-source">Enumeration Source</h2>
+<p><strong>Reachable From:</strong>
+- <strong>Source:</strong> NONE
+- <strong>Nodes:</strong> snomedct:17636008
+- <strong>Via:</strong> rdfs:subClassOf</p>
 <p><em>This is a dynamic enum</em></p>
 <h2 id="slots">Slots</h2>
 <table>
@@ -390,26 +427,34 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumSampleCollectionMethod
-description: The approach used to collect the biospecimen. [LOINC](https://loinc.org)
-  is recommended.
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumSampleCollectionMethod</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The approach used to collect the biospecimen.</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">reachable_from</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">source_ontology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioregistry:snomedct</span>
+<span class="w">  </span><span class="nt">source_nodes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:17636008</span>
+<span class="w">  </span><span class="nt">relationship_types</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rdfs:subClassOf</span>
+<span class="w">  </span><span class="nt">is_direct</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">include_self</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

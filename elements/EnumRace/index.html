@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -311,15 +333,6 @@
   <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       Permissible Values
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    <span class="md-ellipsis">
-      Slots
     </span>
   </a>
   
@@ -379,6 +392,7 @@
 
 <h1 id="enum-enumrace">Enum: EnumRace</h1>
 <p><em>Participant Race</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumRace">includedcc:EnumRace</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -387,170 +401,102 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>american_indian_or_alaska_native</td>
-<td>NCIT:C41259</td>
+<td>CDCREC:1002-5</td>
+<td>None</td>
 <td></td>
+<td>Title: American Indian or Alaska Native<br></td>
 </tr>
 <tr>
-<td>asian</td>
-<td>NCIT:C41260</td>
+<td>CDCREC:2028-9</td>
+<td>None</td>
 <td></td>
+<td>Title: Asian<br></td>
 </tr>
 <tr>
-<td>black_or_african_american</td>
-<td>NCIT:C16352</td>
+<td>CDCREC:2054-5</td>
+<td>None</td>
 <td></td>
+<td>Title: Black or African American<br></td>
 </tr>
 <tr>
-<td>more_than_one_race</td>
-<td>NCIT:C67109</td>
+<td>CDCREC:2076-8</td>
+<td>None</td>
 <td></td>
+<td>Title: Native Hawaiian or Other Pacific Islander<br></td>
 </tr>
 <tr>
-<td>native_hawaiian_or_other_pacific_islander</td>
-<td>NCIT:C41219</td>
+<td>CDCREC:2106-3</td>
+<td>None</td>
 <td></td>
+<td>Title: White<br></td>
 </tr>
 <tr>
-<td>other</td>
-<td>NCIT:C17649</td>
+<td>CDCREC:2118-8</td>
+<td>None</td>
 <td></td>
-</tr>
-<tr>
-<td>white</td>
-<td>NCIT:C41261</td>
-<td></td>
-</tr>
-<tr>
-<td>prefer_not_to_answer</td>
-<td>NCIT:C132222</td>
-<td></td>
-</tr>
-<tr>
-<td>unknown</td>
-<td>NCIT:C17998</td>
-<td></td>
-</tr>
-<tr>
-<td>east_asian</td>
-<td>NCIT:C161419</td>
-<td>UK only; do not use for US data</td>
-</tr>
-<tr>
-<td>latin_american</td>
-<td>NCIT:C126531</td>
-<td>UK only; do not use for US data</td>
-</tr>
-<tr>
-<td>middle_eastern_or_north_african</td>
-<td>NCIT:C43866</td>
-<td>UK only; do not use for US data</td>
-</tr>
-<tr>
-<td>south_asian</td>
-<td>NCIT:C41263</td>
-<td>UK only; do not use for US data</td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../race/">race</a></td>
-<td>Race of Participant</td>
+<td>Title: Middle Eastern or North African<br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumRace
-description: Participant Race
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-permissible_values:
-  american_indian_or_alaska_native:
-    text: american_indian_or_alaska_native
-    meaning: NCIT:C41259
-    title: American Indian or Alaska Native
-  asian:
-    text: asian
-    meaning: NCIT:C41260
-    title: Asian
-  black_or_african_american:
-    text: black_or_african_american
-    meaning: NCIT:C16352
-    title: Black or African American
-  more_than_one_race:
-    text: more_than_one_race
-    meaning: NCIT:C67109
-    title: More than one race
-  native_hawaiian_or_other_pacific_islander:
-    text: native_hawaiian_or_other_pacific_islander
-    meaning: NCIT:C41219
-    title: Native Hawaiian or Other Pacific Islander
-  other:
-    text: other
-    meaning: NCIT:C17649
-    title: Other
-  white:
-    text: white
-    meaning: NCIT:C41261
-    title: White
-  prefer_not_to_answer:
-    text: prefer_not_to_answer
-    meaning: NCIT:C132222
-    title: Prefer not to answer
-  unknown:
-    text: unknown
-    meaning: NCIT:C17998
-    title: Unknown
-  east_asian:
-    text: east_asian
-    description: UK only; do not use for US data
-    meaning: NCIT:C161419
-    title: East Asian
-  latin_american:
-    text: latin_american
-    description: UK only; do not use for US data
-    meaning: NCIT:C126531
-    title: Latin American
-  middle_eastern_or_north_african:
-    text: middle_eastern_or_north_african
-    description: UK only; do not use for US data
-    meaning: NCIT:C43866
-    title: Middle Eastern or North African
-  south_asian:
-    text: south_asian
-    description: UK only; do not use for US data
-    meaning: NCIT:C41263
-    title: South Asian
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumRace</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Participant Race</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">CDCREC:1002-5</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:1002-5</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">American Indian or Alaska Native</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">american_indian_or_alaska_native</span>
+<span class="w">  </span><span class="nt">CDCREC:2028-9</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2028-9</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Asian</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">asian</span>
+<span class="w">  </span><span class="nt">CDCREC:2054-5</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2054-5</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Black or African American</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black_or_african_american</span>
+<span class="w">  </span><span class="nt">CDCREC:2076-8</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2076-8</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Hawaiian or Other Pacific Islander</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_hawaiian_or_other_pacific_islander</span>
+<span class="w">  </span><span class="nt">CDCREC:2106-3</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2106-3</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">White</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">white</span>
+<span class="w">  </span><span class="nt">CDCREC:2118-8</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2118-8</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Middle Eastern or North African</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">middle_eastern_or_north_african</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

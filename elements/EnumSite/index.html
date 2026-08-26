@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -308,9 +330,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
+  <a href="#enumeration-source" class="md-nav__link">
     <span class="md-ellipsis">
-      Slots
+      Enumeration Source
     </span>
   </a>
   
@@ -369,47 +391,46 @@
 
 
 <h1 id="enum-enumsite">Enum: EnumSite</h1>
-<p><em>The location of the specimen collection. <a href="https://hl7.org/fhir/R4B/valueset-body-site.html">SNOMED Body Site</a> is recommended.</em></p>
+<p><em>The location of the specimen collection.</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumSite">includedcc:EnumSite</a></p>
+<h2 id="enumeration-source">Enumeration Source</h2>
+<p><strong>Reachable From:</strong>
+- <strong>Source:</strong> NONE
+- <strong>Nodes:</strong> snomedct:442083009
+- <strong>Via:</strong> rdfs:subClassOf</p>
 <p><em>This is a dynamic enum</em></p>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../site/">site</a></td>
-<td>The location of the specimen collection</td>
-</tr>
-</tbody>
-</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumSite
-description: The location of the specimen collection. [SNOMED Body Site](https://hl7.org/fhir/R4B/valueset-body-site.html)
-  is recommended.
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumSite</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The location of the specimen collection.</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">reachable_from</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">source_ontology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioregistry:snomedct</span>
+<span class="w">  </span><span class="nt">source_nodes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:442083009</span>
+<span class="w">  </span><span class="nt">relationship_types</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rdfs:subClassOf</span>
+<span class="w">  </span><span class="nt">is_direct</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">include_self</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

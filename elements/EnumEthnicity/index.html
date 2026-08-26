@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -311,15 +333,6 @@
   <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       Permissible Values
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    <span class="md-ellipsis">
-      Slots
     </span>
   </a>
   
@@ -379,6 +392,7 @@
 
 <h1 id="enum-enumethnicity">Enum: EnumEthnicity</h1>
 <p><em>Participant ethnicity, specific to Hispanic or Latino.</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumEthnicity">includedcc:EnumEthnicity</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -387,85 +401,58 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>hispanic_or_latino</td>
-<td>NCIT:C17459</td>
+<td>CDCREC:2135-2</td>
+<td>None</td>
 <td></td>
+<td>Title: Hispanic or Latino<br></td>
 </tr>
 <tr>
-<td>not_hispanic_or_latino</td>
-<td>NCIT:C41222</td>
+<td>CDCREC:2186-5</td>
+<td>None</td>
 <td></td>
-</tr>
-<tr>
-<td>prefer_not_to_answer</td>
-<td>NCIT:C132222</td>
-<td></td>
-</tr>
-<tr>
-<td>unknown</td>
-<td>NCIT:C17998</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../ethnicity/">ethnicity</a></td>
-<td>Ethnicity of Participant</td>
+<td>Title: Not Hispanic or Latino<br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumEthnicity
-description: Participant ethnicity, specific to Hispanic or Latino.
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-permissible_values:
-  hispanic_or_latino:
-    text: hispanic_or_latino
-    meaning: NCIT:C17459
-    title: Hispanic or Latino
-  not_hispanic_or_latino:
-    text: not_hispanic_or_latino
-    meaning: NCIT:C41222
-    title: Not Hispanic or Latino
-  prefer_not_to_answer:
-    text: prefer_not_to_answer
-    meaning: NCIT:C132222
-    title: Prefer not to answer
-  unknown:
-    text: unknown
-    meaning: NCIT:C17998
-    title: Unknown
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumEthnicity</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Participant ethnicity, specific to Hispanic or Latino.</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">CDCREC:2135-2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2135-2</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hispanic or Latino</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hispanic_or_latino</span>
+<span class="w">  </span><span class="nt">CDCREC:2186-5</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CDCREC:2186-5</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Not Hispanic or Latino</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_hispanic_or_latino</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

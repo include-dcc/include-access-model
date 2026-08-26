@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -311,15 +333,6 @@
   <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       Permissible Values
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    <span class="md-ellipsis">
-      Slots
     </span>
   </a>
   
@@ -379,6 +392,7 @@
 
 <h1 id="enum-enumsex">Enum: EnumSex</h1>
 <p><em>Subject Sex</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumSex">includedcc:EnumSex</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -387,85 +401,58 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>female</td>
-<td>NCIT:C16576</td>
+<td>snomedct:248152002</td>
+<td>None</td>
 <td></td>
+<td>Title: Female<br></td>
 </tr>
 <tr>
-<td>male</td>
-<td>NCIT:C20197</td>
+<td>snomedct:248153007</td>
+<td>None</td>
 <td></td>
-</tr>
-<tr>
-<td>other</td>
-<td>NCIT:C17649</td>
-<td></td>
-</tr>
-<tr>
-<td>unknown</td>
-<td>NCIT:C17998</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../sex/">sex</a></td>
-<td>Sex of Participant</td>
+<td>Title: Male<br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumSex
-description: Subject Sex
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-permissible_values:
-  female:
-    text: female
-    meaning: NCIT:C16576
-    title: Female
-  male:
-    text: male
-    meaning: NCIT:C20197
-    title: Male
-  other:
-    text: other
-    meaning: NCIT:C17649
-    title: Other
-  unknown:
-    text: unknown
-    meaning: NCIT:C17998
-    title: Unknown
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumSex</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Subject Sex</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">snomedct:248152002</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:248152002</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Female</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">female</span>
+<span class="w">  </span><span class="nt">snomedct:248153007</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:248153007</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Male</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">male</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

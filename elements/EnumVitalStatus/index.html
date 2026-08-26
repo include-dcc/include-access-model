@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -311,15 +333,6 @@
   <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       Permissible Values
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    <span class="md-ellipsis">
-      Slots
     </span>
   </a>
   
@@ -379,6 +392,7 @@
 
 <h1 id="enum-enumvitalstatus">Enum: EnumVitalStatus</h1>
 <p><em>Descriptions of a Subject's vital status</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumVitalStatus">includedcc:EnumVitalStatus</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -387,68 +401,58 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>dead</td>
-<td>NCIT:C28554</td>
+<td>snomedct:419099009</td>
+<td>None</td>
 <td></td>
+<td>Title: Dead<br></td>
 </tr>
 <tr>
-<td>alive</td>
-<td>NCIT:C37987</td>
+<td>snomedct:438949009</td>
+<td>None</td>
 <td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../vital_status/">vital_status</a></td>
-<td>Whether participant is alive or dead</td>
+<td>Title: Alive<br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumVitalStatus
-description: Descriptions of a Subject's vital status
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-is_a: EnumNull
-permissible_values:
-  dead:
-    text: dead
-    meaning: NCIT:C28554
-    title: Dead
-  alive:
-    text: alive
-    meaning: NCIT:C37987
-    title: Alive
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumVitalStatus</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Descriptions of a Subject&#39;s vital status</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">snomedct:419099009</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:419099009</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dead</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dead</span>
+<span class="w">  </span><span class="nt">snomedct:438949009</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:438949009</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alive</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alive</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

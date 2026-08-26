@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -306,6 +328,15 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enumeration-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enumeration Source
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#permissible-values" class="md-nav__link">
@@ -379,7 +410,13 @@
 
 <h1 id="enum-enumfamilytype">Enum: EnumFamilyType</h1>
 <p><em>Enumerations describing research family type</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumFamilyType">includedcc:EnumFamilyType</a></p>
+<h2 id="enumeration-source">Enumeration Source</h2>
+<p><strong>Reachable From:</strong>
+- <strong>Source:</strong> NONE
+- <strong>Nodes:</strong> CAMO:0000001
+- <strong>Via:</strong> rdfs:subClassOf</p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
 <thead>
@@ -387,33 +424,51 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>control_only</td>
+<td>CAMO:0000002</td>
 <td>None</td>
-<td>Control Only</td>
+<td>This family study includes at a minimum one parent and one child</td>
+<td>Title: Parent(s) and Child(ren)<br></td>
 </tr>
 <tr>
-<td>duo</td>
+<td>CAMO:0000003</td>
 <td>None</td>
-<td>Duo</td>
+<td>This family study includes at a minimum one parent and one affected child</td>
+<td>Title: Duo<br></td>
 </tr>
 <tr>
-<td>proband_only</td>
+<td>CAMO:0000004</td>
 <td>None</td>
-<td>Proband Only</td>
+<td>This family study includes at a minimum two parents of one affected child</td>
+<td>Title: Trio<br></td>
 </tr>
 <tr>
-<td>trio</td>
+<td>CAMO:0000005</td>
 <td>None</td>
-<td>Trio (2 parents and affected child)</td>
+<td>This family study includes at a minimum two parents of one affected child and...</td>
+<td>Title: Trio+<br></td>
 </tr>
 <tr>
-<td>trio_plus</td>
+<td>CAMO:0000006</td>
 <td>None</td>
-<td>2 Parents and 2 or more children</td>
+<td>This family study includes only one or more cases</td>
+<td>Title: Case Only<br></td>
+</tr>
+<tr>
+<td>CAMO:0000007</td>
+<td>None</td>
+<td>This family study includes only one or more probands</td>
+<td>Title: Proband Only<br></td>
+</tr>
+<tr>
+<td>CAMO:0000008</td>
+<td>None</td>
+<td>This family study includes only one or more controls</td>
+<td>Title: Control Only<br></td>
 </tr>
 </tbody>
 </table>
@@ -435,47 +490,76 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumFamilyType
-description: Enumerations describing research family type
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-is_a: EnumNull
-permissible_values:
-  control_only:
-    text: control_only
-    description: Control Only
-    title: Control-only
-  duo:
-    text: duo
-    description: Duo
-    title: Duo
-  proband_only:
-    text: proband_only
-    description: Proband Only
-    title: Proband-only
-  trio:
-    text: trio
-    description: Trio (2 parents and affected child)
-    title: Trio
-  trio_plus:
-    text: trio_plus
-    description: 2 Parents and 2 or more children
-    title: Trio+
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumFamilyType</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Enumerations describing research family type</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">CAMO:0000002</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000002</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes at a minimum one parent and one child.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parent(s) and Child(ren)</span>
+<span class="w">  </span><span class="nt">CAMO:0000003</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000003</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes at a minimum one parent and one affected</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">child.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Duo</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">duo</span>
+<span class="w">  </span><span class="nt">CAMO:0000004</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000004</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes at a minimum two parents of one affected</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">child.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Trio</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trio</span>
+<span class="w">  </span><span class="nt">CAMO:0000005</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000005</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes at a minimum two parents of one affected</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">child and at least one other child.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Trio+</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trio_plus</span>
+<span class="w">  </span><span class="nt">CAMO:0000006</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000006</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes only one or more cases.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Case Only</span>
+<span class="w">  </span><span class="nt">CAMO:0000007</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000007</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes only one or more probands.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Proband Only</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proband_only</span>
+<span class="w">  </span><span class="nt">CAMO:0000008</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000008</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This family study includes only one or more controls.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Control Only</span>
+<span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">control_only</span>
+<span class="nt">reachable_from</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">source_ontology</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">camo</span>
+<span class="w">  </span><span class="nt">source_nodes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAMO:0000001</span>
+<span class="w">  </span><span class="nt">relationship_types</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rdfs:subClassOf</span>
+<span class="w">  </span><span class="nt">is_direct</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">include_self</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

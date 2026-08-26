@@ -137,6 +137,14 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../dbt_artifacts">
+<span class="md-ellipsis">
+    dbt
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../about/">
 <span class="md-ellipsis">
     About
@@ -160,36 +168,42 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
-<div class="mermaid">erDiagram
+<pre class="mermaid"><code>erDiagram
 AccessPolicy {
-    string access_policy_id  
-    uriorcurie data_use_accession  
-    EnumDataUsePermission data_use_permission  
-    EnumDataUseModifier data_use_modifier  
-    string disease_limitation  
     string access_description  
+    coGlobalID access_policy_id  
+    uriorcurie data_use_accession  
+    EnumDataUseModifier data_use_modifier  
+    EnumDataUsePermission data_use_permission  
+    string disease_limitation  
     uri website  
 }
 ActivityDefinition {
-    string activity_definition_id  
     string name  
     string description  
+    adGlobalID activity_definition_id  
     uriorcurieList external_id  
 }
 Aliquot {
     string aliquot_id  
-    EnumAvailabilityStatus availablity_status  
-    float quantity_number  
+    EnumAvailabilityStatus availability_status  
     float concentration_number  
+    float quantity_number  
+    uriorcurieList external_id  
+}
+Any {
+
+}
+Assay {
+    diGlobalID assay_id  
+    string assay_source  
+    EnumAssayType assay_type  
     uriorcurieList external_id  
 }
 BiospecimenCollection {
-    string biospecimen_collection_id  
     float age_at_collection  
+    string biospecimen_collection_id  
     EnumSampleCollectionMethod method  
-    EnumSite site  
-    EnumSpatialQualifiers spatial_qualifier  
-    EnumLaterality laterality  
     uriorcurieList external_id  
 }
 Concept {
@@ -197,64 +211,61 @@ Concept {
     string display  
 }
 DOI {
-    string do_id  
     string bibliographic_reference  
+    string do_id  
     uriorcurieList external_id  
 }
 Dataset {
-    string dataset_id  
     string name  
     string description  
-    string data_collection_start  
     string data_collection_end  
+    string data_collection_start  
+    lsGlobalID dataset_id  
 }
 Demographics {
-    EnumSex sex  
-    EnumRaceList race  
-    EnumEthnicity ethnicity  
-    integer age_at_last_vital_status  
-    EnumVitalStatus vital_status  
     integer age_at_first_engagement  
+    integer age_at_last_vital_status  
     uriorcurieList external_id  
 }
 Encounter {
-    string encounter_id  
     integer age_at_event  
+    enGlobalID encounter_id  
     uriorcurieList external_id  
 }
 EncounterDefinition {
-    string encounter_definition_id  
     string name  
     string description  
+    pdGlobalID encounter_definition_id  
     uriorcurieList external_id  
 }
 Family {
-    string family_id  
-    EnumFamilyType family_type  
+    EnumPresentAbsent consanguinity  
     string family_description  
-    EnumConsanguinityAssertion consanguinity  
+    grGlobalID family_id  
     uriorcurie family_study_focus  
+    EnumFamilyType family_type  
     uriorcurieList external_id  
 }
-FamilyMember {
-    uriorcurie family_role  
+FamilyMembership {
+    string family_membership_id  
     uriorcurieList external_id  
 }
 FamilyRelationship {
-    string family_relationship_id  
-    uriorcurie relationship  
+    fmGlobalID family_relationship_id  
     uriorcurieList external_id  
 }
 File {
-    string file_id  
+    EnumAvailabilityStatus availability  
+    EnumEDAMDataTypes data_type  
+    uriorcurie drs_uri  
+    string file_extension  
+    drGlobalID file_id  
     string filename  
     EnumEDAMFormats format  
-    EnumDataCategory data_category  
-    EnumEDAMDataTypes data_type  
+    uriorcurie internal_uri  
+    uriorcurie release_uri  
     integer size  
-    uriorcurie staging_url  
-    uriorcurie release_url  
-    uriorcurie drs_uri  
+    string storage_class  
     uriorcurieList external_id  
 }
 FileHash {
@@ -263,19 +274,15 @@ FileHash {
 }
 IncludeParticipant {
     EnumDownSyndromeStatus down_syndrome_status  
-    EnumSex sex  
-    EnumRaceList race  
-    EnumEthnicity ethnicity  
-    integer age_at_last_vital_status  
-    EnumVitalStatus vital_status  
     integer age_at_first_engagement  
+    integer age_at_last_vital_status  
     uriorcurieList external_id  
 }
 Investigator {
     string name  
+    string email  
     string institution  
     string investigator_title  
-    string email  
     uriorcurieList external_id  
 }
 Publication {
@@ -287,50 +294,47 @@ Record {
     uriorcurieList external_id  
 }
 Sample {
-    string sample_id  
-    uriorcurie sample_type  
+    EnumAvailabilityStatus availability_status  
     uriorcurieList processing  
-    EnumAvailabilityStatus availablity_status  
-    uriorcurieList storage_method  
     float quantity_number  
+    bsGlobalID sample_id  
+    uriorcurie sample_type  
+    uriorcurieList storage_method  
     uriorcurieList external_id  
 }
 Study {
-    string study_title  
-    string study_code  
-    string study_short_name  
-    EnumProgramList program  
-    stringList funding_source  
-    string study_description  
-    uri website  
     string acknowledgments  
     string citation_statement  
+    stringList funding_source  
+    uriorcurieList program  
+    string study_code  
+    string study_description  
+    sdGlobalID study_id  
+    string study_short_name  
+    string study_title  
+    uri website  
     uriorcurieList external_id  
-    string study_id  
 }
 StudyMetadata {
+    integer actual_number_of_participants  
+    EnumDataSourceTypeList clinical_data_source_type  
+    integer expected_number_of_participants  
     EnumParticipantLifespanStageList participant_lifespan_stage  
     string selection_criteria  
-    EnumStudyDesignList study_design  
-    EnumClinicalDataSourceTypeList clinical_data_source_type  
-    EnumDataCategoryList data_category  
-    EnumResearchDomainList research_domain  
-    integer expected_number_of_participants  
-    integer actual_number_of_participants  
     uriorcurieList external_id  
 }
 Subject {
-    string subject_id  
-    EnumSubjectType subject_type  
     uriorcurie organism_type  
+    ptGlobalID subject_id  
     uriorcurieList external_id  
 }
 SubjectAssertion {
-    string assertion_id  
-    EnumAssertionProvenance assertion_provenance  
     integer age_at_assertion  
     integer age_at_event  
     integer age_at_resolution  
+    EnumAsserterType asserter_type  
+    string assertion_id  
+    EnumDataSourceType assertion_source_type  
     string concept_source  
     float value_number  
     string value_source  
@@ -338,22 +342,28 @@ SubjectAssertion {
     uriorcurieList external_id  
 }
 VirtualBiorepository {
-    string vbr_id  
     string name  
     string institution  
-    uri website  
+    orGlobalID vbr_id  
     string vbr_readme  
+    uri website  
     uriorcurieList external_id  
 }
 
 ActivityDefinition ||--|o AccessPolicy : "access_policy_id"
 ActivityDefinition ||--|o Study : "study_id"
 Aliquot ||--|o AccessPolicy : "access_policy_id"
-Aliquot ||--|o Concept : "concentration_unit"
-Aliquot ||--|o Concept : "quantity_unit"
+Aliquot ||--|o Concept : "concentration_unit, quantity_unit"
 Aliquot ||--|o Sample : "sample_id"
 Aliquot ||--|o Study : "study_id"
+Assay ||--|o AccessPolicy : "access_policy_id"
+Assay ||--|o ActivityDefinition : "activity_definition_id"
+Assay ||--|o Study : "study_id"
+Assay ||--}o File : "file_id"
+Assay ||--}o Sample : "sample_id"
+Assay ||--}o Subject : "subject_id"
 BiospecimenCollection ||--|o AccessPolicy : "access_policy_id"
+BiospecimenCollection ||--|o Concept : "laterality, site, spatial_qualifier"
 BiospecimenCollection ||--|o Encounter : "encounter_id"
 BiospecimenCollection ||--|o Study : "study_id"
 DOI ||--|o AccessPolicy : "access_policy_id"
@@ -362,8 +372,11 @@ Dataset ||--|o DOI : "do_id"
 Dataset ||--}o File : "file_id"
 Dataset ||--}o Publication : "publication"
 Demographics ||--|o AccessPolicy : "access_policy_id"
+Demographics ||--|o Concept : "vital_status"
 Demographics ||--|o Study : "study_id"
+Demographics ||--|| Concept : "ethnicity, sex"
 Demographics ||--|| Subject : "subject_id"
+Demographics ||--}| Concept : "race"
 Encounter ||--|o AccessPolicy : "access_policy_id"
 Encounter ||--|o EncounterDefinition : "encounter_definition_id"
 Encounter ||--|o Study : "study_id"
@@ -373,22 +386,27 @@ EncounterDefinition ||--|o Study : "study_id"
 EncounterDefinition ||--}o ActivityDefinition : "activity_definition_id"
 Family ||--|o AccessPolicy : "access_policy_id"
 Family ||--|o Study : "study_id"
-FamilyMember ||--|o AccessPolicy : "access_policy_id"
-FamilyMember ||--|o Study : "study_id"
-FamilyMember ||--|| Family : "family_id"
-FamilyMember ||--|| Subject : "subject_id"
+FamilyMembership ||--|o AccessPolicy : "access_policy_id"
+FamilyMembership ||--|o Concept : "family_role"
+FamilyMembership ||--|o Study : "study_id"
+FamilyMembership ||--|| Family : "family_id"
+FamilyMembership ||--|| Subject : "subject_id"
 FamilyRelationship ||--|o AccessPolicy : "access_policy_id"
 FamilyRelationship ||--|o Study : "study_id"
-FamilyRelationship ||--|| Subject : "family_member_id"
-FamilyRelationship ||--|| Subject : "subject_id"
+FamilyRelationship ||--|| Concept : "relation"
+FamilyRelationship ||--|| Subject : "family_member_id, subject_id"
 File ||--|o AccessPolicy : "access_policy_id"
-File ||--|o FileHash : "hash"
+File ||--|o Concept : "data_category"
 File ||--|o Study : "study_id"
+File ||--}o FileHash : "hash"
 File ||--}o Sample : "sample_id"
 File ||--}o Subject : "subject_id"
 IncludeParticipant ||--|o AccessPolicy : "access_policy_id"
+IncludeParticipant ||--|o Concept : "vital_status"
 IncludeParticipant ||--|o Study : "study_id"
+IncludeParticipant ||--|| Concept : "ethnicity, sex"
 IncludeParticipant ||--|| Subject : "subject_id"
+IncludeParticipant ||--}| Concept : "race"
 Investigator ||--|o AccessPolicy : "access_policy_id"
 Investigator ||--|o Study : "study_id"
 Publication ||--|o AccessPolicy : "access_policy_id"
@@ -404,25 +422,24 @@ Study ||--|o AccessPolicy : "access_policy_id"
 Study ||--|o DOI : "do_id"
 Study ||--|o Study : "parent_study"
 Study ||--}o Publication : "publication"
-Study ||--}| Investigator : "contact"
-Study ||--}| Investigator : "principal_investigator"
+Study ||--}| Investigator : "contact, principal_investigator"
 StudyMetadata ||--|o AccessPolicy : "access_policy_id"
 StudyMetadata ||--|o VirtualBiorepository : "vbr_id"
 StudyMetadata ||--|| Study : "study_id"
+StudyMetadata ||--}| Concept : "data_category, research_domain, study_design"
 Subject ||--|o AccessPolicy : "access_policy_id"
 Subject ||--|o Study : "study_id"
+Subject ||--|| Concept : "subject_type"
 SubjectAssertion ||--|o AccessPolicy : "access_policy_id"
 SubjectAssertion ||--|o Concept : "value_unit"
 SubjectAssertion ||--|o Encounter : "encounter_id"
 SubjectAssertion ||--|o Study : "study_id"
 SubjectAssertion ||--|o Subject : "subject_id"
-SubjectAssertion ||--}o Concept : "concept"
-SubjectAssertion ||--}o Concept : "value_concept"
+SubjectAssertion ||--}o Concept : "concept, value_concept"
 VirtualBiorepository ||--|o AccessPolicy : "access_policy_id"
 VirtualBiorepository ||--|o Study : "study_id"
 VirtualBiorepository ||--}| Investigator : "contact"
-
-</div>
+</code></pre>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
@@ -449,6 +466,5 @@ VirtualBiorepository ||--}| Investigator : "contact"
 </div>
 <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
 <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
-<script type="module">import mermaid from "https://unpkg.com/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
-mermaid.initialize({});</script></body>
+</body>
 </html>

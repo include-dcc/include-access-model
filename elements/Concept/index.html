@@ -137,6 +137,14 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../dbt_artifacts">
+<span class="md-ellipsis">
+    dbt
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../about/">
 <span class="md-ellipsis">
     About
@@ -231,16 +239,16 @@
 <article class="md-content__inner md-typeset">
 <h1 id="class-concept-concept">Class: Concept (Concept)</h1>
 <p><em>A standardized concept with display information.</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/Concept">includedcc:Concept</a></p>
-<div class="mermaid"> classDiagram
+<pre class="mermaid"><code> classDiagram
     class Concept
     click Concept href "../Concept/"
       Concept : concept_curie
 
       Concept : display
 
-
-</div>
+</code></pre>
 <!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
@@ -279,6 +287,114 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../IncludeParticipant/">IncludeParticipant</a></td>
+<td><a href="../sex/">sex</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../IncludeParticipant/">IncludeParticipant</a></td>
+<td><a href="../race/">race</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../IncludeParticipant/">IncludeParticipant</a></td>
+<td><a href="../ethnicity/">ethnicity</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../IncludeParticipant/">IncludeParticipant</a></td>
+<td><a href="../vital_status/">vital_status</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../study_design/">study_design</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../study_design/">study_design</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../data_category/">data_category</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../data_category/">data_category</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../research_domain/">research_domain</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyMetadata/">StudyMetadata</a></td>
+<td><a href="../research_domain/">research_domain</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Subject/">Subject</a></td>
+<td><a href="../subject_type/">subject_type</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td><a href="../sex/">sex</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td><a href="../race/">race</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td><a href="../ethnicity/">ethnicity</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Demographics/">Demographics</a></td>
+<td><a href="../vital_status/">vital_status</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
+<td><a href="../relation/">relation</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyMembership/">FamilyMembership</a></td>
+<td><a href="../family_role/">family_role</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyMembership/">FamilyMembership</a></td>
+<td><a href="../family_role/">family_role</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
 <td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
 <td><a href="../concept/">concept</a></td>
 <td>range</td>
@@ -288,6 +404,12 @@
 <td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
 <td><a href="../value_concept/">value_concept</a></td>
 <td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectAssertion/">SubjectAssertion</a></td>
+<td><a href="../value_concept/">value_concept</a></td>
+<td>any_of[range]</td>
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
@@ -303,6 +425,42 @@
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../site/">site</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../site/">site</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../spatial_qualifier/">spatial_qualifier</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../spatial_qualifier/">spatial_qualifier</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../laterality/">laterality</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BiospecimenCollection/">BiospecimenCollection</a></td>
+<td><a href="../laterality/">laterality</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
 <td><a href="../Aliquot/">Aliquot</a></td>
 <td><a href="../quantity_unit/">quantity_unit</a></td>
 <td>range</td>
@@ -314,12 +472,24 @@
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
+<tr>
+<td><a href="../File/">File</a></td>
+<td><a href="../data_category/">data_category</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../File/">File</a></td>
+<td><a href="../data_category/">data_category</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Concept</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -344,60 +514,57 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Concept
-description: A standardized concept with display information.
-title: Concept
-from_schema: https://includedcc.org/include-access-model
-slots:
-- concept_curie
-- display
-slot_usage:
-  concept_curie:
-    name: concept_curie
-    identifier: true
-    required: true
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A standardized concept with display information.</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">slots</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_curie</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">display</span>
+<span class="nt">slot_usage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">concept_curie</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_curie</span>
+<span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Concept
-description: A standardized concept with display information.
-title: Concept
-from_schema: https://includedcc.org/include-access-model
-slot_usage:
-  concept_curie:
-    name: concept_curie
-    identifier: true
-    required: true
-attributes:
-  concept_curie:
-    name: concept_curie
-    description: The standardized curie for the term.
-    title: Concept Curie
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    identifier: true
-    alias: concept_curie
-    owner: Concept
-    domain_of:
-    - Concept
-    range: uriorcurie
-    required: true
-  display:
-    name: display
-    description: The friendly display string of the coded term.
-    title: Display String
-    from_schema: https://includedcc.org/include-access-model
-    rank: 1000
-    alias: display
-    owner: Concept
-    domain_of:
-    - Concept
-    range: string
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A standardized concept with display information.</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">slot_usage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">concept_curie</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_curie</span>
+<span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">concept_curie</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_curie</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The standardized curie for the term.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept Curie</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uriorcurie</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">display</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">display</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The friendly display string of the coded term.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Display String</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Concept</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</code></pre></div>
 </details>
+</div>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
@@ -424,6 +591,5 @@ attributes:
 </div>
 <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
 <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
-<script type="module">import mermaid from "https://unpkg.com/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
-mermaid.initialize({});</script></body>
+</body>
 </html>

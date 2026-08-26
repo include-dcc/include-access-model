@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -379,6 +401,7 @@
 
 <h1 id="enum-enumdownsyndromestatus">Enum: EnumDownSyndromeStatus</h1>
 <p><em>Down syndrome / chromosome 21 status</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumDownSyndromeStatus">includedcc:EnumDownSyndromeStatus</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -387,6 +410,7 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
@@ -394,11 +418,13 @@
 <td>d21</td>
 <td>PATO:0001393</td>
 <td>Disomy 21 (euploid)</td>
+<td>Title: D21<br></td>
 </tr>
 <tr>
 <td>t21</td>
 <td>MONDO:0008608</td>
 <td>Trisomy 21 (Down syndrome)</td>
+<td>Title: T21<br></td>
 </tr>
 </tbody>
 </table>
@@ -420,36 +446,37 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumDownSyndromeStatus
-description: Down syndrome / chromosome 21 status
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-permissible_values:
-  d21:
-    text: d21
-    description: Disomy 21 (euploid)
-    meaning: PATO:0001393
-    title: D21
-  t21:
-    text: t21
-    description: Trisomy 21 (Down syndrome)
-    meaning: MONDO:0008608
-    title: T21
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumDownSyndromeStatus</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Down syndrome / chromosome 21 status</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">d21</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">d21</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Disomy 21 (euploid)</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PATO:0001393</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">D21</span>
+<span class="w">  </span><span class="nt">t21</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">t21</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Trisomy 21 (Down syndrome)</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MONDO:0008608</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T21</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 

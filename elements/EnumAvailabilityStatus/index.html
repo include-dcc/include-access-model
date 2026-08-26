@@ -266,6 +266,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dbt_artifacts" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    dbt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/" class="md-nav__link">
         
   
@@ -378,7 +400,8 @@
 
 
 <h1 id="enum-enumavailabilitystatus">Enum: EnumAvailabilityStatus</h1>
-<p><em>Is the biospecimen available for use?</em></p>
+<p><em>Is this item available for use?</em></p>
+<div>
 <p>URI: <a href="https://includedcc.org/include-access-model/EnumAvailabilityStatus">includedcc:EnumAvailabilityStatus</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -387,18 +410,21 @@
 <th>Value</th>
 <th>Meaning</th>
 <th>Description</th>
+<th>Additional Info</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>available</td>
-<td>ig2_biospecimen_availability:available</td>
-<td>Biospecimen is Available</td>
+<td>snomedct:103328004</td>
+<td>snomedct:103328004</td>
+<td>The item is available to users, authorization/request permitting</td>
+<td>Title: Available<br></td>
 </tr>
 <tr>
-<td>unavailable</td>
-<td>ig2_biospecimen_availability:unavailable</td>
-<td>Biospecimen is Unavailable</td>
+<td>snomedct:103329007</td>
+<td>snomedct:103329007</td>
+<td>The item is not available to users</td>
+<td>Title: Unavailable<br></td>
 </tr>
 </tbody>
 </table>
@@ -412,44 +438,49 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../availablity_status/">availablity_status</a></td>
+<td><a href="../availability_status/">availability_status</a></td>
 <td>Can this Sample be requested for further analysis?</td>
+</tr>
+<tr>
+<td><a href="../availability/">availability</a></td>
+<td>Is or was this file available to users?</td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://includedcc.org/include-access-model</li>
+<li>from schema: <a href="https://includedcc.org/include-access-model">https://includedcc.org/include-access-model</a></li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-
-<pre><code class="language-yaml">name: EnumAvailabilityStatus
-description: Is the biospecimen available for use?
-from_schema: https://includedcc.org/include-access-model
-rank: 1000
-permissible_values:
-  available:
-    text: available
-    description: Biospecimen is Available
-    meaning: ig2_biospecimen_availability:available
-    title: Available
-  unavailable:
-    text: unavailable
-    description: Biospecimen is Unavailable
-    meaning: ig2_biospecimen_availability:unavailable
-    title: Unavailable
-
-</code></pre>
-
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumAvailabilityStatus</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Is this item available for use?</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://includedcc.org/include-access-model</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">permissible_values</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">snomedct:103328004</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:103328004</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The item is available to users, authorization/request permitting.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:103328004</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Available</span>
+<span class="w">  </span><span class="nt">snomedct:103329007</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:103329007</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The item is not available to users.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snomedct:103329007</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unavailable</span>
+</code></pre></div>
 </details>
+</div>
 
 
 
 
 
 
+
+  
+  
 
 
 
