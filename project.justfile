@@ -26,3 +26,14 @@ gen-dbtmodel:
 [group('model development')]
 update-cam:
   uv run update-cam -l src/include_access_model/schema/include_access_model.yaml -d src/include_access_model/schema/upstream-models
+
+# Expand enum files
+[group('model development')]
+expand:
+  uv run weaver -s src/{{schema_name}}/schema
+
+
+# Deletes permissible_values block from enum file so it can be re-expanded
+[group('model development')]
+clear file_path:
+  uv run weaver --clear src/common_access_model/schema/enums/{{file_path}}.yaml
