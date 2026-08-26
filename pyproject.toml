@@ -13,7 +13,7 @@ authors = [
 license = "MIT"
 license-files = ["LICENSE"]
 readme = "README.md"
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.12,<4.0"
 dynamic = ["version"]
 
 dependencies = [
@@ -22,6 +22,7 @@ dependencies = [
   "linkml>=1.11.0",
   "linkml-runtime>=1.11.0",
   "the-caddie",
+  "term-weaver"
 ]
 
 [dependency-groups]
@@ -91,4 +92,4 @@ extend-exclude = [
 
 [tool.uv.sources]
 the-caddie = { git = "https://github.com/carrollaboratory/the-caddie" }
-#the-caddie = { path = "/home/torstees/dev/the-caddie" }
+term-weaver = { git = "https://github.com/include-dcc/term-weaver" }
