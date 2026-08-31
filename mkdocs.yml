@@ -7,8 +7,19 @@ theme:
   #  primary: cyan
   features:
     - content.tabs.link
-
+    - header.autohide      # maximum screen space during scrolling
+    - navigation.expand    # optimize user experience
+    # The navigation.instant is causing glitchy behavior with the styling
+    # due to a bug in mkdocs.material related to mermaid.
+    # - navigation.instant   # optimize user experience
+    # - navigation.instant.progress
+    - navigation.tracking  # update address bar
+    - search.suggest       # suggest good completions
+    - content.code.copy    # enable copy to clipboard
 # for adding extra css/js see https://www.mkdocs.org/user-guide/customizing-your-theme/
+extra_css: []
+extra_javascript: []
+
 
 plugins:
   - search
