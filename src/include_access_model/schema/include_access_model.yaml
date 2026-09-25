@@ -4,11 +4,11 @@ title: INCLUDE DCC Access Model
 description: LinkML Schema for the internal INCLUDE DCC Access Model
 license: MIT
 see_also:
-- https://includedcc.github.io/include-access-model
+  - https://includedcc.github.io/include-access-model
 
 prefixes:
   includedcc: https://includedcc.org/include-access-model/
- # subset of CDC Race and Ethnicity Code Set Version 1.0
+  # subset of CDC Race and Ethnicity Code Set Version 1.0
   cdc_race_eth: urn:oid:2.16.840.1.113883.6.238/
   ig_dob_method: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method/
   igcondtype: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
@@ -84,14 +84,14 @@ default_prefix: includedcc
 default_range: linkml:string
 
 imports:
-- upstream-models/common_access_model-0.0.7
+  - upstream-models/common_access_model-0.2.0
 classes:
   IncludeParticipant:
     title: INCLUDE Participant
     description: Information specific to INCLUDE participants
     is_a: Demographics
     slots:
-    - down_syndrome_status
+      - down_syndrome_status
 
 slots:
   down_syndrome_status:

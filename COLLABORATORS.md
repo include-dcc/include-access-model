@@ -3,7 +3,7 @@
 This repository serves as a downstream model designed to specialize the
 [Common Access Model](https://github.com/include-dcc/common-access-model). A
 pinned version of this upstream model is captured in
-src/kf_access_model/schema/upstream-models/common_access_model*.yaml.
+src/include_access_model/schema/upstream-models/common_access_model*.yaml.
 
 The purpose of this model is to build out a program-specific extension (or
 profile) by importing the core elements and layering the INCLUDE unique data
@@ -36,10 +36,10 @@ just update-cam
 ```
 
 This recipe will download the newest version to the directory,
-src/kf_access_model/schema/upstream-models and create a symbolic link from the
-common name, common_access_model.yaml. As a result, once that one entry has been
-made to the local model, subsequent updates should work without further updates
-to the model itself.
+src/include_access_model/schema/upstream-models and create a symbolic link from
+the common name, common_access_model.yaml. As a result, once that one entry has
+been made to the local model, subsequent updates should work without further
+updates to the model itself.
 
 ```model-yaml
 imports:
