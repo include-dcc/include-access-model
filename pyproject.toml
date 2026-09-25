@@ -54,7 +54,7 @@ testpaths = ["tests"]
 # https://docs.astral.sh/ruff/configuration/
 [tool.ruff]
 exclude = [
-    "src/kf_access_model/_version.py",
+    "src/include_access_model/_version.py",
 ]
 
 # Ref.: https://github.com/codespell-project/codespell
@@ -63,10 +63,12 @@ skip = [
   "LICENSE",
   "pyproject.toml",
   "uv.lock",
+  "_typos.toml",
   "project/*",
   "src/include_access_model/datamodel/include_access_model_pydantic.py",
   "src/include_access_model/datamodel/include_access_model_sqla.py",
   "src/include_access_model/datamodel/include_access_model.py",
+  "./src/include_access_model/schema/upstream-models/*.yaml"
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list
